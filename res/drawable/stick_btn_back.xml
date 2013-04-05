@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false"
+        android:drawable="@drawable/ad_button_035_03_previous_inactive" />
+    <item android:state_pressed="true"
+        android:drawable="@drawable/ad_button_035_02_previous_active" />
+    <item android:drawable="@drawable/ad_button_035_01_previous_normal" />
+</selector>

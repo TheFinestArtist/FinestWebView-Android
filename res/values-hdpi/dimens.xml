@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dimen for 320dp -->
+    <!-- Web View Action -->
+    <dimen name="web_view_margin_1">30dp</dimen>
+    <dimen name="web_view_margin_2">61dp</dimen>
+    <dimen name="web_view_margin_3">52dp</dimen>
+    <dimen name="web_view_margin_4">55dp</dimen>
+    <dimen name="web_view_margin_5">38dp</dimen>
+    
+</resources>

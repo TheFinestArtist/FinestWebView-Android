@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dimen for 360dp -->
+    <!-- Web View Action -->
+    <dimen name="web_view_margin_1">35dp</dimen>
+    <dimen name="web_view_margin_2">71dp</dimen>
+    <dimen name="web_view_margin_3">62dp</dimen>
+    <dimen name="web_view_margin_4">65dp</dimen>
+    <dimen name="web_view_margin_5">43dp</dimen>
+    
+</resources>

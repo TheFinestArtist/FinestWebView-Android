@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SimpleWebViewFragment</string>
+    <string name="dummy_button">Show Hyo Sung</string>
+    <string name="dummy_content">Jun Hyo Sung\nSECRET</string>
+
+</resources>
