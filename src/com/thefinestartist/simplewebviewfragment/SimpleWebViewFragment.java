@@ -218,4 +218,10 @@ public class SimpleWebViewFragment extends Fragment implements OnClickListener {
         else
             mFowardBtn.setEnabled(false);
     }
+    
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mWebview.destroy();
+    }
 }
