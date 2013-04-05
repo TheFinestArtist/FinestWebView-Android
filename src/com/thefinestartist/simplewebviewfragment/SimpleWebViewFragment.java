@@ -222,6 +222,8 @@ public class SimpleWebViewFragment extends Fragment implements OnClickListener {
     @Override
     public void onDetach() {
         super.onDetach();
+        mView.removeView(mWebview);
+        mWebview.removeAllViews();
         mWebview.destroy();
     }
 }
