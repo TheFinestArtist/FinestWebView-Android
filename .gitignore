@@ -1,4 +1,9 @@
-n/
+gen/
+gen/*
+target/
+target/*
+tmp/
+bin/
 bin/*
 .DS_Store
 .classpath
@@ -6,4 +11,4 @@ bin/*
 .idea
 .jhw-cache
 hardcopy.*
-project.*t
+project.*
