@@ -8,46 +8,39 @@ There is YouTubePlayerActivity which using YouTubePlayerAPI
 HOW TO USE
 ----------------
 
-Put Youtube_api_key in YouTubePlayerActivity
-
-    public static final String GOOGLE_API_KEY = "AIzaSyAOfxiG4aV66h3XmssCEkP3qCvCq******";
-
-GET Youtube Video id from URL
+Add url as Argument in SimpleWebViewFragment and commit fragment
     
-    final String videoId = YouTubePlayerActivity.getYouTubeVideoId("http://www.youtube.com/watch?v=9bZkp7q19f0"); 
+    String url = "http://beautifulsonglyrics.blogspot.com/2013/04/secret-hyosung-yes-underwear-pics.html#.UV5sraspbfU";
+    
+    Fragment frag = new SimpleWebViewFragment();
+    Bundle bundle = new Bundle();
+    bundle.putString(SimpleWebViewFragment.EXTRA_URL, url);
+    frag.setArguments(bundle);
+                
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    ft.add(R.id.content, frag);
+    ft.addToBackStack(SimpleWebViewFragment.class.getSimpleName());
+    ft.commit();
         
-ADD video id as Extra and Start Activity
+You Need To Add!!!
     
-    Intent intent = new Intent(MainActivity.this, YouTubePlayerActivity.class);
+    Drawables (includes png files and xml files)
+    Dimens (for 320dp, 360dp, 400dp)
+    Layout (web_view.xml)
     
-    intent.putExtra(YouTubePlayerActivity.EXTRA_VIDEO_ID, videoId);
     
-    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-    
-    startActivity(intent);
 
 WHAT IT DOES
 ----------------
 
 
-* Orientation Problem (with Auto Rotation mode)
+* WebView Back & Previous Event
 
-    Auto-Rotation ON : You can either use sensor or YouTube full screen button.
+* WebView Refresh Event
 
-    Auto-Rotation OFF : You can just use YouTube full screen button.
+* WebView Loading Progress Bar
 
-
-* Youtube url Parsing Problem
-
-    Method called parseYoutubeVideoId can make YouTube URL to Video ID.
-    
-    Get some help from http://androidsnippets.wordpress.com/2012/10/11/how-to-get-extract-video-id-from-an-youtube-url-in-android-java/
-
-
-* Media Volume Problem
-
-    While watching YouTube Player, users should be able to set media volume!!!
-    
+* Show Url in other Web Browser App    
     
     
 Developer
