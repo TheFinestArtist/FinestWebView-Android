@@ -47,9 +47,9 @@ Developer
 ----------------
 THE FINEST ARTIST
 
-Facebook : www.facebook.com/TheFinestArtist
+Website : http://www.TheFinestArtist.com
 
-Email : contact@thefinestartist.com
+Email : contact@TheFinestArtist.com
 
 
 
