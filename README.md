@@ -49,7 +49,7 @@ THE FINEST ARTIST
 
 Facebook : www.facebook.com/TheFinestArtist
 
-Email : liger745547@gmail.com
+Email : contact@thefinestartist.com
 
 
 
