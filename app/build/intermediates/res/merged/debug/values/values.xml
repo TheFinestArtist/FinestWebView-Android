@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="black_overlay">#66000000</color>
+    <declare-styleable name="ButtonBarContainerTheme"><attr format="reference" name="buttonBarStyle"/><attr format="reference" name="buttonBarButtonStyle"/></declare-styleable>
+    <!-- From: file:/Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="card_show_stick_height">44dp</dimen>
+    <dimen name="card_show_stick_height_without_shadow">42dp</dimen>
+    <dimen name="loading_spinner_size_small">20dp</dimen>
+    <dimen name="web_view_margin_1">35dp</dimen>
+    <dimen name="web_view_margin_2">71dp</dimen>
+    <dimen name="web_view_margin_3">62dp</dimen>
+    <dimen name="web_view_margin_4">65dp</dimen>
+    <dimen name="web_view_margin_5">43dp</dimen>
+    <!-- From: file:/Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="app_name">SimpleWebViewFragment</string>
+    <string name="dummy_button">Show Hyo Sung</string>
+    <string name="dummy_content">Jun Hyo Sung\nSECRET</string>
+    <!-- From: file:/Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <style name="ButtonBar">
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:background">@android:drawable/bottom_bar</item>
+    </style>
+    <style name="ButtonBarButton"/>
+    <style name="FullscreenTheme" parent="android:Theme.NoTitleBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="buttonBarStyle">@style/ButtonBar</item>
+        <item name="buttonBarButtonStyle">@style/ButtonBarButton</item>
+    </style>
+</resources>

@@ -1,0 +1,63 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:2:1-32:12
+	xmlns:android
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:2:11-69
+	package
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:3:5-56
+		INJECTED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml
+	android:versionName
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:5:5-30
+	android:versionCode
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:4:5-28
+		INJECTED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml
+uses-sdk
+ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-v4:23.0.1] /Users/Leonardo/Documents/SimpleWebViewFragment/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:20:5-43
+	android:targetSdkVersion
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:9:9-38
+		INJECTED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:8:9-34
+		INJECTED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:11:5-67
+	android:name
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:11:22-64
+application
+ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:13:5-30:19
+MERGED from [com.android.support:support-v4:23.0.1] /Users/Leonardo/Documents/SimpleWebViewFragment/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/AndroidManifest.xml:22:5-20
+	android:label
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:16:9-41
+	android:allowBackup
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:14:9-35
+	android:icon
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:15:9-38
+	android:theme
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:17:9-40
+activity#com.thefinestartist.simplewebviewfragment.MainActivity
+ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:18:9-29:20
+	android:screenOrientation
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:22:13-49
+	android:label
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:21:13-45
+	android:configChanges
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:20:13-74
+	android:theme
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:23:13-51
+	android:name
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:19:13-82
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:24:13-28:29
+action#android.intent.action.MAIN
+ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:25:17-69
+	android:name
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:25:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:27:17-77
+	android:name
+		ADDED from /Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/AndroidManifest.xml:27:27-74

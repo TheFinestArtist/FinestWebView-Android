@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/Leonardo/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/Leonardo/Documents/SimpleWebViewFragment/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-2ea5ecbeb128893181676a96ec07875b03f32ee5.jar" />
+    </item>
+    <item
+        jar="/Users/Leonardo/Documents/SimpleWebViewFragment/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/Leonardo/Documents/SimpleWebViewFragment/app/build/intermediates/pre-dexed/debug/classes-0e67642be7c0ab789583b558947ea0a06afc748e.jar" />
+    </item>
+    <item
+        jar="/Users/Leonardo/Documents/SimpleWebViewFragment/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/Leonardo/Documents/SimpleWebViewFragment/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-b836cbf6365cbde712780e47aa4347ff2e777c1e.jar" />
+    </item>
+
+</items>

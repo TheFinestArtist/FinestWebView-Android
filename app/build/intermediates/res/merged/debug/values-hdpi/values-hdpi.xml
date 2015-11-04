@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/Leonardo/Documents/SimpleWebViewFragment/app/src/main/res/values-hdpi/dimens.xml -->
+    <eat-comment/>
+    <dimen name="web_view_margin_1">30dp</dimen>
+    <dimen name="web_view_margin_2">61dp</dimen>
+    <dimen name="web_view_margin_3">52dp</dimen>
+    <dimen name="web_view_margin_4">55dp</dimen>
+    <dimen name="web_view_margin_5">38dp</dimen>
+</resources>
