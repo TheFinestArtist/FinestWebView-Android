@@ -30,16 +30,19 @@ statusBarColorRes(int) //default: 0
 toolBarColor(int) // default: white
 toolBarColorRes(int) // default: white
 
-iconColorDefault(int) // default: black
-iconColorDisabled(int) // default: gray
-iconColorPressed(int) // default: black
+iconDefaultColor(int) // default: black
+iconDefaultColorRes(int) // default: 0
+iconDisabledColor(int) // default: gray
+iconDisabledColorRes(int) // default: 0
+iconPressedColor(int) // default: black
+iconPressedColorRes(int) // default: 0
 
 showProgressBar(boolean) // default: true
 progressBarColor(int) // default: ?
 progressBarColors(int[]) // default: ?
 progressBarColorRes(int) // default: 0
 progressBarColorsRes(int) // default: 0
-smoothProgressBar(SmoothProgress) // default: null
+smoothProgressBar(SmoothProgressBar) // default: null
 progressBarPosition(Position) // default: Position.BOTTON_OF_TOOLBAR
 
 titleDefault(String) // default: null
@@ -60,11 +63,14 @@ urlFont(String) // default: Roboto-Regular.ttf
 urlColor(int) // default: black
 urlColorRes(int) // default: 0
 
-exitAnimation(int) // default: R.anim.
+enterAnimation(int) // default: R.anim.modal_activity_close_enter
+exitAnimation(int) // default: R.anim.modal_activity_close_exit
 
 showRefresh(boolean) // default: false
 backPressToClose(boolean) // default: false
-edgeControl(boolean) // default: true
+
+edgeControlSide(boolean) // default: true
+edgeControlTop(boolean) // default: true
 ```
 
 
@@ -80,6 +86,10 @@ Share via
 Open with
 
 기본 Activity 보여주고 없애는 Animation
+
+## User Interface Design & Graphic Design
+
+### Min Kim
 
 ## License
 
