@@ -1,11 +1,13 @@
 package com.thefinestartist.finestwebview;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.AnimRes;
-import android.support.annotation.ArrayRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
@@ -14,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.thefinestartist.finestwebview.enums.Position;
 import com.thefinestartist.finestwebview.helpers.DipPixelHelper;
 
-import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 /**
  * Created by Leonardo on 11/14/15.
@@ -25,46 +26,42 @@ public class FinestWebViewActivity extends AppCompatActivity {
 
         private Context context;
 
-        protected boolean showStatusBar = true;
-        protected int statusBarColor = 0Xffffff;
+        protected boolean showStatusBar;
+        protected int statusBarColor;
+        protected int toolBarColor;
 
-        protected int toolBarColor = 0Xffffff;
+        protected int iconDefaultColor;
+        protected int iconDisabledColor;
+        protected int iconPressedColor;
+        protected int iconSelector;
 
-        protected int iconDefaultColor = 0Xffffff;
-        protected int iconDisabledColor = 0Xffffff;
-        protected int iconPressedColor = 0Xffffff;
+        protected boolean showProgressBar;
+        protected int progressBarColor;
+        protected float progressBarHeight;
+        protected Position progressBarPosition;
 
-        protected boolean showProgressBar = true;
-        protected int[] progressBarColors = new int[]{0Xffffff};
-        protected SmoothProgressBar smoothProgressBar = null;
-        protected Position progressBarPosition = Position.BOTTON_OF_TOOLBAR;
+        protected String titleDefault;
+        protected boolean updateTitleFromHtml;
+        protected float titleSize;
+        protected String titleFont;
+        protected int titleColor;
 
-        protected String titleDefault = null;
-        protected boolean updateTitleFromHtml = true;
-        private final float titleSizeInDp = 16f;
-        protected float titleSize = 0f;
-        protected String titleFont = "Roboto-Regular.ttf";
-        protected int titleColor = 0X000000;
+        protected boolean showUrl;
+        protected float urlSize;
+        protected String urlFont;
+        protected int urlColor;
 
-        protected boolean showUrl = true;
-        private final float urlSizeInDp = 16f;
-        protected float urlSize = 0f;
-        protected String urlFont = "Roboto-Regular.ttf";
-        protected int urlColor = 0X000000;
+        protected int enterAnimation;
+        protected int exitAnimation;
 
-        protected int enterAnimation = R.anim.modal_activity_close_enter;
-        protected int exitAnimation = R.anim.modal_activity_close_exit;
+        protected boolean showRefresh;
+        protected boolean backPressToClose;
 
-        protected boolean showRefresh = false;
-        protected boolean backPressToClose = false;
-
-        protected boolean edgeControlSide = true;
-        protected boolean edgeControlTop = true;
+        protected boolean edgeControlSide;
+        protected boolean edgeControlTop;
 
         public Builder(@NonNull Context context) {
             this.context = context;
-            this.titleSize = DipPixelHelper.getPixel(context, titleSizeInDp);
-            this.urlSize = DipPixelHelper.getPixel(context, urlSizeInDp);
         }
 
         public Builder showStatusBar(boolean showStatusBar) {
@@ -122,33 +119,38 @@ public class FinestWebViewActivity extends AppCompatActivity {
             return this;
         }
 
+        public Builder iconSelector(@DrawableRes int selectorRes) {
+            this.iconSelector = selectorRes;
+            return this;
+        }
+
         public Builder showProgressBar(boolean showProgressBar) {
             this.showProgressBar = showProgressBar;
             return this;
         }
 
         public Builder progressBarColor(@ColorInt int color) {
-            this.progressBarColors = new int[]{color};
-            return this;
-        }
-
-        public Builder progressBarColors(int[] colors) {
-            this.progressBarColors = colors;
+            this.progressBarColor = color;
             return this;
         }
 
         public Builder progressBarColorRes(@ColorRes int colorRes) {
-            this.progressBarColors = new int[]{ContextCompat.getColor(context, colorRes)};
+            this.progressBarColor = ContextCompat.getColor(context, colorRes);
             return this;
         }
 
-        public Builder progressBarColorsRes(@ArrayRes int arrayRes) {
-            this.progressBarColors = context.getResources().getIntArray(arrayRes);
+        public Builder progressBarHeight(float height) {
+            this.progressBarHeight = height;
             return this;
         }
 
-        public Builder smoothProgressBar(@NonNull SmoothProgressBar smoothProgressBar) {
-            this.smoothProgressBar = smoothProgressBar;
+        public Builder progressBarHeight(int height) {
+            this.progressBarHeight = height;
+            return this;
+        }
+
+        public Builder progressBarHeightRes(@DimenRes int height) {
+            this.progressBarHeight = DipPixelHelper.getPixel(context, height);
             return this;
         }
 
@@ -265,6 +267,141 @@ public class FinestWebViewActivity extends AppCompatActivity {
         public Builder edgeControlTop(boolean edgeControlTop) {
             this.edgeControlTop = edgeControlTop;
             return this;
+        }
+
+        public void show(@StringRes int urlRes) {
+            show(context.getString(urlRes));
+        }
+
+        public void show(@NonNull String url) {
+            Intent intent = new Intent(context, FinestWebViewActivity.class);
+
+            intent.putExtra("showStatusBar", showStatusBar);
+            intent.putExtra("statusBarColor", statusBarColor);
+            intent.putExtra("toolBarColor", toolBarColor);
+
+            intent.putExtra("iconDefaultColor", iconDefaultColor);
+            intent.putExtra("iconDisabledColor", iconDisabledColor);
+            intent.putExtra("iconPressedColor", iconPressedColor);
+            intent.putExtra("iconSelector", iconSelector);
+
+            intent.putExtra("showProgressBar", showProgressBar);
+            intent.putExtra("progressBarColor", progressBarColor);
+            intent.putExtra("progressBarHeight", progressBarHeight);
+            intent.putExtra("progressBarPosition", progressBarPosition);
+
+            intent.putExtra("titleDefault", titleDefault);
+            intent.putExtra("updateTitleFromHtml", updateTitleFromHtml);
+            intent.putExtra("titleSize", titleSize);
+            intent.putExtra("titleFont", titleFont);
+            intent.putExtra("titleColor", titleColor);
+
+            intent.putExtra("showUrl", showUrl);
+            intent.putExtra("urlSize", urlSize);
+            intent.putExtra("urlFont", urlFont);
+            intent.putExtra("urlColor", urlColor);
+
+            intent.putExtra("enterAnimation", enterAnimation);
+            intent.putExtra("exitAnimation", exitAnimation);
+
+            intent.putExtra("showRefresh", showRefresh);
+            intent.putExtra("backPressToClose", backPressToClose);
+
+            intent.putExtra("edgeControlSide", edgeControlSide);
+            intent.putExtra("edgeControlTop", edgeControlTop);
+
+            context.startActivity(intent);
+        }
+    }
+
+    protected boolean showStatusBar;
+    protected int statusBarColor;
+    protected int toolBarColor;
+
+    protected int iconDefaultColor;
+    protected int iconDisabledColor;
+    protected int iconPressedColor;
+    protected int iconSelector;
+
+    protected boolean showProgressBar = true;
+    protected int progressBarColor = 0X000000;
+    protected float progressBarHeight = 0f;
+    protected Position progressBarPosition = Position.BOTTON_OF_TOOLBAR;
+
+    protected String titleDefault;
+    protected boolean updateTitleFromHtml;
+    protected float titleSize;
+    protected String titleFont;
+    protected int titleColor;
+
+    protected boolean showUrl;
+    protected float urlSize;
+    protected String urlFont;
+    protected int urlColor;
+
+    protected int enterAnimation;
+    protected int exitAnimation;
+
+    protected boolean showRefresh;
+    protected boolean backPressToClose;
+
+    protected boolean edgeControlSide;
+    protected boolean edgeControlTop;
+
+    protected void initialize() {
+        Intent intent = getIntent();
+        if (intent == null)
+            return;
+
+        showStatusBar = intent.getBooleanExtra("showStatusBar", true);
+        statusBarColor = intent.getIntExtra("statusBarColor", 0Xffffff);
+        toolBarColor = intent.getIntExtra("toolBarColor", 0Xffffff);
+
+        iconDefaultColor = intent.getIntExtra("iconDefaultColor", 0Xffffff);
+        iconDisabledColor = intent.getIntExtra("iconDisabledColor", 0Xffffff);
+        iconPressedColor = intent.getIntExtra("iconPressedColor", 0Xffffff);
+        iconSelector = intent.getIntExtra("iconSelector", R.drawable.selector_grey);
+
+        showProgressBar = intent.getBooleanExtra("showProgressBar", true);
+        progressBarColor = intent.getIntExtra("progressBarColor", 0X000000);
+        progressBarHeight = intent.getFloatExtra("progressBarHeight", DipPixelHelper.getPixel(this, 2));
+        progressBarPosition = Position.fromSerializable(intent.getSerializableExtra("progressBarPosition"));
+
+        titleDefault = intent.getStringExtra("titleDefault");
+        updateTitleFromHtml = intent.getBooleanExtra("updateTitleFromHtml", true);
+        titleSize = intent.getFloatExtra("titleSize", DipPixelHelper.getPixel(this, 16));
+        titleFont = intent.getStringExtra("titleFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("titleFont");
+        titleColor = intent.getIntExtra("titleColor", 0X000000);
+
+        showUrl = intent.getBooleanExtra("showUrl", true);
+        urlSize = intent.getFloatExtra("urlSize", DipPixelHelper.getPixel(this, 16));
+        urlFont = intent.getStringExtra("urlFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("titleFont");
+        urlColor = intent.getIntExtra("urlColor", 0X000000);
+
+        enterAnimation = intent.getIntExtra("enterAnimation", R.anim.modal_activity_close_enter);
+        exitAnimation = intent.getIntExtra("exitAnimation", R.anim.modal_activity_close_exit);
+
+        showRefresh = intent.getBooleanExtra("showRefresh", false);
+        backPressToClose = intent.getBooleanExtra("backPressToClose", false);
+
+        edgeControlSide = intent.getBooleanExtra("edgeControlSide", true);
+        edgeControlTop = intent.getBooleanExtra("edgeControlTop", true);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.finest_web_view);
+        initialize();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressToClose) {
+            super.onBackPressed();
+            overridePendingTransition(enterAnimation, exitAnimation);
+        } else {
+
         }
     }
 }

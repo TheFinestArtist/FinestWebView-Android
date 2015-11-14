@@ -36,13 +36,14 @@ iconDisabledColor(int) // default: gray
 iconDisabledColorRes(int) // default: 0
 iconPressedColor(int) // default: black
 iconPressedColorRes(int) // default: 0
+iconSelector(int) // default: 0
 
 showProgressBar(boolean) // default: true
 progressBarColor(int) // default: ?
-progressBarColors(int[]) // default: ?
 progressBarColorRes(int) // default: 0
-progressBarColorsRes(int) // default: 0
-smoothProgressBar(SmoothProgressBar) // default: null
+progressBarHeight(float) // default: 0
+progressBarHeight(int) // default: 0
+progressBarHeightRes(int) // default: 0
 progressBarPosition(Position) // default: Position.BOTTON_OF_TOOLBAR
 
 titleDefault(String) // default: null
