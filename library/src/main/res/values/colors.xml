@@ -2,4 +2,9 @@
 <resources>
     <color name="grey_20">#33D2D2D2</color>
     <color name="black_30">#4D202020</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="silver">#A5A5A5</color>
+    <color name="gray">#C5C5C5</color>
 </resources>

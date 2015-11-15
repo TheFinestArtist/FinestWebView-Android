@@ -1,3 +1,14 @@
 <resources>
 
+    <style name="FinestWebViewTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/gray</item>
+        <item name="colorAccent">@color/black</item>
+    </style>
+
+    <style name="FinestWebViewTheme.Fullscreen" parent="FinestWebViewTheme">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

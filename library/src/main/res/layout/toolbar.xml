@@ -1,9 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/toolbarHeight"
+    android:background="@color/white"
     android:gravity="center_vertical"
-    android:minHeight="@dimen/toolbarHeight">
+    android:minHeight="@dimen/toolbarHeight"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="52dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_grey"
+            android:src="@drawable/ic_launcher" />
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_grey"
+            android:src="@drawable/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:singleLine="true"
+                android:textColor="@color/silver"
+                android:textSize="10dp" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/forward"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_grey"
+            android:src="@drawable/ic_launcher" />
+
+        <ImageButton
+            android:id="@+id/more"
+            android:layout_width="52dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/selector_grey"
+            android:src="@drawable/ic_launcher" />
+
+    </LinearLayout>
 
 </android.support.v7.widget.Toolbar>
