@@ -22,6 +22,6 @@ public class MainActivity extends AppCompatActivity {
         new FinestWebViewActivity.Builder(this)
                 .titleDefault("FinestWebView")
                 .backPressToClose(true)
-                .show("http://thefinestartist.com/");
+                .show("https://medium.com/@kollinz");
     }
 }

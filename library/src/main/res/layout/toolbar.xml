@@ -10,15 +10,16 @@
     app:contentInsetLeft="0dp"
     app:contentInsetStart="0dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <ImageButton
             android:id="@+id/close"
-            android:layout_width="52dp"
+            android:layout_width="48dp"
             android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:background="@drawable/selector_grey"
             android:src="@drawable/ic_launcher" />
 
@@ -26,13 +27,15 @@
             android:id="@+id/back"
             android:layout_width="48dp"
             android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/centerLayout"
             android:background="@drawable/selector_grey"
             android:src="@drawable/ic_launcher" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@id/centerLayout"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_centerInParent="true"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -66,16 +69,19 @@
             android:id="@+id/forward"
             android:layout_width="48dp"
             android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/centerLayout"
             android:background="@drawable/selector_grey"
             android:src="@drawable/ic_launcher" />
 
         <ImageButton
             android:id="@+id/more"
-            android:layout_width="52dp"
+            android:layout_width="48dp"
             android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:background="@drawable/selector_grey"
             android:src="@drawable/ic_launcher" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

@@ -2,9 +2,14 @@ package com.thefinestartist.finestwebview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.support.annotation.AnimRes;
 import android.support.annotation.ColorInt;
@@ -14,19 +19,22 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.thefinestartist.finestwebview.enums.Position;
 import com.thefinestartist.finestwebview.helpers.DipPixelHelper;
+import com.thefinestartist.finestwebview.helpers.ScreenHelper;
 import com.thefinestartist.finestwebview.helpers.TypefaceHelper;
 
 
@@ -420,18 +428,18 @@ public class FinestWebViewActivity extends AppCompatActivity {
         iconSelector = intent.getIntExtra("iconSelector", R.drawable.selector_grey);
 
         showDivider = intent.getBooleanExtra("showDivider", true);
-        gradientDivider = intent.getBooleanExtra("gradientDivider", true);
-        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.black));
-        dividerHeight = intent.getFloatExtra("dividerHeight", DipPixelHelper.getPixel(this, 2));
+        gradientDivider = intent.getBooleanExtra("gradientDivider", true); // TODO
+        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.black)); // TODO
+        dividerHeight = intent.getFloatExtra("dividerHeight", DipPixelHelper.getPixel(this, 2)); // TODO
 
         showProgressBar = intent.getBooleanExtra("showProgressBar", true);
-        progressBarColor = intent.getIntExtra("progressBarColor", ContextCompat.getColor(this, R.color.black));
-        progressBarHeight = intent.getFloatExtra("progressBarHeight", DipPixelHelper.getPixel(this, 2));
+        progressBarColor = intent.getIntExtra("progressBarColor", ContextCompat.getColor(this, R.color.black)); // TODO
+        progressBarHeight = intent.getFloatExtra("progressBarHeight", DipPixelHelper.getPixel(this, 2)); // TODO
         progressBarPosition = Position.fromSerializable(intent.getSerializableExtra("progressBarPosition"));
 
         titleDefault = intent.getStringExtra("titleDefault");
         updateTitleFromHtml = intent.getBooleanExtra("updateTitleFromHtml", true);
-        titleSize = intent.getFloatExtra("titleSize", DipPixelHelper.getPixel(this, 14));
+        titleSize = intent.getFloatExtra("titleSize", DipPixelHelper.getPixel(this, 14)); // TODO
         titleFont = intent.getStringExtra("titleFont") == null ? "Roboto-Medium.ttf" : intent.getStringExtra("titleFont");
         titleColor = intent.getIntExtra("titleColor", ContextCompat.getColor(this, R.color.black));
 
@@ -443,11 +451,11 @@ public class FinestWebViewActivity extends AppCompatActivity {
         enterAnimation = intent.getIntExtra("enterAnimation", R.anim.modal_activity_close_enter);
         exitAnimation = intent.getIntExtra("exitAnimation", R.anim.modal_activity_close_exit);
 
-        showRefresh = intent.getBooleanExtra("showRefresh", false);
-        backPressToClose = intent.getBooleanExtra("backPressToClose", false);
+        showRefresh = intent.getBooleanExtra("showRefresh", false); // TODO
+        backPressToClose = intent.getBooleanExtra("backPressToClose", false); // TODO
 
-        edgeControlSide = intent.getBooleanExtra("edgeControlSide", true);
-        edgeControlTop = intent.getBooleanExtra("edgeControlTop", true);
+        edgeControlSide = intent.getBooleanExtra("edgeControlSide", true); // TODO
+        edgeControlTop = intent.getBooleanExtra("edgeControlTop", true); // TODO
 
         url = intent.getStringExtra("url");
     }
@@ -461,9 +469,10 @@ public class FinestWebViewActivity extends AppCompatActivity {
     protected ImageButton forward;
     protected ImageButton more;
 
+    protected WebView webView;
+
     protected View divider;
     protected ProgressBar progressBar;
-    protected WebView webView;
 
     protected void bind() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -475,23 +484,61 @@ public class FinestWebViewActivity extends AppCompatActivity {
         forward = (ImageButton) findViewById(R.id.forward);
         more = (ImageButton) findViewById(R.id.more);
 
+        webView = (WebView) findViewById(R.id.webView);
+
         divider = findViewById(R.id.divider);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        webView = (WebView) findViewById(R.id.webView);
     }
 
     protected void drawViews() {
-        close.getBackground().setColorFilter(new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP));
+        setSupportActionBar(toolbar);
+        int maxWidth = getMaxWidth();
+
+        updateIcon(close, R.drawable.ic_launcher);
+        close.setBackgroundResource(iconSelector);
+        updateIcon(back, R.drawable.ic_launcher);
+        back.setBackgroundResource(iconSelector);
+        updateIcon(forward, R.drawable.ic_launcher);
+        forward.setBackgroundResource(iconSelector);
+        updateIcon(more, R.drawable.ic_launcher);
+        more.setBackgroundResource(iconSelector);
 
         title.setText(titleDefault);
         title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
         title.setTypeface(TypefaceHelper.get(this, titleFont));
         title.setTextColor(titleColor);
+        title.setMaxWidth(maxWidth);
 
         urlTv.setText(url);
         urlTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, urlSize);
         urlTv.setTypeface(TypefaceHelper.get(this, urlFont));
         urlTv.setTextColor(urlColor);
+        urlTv.setMaxWidth(maxWidth);
+
+        progressBar.setVisibility(showProgressBar ? View.VISIBLE : View.GONE);
+        progressBar.getProgressDrawable().setColorFilter(progressBarColor, PorterDuff.Mode.SRC_IN);
+        progressBar.setBackgroundColor(Color.TRANSPARENT);
+        progressBar.setMinimumHeight((int) progressBarHeight);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                (int) progressBarHeight
+        );
+        float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
+        switch (progressBarPosition) {
+            case TOP_OF_TOOLBAR:
+                params.setMargins(0, 0, 0, 0);
+                break;
+            case BOTTON_OF_TOOLBAR:
+                params.setMargins(0, (int) (toolbarHeight - progressBarHeight), 0, 0);
+                break;
+            case TOP_OF_WEBVIEW:
+                params.setMargins(0, (int) toolbarHeight, 0, 0);
+                break;
+            case BOTTOM_OF_WEBVIEW:
+                params.setMargins(0, (int) (ScreenHelper.getHeight(this) - progressBarHeight), 0, 0);
+                break;
+        }
+        progressBar.setLayoutParams(params);
 
         webView.getSettings().setUseWideViewPort(true);
         webView.setInitialScale(100);
@@ -509,6 +556,37 @@ public class FinestWebViewActivity extends AppCompatActivity {
         });
 
         webView.loadUrl(url);
+    }
+
+    protected int getMaxWidth() {
+        if (forward.getVisibility() == View.VISIBLE) {
+            return (int) (ScreenHelper.getWidth(this) - DipPixelHelper.getPixel(this, 100));
+        } else {
+            return (int) (ScreenHelper.getWidth(this) - DipPixelHelper.getPixel(this, 52));
+        }
+    }
+
+    protected void updateIcon(ImageButton icon, @DrawableRes int drawableRes) {
+        StateListDrawable states = new StateListDrawable();
+        {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableRes);
+            BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+            drawable.setColorFilter(new PorterDuffColorFilter(iconPressedColor, PorterDuff.Mode.SRC_ATOP));
+            states.addState(new int[]{android.R.attr.state_pressed}, drawable);
+        }
+        {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableRes);
+            BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+            drawable.setColorFilter(new PorterDuffColorFilter(iconDisabledColor, PorterDuff.Mode.SRC_ATOP));
+            states.addState(new int[]{-android.R.attr.state_enabled}, drawable);
+        }
+        {
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableRes);
+            BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+            drawable.setColorFilter(new PorterDuffColorFilter(iconDefaultColor, PorterDuff.Mode.SRC_ATOP));
+            states.addState(new int[]{}, drawable);
+        }
+        icon.setImageDrawable(states);
     }
 
     @Override
