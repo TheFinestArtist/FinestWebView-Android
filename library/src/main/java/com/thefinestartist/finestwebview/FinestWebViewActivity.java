@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.support.annotation.AnimRes;
@@ -20,6 +22,7 @@ import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -457,9 +460,9 @@ public class FinestWebViewActivity extends AppCompatActivity {
         iconSelector = intent.getIntExtra("iconSelector", R.drawable.selector_grey);
 
         showDivider = intent.getBooleanExtra("showDivider", true);
-        gradientDivider = intent.getBooleanExtra("gradientDivider", true); // TODO
-        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.black)); // TODO
-        dividerHeight = intent.getFloatExtra("dividerHeight", DipPixelHelper.getPixel(this, 2)); // TODO
+        gradientDivider = intent.getBooleanExtra("gradientDivider", true);
+        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.black));
+        dividerHeight = intent.getFloatExtra("dividerHeight", DipPixelHelper.getPixel(this, 2));
 
         showProgressBar = intent.getBooleanExtra("showProgressBar", true);
         progressBarColor = intent.getIntExtra("progressBarColor", colorAccent);
@@ -467,8 +470,8 @@ public class FinestWebViewActivity extends AppCompatActivity {
         progressBarPosition = Position.fromSerializable(intent.getSerializableExtra("progressBarPosition"));
 
         titleDefault = intent.getStringExtra("titleDefault");
-        updateTitleFromHtml = intent.getBooleanExtra("updateTitleFromHtml", true);
-        titleSize = intent.getFloatExtra("titleSize", DipPixelHelper.getPixel(this, 14)); // TODO
+        updateTitleFromHtml = intent.getBooleanExtra("updateTitleFromHtml", true); // TODO
+        titleSize = intent.getFloatExtra("titleSize", DipPixelHelper.getPixel(this, 14));
         titleFont = intent.getStringExtra("titleFont") == null ? "Roboto-Medium.ttf" : intent.getStringExtra("titleFont");
         titleColor = intent.getIntExtra("titleColor", textColorPrimary);
 
@@ -554,8 +557,18 @@ public class FinestWebViewActivity extends AppCompatActivity {
 
         { // Divider
             divider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
-//        gradientDivider = intent.getBooleanExtra("gradientDivider", true); // TODO
-            divider.setBackgroundColor(dividerColor);
+            if (gradientDivider) {
+                GradientDrawable gradient = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                        new int[]{dividerColor, ContextCompat.getColor(this, android.R.color.transparent)});
+                gradient.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+                gradient.setShape(GradientDrawable.RECTANGLE);
+                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    divider.setBackgroundDrawable(gradient);
+                } else {
+                    divider.setBackground(gradient);
+                }
+            } else
+                divider.setBackgroundColor(dividerColor);
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     (int) dividerHeight
@@ -623,24 +636,43 @@ public class FinestWebViewActivity extends AppCompatActivity {
     protected void updateIcon(ImageButton icon, @DrawableRes int drawableRes) {
         StateListDrawable states = new StateListDrawable();
         {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableRes);
+            Bitmap bitmap = getColoredBitmap(drawableRes, iconPressedColor);
             BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
-            drawable.setColorFilter(new PorterDuffColorFilter(iconPressedColor, PorterDuff.Mode.SRC_ATOP));
             states.addState(new int[]{android.R.attr.state_pressed}, drawable);
         }
         {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableRes);
+            Bitmap bitmap = getColoredBitmap(drawableRes, iconDisabledColor);
             BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
-            drawable.setColorFilter(new PorterDuffColorFilter(iconDisabledColor, PorterDuff.Mode.SRC_ATOP));
             states.addState(new int[]{-android.R.attr.state_enabled}, drawable);
         }
         {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableRes);
+            Bitmap bitmap = getColoredBitmap(drawableRes, iconDefaultColor);
             BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
-            drawable.setColorFilter(new PorterDuffColorFilter(iconDefaultColor, PorterDuff.Mode.SRC_ATOP));
             states.addState(new int[]{}, drawable);
         }
         icon.setImageDrawable(states);
+    }
+
+    protected Bitmap getColoredBitmap(@DrawableRes int drawableRes, @ColorInt int color) {
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableRes);
+
+        int defAlpha = Color.alpha(color);
+        int defRed = Color.red(color);
+        int defGreen = Color.green(color);
+        int defBlue = Color.blue(color);
+
+        int[] pixels = new int[bitmap.getWidth() * bitmap.getHeight()];
+        bitmap.getPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+        for (int i = 0; i < pixels.length; i++) {
+            int pixel = pixels[i];
+            int alpha = Color.alpha(pixel);
+            if (alpha != 0)
+                pixels[i] = Color.argb((int) (alpha * defAlpha / 256f), defRed, defGreen, defBlue);
+        }
+
+        Bitmap coloredBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        coloredBitmap.setPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+        return coloredBitmap;
     }
 
     @Override

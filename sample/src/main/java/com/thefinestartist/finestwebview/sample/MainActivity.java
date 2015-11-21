@@ -23,7 +23,10 @@ public class MainActivity extends AppCompatActivity {
         new FinestWebViewActivity.Builder(this)
                 .titleDefault("FinestWebView")
                 .backPressToClose(true)
-                .dividerHeight(1)
+                .dividerHeight(100)
+                .gradientDivider(true)
+                .dividerColorRes(R.color.silver)
+                .iconDefaultColorRes(R.color.accent)
                 .progressBarHeight(DipPixelHelper.getPixel(this, 3))
                 .progressBarColorRes(R.color.accent)
                 .show("https://medium.com/@kollinz");

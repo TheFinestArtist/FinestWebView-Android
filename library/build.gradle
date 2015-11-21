@@ -22,6 +22,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:support-annotations:23.1.0'
+    compile 'com.wnafee:vector-compat:1.0.5'
 }
 
 publish {
