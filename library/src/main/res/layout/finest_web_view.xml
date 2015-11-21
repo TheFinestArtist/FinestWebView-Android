@@ -22,9 +22,9 @@
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:progress="50"
-        android:indeterminate="false" />
+        android:layout_height="3dp"
+        android:indeterminate="false"
+        android:progressDrawable="@drawable/progress_drawable" />
 
     <include layout="@layout/menus" />
 

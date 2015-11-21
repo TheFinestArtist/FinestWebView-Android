@@ -2,13 +2,12 @@ package com.thefinestartist.finestwebview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.support.annotation.AnimRes;
@@ -19,7 +18,6 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -46,6 +44,8 @@ public class FinestWebViewActivity extends AppCompatActivity {
     public static class Builder {
 
         private final Context context;
+
+        protected Integer toolbarColor;
 
         protected Integer iconDefaultColor;
         protected Integer iconDisabledColor;
@@ -86,6 +86,16 @@ public class FinestWebViewActivity extends AppCompatActivity {
 
         public Builder(@NonNull Context context) {
             this.context = context;
+        }
+
+        public Builder toolbarColor(@ColorInt int color) {
+            this.toolbarColor = color;
+            return this;
+        }
+
+        public Builder toolbarColorRes(@ColorRes int color) {
+            this.toolbarColor = ContextCompat.getColor(context, color);
+            return this;
         }
 
         public Builder iconDefaultColor(@ColorInt int color) {
@@ -312,6 +322,9 @@ public class FinestWebViewActivity extends AppCompatActivity {
 
             Intent intent = new Intent(context, FinestWebViewActivity.class);
 
+            if (toolbarColor != null)
+                intent.putExtra("toolbarColor", (int) toolbarColor);
+
             if (iconDefaultColor != null)
                 intent.putExtra("iconDefaultColor", (int) iconDefaultColor);
             if (iconDisabledColor != null)
@@ -380,6 +393,8 @@ public class FinestWebViewActivity extends AppCompatActivity {
         }
     }
 
+    protected int toolbarColor;
+
     protected int iconDefaultColor;
     protected int iconDisabledColor;
     protected int iconPressedColor;
@@ -422,9 +437,23 @@ public class FinestWebViewActivity extends AppCompatActivity {
         if (intent == null)
             return;
 
-        iconDefaultColor = intent.getIntExtra("iconDefaultColor", ContextCompat.getColor(this, R.color.black));
-        iconDisabledColor = intent.getIntExtra("iconDisabledColor", ContextCompat.getColor(this, R.color.black));
-        iconPressedColor = intent.getIntExtra("iconPressedColor", ContextCompat.getColor(this, R.color.black));
+        TypedValue typedValue = new TypedValue();
+        TypedArray a = obtainStyledAttributes(typedValue.data, new int[]{
+                R.attr.colorPrimary,
+                R.attr.colorAccent,
+                android.R.attr.textColorPrimary,
+                android.R.attr.textColorSecondary});
+        int colorPrimary = a.getColor(0, ContextCompat.getColor(this, R.color.white));
+        int colorAccent = a.getColor(1, ContextCompat.getColor(this, R.color.black));
+        int textColorPrimary = a.getColor(2, ContextCompat.getColor(this, R.color.black));
+        int textColorSecondary = a.getColor(3, ContextCompat.getColor(this, R.color.silver));
+        a.recycle();
+
+        toolbarColor = intent.getIntExtra("toolbarColor", colorPrimary);
+
+        iconDefaultColor = intent.getIntExtra("iconDefaultColor", colorAccent);
+        iconDisabledColor = intent.getIntExtra("iconDisabledColor", colorAccent);
+        iconPressedColor = intent.getIntExtra("iconPressedColor", colorAccent);
         iconSelector = intent.getIntExtra("iconSelector", R.drawable.selector_grey);
 
         showDivider = intent.getBooleanExtra("showDivider", true);
@@ -433,20 +462,20 @@ public class FinestWebViewActivity extends AppCompatActivity {
         dividerHeight = intent.getFloatExtra("dividerHeight", DipPixelHelper.getPixel(this, 2)); // TODO
 
         showProgressBar = intent.getBooleanExtra("showProgressBar", true);
-        progressBarColor = intent.getIntExtra("progressBarColor", ContextCompat.getColor(this, R.color.black)); // TODO
-        progressBarHeight = intent.getFloatExtra("progressBarHeight", DipPixelHelper.getPixel(this, 2)); // TODO
+        progressBarColor = intent.getIntExtra("progressBarColor", colorAccent);
+        progressBarHeight = intent.getFloatExtra("progressBarHeight", DipPixelHelper.getPixel(this, 2));
         progressBarPosition = Position.fromSerializable(intent.getSerializableExtra("progressBarPosition"));
 
         titleDefault = intent.getStringExtra("titleDefault");
         updateTitleFromHtml = intent.getBooleanExtra("updateTitleFromHtml", true);
         titleSize = intent.getFloatExtra("titleSize", DipPixelHelper.getPixel(this, 14)); // TODO
         titleFont = intent.getStringExtra("titleFont") == null ? "Roboto-Medium.ttf" : intent.getStringExtra("titleFont");
-        titleColor = intent.getIntExtra("titleColor", ContextCompat.getColor(this, R.color.black));
+        titleColor = intent.getIntExtra("titleColor", textColorPrimary);
 
         showUrl = intent.getBooleanExtra("showUrl", true);
         urlSize = intent.getFloatExtra("urlSize", DipPixelHelper.getPixel(this, 10));
         urlFont = intent.getStringExtra("urlFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("titleFont");
-        urlColor = intent.getIntExtra("urlColor", ContextCompat.getColor(this, R.color.silver));
+        urlColor = intent.getIntExtra("urlColor", textColorSecondary);
 
         enterAnimation = intent.getIntExtra("enterAnimation", R.anim.modal_activity_close_enter);
         exitAnimation = intent.getIntExtra("exitAnimation", R.anim.modal_activity_close_exit);
@@ -503,59 +532,84 @@ public class FinestWebViewActivity extends AppCompatActivity {
         updateIcon(more, R.drawable.ic_launcher);
         more.setBackgroundResource(iconSelector);
 
-        title.setText(titleDefault);
-        title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
-        title.setTypeface(TypefaceHelper.get(this, titleFont));
-        title.setTextColor(titleColor);
-        title.setMaxWidth(maxWidth);
-
-        urlTv.setText(url);
-        urlTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, urlSize);
-        urlTv.setTypeface(TypefaceHelper.get(this, urlFont));
-        urlTv.setTextColor(urlColor);
-        urlTv.setMaxWidth(maxWidth);
-
-        progressBar.setVisibility(showProgressBar ? View.VISIBLE : View.GONE);
-        progressBar.getProgressDrawable().setColorFilter(progressBarColor, PorterDuff.Mode.SRC_IN);
-        progressBar.setBackgroundColor(Color.TRANSPARENT);
-        progressBar.setMinimumHeight((int) progressBarHeight);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                (int) progressBarHeight
-        );
-        float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
-        switch (progressBarPosition) {
-            case TOP_OF_TOOLBAR:
-                params.setMargins(0, 0, 0, 0);
-                break;
-            case BOTTON_OF_TOOLBAR:
-                params.setMargins(0, (int) (toolbarHeight - progressBarHeight), 0, 0);
-                break;
-            case TOP_OF_WEBVIEW:
-                params.setMargins(0, (int) toolbarHeight, 0, 0);
-                break;
-            case BOTTOM_OF_WEBVIEW:
-                params.setMargins(0, (int) (ScreenHelper.getHeight(this) - progressBarHeight), 0, 0);
-                break;
+        { // Toolbar
+            toolbar.setBackgroundColor(toolbarColor);
         }
-        progressBar.setLayoutParams(params);
 
-        webView.getSettings().setUseWideViewPort(true);
-        webView.setInitialScale(100);
-        webView.getSettings().setUseWideViewPort(true);
-        webView.getSettings().setBuiltInZoomControls(true);
-        webView.getSettings().setSupportZoom(true);
-        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        webView.getSettings().setAllowFileAccess(true);
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setAppCacheEnabled(true);
-        webView.getSettings().setDisplayZoomControls(false);
+        { // Title
+            title.setText(titleDefault);
+            title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
+            title.setTypeface(TypefaceHelper.get(this, titleFont));
+            title.setTextColor(titleColor);
+            title.setMaxWidth(maxWidth);
+        }
 
-        webView.setWebViewClient(new WebViewClient() {
-        });
+        { // UrlTv
+            urlTv.setText(url);
+            urlTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, urlSize);
+            urlTv.setTypeface(TypefaceHelper.get(this, urlFont));
+            urlTv.setTextColor(urlColor);
+            urlTv.setMaxWidth(maxWidth);
+        }
 
-        webView.loadUrl(url);
+        { // Divider
+            divider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
+//        gradientDivider = intent.getBooleanExtra("gradientDivider", true); // TODO
+            divider.setBackgroundColor(dividerColor);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) dividerHeight
+            );
+            float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
+            params.setMargins(0, (int) toolbarHeight, 0, 0);
+            divider.setLayoutParams(params);
+        }
+
+        { // ProgressBar
+            progressBar.setVisibility(showProgressBar ? View.VISIBLE : View.GONE);
+            progressBar.getProgressDrawable().setColorFilter(progressBarColor, PorterDuff.Mode.SRC_IN);
+            progressBar.setMinimumHeight((int) progressBarHeight);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) progressBarHeight
+            );
+            float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
+            switch (progressBarPosition) {
+                case TOP_OF_TOOLBAR:
+                    params.setMargins(0, 0, 0, 0);
+                    break;
+                case BOTTON_OF_TOOLBAR:
+                    params.setMargins(0, (int) (toolbarHeight - progressBarHeight), 0, 0);
+                    break;
+                case TOP_OF_WEBVIEW:
+                    params.setMargins(0, (int) toolbarHeight, 0, 0);
+                    break;
+                case BOTTOM_OF_WEBVIEW:
+                    params.setMargins(0, (int) (ScreenHelper.getHeight(this) - progressBarHeight), 0, 0);
+                    break;
+            }
+            progressBar.setLayoutParams(params);
+            progressBar.setProgress(30);
+        }
+
+        { // WebView
+            webView.getSettings().setUseWideViewPort(true);
+            webView.setInitialScale(100);
+            webView.getSettings().setUseWideViewPort(true);
+            webView.getSettings().setBuiltInZoomControls(true);
+            webView.getSettings().setSupportZoom(true);
+            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+            webView.getSettings().setAllowFileAccess(true);
+            webView.getSettings().setDomStorageEnabled(true);
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.getSettings().setAppCacheEnabled(true);
+            webView.getSettings().setDisplayZoomControls(false);
+
+            webView.setWebViewClient(new WebViewClient() {
+            });
+
+            webView.loadUrl(url);
+        }
     }
 
     protected int getMaxWidth() {
