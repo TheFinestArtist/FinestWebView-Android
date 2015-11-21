@@ -22,8 +22,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:support-annotations:23.1.0'
-    compile 'com.github.ksoichiro:android-observablescrollview:1.6.0'
-    compile 'com.nineoldandroids:library:2.4.0+'
+    compile 'com.android.support:design:23.1.0'
 }
 
 publish {

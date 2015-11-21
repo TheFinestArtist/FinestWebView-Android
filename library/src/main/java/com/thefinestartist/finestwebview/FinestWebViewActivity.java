@@ -9,6 +9,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -18,17 +19,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ObservableWebView;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
-import com.nineoldandroids.animation.ObjectAnimator;
-import com.nineoldandroids.animation.ValueAnimator;
-import com.nineoldandroids.view.ViewHelper;
 import com.thefinestartist.finestwebview.enums.Position;
 import com.thefinestartist.finestwebview.helpers.DipPixelHelper;
 import com.thefinestartist.finestwebview.helpers.ScreenHelper;
@@ -38,7 +35,7 @@ import com.thefinestartist.finestwebview.helpers.TypefaceHelper;
 /**
  * Created by Leonardo on 11/14/15.
  */
-public class FinestWebViewActivity extends AppCompatActivity implements ObservableScrollViewCallbacks {
+public class FinestWebViewActivity extends AppCompatActivity {
 
     protected int toolbarColor;
 
@@ -128,10 +125,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements Observab
         exitAnimation = intent.getIntExtra("exitAnimation", R.anim.activity_close_exit); // TODO
 
         showRefresh = intent.getBooleanExtra("showRefresh", false); // TODO
-        backPressToClose = intent.getBooleanExtra("backPressToClose", false); // TODO
+        backPressToClose = intent.getBooleanExtra("backPressToClose", false);
 
         edgeControlSide = intent.getBooleanExtra("edgeControlSide", true); // TODO
-        edgeControlTop = intent.getBooleanExtra("edgeControlTop", true);
+        edgeControlTop = intent.getBooleanExtra("edgeControlTop", true); // TODO
 
         url = intent.getStringExtra("url");
     }
@@ -145,14 +142,17 @@ public class FinestWebViewActivity extends AppCompatActivity implements Observab
     protected ImageButton forward;
     protected ImageButton more;
 
+    protected WebView webView;
+
     protected View divider;
     protected ProgressBar progressBar;
-    protected ObservableWebView webView;
 
     protected void bind() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         title = (TextView) findViewById(R.id.title);
         urlTv = (TextView) findViewById(R.id.url);
+
+        webView = (WebView) findViewById(R.id.webView);
 
         close = (ImageButton) findViewById(R.id.close);
         back = (ImageButton) findViewById(R.id.back);
@@ -161,36 +161,35 @@ public class FinestWebViewActivity extends AppCompatActivity implements Observab
 
         divider = findViewById(R.id.divider);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        webView = (ObservableWebView) findViewById(R.id.webView);
-        webView.setScrollViewCallbacks(this);
     }
 
     protected void drawViews() {
         setSupportActionBar(toolbar);
-        int maxWidth = getMaxWidth();
 
-        updateIcon(close, R.drawable.ic_launcher);
-        close.setBackgroundResource(iconSelector);
-        updateIcon(back, R.drawable.ic_launcher);
-        back.setBackgroundResource(iconSelector);
-        updateIcon(forward, R.drawable.ic_launcher);
-        forward.setBackgroundResource(iconSelector);
-        updateIcon(more, R.drawable.ic_launcher);
-        more.setBackgroundResource(iconSelector);
+        { // Icons
+            updateIcon(close, R.drawable.ic_launcher);
+            close.setBackgroundResource(iconSelector);
+            updateIcon(back, R.drawable.ic_launcher);
+            back.setBackgroundResource(iconSelector);
+            updateIcon(forward, R.drawable.ic_launcher);
+            forward.setBackgroundResource(iconSelector);
+            updateIcon(more, R.drawable.ic_launcher);
+            more.setBackgroundResource(iconSelector);
+        }
 
         { // Toolbar
             toolbar.setBackgroundColor(toolbarColor);
         }
 
-        { // Title
+        { // TextViews
+            int maxWidth = getMaxWidth();
+
             title.setText(titleDefault);
             title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
             title.setTypeface(TypefaceHelper.get(this, titleFont));
             title.setTextColor(titleColor);
             title.setMaxWidth(maxWidth);
-        }
 
-        { // UrlTv
             urlTv.setText(url);
             urlTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, urlSize);
             urlTv.setTypeface(TypefaceHelper.get(this, urlFont));
@@ -198,20 +197,40 @@ public class FinestWebViewActivity extends AppCompatActivity implements Observab
             urlTv.setMaxWidth(maxWidth);
         }
 
+        { // Content
+            webView.loadUrl(url);
+            webView.getSettings().setUseWideViewPort(true);
+            webView.setInitialScale(100);
+            webView.getSettings().setUseWideViewPort(true);
+            webView.getSettings().setBuiltInZoomControls(true);
+            webView.getSettings().setSupportZoom(true);
+            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+            webView.getSettings().setAllowFileAccess(true);
+            webView.getSettings().setDomStorageEnabled(true);
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.getSettings().setAppCacheEnabled(true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                webView.getSettings().setDisplayZoomControls(false);
+            else
+                webView.getSettings().setBuiltInZoomControls(false);
+
+            webView.setWebViewClient(new WebViewClient() {
+            });
+        }
+
         { // Divider
             divider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
             if (gradientDivider) {
-                GradientDrawable gradient = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                        new int[]{dividerColor, ContextCompat.getColor(this, android.R.color.transparent)});
-                gradient.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-                gradient.setShape(GradientDrawable.RECTANGLE);
-                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    divider.setBackgroundDrawable(gradient);
+                Bitmap bitmap = getGradientBitmap(ScreenHelper.getWidth(this), (int) dividerHeight, dividerColor);
+                BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    divider.setBackgroundDrawable(drawable);
                 } else {
-                    divider.setBackground(gradient);
+                    divider.setBackground(drawable);
                 }
-            } else
+            } else {
                 divider.setBackgroundColor(dividerColor);
+            }
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     (int) dividerHeight
@@ -249,32 +268,6 @@ public class FinestWebViewActivity extends AppCompatActivity implements Observab
         }
 
         { // Options
-//            SlidrConfig config = new SlidrConfig.Builder()
-////                .primaryColor(primary)
-////                .secondaryColor(secondary)
-//                    .position(SlidrPosition.TOP)
-//                    .velocityThreshold(2400)
-//                    .distanceThreshold(.25f)
-//                    .edge(true)
-//                    .touchSize(getResources().getDimensionPixelSize(R.dimen.toolbarHeight))
-//                    .build();
-//
-//            SlidrInterface slidrInterface = Slidr.attach(this, config);
-//            if (edgeControlTop)
-//                slidrInterface.unlock();
-//            else
-//                slidrInterface.lock();
-        }
-
-        { // Content
-            webView.loadUrl(url);
-//            FinestWebViewFragment fragment = new FinestWebViewFragment();
-//            Bundle args = new Bundle();
-//            args.putString(FinestWebViewFragment.EXTRA_URL, url);
-//            fragment.setArguments(args);
-//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//            transaction.replace(R.id.content, fragment);
-//            transaction.commit();
         }
     }
 
@@ -309,23 +302,44 @@ public class FinestWebViewActivity extends AppCompatActivity implements Observab
     protected Bitmap getColoredBitmap(@DrawableRes int drawableRes, @ColorInt int color) {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableRes);
 
-        int defAlpha = Color.alpha(color);
-        int defRed = Color.red(color);
-        int defGreen = Color.green(color);
-        int defBlue = Color.blue(color);
+        int alpha = Color.alpha(color);
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
 
         int[] pixels = new int[bitmap.getWidth() * bitmap.getHeight()];
         bitmap.getPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
         for (int i = 0; i < pixels.length; i++) {
             int pixel = pixels[i];
-            int alpha = Color.alpha(pixel);
-            if (alpha != 0)
-                pixels[i] = Color.argb((int) (alpha * defAlpha / 256f), defRed, defGreen, defBlue);
+            int pixelAlpha = Color.alpha(pixel);
+            if (pixelAlpha != 0)
+                pixels[i] = Color.argb((int) (pixelAlpha * alpha / 256f), red, green, blue);
         }
 
         Bitmap coloredBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
         coloredBitmap.setPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
         return coloredBitmap;
+    }
+
+    protected Bitmap getGradientBitmap(int width, int height, @ColorInt int color) {
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+        int alpha = Color.alpha(color);
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+
+        int[] pixels = new int[width * height];
+        bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+        for (int y = 0; y < height; y++) {
+            int gradientAlpha = (int) ((float) alpha * (float) (height - y) * (float) (height - y) / (float) height / (float) height);
+            for (int x = 0; x < width; x++) {
+                pixels[x + y * width] = Color.argb(gradientAlpha, red, green, blue);
+            }
+        }
+
+        bitmap.setPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+        return bitmap;
     }
 
     @Override
@@ -339,71 +353,11 @@ public class FinestWebViewActivity extends AppCompatActivity implements Observab
 
     @Override
     public void onBackPressed() {
-        if (backPressToClose) {
+        if (backPressToClose || !webView.canGoBack()) {
             super.onBackPressed();
             overridePendingTransition(enterAnimation, exitAnimation);
         } else {
-
+            webView.goBack();
         }
-    }
-
-    @Override
-    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
-
-    }
-
-    @Override
-    public void onDownMotionEvent() {
-
-    }
-
-    @Override
-    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
-        if (scrollState == ScrollState.UP) {
-            if (toolbarIsShown()) {
-                hideToolbar();
-            }
-        } else if (scrollState == ScrollState.DOWN) {
-            if (toolbarIsHidden()) {
-                showToolbar();
-            }
-        }
-    }
-
-    private boolean toolbarIsShown() {
-        return ViewHelper.getTranslationY(toolbar) == 0;
-    }
-
-    private boolean toolbarIsHidden() {
-        return ViewHelper.getTranslationY(toolbar) == -toolbar.getHeight();
-    }
-
-    private void showToolbar() {
-        moveToolbar(0);
-    }
-
-    private void hideToolbar() {
-        moveToolbar(-toolbar.getHeight());
-    }
-
-    private void moveToolbar(float toTranslationY) {
-        if (ViewHelper.getTranslationY(toolbar) == toTranslationY)
-            return;
-
-        ValueAnimator animator = ObjectAnimator.ofFloat(ViewHelper.getTranslationY(toolbar), toTranslationY).setDuration(200);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float translationY = (float) animation.getAnimatedValue();
-                ViewHelper.setTranslationY(toolbar, translationY);
-                ViewHelper.setTranslationY(webView, translationY);
-                ViewHelper.setTranslationY(divider, translationY);
-                ViewHelper.setTranslationY(progressBar, translationY);
-                FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) webView.getLayoutParams();
-                lp.height = (int) -translationY + ScreenHelper.getHeight(FinestWebViewActivity.this) - lp.topMargin;
-                webView.requestLayout();
-            }
-        });
-        animator.start();
     }
 }

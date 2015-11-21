@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 .iconDefaultColorRes(R.color.accent)
                 .progressBarHeight(DipPixelHelper.getPixel(this, 3))
                 .progressBarColorRes(R.color.accent)
+                .backPressToClose(false)
                 .show("https://medium.com/@kollinz");
         overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
     }
