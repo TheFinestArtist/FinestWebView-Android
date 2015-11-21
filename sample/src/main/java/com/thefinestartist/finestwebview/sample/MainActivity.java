@@ -3,7 +3,7 @@ package com.thefinestartist.finestwebview.sample;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.thefinestartist.finestwebview.FinestWebViewActivity;
+import com.thefinestartist.finestwebview.FinestWebView;
 import com.thefinestartist.finestwebview.helpers.DipPixelHelper;
 
 import butterknife.ButterKnife;
@@ -20,12 +20,12 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.show)
     public void show() {
-        new FinestWebViewActivity.Builder(this)
+        new FinestWebView.Builder(this)
                 .titleDefault("FinestWebView")
                 .backPressToClose(true)
                 .dividerHeight(100)
                 .gradientDivider(true)
-                .dividerColorRes(R.color.silver)
+                .dividerColorRes(R.color.black_30)
                 .iconDefaultColorRes(R.color.accent)
                 .progressBarHeight(DipPixelHelper.getPixel(this, 3))
                 .progressBarColorRes(R.color.accent)

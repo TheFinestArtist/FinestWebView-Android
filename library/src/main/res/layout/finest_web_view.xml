@@ -12,6 +12,12 @@
         android:layout_height="match_parent"
         android:paddingTop="@dimen/toolbarHeight" />
 
+    <com.github.ksoichiro.android.observablescrollview.ObservableWebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/toolbarHeight" />
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
