@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +26,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.thefinestartist.finestwebview.enums.Position;
+import com.thefinestartist.finestwebview.helpers.BitmapHelper;
 import com.thefinestartist.finestwebview.helpers.DipPixelHelper;
 import com.thefinestartist.finestwebview.helpers.ScreenHelper;
 import com.thefinestartist.finestwebview.helpers.TypefaceHelper;
@@ -221,7 +221,8 @@ public class FinestWebViewActivity extends AppCompatActivity {
         { // Divider
             divider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
             if (gradientDivider) {
-                Bitmap bitmap = getGradientBitmap(ScreenHelper.getWidth(this), (int) dividerHeight, dividerColor);
+                int dividerWidth = ScreenHelper.getWidth(this);
+                Bitmap bitmap = BitmapHelper.getGradientBitmap(dividerWidth, (int) dividerHeight, dividerColor);
                 BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
                     divider.setBackgroundDrawable(drawable);
@@ -282,64 +283,21 @@ public class FinestWebViewActivity extends AppCompatActivity {
     protected void updateIcon(ImageButton icon, @DrawableRes int drawableRes) {
         StateListDrawable states = new StateListDrawable();
         {
-            Bitmap bitmap = getColoredBitmap(drawableRes, iconPressedColor);
+            Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconPressedColor);
             BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
             states.addState(new int[]{android.R.attr.state_pressed}, drawable);
         }
         {
-            Bitmap bitmap = getColoredBitmap(drawableRes, iconDisabledColor);
+            Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconDisabledColor);
             BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
             states.addState(new int[]{-android.R.attr.state_enabled}, drawable);
         }
         {
-            Bitmap bitmap = getColoredBitmap(drawableRes, iconDefaultColor);
+            Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconDefaultColor);
             BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
             states.addState(new int[]{}, drawable);
         }
         icon.setImageDrawable(states);
-    }
-
-    protected Bitmap getColoredBitmap(@DrawableRes int drawableRes, @ColorInt int color) {
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableRes);
-
-        int alpha = Color.alpha(color);
-        int red = Color.red(color);
-        int green = Color.green(color);
-        int blue = Color.blue(color);
-
-        int[] pixels = new int[bitmap.getWidth() * bitmap.getHeight()];
-        bitmap.getPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
-        for (int i = 0; i < pixels.length; i++) {
-            int pixel = pixels[i];
-            int pixelAlpha = Color.alpha(pixel);
-            if (pixelAlpha != 0)
-                pixels[i] = Color.argb((int) (pixelAlpha * alpha / 256f), red, green, blue);
-        }
-
-        Bitmap coloredBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
-        coloredBitmap.setPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
-        return coloredBitmap;
-    }
-
-    protected Bitmap getGradientBitmap(int width, int height, @ColorInt int color) {
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-
-        int alpha = Color.alpha(color);
-        int red = Color.red(color);
-        int green = Color.green(color);
-        int blue = Color.blue(color);
-
-        int[] pixels = new int[width * height];
-        bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
-        for (int y = 0; y < height; y++) {
-            int gradientAlpha = (int) ((float) alpha * (float) (height - y) * (float) (height - y) / (float) height / (float) height);
-            for (int x = 0; x < width; x++) {
-                pixels[x + y * width] = Color.argb(gradientAlpha, red, green, blue);
-            }
-        }
-
-        bitmap.setPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
-        return bitmap;
     }
 
     @Override
