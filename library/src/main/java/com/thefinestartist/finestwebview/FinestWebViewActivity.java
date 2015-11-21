@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -19,20 +18,22 @@ import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.r0adkll.slidr.Slidr;
+import com.r0adkll.slidr.model.SlidrConfig;
+import com.r0adkll.slidr.model.SlidrInterface;
+import com.r0adkll.slidr.model.SlidrPosition;
 import com.thefinestartist.finestwebview.enums.Position;
 import com.thefinestartist.finestwebview.helpers.DipPixelHelper;
 import com.thefinestartist.finestwebview.helpers.ScreenHelper;
@@ -480,14 +481,14 @@ public class FinestWebViewActivity extends AppCompatActivity {
         urlFont = intent.getStringExtra("urlFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("titleFont");
         urlColor = intent.getIntExtra("urlColor", textColorSecondary);
 
-        enterAnimation = intent.getIntExtra("enterAnimation", R.anim.modal_activity_close_enter);
-        exitAnimation = intent.getIntExtra("exitAnimation", R.anim.modal_activity_close_exit);
+        enterAnimation = intent.getIntExtra("enterAnimation", R.anim.activity_close_enter); // TODO
+        exitAnimation = intent.getIntExtra("exitAnimation", R.anim.activity_close_exit); // TODO
 
         showRefresh = intent.getBooleanExtra("showRefresh", false); // TODO
         backPressToClose = intent.getBooleanExtra("backPressToClose", false); // TODO
 
         edgeControlSide = intent.getBooleanExtra("edgeControlSide", true); // TODO
-        edgeControlTop = intent.getBooleanExtra("edgeControlTop", true); // TODO
+        edgeControlTop = intent.getBooleanExtra("edgeControlTop", true);
 
         url = intent.getStringExtra("url");
     }
@@ -501,8 +502,6 @@ public class FinestWebViewActivity extends AppCompatActivity {
     protected ImageButton forward;
     protected ImageButton more;
 
-    protected WebView webView;
-
     protected View divider;
     protected ProgressBar progressBar;
 
@@ -515,8 +514,6 @@ public class FinestWebViewActivity extends AppCompatActivity {
         back = (ImageButton) findViewById(R.id.back);
         forward = (ImageButton) findViewById(R.id.forward);
         more = (ImageButton) findViewById(R.id.more);
-
-        webView = (WebView) findViewById(R.id.webView);
 
         divider = findViewById(R.id.divider);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -605,23 +602,32 @@ public class FinestWebViewActivity extends AppCompatActivity {
             progressBar.setProgress(30);
         }
 
-        { // WebView
-            webView.getSettings().setUseWideViewPort(true);
-            webView.setInitialScale(100);
-            webView.getSettings().setUseWideViewPort(true);
-            webView.getSettings().setBuiltInZoomControls(true);
-            webView.getSettings().setSupportZoom(true);
-            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-            webView.getSettings().setAllowFileAccess(true);
-            webView.getSettings().setDomStorageEnabled(true);
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.getSettings().setAppCacheEnabled(true);
-            webView.getSettings().setDisplayZoomControls(false);
+        { // Options
+            SlidrConfig config = new SlidrConfig.Builder()
+//                .primaryColor(primary)
+//                .secondaryColor(secondary)
+                    .position(SlidrPosition.TOP)
+                    .velocityThreshold(2400)
+                    .distanceThreshold(.25f)
+                    .edge(true)
+                    .touchSize(getResources().getDimensionPixelSize(R.dimen.toolbarHeight))
+                    .build();
 
-            webView.setWebViewClient(new WebViewClient() {
-            });
+            SlidrInterface slidrInterface = Slidr.attach(this, config);
+            if (edgeControlTop)
+                slidrInterface.unlock();
+            else
+                slidrInterface.lock();
+        }
 
-            webView.loadUrl(url);
+        { // Content
+            FinestWebViewFragment fragment = new FinestWebViewFragment();
+            Bundle args = new Bundle();
+            args.putString(FinestWebViewFragment.EXTRA_URL, url);
+            fragment.setArguments(args);
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.content, fragment);
+            transaction.commit();
         }
     }
 
