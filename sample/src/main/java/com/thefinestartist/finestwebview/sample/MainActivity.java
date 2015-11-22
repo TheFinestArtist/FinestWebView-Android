@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
                 .titleDefault("FinestWebView")
                 .backPressToClose(true)
                 .dividerHeight(100)
+//                .toolbarColorRes(R.color.accent)
                 .gradientDivider(true)
                 .dividerColorRes(R.color.black_30)
                 .iconDefaultColorRes(R.color.accent)

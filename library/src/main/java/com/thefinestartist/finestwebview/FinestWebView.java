@@ -51,12 +51,13 @@ public class FinestWebView {
         protected String urlFont;
         protected Integer urlColor;
 
-        protected Integer enterAnimation;
-        protected Integer exitAnimation;
+        protected Integer animationCloseEnter;
+        protected Integer animationCloseExit;
 
         protected Boolean showRefresh;
         protected Boolean backPressToClose;
 
+        protected Boolean collapsingToolbar;
         protected Boolean edgeControlSide;
         protected Boolean edgeControlTop;
 
@@ -261,13 +262,10 @@ public class FinestWebView {
             return this;
         }
 
-        public Builder enterAnimation(@AnimRes int enterAnimation) {
-            this.enterAnimation = enterAnimation;
-            return this;
-        }
-
-        public Builder exitAnimation(@AnimRes int exitAnimation) {
-            this.exitAnimation = exitAnimation;
+        public Builder setCloseAnimations(@AnimRes int animationCloseEnter,
+                                          @AnimRes int animationCloseExit) {
+            this.animationCloseEnter = animationCloseEnter;
+            this.animationCloseExit = animationCloseExit;
             return this;
         }
 
@@ -281,15 +279,20 @@ public class FinestWebView {
             return this;
         }
 
-        public Builder edgeControlSide(boolean edgeControlSide) {
-            this.edgeControlSide = edgeControlSide;
+        public Builder collapsingToolbar(boolean collapsingToolbar) {
+            this.collapsingToolbar = collapsingToolbar;
             return this;
         }
 
-        public Builder edgeControlTop(boolean edgeControlTop) {
-            this.edgeControlTop = edgeControlTop;
-            return this;
-        }
+//        public Builder edgeControlSide(boolean edgeControlSide) {
+//            this.edgeControlSide = edgeControlSide;
+//            return this;
+//        }
+//
+//        public Builder edgeControlTop(boolean edgeControlTop) {
+//            this.edgeControlTop = edgeControlTop;
+//            return this;
+//        }
 
         public void show(@StringRes int urlRes) {
             show(context.getString(urlRes));
@@ -301,69 +304,71 @@ public class FinestWebView {
             Intent intent = new Intent(context, FinestWebViewActivity.class);
 
             if (toolbarColor != null)
-                intent.putExtra("toolbarColor", (int) toolbarColor);
+                intent.putExtra("toolbarColor", toolbarColor.intValue());
 
             if (iconDefaultColor != null)
-                intent.putExtra("iconDefaultColor", (int) iconDefaultColor);
+                intent.putExtra("iconDefaultColor", iconDefaultColor.intValue());
             if (iconDisabledColor != null)
-                intent.putExtra("iconDisabledColor", (int) iconDisabledColor);
+                intent.putExtra("iconDisabledColor", iconDisabledColor.intValue());
             if (iconPressedColor != null)
-                intent.putExtra("iconPressedColor", (int) iconPressedColor);
+                intent.putExtra("iconPressedColor", iconPressedColor.intValue());
             if (iconSelector != null)
-                intent.putExtra("iconSelector", (int) iconSelector);
+                intent.putExtra("iconSelector", iconSelector.intValue());
 
             if (showDivider != null)
-                intent.putExtra("showDivider", (boolean) showDivider);
+                intent.putExtra("showDivider", showDivider.booleanValue());
             if (gradientDivider != null)
-                intent.putExtra("gradientDivider", (boolean) gradientDivider);
+                intent.putExtra("gradientDivider", gradientDivider.booleanValue());
             if (dividerColor != null)
-                intent.putExtra("dividerColor", (int) dividerColor);
+                intent.putExtra("dividerColor", dividerColor.intValue());
             if (dividerHeight != null)
-                intent.putExtra("dividerHeight", (float) dividerHeight);
+                intent.putExtra("dividerHeight", dividerHeight.floatValue());
 
             if (showProgressBar != null)
-                intent.putExtra("showProgressBar", (boolean) showProgressBar);
+                intent.putExtra("showProgressBar", showProgressBar.booleanValue());
             if (progressBarColor != null)
-                intent.putExtra("progressBarColor", (int) progressBarColor);
+                intent.putExtra("progressBarColor", progressBarColor.intValue());
             if (progressBarHeight != null)
-                intent.putExtra("progressBarHeight", (float) progressBarHeight);
+                intent.putExtra("progressBarHeight", progressBarHeight.floatValue());
             if (progressBarPosition != null)
                 intent.putExtra("progressBarPosition", progressBarPosition);
 
             if (titleDefault != null)
                 intent.putExtra("titleDefault", titleDefault);
             if (updateTitleFromHtml != null)
-                intent.putExtra("updateTitleFromHtml", (boolean) updateTitleFromHtml);
+                intent.putExtra("updateTitleFromHtml", updateTitleFromHtml.booleanValue());
             if (titleSize != null)
-                intent.putExtra("titleSize", (float) titleSize);
+                intent.putExtra("titleSize", titleSize.floatValue());
             if (titleFont != null)
                 intent.putExtra("titleFont", titleFont);
             if (titleColor != null)
-                intent.putExtra("titleColor", (int) titleColor);
+                intent.putExtra("titleColor", titleColor.intValue());
 
             if (showUrl != null)
-                intent.putExtra("showUrl", (boolean) showUrl);
+                intent.putExtra("showUrl", showUrl.booleanValue());
             if (urlSize != null)
-                intent.putExtra("urlSize", (float) urlSize);
+                intent.putExtra("urlSize", urlSize.floatValue());
             if (urlFont != null)
                 intent.putExtra("urlFont", urlFont);
             if (urlColor != null)
-                intent.putExtra("urlColor", (int) urlColor);
+                intent.putExtra("urlColor", urlColor.intValue());
 
-            if (enterAnimation != null)
-                intent.putExtra("enterAnimation", (int) enterAnimation);
-            if (exitAnimation != null)
-                intent.putExtra("exitAnimation", (int) exitAnimation);
+            if (animationCloseEnter != null)
+                intent.putExtra("animationCloseEnter", animationCloseEnter.intValue());
+            if (animationCloseExit != null)
+                intent.putExtra("animationCloseExit", animationCloseExit.intValue());
 
             if (showRefresh != null)
-                intent.putExtra("showRefresh", (boolean) showRefresh);
+                intent.putExtra("showRefresh", showRefresh.booleanValue());
             if (backPressToClose != null)
-                intent.putExtra("backPressToClose", (boolean) backPressToClose);
+                intent.putExtra("backPressToClose", backPressToClose.booleanValue());
 
+            if (collapsingToolbar != null)
+                intent.putExtra("collapsingToolbar", collapsingToolbar.booleanValue());
             if (edgeControlSide != null)
-                intent.putExtra("edgeControlSide", (boolean) edgeControlSide);
+                intent.putExtra("edgeControlSide", edgeControlSide.booleanValue());
             if (edgeControlTop != null)
-                intent.putExtra("edgeControlTop", (boolean) edgeControlTop);
+                intent.putExtra("edgeControlTop", edgeControlTop.booleanValue());
 
             intent.putExtra("url", url);
 

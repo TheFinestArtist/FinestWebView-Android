@@ -3,15 +3,13 @@ package com.thefinestartist.finestwebview;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -65,12 +62,13 @@ public class FinestWebViewActivity extends AppCompatActivity {
     protected String urlFont;
     protected int urlColor;
 
-    protected int enterAnimation;
-    protected int exitAnimation;
+    protected int animationCloseEnter;
+    protected int animationCloseExit;
 
     protected boolean showRefresh;
     protected boolean backPressToClose;
 
+    protected boolean collapsingToolbar;
     protected boolean edgeControlSide;
     protected boolean edgeControlTop;
 
@@ -121,12 +119,13 @@ public class FinestWebViewActivity extends AppCompatActivity {
         urlFont = intent.getStringExtra("urlFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("titleFont");
         urlColor = intent.getIntExtra("urlColor", textColorSecondary);
 
-        enterAnimation = intent.getIntExtra("enterAnimation", R.anim.activity_close_enter); // TODO
-        exitAnimation = intent.getIntExtra("exitAnimation", R.anim.activity_close_exit); // TODO
+        animationCloseEnter = intent.getIntExtra("animationCloseEnter", R.anim.modal_activity_close_enter);
+        animationCloseExit = intent.getIntExtra("animationCloseExit", R.anim.modal_activity_close_exit);
 
         showRefresh = intent.getBooleanExtra("showRefresh", false); // TODO
         backPressToClose = intent.getBooleanExtra("backPressToClose", false);
 
+        collapsingToolbar = intent.getBooleanExtra("collapsingToolbar", true);
         edgeControlSide = intent.getBooleanExtra("edgeControlSide", true); // TODO
         edgeControlTop = intent.getBooleanExtra("edgeControlTop", true); // TODO
 
@@ -232,12 +231,8 @@ public class FinestWebViewActivity extends AppCompatActivity {
             } else {
                 divider.setBackgroundColor(dividerColor);
             }
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    (int) dividerHeight
-            );
-            float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
-            params.setMargins(0, (int) toolbarHeight, 0, 0);
+            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) divider.getLayoutParams();
+            params.height = (int) dividerHeight;
             divider.setLayoutParams(params);
         }
 
@@ -245,7 +240,7 @@ public class FinestWebViewActivity extends AppCompatActivity {
             progressBar.setVisibility(showProgressBar ? View.VISIBLE : View.GONE);
             progressBar.getProgressDrawable().setColorFilter(progressBarColor, PorterDuff.Mode.SRC_IN);
             progressBar.setMinimumHeight((int) progressBarHeight);
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+            CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     (int) progressBarHeight
             );
@@ -313,7 +308,7 @@ public class FinestWebViewActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (backPressToClose || !webView.canGoBack()) {
             super.onBackPressed();
-            overridePendingTransition(enterAnimation, exitAnimation);
+            overridePendingTransition(animationCloseEnter, animationCloseExit);
         } else {
             webView.goBack();
         }
