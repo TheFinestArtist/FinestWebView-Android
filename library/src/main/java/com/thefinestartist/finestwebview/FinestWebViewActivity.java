@@ -6,35 +6,43 @@ import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.nineoldandroids.view.ViewHelper;
 import com.thefinestartist.finestwebview.enums.Position;
 import com.thefinestartist.finestwebview.helpers.BitmapHelper;
 import com.thefinestartist.finestwebview.helpers.DipPixelHelper;
 import com.thefinestartist.finestwebview.helpers.ScreenHelper;
 import com.thefinestartist.finestwebview.helpers.TypefaceHelper;
+import com.thefinestartist.finestwebview.helpers.UrlParser;
 
 
 /**
  * Created by Leonardo on 11/14/15.
  */
-public class FinestWebViewActivity extends AppCompatActivity {
+public class FinestWebViewActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
 
     protected int toolbarColor;
+    protected int toolbarScrollFlags;
 
     protected int iconDefaultColor;
     protected int iconDisabledColor;
@@ -92,6 +100,8 @@ public class FinestWebViewActivity extends AppCompatActivity {
         a.recycle();
 
         toolbarColor = intent.getIntExtra("toolbarColor", colorPrimary);
+        toolbarScrollFlags = intent.getIntExtra("toolbarScrollFlags", AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
+                | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
 
         iconDefaultColor = intent.getIntExtra("iconDefaultColor", colorAccent);
         iconDisabledColor = intent.getIntExtra("iconDisabledColor", colorAccent);
@@ -109,7 +119,7 @@ public class FinestWebViewActivity extends AppCompatActivity {
         progressBarPosition = Position.fromSerializable(intent.getSerializableExtra("progressBarPosition"));
 
         titleDefault = intent.getStringExtra("titleDefault");
-        updateTitleFromHtml = intent.getBooleanExtra("updateTitleFromHtml", true); // TODO
+        updateTitleFromHtml = intent.getBooleanExtra("updateTitleFromHtml", true);
         titleSize = intent.getFloatExtra("titleSize", DipPixelHelper.getPixel(this, 14));
         titleFont = intent.getStringExtra("titleFont") == null ? "Roboto-Medium.ttf" : intent.getStringExtra("titleFont");
         titleColor = intent.getIntExtra("titleColor", textColorPrimary);
@@ -132,7 +142,9 @@ public class FinestWebViewActivity extends AppCompatActivity {
         url = intent.getStringExtra("url");
     }
 
+    protected AppBarLayout appBar;
     protected Toolbar toolbar;
+
     protected TextView title;
     protected TextView urlTv;
 
@@ -141,29 +153,64 @@ public class FinestWebViewActivity extends AppCompatActivity {
     protected ImageButton forward;
     protected ImageButton more;
 
+    protected NestedScrollView nestedScrollView;
     protected WebView webView;
 
+    protected View gradient;
     protected View divider;
     protected ProgressBar progressBar;
 
     protected void bind() {
+        appBar = (AppBarLayout) findViewById(R.id.appBar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         title = (TextView) findViewById(R.id.title);
         urlTv = (TextView) findViewById(R.id.url);
-
-        webView = (WebView) findViewById(R.id.webView);
 
         close = (ImageButton) findViewById(R.id.close);
         back = (ImageButton) findViewById(R.id.back);
         forward = (ImageButton) findViewById(R.id.forward);
         more = (ImageButton) findViewById(R.id.more);
 
+        nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
+        webView = (WebView) findViewById(R.id.webView);
+
+        gradient = findViewById(R.id.gradient);
         divider = findViewById(R.id.divider);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     protected void drawViews() {
         setSupportActionBar(toolbar);
+
+        { // AppBar
+            appBar.addOnOffsetChangedListener(this);
+        }
+
+        { // Toolbar
+            toolbar.setBackgroundColor(toolbarColor);
+            AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
+            params.setScrollFlags(toolbarScrollFlags);
+            toolbar.setLayoutParams(params);
+        }
+
+        { // TextViews
+            int maxWidth = getMaxWidth();
+
+            title.setText(titleDefault);
+            title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
+            title.setTypeface(TypefaceHelper.get(this, titleFont));
+            title.setTextColor(titleColor);
+            title.setMaxWidth(maxWidth);
+
+            urlTv.setText(UrlParser.getHost(url));
+            urlTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, urlSize);
+            urlTv.setTypeface(TypefaceHelper.get(this, urlFont));
+            urlTv.setTextColor(urlColor);
+            urlTv.setMaxWidth(maxWidth);
+
+            requestCenterLayout();
+        }
 
         { // Icons
             updateIcon(close, R.drawable.ic_launcher);
@@ -176,64 +223,50 @@ public class FinestWebViewActivity extends AppCompatActivity {
             more.setBackgroundResource(iconSelector);
         }
 
-        { // Toolbar
-            toolbar.setBackgroundColor(toolbarColor);
-        }
-
-        { // TextViews
-            int maxWidth = getMaxWidth();
-
-            title.setText(titleDefault);
-            title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
-            title.setTypeface(TypefaceHelper.get(this, titleFont));
-            title.setTextColor(titleColor);
-            title.setMaxWidth(maxWidth);
-
-            urlTv.setText(url);
-            urlTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, urlSize);
-            urlTv.setTypeface(TypefaceHelper.get(this, urlFont));
-            urlTv.setTextColor(urlColor);
-            urlTv.setMaxWidth(maxWidth);
-        }
-
         { // Content
-            webView.loadUrl(url);
-            webView.getSettings().setUseWideViewPort(true);
-            webView.setInitialScale(100);
-            webView.getSettings().setUseWideViewPort(true);
-            webView.getSettings().setBuiltInZoomControls(true);
-            webView.getSettings().setSupportZoom(true);
-            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-            webView.getSettings().setAllowFileAccess(true);
-            webView.getSettings().setDomStorageEnabled(true);
+            webView.setWebChromeClient(new MyWebChromeClient());
+            webView.setWebViewClient(new MyWebViewClient());
+//            webView.getSettings().setUseWideViewPort(true);
+//            webView.setInitialScale(100);
+//            webView.getSettings().setUseWideViewPort(true);
+//            webView.getSettings().setBuiltInZoomControls(true);
+//            webView.getSettings().setSupportZoom(true);
+//            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+//            webView.getSettings().setAllowFileAccess(true);
+//            webView.getSettings().setDomStorageEnabled(true);
             webView.getSettings().setJavaScriptEnabled(true);
             webView.getSettings().setAppCacheEnabled(true);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                webView.getSettings().setDisplayZoomControls(false);
-            else
-                webView.getSettings().setBuiltInZoomControls(false);
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+//                webView.getSettings().setDisplayZoomControls(false);
+//            else
+//                webView.getSettings().setBuiltInZoomControls(false);
 
-            webView.setWebViewClient(new WebViewClient() {
-            });
+            webView.loadUrl(url);
         }
 
         { // Divider
-            divider.setVisibility(showDivider ? View.VISIBLE : View.GONE);
+            gradient.setVisibility(showDivider && gradientDivider ? View.VISIBLE : View.GONE);
+            divider.setVisibility(showDivider && !gradientDivider ? View.VISIBLE : View.GONE);
             if (gradientDivider) {
                 int dividerWidth = ScreenHelper.getWidth(this);
                 Bitmap bitmap = BitmapHelper.getGradientBitmap(dividerWidth, (int) dividerHeight, dividerColor);
                 BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                    divider.setBackgroundDrawable(drawable);
+                    gradient.setBackgroundDrawable(drawable);
                 } else {
-                    divider.setBackground(drawable);
+                    gradient.setBackground(drawable);
                 }
+
+                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) gradient.getLayoutParams();
+                params.height = (int) dividerHeight;
+                gradient.setLayoutParams(params);
             } else {
                 divider.setBackgroundColor(dividerColor);
+
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) divider.getLayoutParams();
+                params.height = (int) dividerHeight;
+                divider.setLayoutParams(params);
             }
-            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) divider.getLayoutParams();
-            params.height = (int) dividerHeight;
-            divider.setLayoutParams(params);
         }
 
         { // ProgressBar
@@ -250,13 +283,13 @@ public class FinestWebViewActivity extends AppCompatActivity {
                     params.setMargins(0, 0, 0, 0);
                     break;
                 case BOTTON_OF_TOOLBAR:
-                    params.setMargins(0, (int) (toolbarHeight - progressBarHeight), 0, 0);
+                    params.setMargins(0, (int) toolbarHeight - (int) progressBarHeight, 0, 0);
                     break;
                 case TOP_OF_WEBVIEW:
                     params.setMargins(0, (int) toolbarHeight, 0, 0);
                     break;
                 case BOTTOM_OF_WEBVIEW:
-                    params.setMargins(0, (int) (ScreenHelper.getHeight(this) - progressBarHeight), 0, 0);
+                    params.setMargins(0, ScreenHelper.getHeight(this) - (int) progressBarHeight, 0, 0);
                     break;
             }
             progressBar.setLayoutParams(params);
@@ -264,6 +297,7 @@ public class FinestWebViewActivity extends AppCompatActivity {
         }
 
         { // Options
+
         }
     }
 
@@ -307,10 +341,109 @@ public class FinestWebViewActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (backPressToClose || !webView.canGoBack()) {
-            super.onBackPressed();
-            overridePendingTransition(animationCloseEnter, animationCloseExit);
+            close();
         } else {
             webView.goBack();
         }
+    }
+
+    public void onClick(View view) {
+        int viewId = view.getId();
+        if (viewId == R.id.close) {
+            close();
+        } else if (viewId == R.id.back) {
+            webView.goBack();
+        } else if (viewId == R.id.forward) {
+            webView.goForward();
+        } else if (viewId == R.id.more) {
+
+        }
+    }
+
+    protected void close() {
+        super.onBackPressed();
+        overridePendingTransition(animationCloseEnter, animationCloseExit);
+    }
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+        if (toolbarScrollFlags == 0)
+            return;
+
+        ViewHelper.setTranslationY(gradient, verticalOffset);
+        ViewHelper.setAlpha(gradient, 1 - (float) Math.abs(verticalOffset) / (float) appBarLayout.getTotalScrollRange());
+
+        switch (progressBarPosition) {
+            case BOTTON_OF_TOOLBAR:
+                ViewHelper.setTranslationY(progressBar, Math.max(verticalOffset, progressBarHeight - appBarLayout.getTotalScrollRange()));
+                break;
+            case TOP_OF_WEBVIEW:
+                ViewHelper.setTranslationY(progressBar, verticalOffset);
+                break;
+            case TOP_OF_TOOLBAR:
+            case BOTTOM_OF_WEBVIEW:
+            default:
+                break;
+        }
+    }
+
+    public class MyWebChromeClient extends WebChromeClient {
+        @Override
+        public void onProgressChanged(WebView view, int progress) {
+            if (progress == 100)
+                progress = 0;
+            progressBar.setProgress(progress);
+        }
+    }
+
+    public class MyWebViewClient extends WebViewClient {
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            title.setText(view.getTitle());
+            urlTv.setText(UrlParser.getHost(url));
+            requestCenterLayout();
+
+            if (view.canGoBack() || view.canGoForward()) {
+                back.setVisibility(View.VISIBLE);
+                forward.setVisibility(View.VISIBLE);
+                back.setEnabled(view.canGoBack());
+                forward.setEnabled(view.canGoForward());
+            } else {
+                back.setVisibility(View.GONE);
+                forward.setVisibility(View.GONE);
+            }
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if (url.endsWith(".mp4")) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.parse(url), "video/*");
+                view.getContext().startActivity(intent);
+                return true;
+            } else {
+                return super.shouldOverrideUrlLoading(view, url);
+            }
+        }
+    }
+
+    protected void requestCenterLayout() {
+        int maxWidth;
+        if (webView.canGoBack() || webView.canGoForward()) {
+            maxWidth = (int) (ScreenHelper.getWidth(this) - DipPixelHelper.getPixel(this, 48) * 4);
+        } else {
+            maxWidth = (int) (ScreenHelper.getWidth(this) - DipPixelHelper.getPixel(this, 48) * 2);
+        }
+
+        title.setMaxWidth(maxWidth);
+        urlTv.setMaxWidth(maxWidth);
+        title.requestLayout();
+        urlTv.requestLayout();
     }
 }

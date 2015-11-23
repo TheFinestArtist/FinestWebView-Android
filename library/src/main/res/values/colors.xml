@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="grey_20">#33D2D2D2</color>
+    <color name="gray_20">#33D2D2D2</color>
     <color name="black_30">#4D202020</color>
 
     <color name="white">#FFFFFF</color>

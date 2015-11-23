@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 23
@@ -11,7 +10,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 10
+        minSdkVersion 7
         targetSdkVersion 23
         versionCode 1
         versionName "1.0.0"
@@ -20,16 +19,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'com.android.support:support-annotations:23.1.0'
-    compile 'com.android.support:design:23.1.0'
-}
-
-publish {
-    userOrg = 'thefinestartist'
-    groupId = 'com.thefinestartist'
-    artifactId = 'finestwebview'
-    version = '1.0.0'
-    description = 'FinestWebView is a Android library which extends Android WebView that has back, forward, refresh and share button in it.'
-    website = 'https://github.com/TheFinestArtist/FinestWebView-Android'
+    compile 'com.android.support:support-annotations:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+    compile 'com.nineoldandroids:library:2.4.0+'
 }

@@ -9,6 +9,7 @@ import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.design.widget.AppBarLayout.LayoutParams.ScrollFlags;
 import android.support.v4.content.ContextCompat;
 
 import com.thefinestartist.finestwebview.enums.Position;
@@ -24,6 +25,7 @@ public class FinestWebView {
         private final Context context;
 
         protected Integer toolbarColor;
+        protected Integer toolbarScrollFlags;
 
         protected Integer iconDefaultColor;
         protected Integer iconDisabledColor;
@@ -57,7 +59,6 @@ public class FinestWebView {
         protected Boolean showRefresh;
         protected Boolean backPressToClose;
 
-        protected Boolean collapsingToolbar;
         protected Boolean edgeControlSide;
         protected Boolean edgeControlTop;
 
@@ -69,6 +70,11 @@ public class FinestWebView {
 
         public Builder toolbarColor(@ColorInt int color) {
             this.toolbarColor = color;
+            return this;
+        }
+
+        public Builder toolbarScrollFlags(@ScrollFlags int flags) {
+            this.toolbarScrollFlags = flags;
             return this;
         }
 
@@ -279,11 +285,6 @@ public class FinestWebView {
             return this;
         }
 
-        public Builder collapsingToolbar(boolean collapsingToolbar) {
-            this.collapsingToolbar = collapsingToolbar;
-            return this;
-        }
-
 //        public Builder edgeControlSide(boolean edgeControlSide) {
 //            this.edgeControlSide = edgeControlSide;
 //            return this;
@@ -305,6 +306,8 @@ public class FinestWebView {
 
             if (toolbarColor != null)
                 intent.putExtra("toolbarColor", toolbarColor.intValue());
+            if (toolbarScrollFlags != null)
+                intent.putExtra("toolbarScrollFlags", toolbarScrollFlags.intValue());
 
             if (iconDefaultColor != null)
                 intent.putExtra("iconDefaultColor", iconDefaultColor.intValue());
@@ -363,8 +366,6 @@ public class FinestWebView {
             if (backPressToClose != null)
                 intent.putExtra("backPressToClose", backPressToClose.booleanValue());
 
-            if (collapsingToolbar != null)
-                intent.putExtra("collapsingToolbar", collapsingToolbar.booleanValue());
             if (edgeControlSide != null)
                 intent.putExtra("edgeControlSide", edgeControlSide.booleanValue());
             if (edgeControlTop != null)
