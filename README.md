@@ -23,7 +23,8 @@ dependencies {
 
 ## Manifest Settings
 
-FinestWebView is basically and Android activity with webview, toolbar and etc. You have to add FinestWebViewActivity in your `AndroidManifest.xml` 
+FinestWebView is basically and Android activity with webview, toolbar and etc.  
+You have to add FinestWebViewActivity in your `AndroidManifest.xml` 
 
 ```xml
 <activity
