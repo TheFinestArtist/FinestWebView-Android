@@ -192,7 +192,7 @@ new FinestWebViewActivity.Builder(this)
 overridePendingTransition(R.anim.activity_open_enter, R.anim.activity_open_exit);
 ```
 
-Pre-defined animations
+Pre-defined animation sets
 ```xml
 activity_open_enter.xml
 activity_open_exit.xml
