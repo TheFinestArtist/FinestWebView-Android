@@ -1,6 +1,12 @@
 # FinestWebView
 
-FinestWebView is a Android library which extends Android WebView that has back, forward, refresh and share button in it.
+#### FinestWebView is easy to use WebView that includes back, forward, refresh and share features
+
+* Builder pattern
+* Various options
+* Material design
+* Pre-made icons
+
 
 ## Gradle Dependency (jcenter)
 
@@ -12,8 +18,9 @@ dependencies {
 }
 ```
 
-## Basic WebView
 
+## Basic WebView
+ 
 ```java
 new FinestWebViewActivity.Builder(this)
         .defaultTitle(R.string.title)
@@ -21,76 +28,75 @@ new FinestWebViewActivity.Builder(this)
         .show(url);
 ```
 
-## Options
+
+## More Options
+
 ```java
-showStatusBar(boolean) // default: true
-statusBarColor(int) // default: white
-statusBarColorRes(int) //default: 0
+// Toolbar Options
+toolbarColor(@ColorInt int color)
+toolbarScrollFlags(@ScrollFlags int flags)
+toolbarColorRes(@ColorRes int color)
 
-toolBarColor(int) // default: white
-toolBarColorRes(int) // default: white
+// Icon Options
+iconDefaultColor(@ColorInt int color)
+iconDefaultColorRes(@ColorRes int color)
+iconDisabledColor(@ColorInt int color)
+iconDisabledColorRes(@ColorRes int colorRes)
+iconPressedColor(@ColorInt int color)
+iconPressedColorRes(@ColorRes int colorRes)
+iconSelector(@DrawableRes int selectorRes)
 
-iconDefaultColor(int) // default: black
-iconDefaultColorRes(int) // default: 0
-iconDisabledColor(int) // default: gray
-iconDisabledColorRes(int) // default: 0
-iconPressedColor(int) // default: black
-iconPressedColorRes(int) // default: 0
-iconSelector(int) // default: 0
+// Divider Options
+showDivider(boolean showDivider)
+gradientDivider(boolean gradientDivider)
+dividerColor(@ColorInt int color)
+dividerColorRes(@ColorRes int colorRes)
+dividerHeight(float height)
+dividerHeight(int height)
+dividerHeightRes(@DimenRes int height)
 
-showProgressBar(boolean) // default: true
-progressBarColor(int) // default: ?
-progressBarColorRes(int) // default: 0
-progressBarHeight(float) // default: 0
-progressBarHeight(int) // default: 0
-progressBarHeightRes(int) // default: 0
-progressBarPosition(Position) // default: Position.BOTTON_OF_TOOLBAR
+// ProgressBar Options
+showProgressBar(boolean showProgressBar)
+progressBarColor(@ColorInt int color)
+progressBarColorRes(@ColorRes int colorRes)
+progressBarHeight(float height)
+progressBarHeight(int height)
+progressBarHeightRes(@DimenRes int height)
+progressBarPosition(@NonNull Position position)
 
-titleDefault(String) // default: null
-titleDefaultRes(int) // default: 0
-updateTitleFromHtml(boolean) // default: true
-titleSize(float) // default: 0
-titleSize(int) // default: 0
-titleSizeRes(int) // default: 0
-titleFont(String) // default: Roboto-Regular.ttf
-titleColor(int) // default: black
-titleColorRes(int) // default: 0
+// Title Options
+titleDefault(@NonNull String title)
+titleDefaultRes(@StringRes int stringRes)
+updateTitleFromHtml(boolean updateTitleFromHtml)
+titleSize(float titleSize)
+titleSize(int titleSize)
+titleSizeRes(@DimenRes int titleSize)
+titleFont(String titleFont)
+titleColor(@ColorInt int color)
+titleColorRes(@ColorRes int colorRes)
 
-showUrl(boolean) // default: true
-urlSize(float) // default: 0
-urlSize(int) // default: 0
-urlSizeRes(int) // default: 0
-urlFont(String) // default: Roboto-Regular.ttf
-urlColor(int) // default: black
-urlColorRes(int) // default: 0
+// Url Options
+showUrl(boolean showUrl)
+urlSize(float urlSize)
+urlSize(int urlSize)
+urlSizeRes(@DimenRes int urlSize)
+urlFont(String urlFont)
+urlColor(@ColorInt int color)
+urlColorRes(@ColorRes int colorRes)
 
-enterAnimation(int) // default: R.anim.modal_activity_close_enter
-exitAnimation(int) // default: R.anim.modal_activity_close_exit
-
-showRefresh(boolean) // default: false
-backPressToClose(boolean) // default: false
-
-edgeControlSide(boolean) // default: true
-edgeControlTop(boolean) // default: true
+// More Options
+setCloseAnimations(@AnimRes int animationCloseEnter, @AnimRes int animationCloseExit)
+showRefresh(boolean showRefresh)
+backPressToClose(boolean backPressToClose) 
 ```
 
+## Contributors
 
+#### Min Kim
 
-https://github.com/liuguangqiang/SwipeBack
+* User Interface Design
+* Graphic Design
 
-https://github.com/r0adkll/Slidr
-
-https://github.com/ppamorim/Dragger
-
-Share via
-
-Open with
-
-기본 Activity 보여주고 없애는 Animation
-
-## User Interface Design & Graphic Design
-
-### Min Kim
 
 ## License
 
