@@ -237,7 +237,7 @@ new FinestWebView.Builder(this)
 
 ## Designer
 
-#### Min Kim
+#### [Min Kim](https://github.com/openyourboxes)
 
 * User Interface Design
 * Graphic Design
