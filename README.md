@@ -49,61 +49,61 @@ overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activit
 
 ```java
 // Toolbar Options
-toolbarColor(@ColorInt int color)
-toolbarColorRes(@ColorRes int color)
-toolbarScrollFlags(@ScrollFlags int flags)
+toolbarColor(@ColorInt int color);
+toolbarColorRes(@ColorRes int color);
+toolbarScrollFlags(@ScrollFlags int flags);
 
 // Icon Options
-iconDefaultColor(@ColorInt int color)
-iconDefaultColorRes(@ColorRes int color)
-iconDisabledColor(@ColorInt int color)
-iconDisabledColorRes(@ColorRes int colorRes)
-iconPressedColor(@ColorInt int color)
-iconPressedColorRes(@ColorRes int colorRes)
-iconSelector(@DrawableRes int selectorRes)
+iconDefaultColor(@ColorInt int color);
+iconDefaultColorRes(@ColorRes int color);
+iconDisabledColor(@ColorInt int color);
+iconDisabledColorRes(@ColorRes int colorRes);
+iconPressedColor(@ColorInt int color);
+iconPressedColorRes(@ColorRes int colorRes);
+iconSelector(@DrawableRes int selectorRes);
 
 // Divider Options
-showDivider(boolean showDivider)
-gradientDivider(boolean gradientDivider)
-dividerColor(@ColorInt int color)
-dividerColorRes(@ColorRes int colorRes)
-dividerHeight(float height)
-dividerHeight(int height)
-dividerHeightRes(@DimenRes int height)
+showDivider(boolean showDivider);
+gradientDivider(boolean gradientDivider);
+dividerColor(@ColorInt int color);
+dividerColorRes(@ColorRes int colorRes);
+dividerHeight(float height);
+dividerHeight(int height);
+dividerHeightRes(@DimenRes int height);
 
 // ProgressBar Options
-showProgressBar(boolean showProgressBar)
-progressBarColor(@ColorInt int color)
-progressBarColorRes(@ColorRes int colorRes)
-progressBarHeight(float height)
-progressBarHeight(int height)
-progressBarHeightRes(@DimenRes int height)
-progressBarPosition(@NonNull Position position)
+showProgressBar(boolean showProgressBar);
+progressBarColor(@ColorInt int color);
+progressBarColorRes(@ColorRes int colorRes);
+progressBarHeight(float height);
+progressBarHeight(int height);
+progressBarHeightRes(@DimenRes int height);
+progressBarPosition(@NonNull Position position);
 
 // Title Options
-titleDefault(@NonNull String title)
-titleDefaultRes(@StringRes int stringRes)
-updateTitleFromHtml(boolean updateTitleFromHtml)
-titleSize(float titleSize)
-titleSize(int titleSize)
-titleSizeRes(@DimenRes int titleSize)
-titleFont(String titleFont)
-titleColor(@ColorInt int color)
-titleColorRes(@ColorRes int colorRes)
+titleDefault(@NonNull String title);
+titleDefaultRes(@StringRes int stringRes);
+updateTitleFromHtml(boolean updateTitleFromHtml);
+titleSize(float titleSize);
+titleSize(int titleSize);
+titleSizeRes(@DimenRes int titleSize);
+titleFont(String titleFont);
+titleColor(@ColorInt int color);
+titleColorRes(@ColorRes int colorRes);
 
 // Url Options
-showUrl(boolean showUrl)
-urlSize(float urlSize)
-urlSize(int urlSize)
-urlSizeRes(@DimenRes int urlSize)
-urlFont(String urlFont)
-urlColor(@ColorInt int color)
-urlColorRes(@ColorRes int colorRes)
+showUrl(boolean showUrl);
+urlSize(float urlSize);
+urlSize(int urlSize);
+urlSizeRes(@DimenRes int urlSize);
+urlFont(String urlFont);
+urlColor(@ColorInt int color);
+urlColorRes(@ColorRes int colorRes);
 
 // More Options
-setCloseAnimations(@AnimRes int animationCloseEnter, @AnimRes int animationCloseExit)
-showRefresh(boolean showRefresh)
-backPressToClose(boolean backPressToClose) 
+setCloseAnimations(@AnimRes int animationCloseEnter, @AnimRes int animationCloseExit);
+showRefresh(boolean showRefresh);
+backPressToClose(boolean backPressToClose); 
 ```
 
 ```java
