@@ -235,7 +235,7 @@ new FinestWebView.Builder(this)
 ```
 
 
-## Contributors
+## Designer
 
 #### Min Kim
 
