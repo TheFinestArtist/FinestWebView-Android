@@ -73,13 +73,13 @@ public class FinestWebView {
             return this;
         }
 
-        public Builder toolbarScrollFlags(@ScrollFlags int flags) {
-            this.toolbarScrollFlags = flags;
+        public Builder toolbarColorRes(@ColorRes int color) {
+            this.toolbarColor = ContextCompat.getColor(context, color);
             return this;
         }
 
-        public Builder toolbarColorRes(@ColorRes int color) {
-            this.toolbarColor = ContextCompat.getColor(context, color);
+        public Builder toolbarScrollFlags(@ScrollFlags int flags) {
+            this.toolbarScrollFlags = flags;
             return this;
         }
 

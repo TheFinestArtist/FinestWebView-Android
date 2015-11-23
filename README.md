@@ -6,6 +6,8 @@
 * Various options
 * Material design
 * Pre-made icons
+* Custom themes
+* Animation support
 
 
 ## Gradle Dependency (jcenter)
@@ -26,8 +28,6 @@ FinestWebView is basically and Android activity with webview, toolbar and etc. Y
 ```xml
 <activity
         android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
-        android:configChanges="keyboardHidden|orientation|screenSize"
-        android:screenOrientation="sensor"
         android:theme="@style/FinestWebViewTheme" />
 ```
 
@@ -35,41 +35,22 @@ FinestWebView is basically and Android activity with webview, toolbar and etc. Y
 ## Basic WebView
  
 ```java
-new FinestWebViewActivity.Builder(this)
-        .defaultTitle(R.string.title)
-        .showUrl(true)
-        .show(url);
+new FinestWebViewActivity.Builder(this).show(url);
 overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
 ```
 
 
-## Custom WebView
- 
-```java
-new FinestWebView.Builder(this)
-        .titleDefault("Default Title")
-        .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
-        .gradientDivider(false)
-        .dividerHeight(100)
-        .toolbarColorRes(R.color.accent)
-        .dividerColorRes(R.color.black_30)
-        .iconDefaultColorRes(R.color.accent)
-        .iconDisabledColorRes(R.color.gray)
-        .iconPressedColorRes(R.color.black)
-        .progressBarHeight(DipPixelHelper.getPixel(this, 3))
-        .progressBarColorRes(R.color.accent)
-        .backPressToClose(false)
-        .show(url);
-overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
-```
+## Customization
 
-## More Options
+### There is 2 way to customize FinestWebView.
+
+#### 1. Builder Options
 
 ```java
 // Toolbar Options
 toolbarColor(@ColorInt int color)
-toolbarScrollFlags(@ScrollFlags int flags)
 toolbarColorRes(@ColorRes int color)
+toolbarScrollFlags(@ScrollFlags int flags)
 
 // Icon Options
 iconDefaultColor(@ColorInt int color)
@@ -124,6 +105,29 @@ showRefresh(boolean showRefresh)
 backPressToClose(boolean backPressToClose) 
 ```
 
+```java
+new FinestWebView.Builder(this)
+        .titleDefault("Default Title")
+        .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
+        .gradientDivider(false)
+        .dividerHeight(100)
+        .toolbarColorRes(R.color.accent)
+        .dividerColorRes(R.color.black_30)
+        .iconDefaultColorRes(R.color.accent)
+        .iconDisabledColorRes(R.color.gray)
+        .iconPressedColorRes(R.color.black)
+        .progressBarHeight(DipPixelHelper.getPixel(this, 3))
+        .progressBarColorRes(R.color.accent)
+        .backPressToClose(false)
+        .show(url);
+overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
+```
+
+
+#### 2. Using Themes
+
+You can use your own Theme for FinestWebView. If you want to use pre-defined theme, use `android:theme="@style/FinestWebViewTheme"` or `android:theme="@style/FinestWebViewTheme.Fullscreen"`
+
 ```xml
 <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
@@ -131,10 +135,102 @@ backPressToClose(boolean backPressToClose)
         <item name="colorAccent">@color/accent</item>
         <item name="android:textColorPrimary">@color/primary_text</item>
         <item name="android:textColorSecondary">@color/secondary_text</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowFullscreen">true</item>
 </style>
 ```
+
+```xml
+<activity
+        android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:screenOrientation="sensor"
+        android:theme="@style/AppTheme.NoActionBar" />
+```
+
+
+#### Status Bar Color & Toolbar Color
+
+Status bar color will be set as 'colorPrimaryDark' of style you set for FinestWebViewActivity.
+Toolbar color will be set as 'colorPrimary' of style you set for FinestWebViewActivity.
+But, you can override this setting using builder option `toolbarColor` or `toolbarColorRes`.
+
+
+#### Disable Toolbar Collapsing
+
+```java
+new FinestWebView.Builder(this)
+        .toolbarScrollFlags(0) // By sending as 0, toolbar collapsing will be disabled
+        .show(url);
+```
+
+
+#### Full Screen Mode
+
+```
+<style name="AppTheme.NoActionBar.FullScreen" parent="AppTheme.NoActionBar">
+        <item name="android:windowContentOverlay">@null</item> 
+        <item name="android:windowFullscreen">true</item>
+</style>
+<activity
+        android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:screenOrientation="sensor"
+        android:theme="@style/AppTheme.NoActionBar.FullScreen" />
+```
+
+
+#### Customizing Animations
+
+You can use some pre-defined animations from this library or your own animations.
+
+```java
+new FinestWebViewActivity.Builder(this)
+        .setCloseAnimations(R.anim.activity_close_enter, R.anim.activity_close_exit)
+        .show(url);
+overridePendingTransition(R.anim.activity_open_enter, R.anim.activity_open_exit);
+```
+
+Pre-defined animations
+```
+activity_open_enter.xml
+activity_open_exit.xml
+activity_close_enter.xml
+activity_close_exit.xml
+
+modal_activity_open_enter.xml
+modal_activity_open_exit.xml
+modal_activity_close_enter.xml
+modal_activity_close_exit.xml
+
+fragment_open_enter.xml
+fragment_open_enter_reverse.xml
+fragment_close_enter.xml
+fragment_close_enter_reverse.xml
+```
+
+
+#### Orientation Support
+
+Use configChange, screenOrientation to customize your orientation options
+
+```xml
+<activity
+        android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:screenOrientation="sensor"
+        android:theme="@style/FinestWebViewTheme" />
+```
+
+
+#### Gradient Divider
+
+You can make your divider gradient. If you do, webview will be under the gradient. If you disable gradient divider, webview will be below the divider.
+
+```java
+new FinestWebView.Builder(this)
+        .gradientDivider(false)
+        .show(url);
+```
+
 
 ## Contributors
 
