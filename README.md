@@ -12,10 +12,23 @@
 
 Easily reference the library in your Android projects using this dependency in your module's `build.gradle` file:
 
-```Gradle
+```java
 dependencies {
     compile 'com.thefinestartist:finestwebview:1.0.0'
 }
+```
+
+
+## Manifest Settings
+
+FinestWebView is basically and Android activity with webview, toolbar and etc. You have to add FinestWebViewActivity in your `AndroidManifest.xml` 
+
+```xml
+<activity
+        android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:screenOrientation="sensor"
+        android:theme="@style/FinestWebViewTheme" />
 ```
 
 
@@ -26,8 +39,29 @@ new FinestWebViewActivity.Builder(this)
         .defaultTitle(R.string.title)
         .showUrl(true)
         .show(url);
+overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
 ```
 
+
+## Custom WebView
+ 
+```java
+new FinestWebView.Builder(this)
+        .titleDefault("Default Title")
+        .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
+        .gradientDivider(false)
+        .dividerHeight(100)
+        .toolbarColorRes(R.color.accent)
+        .dividerColorRes(R.color.black_30)
+        .iconDefaultColorRes(R.color.accent)
+        .iconDisabledColorRes(R.color.gray)
+        .iconPressedColorRes(R.color.black)
+        .progressBarHeight(DipPixelHelper.getPixel(this, 3))
+        .progressBarColorRes(R.color.accent)
+        .backPressToClose(false)
+        .show(url);
+overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
+```
 
 ## More Options
 
@@ -88,6 +122,18 @@ urlColorRes(@ColorRes int colorRes)
 setCloseAnimations(@AnimRes int animationCloseEnter, @AnimRes int animationCloseExit)
 showRefresh(boolean showRefresh)
 backPressToClose(boolean backPressToClose) 
+```
+
+```xml
+<style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+</style>
 ```
 
 ## Contributors
