@@ -168,7 +168,7 @@ new FinestWebView.Builder(this)
 
 #### Full Screen Mode
 
-```
+```xml
 <style name="AppTheme.NoActionBar.FullScreen" parent="AppTheme.NoActionBar">
         <item name="android:windowContentOverlay">@null</item> 
         <item name="android:windowFullscreen">true</item>
@@ -193,7 +193,7 @@ overridePendingTransition(R.anim.activity_open_enter, R.anim.activity_open_exit)
 ```
 
 Pre-defined animations
-```
+```xml
 activity_open_enter.xml
 activity_open_exit.xml
 activity_close_enter.xml
