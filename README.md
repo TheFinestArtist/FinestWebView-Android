@@ -28,8 +28,8 @@ You have to add FinestWebViewActivity in your `AndroidManifest.xml`
 
 ```xml
 <activity
-        android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
-        android:theme="@style/FinestWebViewTheme" />
+    android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+    android:theme="@style/FinestWebViewTheme" />
 ```
 
 
@@ -108,19 +108,19 @@ backPressToClose(boolean backPressToClose);
 
 ```java
 new FinestWebView.Builder(this)
-        .titleDefault("Default Title")
-        .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
-        .gradientDivider(false)
-        .dividerHeight(100)
-        .toolbarColorRes(R.color.accent)
-        .dividerColorRes(R.color.black_30)
-        .iconDefaultColorRes(R.color.accent)
-        .iconDisabledColorRes(R.color.gray)
-        .iconPressedColorRes(R.color.black)
-        .progressBarHeight(DipPixelHelper.getPixel(this, 3))
-        .progressBarColorRes(R.color.accent)
-        .backPressToClose(false)
-        .show(url);
+    .titleDefault("Default Title")
+    .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
+    .gradientDivider(false)
+    .dividerHeight(100)
+    .toolbarColorRes(R.color.accent)
+    .dividerColorRes(R.color.black_30)
+    .iconDefaultColorRes(R.color.accent)
+    .iconDisabledColorRes(R.color.gray)
+    .iconPressedColorRes(R.color.black)
+    .progressBarHeight(DipPixelHelper.getPixel(this, 3))
+    .progressBarColorRes(R.color.accent)
+    .backPressToClose(false)
+    .show(url);
 overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
 ```
 
@@ -131,20 +131,20 @@ You can use your own Theme for FinestWebView. If you want to use pre-defined the
 
 ```xml
 <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
-        <item name="android:textColorPrimary">@color/primary_text</item>
-        <item name="android:textColorSecondary">@color/secondary_text</item>
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryDark">@color/primary_dark</item>
+    <item name="colorAccent">@color/accent</item>
+    <item name="android:textColorPrimary">@color/primary_text</item>
+    <item name="android:textColorSecondary">@color/secondary_text</item>
 </style>
 ```
 
 ```xml
 <activity
-        android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
-        android:configChanges="keyboardHidden|orientation|screenSize"
-        android:screenOrientation="sensor"
-        android:theme="@style/AppTheme.NoActionBar" />
+    android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    android:screenOrientation="sensor"
+    android:theme="@style/AppTheme.NoActionBar" />
 ```
 
 
@@ -161,8 +161,8 @@ But, you can override this setting using builder option `toolbarColor` or `toolb
 
 ```java
 new FinestWebView.Builder(this)
-        .toolbarScrollFlags(0) // By sending as 0, toolbar collapsing will be disabled
-        .show(url);
+    .toolbarScrollFlags(0) // By sending as 0, toolbar collapsing will be disabled
+    .show(url);
 ```
 
 
@@ -170,14 +170,14 @@ new FinestWebView.Builder(this)
 
 ```xml
 <style name="AppTheme.NoActionBar.FullScreen" parent="AppTheme.NoActionBar">
-        <item name="android:windowContentOverlay">@null</item> 
-        <item name="android:windowFullscreen">true</item>
+    <item name="android:windowContentOverlay">@null</item> 
+    <item name="android:windowFullscreen">true</item>
 </style>
 <activity
-        android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
-        android:configChanges="keyboardHidden|orientation|screenSize"
-        android:screenOrientation="sensor"
-        android:theme="@style/AppTheme.NoActionBar.FullScreen" />
+    android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    android:screenOrientation="sensor"
+    android:theme="@style/AppTheme.NoActionBar.FullScreen" />
 ```
 
 
@@ -187,8 +187,8 @@ You can use some pre-defined animations from this library or your own animations
 
 ```java
 new FinestWebViewActivity.Builder(this)
-        .setCloseAnimations(R.anim.activity_close_enter, R.anim.activity_close_exit)
-        .show(url);
+    .setCloseAnimations(R.anim.activity_close_enter, R.anim.activity_close_exit)
+    .show(url);
 overridePendingTransition(R.anim.activity_open_enter, R.anim.activity_open_exit);
 ```
 
@@ -217,10 +217,10 @@ Use configChange, screenOrientation to customize your orientation options
 
 ```xml
 <activity
-        android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
-        android:configChanges="keyboardHidden|orientation|screenSize"
-        android:screenOrientation="sensor"
-        android:theme="@style/FinestWebViewTheme" />
+    android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    android:screenOrientation="sensor"
+    android:theme="@style/FinestWebViewTheme" />
 ```
 
 
@@ -230,8 +230,8 @@ You can make your divider gradient. If you do, webview will be under the gradien
 
 ```java
 new FinestWebView.Builder(this)
-        .gradientDivider(false)
-        .show(url);
+    .gradientDivider(false)
+    .show(url);
 ```
 
 
