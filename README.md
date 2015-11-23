@@ -148,10 +148,12 @@ You can use your own Theme for FinestWebView. If you want to use pre-defined the
 ```
 
 
+## More in customization
+
 #### Status Bar Color & Toolbar Color
 
-Status bar color will be set as 'colorPrimaryDark' of style you set for FinestWebViewActivity.
-Toolbar color will be set as 'colorPrimary' of style you set for FinestWebViewActivity.
+Status bar color will be set as 'colorPrimaryDark' of style you set for FinestWebViewActivity.  
+Toolbar color will be set as 'colorPrimary' of style you set for FinestWebViewActivity.  
 But, you can override this setting using builder option `toolbarColor` or `toolbarColorRes`.
 
 
