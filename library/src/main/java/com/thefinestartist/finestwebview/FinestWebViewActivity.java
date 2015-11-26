@@ -72,6 +72,15 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected String urlFont;
     protected int urlColor;
 
+    protected Integer menuColor;
+    protected Integer menuDropShadowColor;
+    protected Float menuDropShadowSize;
+    protected Integer menuSelector;
+
+    protected Float menuTextSize;
+    protected String menuTextFont;
+    protected Integer menuTextColor;
+
     protected Boolean showMenuRefresh;
     protected Integer stringResRefresh;
     protected Boolean showMenuShareVia;
@@ -132,8 +141,17 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         showUrl = intent.getBooleanExtra("showUrl", true);
         urlSize = intent.getFloatExtra("urlSize", DipPixelHelper.getPixel(this, 10));
-        urlFont = intent.getStringExtra("urlFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("titleFont");
+        urlFont = intent.getStringExtra("urlFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("urlFont");
         urlColor = intent.getIntExtra("urlColor", textColorSecondary);
+
+        menuColor = intent.getIntExtra("menuColor", ContextCompat.getColor(this, R.color.finestWhite));
+        menuDropShadowColor = intent.getIntExtra("menuDropShadowColor", ContextCompat.getColor(this, R.color.finestSilver));
+        menuDropShadowSize = intent.getFloatExtra("menuDropShadowSize", DipPixelHelper.getPixel(this, 2));
+        menuSelector = intent.getIntExtra("menuSelector", R.drawable.selector_grey);
+
+        menuTextSize = intent.getFloatExtra("menuTextSize", DipPixelHelper.getPixel(this, 16));
+        menuTextFont = intent.getStringExtra("menuTextFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("menuTextFont");
+        menuTextColor = intent.getIntExtra("menuTextColor", ContextCompat.getColor(this, R.color.finestBlack));
 
         showMenuRefresh = intent.getBooleanExtra("showMenuRefresh", true);
         stringResRefresh = intent.getIntExtra("stringResRefresh", R.string.refresh);

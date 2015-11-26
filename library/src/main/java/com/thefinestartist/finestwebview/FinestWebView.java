@@ -54,10 +54,13 @@ public class FinestWebView {
         protected Integer urlColor;
 
         protected Integer menuColor;
-        protected Integer menuCornerRadius;
-        protected Integer menuShadowColor;
-        protected Integer menuShadowWidth;
+        protected Integer menuDropShadowColor;
+        protected Float menuDropShadowSize;
         protected Integer menuSelector;
+
+        protected Float menuTextSize;
+        protected String menuTextFont;
+        protected Integer menuTextColor;
 
         protected Boolean showMenuRefresh;
         protected Integer stringResRefresh;
@@ -279,6 +282,76 @@ public class FinestWebView {
             return this;
         }
 
+        public Builder menuColor(@ColorInt int color) {
+            this.menuColor = color;
+            return this;
+        }
+
+        public Builder menuColorRes(@ColorRes int colorRes) {
+            this.menuColor = ContextCompat.getColor(context, colorRes);
+            return this;
+        }
+
+        public Builder menuDropShadowColor(@ColorInt int color) {
+            this.menuDropShadowColor = color;
+            return this;
+        }
+
+        public Builder menuDropShadowColorRes(@ColorRes int colorRes) {
+            this.menuDropShadowColor = ContextCompat.getColor(context, colorRes);
+            return this;
+        }
+
+        public Builder menuDropShadowSize(float menuDropShadowSize) {
+            this.menuDropShadowSize = menuDropShadowSize;
+            return this;
+        }
+
+        public Builder menuDropShadowSize(int menuDropShadowSize) {
+            this.menuDropShadowSize = (float) menuDropShadowSize;
+            return this;
+        }
+
+        public Builder menuDropShadowSizeRes(@DimenRes int menuDropShadowSize) {
+            this.menuDropShadowSize = DipPixelHelper.getPixel(context, menuDropShadowSize);
+            return this;
+        }
+
+        public Builder menuSelector(@DrawableRes int selectorRes) {
+            this.menuSelector = selectorRes;
+            return this;
+        }
+
+        public Builder menuTextSize(float menuTextSize) {
+            this.menuTextSize = menuTextSize;
+            return this;
+        }
+
+        public Builder menuTextSize(int menuTextSize) {
+            this.menuTextSize = (float) menuTextSize;
+            return this;
+        }
+
+        public Builder menuTextSizeRes(@DimenRes int menuTextSize) {
+            this.menuTextSize = DipPixelHelper.getPixel(context, menuTextSize);
+            return this;
+        }
+
+        public Builder menuTextFont(String menuTextFont) {
+            this.menuTextFont = menuTextFont;
+            return this;
+        }
+
+        public Builder menuTextColor(@ColorInt int color) {
+            this.menuTextColor = color;
+            return this;
+        }
+
+        public Builder menuTextColorRes(@ColorRes int colorRes) {
+            this.menuTextColor = ContextCompat.getColor(context, colorRes);
+            return this;
+        }
+
         public Builder showMenuRefresh(boolean showMenuRefresh) {
             this.showMenuRefresh = showMenuRefresh;
             return this;
@@ -391,6 +464,22 @@ public class FinestWebView {
                 intent.putExtra("urlFont", urlFont);
             if (urlColor != null)
                 intent.putExtra("urlColor", urlColor.intValue());
+
+            if (menuColor != null)
+                intent.putExtra("menuColor", menuColor.intValue());
+            if (menuDropShadowColor != null)
+                intent.putExtra("menuDropShadowColor", menuDropShadowColor.intValue());
+            if (menuDropShadowSize != null)
+                intent.putExtra("menuDropShadowSize", menuDropShadowSize.floatValue());
+            if (menuSelector != null)
+                intent.putExtra("menuSelector", menuSelector.intValue());
+
+            if (menuTextSize != null)
+                intent.putExtra("menuTextSize", menuTextSize.floatValue());
+            if (menuTextFont != null)
+                intent.putExtra("menuTextFont", menuTextFont);
+            if (menuTextColor != null)
+                intent.putExtra("menuTextColor", menuTextColor.intValue());
 
             if (showMenuRefresh != null)
                 intent.putExtra("showMenuRefresh", showMenuRefresh.booleanValue());
