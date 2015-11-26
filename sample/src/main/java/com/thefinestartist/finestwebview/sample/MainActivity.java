@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         ButterKnife.bind(this);
-        show();
+//        show();
     }
 
     @OnClick(R.id.show)
@@ -25,9 +25,11 @@ public class MainActivity extends AppCompatActivity {
                 .titleDefault("FinestWebView")
                 .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
 //                .toolbarScrollFlags(0) // 0 for not collapsing
-//                .gradientDivider(false)
-//                .dividerHeight(100)
-//                .toolbarColorRes(R.color.accent)
+                .gradientDivider(true)
+//                .dividerColorRes(R.color.black)
+                .dividerHeight(100)
+                .toolbarColorRes(R.color.accent)
+                .urlColorRes(R.color.black)
 //                .dividerColorRes(R.color.black_30)
 //                .iconDefaultColorRes(R.color.accent)
 //                .iconDisabledColorRes(R.color.gray)

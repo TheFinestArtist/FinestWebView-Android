@@ -1,6 +1,7 @@
 package com.thefinestartist.finestwebview;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
@@ -16,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nineoldandroids.view.ViewHelper;
@@ -82,7 +85,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
     protected String url;
 
-    protected void initialize() {
+    protected void getOptions() {
         Intent intent = getIntent();
         if (intent == null)
             return;
@@ -142,8 +145,11 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         url = intent.getStringExtra("url");
     }
 
+    protected CoordinatorLayout coordinatorLayout;
+
     protected AppBarLayout appBar;
     protected Toolbar toolbar;
+    protected RelativeLayout toolbarLayout;
 
     protected TextView title;
     protected TextView urlTv;
@@ -160,9 +166,12 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected View divider;
     protected ProgressBar progressBar;
 
-    protected void bind() {
+    protected void bindViews() {
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+
         appBar = (AppBarLayout) findViewById(R.id.appBar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbarLayout = (RelativeLayout) findViewById(R.id.toolbarLayout);
 
         title = (TextView) findViewById(R.id.title);
         urlTv = (TextView) findViewById(R.id.url);
@@ -180,7 +189,87 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
-    protected void drawViews() {
+    protected void layoutViews() {
+        setSupportActionBar(toolbar);
+
+        { // AppBar
+            float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
+            if (!gradientDivider)
+                toolbarHeight += dividerHeight;
+            CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) toolbarHeight);
+            appBar.setLayoutParams(params);
+            coordinatorLayout.requestLayout();
+        }
+
+        { // Toolbar
+            float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) toolbarHeight);
+            toolbarLayout.setMinimumHeight((int) toolbarHeight);
+            toolbarLayout.setLayoutParams(params);
+            coordinatorLayout.requestLayout();
+        }
+
+        { // TextViews
+            int maxWidth = getMaxWidth();
+
+            title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
+            title.setMaxWidth(maxWidth);
+
+            urlTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, urlSize);
+            urlTv.setMaxWidth(maxWidth);
+
+            requestCenterLayout();
+        }
+
+        { // Icons
+            updateIcon(close, R.drawable.ic_launcher);
+            updateIcon(back, R.drawable.ic_launcher);
+            updateIcon(forward, R.drawable.ic_launcher);
+            updateIcon(more, R.drawable.ic_launcher);
+        }
+
+        { // Content
+        }
+
+        { // Divider
+            if (gradientDivider) {
+                float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
+                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) gradient.getLayoutParams();
+                params.setMargins(0, (int) toolbarHeight, 0, 0);
+                gradient.setLayoutParams(params);
+            }
+        }
+
+        { // ProgressBar
+            progressBar.setMinimumHeight((int) progressBarHeight);
+            CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    (int) progressBarHeight
+            );
+            float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
+            switch (progressBarPosition) {
+                case TOP_OF_TOOLBAR:
+                    params.setMargins(0, 0, 0, 0);
+                    break;
+                case BOTTON_OF_TOOLBAR:
+                    params.setMargins(0, (int) toolbarHeight - (int) progressBarHeight, 0, 0);
+                    break;
+                case TOP_OF_WEBVIEW:
+                    params.setMargins(0, (int) toolbarHeight, 0, 0);
+                    break;
+                case BOTTOM_OF_WEBVIEW:
+                    params.setMargins(0, ScreenHelper.getHeight(this) - (int) progressBarHeight, 0, 0);
+                    break;
+            }
+            progressBar.setLayoutParams(params);
+        }
+
+        { // Options
+
+        }
+    }
+
+    protected void initializeViews() {
         setSupportActionBar(toolbar);
 
         { // AppBar
@@ -195,31 +284,21 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         }
 
         { // TextViews
-            int maxWidth = getMaxWidth();
-
             title.setText(titleDefault);
-            title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
             title.setTypeface(TypefaceHelper.get(this, titleFont));
             title.setTextColor(titleColor);
-            title.setMaxWidth(maxWidth);
 
             urlTv.setText(UrlParser.getHost(url));
-            urlTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, urlSize);
             urlTv.setTypeface(TypefaceHelper.get(this, urlFont));
             urlTv.setTextColor(urlColor);
-            urlTv.setMaxWidth(maxWidth);
 
             requestCenterLayout();
         }
 
         { // Icons
-            updateIcon(close, R.drawable.ic_launcher);
             close.setBackgroundResource(iconSelector);
-            updateIcon(back, R.drawable.ic_launcher);
             back.setBackgroundResource(iconSelector);
-            updateIcon(forward, R.drawable.ic_launcher);
             forward.setBackgroundResource(iconSelector);
-            updateIcon(more, R.drawable.ic_launcher);
             more.setBackgroundResource(iconSelector);
         }
 
@@ -240,7 +319,6 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 //                webView.getSettings().setDisplayZoomControls(false);
 //            else
 //                webView.getSettings().setBuiltInZoomControls(false);
-
             webView.loadUrl(url);
         }
 
@@ -333,9 +411,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.finest_web_view);
-        bind();
-        initialize();
-        drawViews();
+        getOptions();
+        bindViews();
+        layoutViews();
+        initializeViews();
     }
 
     @Override
@@ -445,5 +524,16 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         urlTv.setMaxWidth(maxWidth);
         title.requestLayout();
         urlTv.requestLayout();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            layoutViews();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            layoutViews();
+        }
     }
 }

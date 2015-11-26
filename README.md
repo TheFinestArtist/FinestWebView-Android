@@ -175,8 +175,6 @@ new FinestWebView.Builder(this)
 </style>
 <activity
     android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
-    android:configChanges="keyboardHidden|orientation|screenSize"
-    android:screenOrientation="sensor"
     android:theme="@style/AppTheme.NoActionBar.FullScreen" />
 ```
 
