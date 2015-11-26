@@ -101,6 +101,22 @@ urlColor(@ColorInt int color);
 urlColorRes(@ColorRes int colorRes);
 
 // Menu Options
+menuColor(@ColorInt int color);
+menuColorRes(@ColorRes int colorRes);
+menuDropShadowColor(@ColorInt int color);
+menuDropShadowColorRes(@ColorRes int colorRes);
+menuDropShadowSize(float menuDropShadowSize);
+menuDropShadowSize(int menuDropShadowSize);
+menuDropShadowSizeRes(@DimenRes int menuDropShadowSize);
+menuSelector(@DrawableRes int selectorRes);
+
+menuTextSize(float menuTextSize);
+menuTextSize(int menuTextSize);
+menuTextSizeRes(@DimenRes int menuTextSize);
+menuTextFont(String menuTextFont);
+menuTextColor(@ColorInt int color);
+menuTextColorRes(@ColorRes int colorRes);
+
 showMenuRefresh(boolean showMenuRefresh);
 stringResRefresh(@StringRes int stringResRefresh);
 showMenuShareVia(boolean showMenuShareVia);
