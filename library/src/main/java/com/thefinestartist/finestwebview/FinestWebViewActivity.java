@@ -17,7 +17,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,7 +112,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         showDivider = intent.getBooleanExtra("showDivider", true);
         gradientDivider = intent.getBooleanExtra("gradientDivider", true);
-        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.black));
+        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.silver));
         dividerHeight = intent.getFloatExtra("dividerHeight", DipPixelHelper.getPixel(this, 2));
 
         showProgressBar = intent.getBooleanExtra("showProgressBar", true);

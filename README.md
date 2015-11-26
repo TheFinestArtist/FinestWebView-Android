@@ -1,6 +1,6 @@
 # FinestWebView
 
-#### FinestWebView is easy to use WebView that includes back, forward, refresh and share features
+#### FinestWebView is a easy to use WebView for mobile Applications.
 
 * Builder pattern
 * Various options
