@@ -48,7 +48,7 @@
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:singleLine="true"
-                android:textColor="@color/black"
+                android:textColor="@color/finestBlack"
                 android:textSize="14dp" />
 
             <TextView
@@ -63,7 +63,7 @@
                 android:paddingLeft="2dp"
                 android:paddingRight="2dp"
                 android:singleLine="true"
-                android:textColor="@color/silver"
+                android:textColor="@color/finestSilver"
                 android:textSize="10dp" />
         </LinearLayout>
 
@@ -92,5 +92,5 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/silver" />
+        android:background="@color/finestSilver" />
 </LinearLayout>

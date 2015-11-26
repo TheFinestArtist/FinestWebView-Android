@@ -53,14 +53,25 @@ public class FinestWebView {
         protected String urlFont;
         protected Integer urlColor;
 
+        protected Integer menuColor;
+        protected Integer menuCornerRadius;
+        protected Integer menuShadowColor;
+        protected Integer menuShadowWidth;
+        protected Integer menuSelector;
+
+        protected Boolean showMenuRefresh;
+        protected Integer stringResRefresh;
+        protected Boolean showMenuShareVia;
+        protected Integer stringResShareVia;
+        protected Boolean showMenuCopyLink;
+        protected Integer stringResCopyLink;
+        protected Boolean showMenuOpenWith;
+        protected Integer stringResOpenWith;
+
         protected Integer animationCloseEnter;
         protected Integer animationCloseExit;
 
-        protected Boolean showRefresh;
         protected Boolean backPressToClose;
-
-        protected Boolean edgeControlSide;
-        protected Boolean edgeControlTop;
 
         protected String url;
 
@@ -268,6 +279,46 @@ public class FinestWebView {
             return this;
         }
 
+        public Builder showMenuRefresh(boolean showMenuRefresh) {
+            this.showMenuRefresh = showMenuRefresh;
+            return this;
+        }
+
+        public Builder stringResRefresh(@StringRes int stringResRefresh) {
+            this.stringResRefresh = stringResRefresh;
+            return this;
+        }
+
+        public Builder showMenuShareVia(boolean showMenuShareVia) {
+            this.showMenuShareVia = showMenuShareVia;
+            return this;
+        }
+
+        public Builder stringResShareVia(@StringRes int stringResShareVia) {
+            this.stringResShareVia = stringResShareVia;
+            return this;
+        }
+
+        public Builder showMenuCopyLink(boolean showMenuCopyLink) {
+            this.showMenuCopyLink = showMenuCopyLink;
+            return this;
+        }
+
+        public Builder stringResCopyLink(@StringRes int stringResCopyLink) {
+            this.stringResCopyLink = stringResCopyLink;
+            return this;
+        }
+
+        public Builder showMenuOpenWith(boolean showMenuOpenWith) {
+            this.showMenuOpenWith = showMenuOpenWith;
+            return this;
+        }
+
+        public Builder stringResOpenWith(@StringRes int stringResOpenWith) {
+            this.stringResOpenWith = stringResOpenWith;
+            return this;
+        }
+
         public Builder setCloseAnimations(@AnimRes int animationCloseEnter,
                                           @AnimRes int animationCloseExit) {
             this.animationCloseEnter = animationCloseEnter;
@@ -275,25 +326,10 @@ public class FinestWebView {
             return this;
         }
 
-        public Builder showRefresh(boolean showRefresh) {
-            this.showRefresh = showRefresh;
-            return this;
-        }
-
         public Builder backPressToClose(boolean backPressToClose) {
             this.backPressToClose = backPressToClose;
             return this;
         }
-
-//        public Builder edgeControlSide(boolean edgeControlSide) {
-//            this.edgeControlSide = edgeControlSide;
-//            return this;
-//        }
-//
-//        public Builder edgeControlTop(boolean edgeControlTop) {
-//            this.edgeControlTop = edgeControlTop;
-//            return this;
-//        }
 
         public void show(@StringRes int urlRes) {
             show(context.getString(urlRes));
@@ -356,20 +392,30 @@ public class FinestWebView {
             if (urlColor != null)
                 intent.putExtra("urlColor", urlColor.intValue());
 
+            if (showMenuRefresh != null)
+                intent.putExtra("showMenuRefresh", showMenuRefresh.booleanValue());
+            if (stringResRefresh != null)
+                intent.putExtra("stringResRefresh", stringResRefresh.intValue());
+            if (showMenuShareVia != null)
+                intent.putExtra("showMenuShareVia", showMenuShareVia.booleanValue());
+            if (stringResShareVia != null)
+                intent.putExtra("stringResShareVia", stringResShareVia.intValue());
+            if (showMenuCopyLink != null)
+                intent.putExtra("showMenuCopyLink", showMenuCopyLink.booleanValue());
+            if (stringResCopyLink != null)
+                intent.putExtra("stringResCopyLink", stringResCopyLink.intValue());
+            if (showMenuOpenWith != null)
+                intent.putExtra("showMenuOpenWith", showMenuOpenWith.booleanValue());
+            if (stringResOpenWith != null)
+                intent.putExtra("stringResOpenWith", stringResOpenWith.intValue());
+
             if (animationCloseEnter != null)
                 intent.putExtra("animationCloseEnter", animationCloseEnter.intValue());
             if (animationCloseExit != null)
                 intent.putExtra("animationCloseExit", animationCloseExit.intValue());
 
-            if (showRefresh != null)
-                intent.putExtra("showRefresh", showRefresh.booleanValue());
             if (backPressToClose != null)
                 intent.putExtra("backPressToClose", backPressToClose.booleanValue());
-
-            if (edgeControlSide != null)
-                intent.putExtra("edgeControlSide", edgeControlSide.booleanValue());
-            if (edgeControlTop != null)
-                intent.putExtra("edgeControlTop", edgeControlTop.booleanValue());
 
             intent.putExtra("url", url);
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="gray_20">#33D2D2D2</color>
-    <color name="black_30">#4D202020</color>
+    <color name="finestGray20">#33D2D2D2</color>
+    <color name="finestBlack30">#4D202020</color>
 
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
-    <color name="silver">#A5A5A5</color>
-    <color name="gray">#C5C5C5</color>
+    <color name="finestWhite">#FFFFFF</color>
+    <color name="finestBlack">#000000</color>
+    <color name="finestSilver">#A5A5A5</color>
+    <color name="finestGray">#C5C5C5</color>
 </resources>

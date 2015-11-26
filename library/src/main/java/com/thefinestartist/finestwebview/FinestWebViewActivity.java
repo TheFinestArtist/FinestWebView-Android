@@ -72,15 +72,19 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected String urlFont;
     protected int urlColor;
 
+    protected Boolean showMenuRefresh;
+    protected Integer stringResRefresh;
+    protected Boolean showMenuShareVia;
+    protected Integer stringResShareVia;
+    protected Boolean showMenuCopyLink;
+    protected Integer stringResCopyLink;
+    protected Boolean showMenuOpenWith;
+    protected Integer stringResOpenWith;
+
     protected int animationCloseEnter;
     protected int animationCloseExit;
 
-    protected boolean showRefresh;
     protected boolean backPressToClose;
-
-    protected boolean collapsingToolbar;
-    protected boolean edgeControlSide;
-    protected boolean edgeControlTop;
 
     protected String url;
 
@@ -95,10 +99,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 R.attr.colorAccent,
                 android.R.attr.textColorPrimary,
                 android.R.attr.textColorSecondary});
-        int colorPrimary = a.getColor(0, ContextCompat.getColor(this, R.color.white));
-        int colorAccent = a.getColor(1, ContextCompat.getColor(this, R.color.black));
-        int textColorPrimary = a.getColor(2, ContextCompat.getColor(this, R.color.black));
-        int textColorSecondary = a.getColor(3, ContextCompat.getColor(this, R.color.silver));
+        int colorPrimary = a.getColor(0, ContextCompat.getColor(this, R.color.finestWhite));
+        int colorAccent = a.getColor(1, ContextCompat.getColor(this, R.color.finestBlack));
+        int textColorPrimary = a.getColor(2, ContextCompat.getColor(this, R.color.finestBlack));
+        int textColorSecondary = a.getColor(3, ContextCompat.getColor(this, R.color.finestSilver));
         a.recycle();
 
         toolbarColor = intent.getIntExtra("toolbarColor", colorPrimary);
@@ -112,7 +116,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         showDivider = intent.getBooleanExtra("showDivider", true);
         gradientDivider = intent.getBooleanExtra("gradientDivider", true);
-        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.silver));
+        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.finestSilver));
         dividerHeight = intent.getFloatExtra("dividerHeight", DipPixelHelper.getPixel(this, 2));
 
         showProgressBar = intent.getBooleanExtra("showProgressBar", true);
@@ -131,15 +135,19 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         urlFont = intent.getStringExtra("urlFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("titleFont");
         urlColor = intent.getIntExtra("urlColor", textColorSecondary);
 
+        showMenuRefresh = intent.getBooleanExtra("showMenuRefresh", true);
+        stringResRefresh = intent.getIntExtra("stringResRefresh", R.string.refresh);
+        showMenuShareVia = intent.getBooleanExtra("showMenuShareVia", true);
+        stringResShareVia = intent.getIntExtra("stringResShareVia", R.string.share_via);
+        showMenuCopyLink = intent.getBooleanExtra("showMenuCopyLink", true);
+        stringResCopyLink = intent.getIntExtra("stringResCopyLink", R.string.copy_link);
+        showMenuOpenWith = intent.getBooleanExtra("showMenuOpenWith", true);
+        stringResOpenWith = intent.getIntExtra("stringResOpenWith", R.string.open_with);
+
         animationCloseEnter = intent.getIntExtra("animationCloseEnter", R.anim.modal_activity_close_enter);
         animationCloseExit = intent.getIntExtra("animationCloseExit", R.anim.modal_activity_close_exit);
 
-        showRefresh = intent.getBooleanExtra("showRefresh", false); // TODO
         backPressToClose = intent.getBooleanExtra("backPressToClose", false);
-
-        collapsingToolbar = intent.getBooleanExtra("collapsingToolbar", true);
-        edgeControlSide = intent.getBooleanExtra("edgeControlSide", true); // TODO
-        edgeControlTop = intent.getBooleanExtra("edgeControlTop", true); // TODO
 
         url = intent.getStringExtra("url");
     }
@@ -483,7 +491,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         @Override
         public void onPageFinished(WebView view, String url) {
-            title.setText(view.getTitle());
+            if (updateTitleFromHtml)
+                title.setText(view.getTitle());
             urlTv.setText(UrlParser.getHost(url));
             requestCenterLayout();
 

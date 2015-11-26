@@ -22,14 +22,14 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.show)
     public void show() {
         new FinestWebView.Builder(this)
-                .titleDefault("FinestWebView")
+                .titleDefault("Loading...")
                 .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
 //                .toolbarScrollFlags(0) // 0 for not collapsing
                 .gradientDivider(true)
 //                .dividerColorRes(R.color.black)
                 .dividerHeight(100)
                 .toolbarColorRes(R.color.accent)
-                .urlColorRes(R.color.black)
+                .urlColorRes(R.color.finestBlack)
 //                .dividerColorRes(R.color.black_30)
 //                .iconDefaultColorRes(R.color.accent)
 //                .iconDisabledColorRes(R.color.gray)

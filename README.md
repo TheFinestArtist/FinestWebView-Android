@@ -1,6 +1,6 @@
 # FinestWebView
 
-#### FinestWebView is a easy to use WebView for mobile Applications.
+#### FinestWebView is an easy to use WebView for mobile Applications.
 
 * Builder pattern
 * Various options
@@ -99,6 +99,16 @@ urlSizeRes(@DimenRes int urlSize);
 urlFont(String urlFont);
 urlColor(@ColorInt int color);
 urlColorRes(@ColorRes int colorRes);
+
+// Menu Options
+showMenuRefresh(boolean showMenuRefresh);
+stringResRefresh(@StringRes int stringResRefresh);
+showMenuShareVia(boolean showMenuShareVia);
+stringResShareVia(@StringRes int stringResShareVia);
+showMenuCopyLink(boolean showMenuCopyLink);
+stringResCopyLink(@StringRes int stringResCopyLink);
+showMenuOpenWith(boolean showMenuOpenWith);
+stringResOpenWith(@StringRes int stringResOpenWith);
 
 // More Options
 setCloseAnimations(@AnimRes int animationCloseEnter, @AnimRes int animationCloseExit);
