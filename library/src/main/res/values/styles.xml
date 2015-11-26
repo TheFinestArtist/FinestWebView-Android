@@ -6,6 +6,7 @@
         <item name="colorAccent">@color/finestBlack</item>
         <item name="android:textColorPrimary">@color/finestBlack</item>
         <item name="android:textColorSecondary">@color/finestSilver</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
 
     <style name="FinestWebViewTheme.Fullscreen" parent="FinestWebViewTheme">

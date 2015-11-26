@@ -20,6 +20,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -191,6 +193,17 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected View divider;
     protected ProgressBar progressBar;
 
+    protected RelativeLayout menuBackground;
+    protected LinearLayout menuLayout;
+    protected LinearLayout menuRefresh;
+    protected TextView menuRefreshTv;
+    protected LinearLayout menuShareVia;
+    protected TextView menuShareViaTv;
+    protected LinearLayout menuCopyLink;
+    protected TextView menuCopyLinkTv;
+    protected LinearLayout menuOpenWith;
+    protected TextView menuOpenWithTv;
+
     protected void bindViews() {
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
@@ -212,6 +225,17 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         gradient = findViewById(R.id.gradient);
         divider = findViewById(R.id.divider);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        menuBackground = (RelativeLayout) findViewById(R.id.menuBackground);
+        menuLayout = (LinearLayout) findViewById(R.id.menuLayout);
+        menuRefresh = (LinearLayout) findViewById(R.id.menuRefresh);
+        menuRefreshTv = (TextView) findViewById(R.id.menuRefreshTv);
+        menuShareVia = (LinearLayout) findViewById(R.id.menuShareVia);
+        menuShareViaTv = (TextView) findViewById(R.id.menuShareViaTv);
+        menuCopyLink = (LinearLayout) findViewById(R.id.menuCopyLink);
+        menuCopyLinkTv = (TextView) findViewById(R.id.menuCopyLinkTv);
+        menuOpenWith = (LinearLayout) findViewById(R.id.menuOpenWith);
+        menuOpenWithTv = (TextView) findViewById(R.id.menuOpenWithTv);
     }
 
     protected void layoutViews() {
@@ -236,13 +260,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         { // TextViews
             int maxWidth = getMaxWidth();
-
-            title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
             title.setMaxWidth(maxWidth);
-
-            urlTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, urlSize);
             urlTv.setMaxWidth(maxWidth);
-
             requestCenterLayout();
         }
 
@@ -288,10 +307,6 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             }
             progressBar.setLayoutParams(params);
         }
-
-        { // Options
-
-        }
     }
 
     protected void initializeViews() {
@@ -310,10 +325,12 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         { // TextViews
             title.setText(titleDefault);
+            title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
             title.setTypeface(TypefaceHelper.get(this, titleFont));
             title.setTextColor(titleColor);
 
             urlTv.setText(UrlParser.getHost(url));
+            urlTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, urlSize);
             urlTv.setTypeface(TypefaceHelper.get(this, urlFont));
             urlTv.setTextColor(urlColor);
 
@@ -325,6 +342,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             back.setBackgroundResource(iconSelector);
             forward.setBackgroundResource(iconSelector);
             more.setBackgroundResource(iconSelector);
+            if (showMenuRefresh || showMenuShareVia || showMenuCopyLink || showMenuOpenWith)
+                more.setVisibility(View.VISIBLE);
+            else
+                more.setVisibility(View.GONE);
         }
 
         { // Content
@@ -399,8 +420,34 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             progressBar.setProgress(30);
         }
 
-        { // Options
+        { // Menu
+            menuRefresh.setVisibility(showMenuRefresh ? View.VISIBLE : View.GONE);
+            menuRefresh.setBackgroundResource(menuSelector);
+            menuRefreshTv.setText(stringResRefresh);
+            menuRefreshTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
+            menuRefreshTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
+            menuRefreshTv.setTextColor(menuTextColor);
 
+            menuShareVia.setVisibility(showMenuShareVia ? View.VISIBLE : View.GONE);
+            menuShareVia.setBackgroundResource(menuSelector);
+            menuShareViaTv.setText(stringResShareVia);
+            menuShareViaTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
+            menuShareViaTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
+            menuShareViaTv.setTextColor(menuTextColor);
+
+            menuCopyLink.setVisibility(showMenuCopyLink ? View.VISIBLE : View.GONE);
+            menuCopyLink.setBackgroundResource(menuSelector);
+            menuCopyLinkTv.setText(stringResCopyLink);
+            menuCopyLinkTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
+            menuCopyLinkTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
+            menuCopyLinkTv.setTextColor(menuTextColor);
+
+            menuOpenWith.setVisibility(showMenuOpenWith ? View.VISIBLE : View.GONE);
+            menuOpenWith.setBackgroundResource(menuSelector);
+            menuOpenWithTv.setText(stringResOpenWith);
+            menuOpenWithTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
+            menuOpenWithTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
+            menuOpenWithTv.setTextColor(menuTextColor);
         }
     }
 
@@ -460,6 +507,27 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         } else if (viewId == R.id.forward) {
             webView.goForward();
         } else if (viewId == R.id.more) {
+            menuBackground.setVisibility(View.VISIBLE);
+            Animation popupAnim = AnimationUtils.loadAnimation(this, R.anim.popup_flyout_show);
+            menuLayout.startAnimation(popupAnim);
+        } else if (viewId == R.id.menuBackground) {
+            Animation popupAnim = AnimationUtils.loadAnimation(this, R.anim.popup_flyout_hide);
+            menuLayout.startAnimation(popupAnim);
+            popupAnim.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    menuBackground.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+            });
+        } else if (viewId == R.id.menuRefresh) {
 
         }
     }
