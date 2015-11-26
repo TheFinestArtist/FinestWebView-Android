@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="6dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginRight="@dimen/defaultMenuLayoutMargin"
+        android:layout_marginTop="@dimen/defaultMenuLayoutMargin"
         android:background="@color/finestWhite"
         android:orientation="vertical"
         android:paddingBottom="8dp"
@@ -40,7 +40,7 @@
                 android:singleLine="true"
                 android:text="@string/refresh"
                 android:textColor="@color/finestBlack"
-                android:textSize="16dp" />
+                android:textSize="@dimen/defaultMenuTextSize" />
         </LinearLayout>
 
         <LinearLayout
@@ -62,7 +62,7 @@
                 android:singleLine="true"
                 android:text="@string/share_via"
                 android:textColor="@color/finestBlack"
-                android:textSize="16dp" />
+                android:textSize="@dimen/defaultMenuTextSize" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,7 +84,7 @@
                 android:singleLine="true"
                 android:text="@string/copy_link"
                 android:textColor="@color/finestBlack"
-                android:textSize="16dp" />
+                android:textSize="@dimen/defaultMenuTextSize" />
         </LinearLayout>
 
         <LinearLayout
@@ -106,7 +106,7 @@
                 android:singleLine="true"
                 android:text="@string/open_with"
                 android:textColor="@color/finestBlack"
-                android:textSize="16dp" />
+                android:textSize="@dimen/defaultMenuTextSize" />
         </LinearLayout>
 
     </LinearLayout>

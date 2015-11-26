@@ -169,8 +169,6 @@ You can use your own Theme for FinestWebView. If you want to use pre-defined the
 ```xml
 <activity
     android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
-    android:configChanges="keyboardHidden|orientation|screenSize"
-    android:screenOrientation="sensor"
     android:theme="@style/AppTheme.NoActionBar" />
 ```
 

@@ -49,7 +49,7 @@
                 android:includeFontPadding="false"
                 android:singleLine="true"
                 android:textColor="@color/finestBlack"
-                android:textSize="14dp" />
+                android:textSize="@dimen/defaultTitleSize" />
 
             <TextView
                 android:id="@+id/url"
@@ -64,7 +64,7 @@
                 android:paddingRight="2dp"
                 android:singleLine="true"
                 android:textColor="@color/finestSilver"
-                android:textSize="10dp" />
+                android:textSize="@dimen/defaultUrlSize" />
         </LinearLayout>
 
         <ImageButton
@@ -91,6 +91,6 @@
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="@dimen/defaultDividerHeight"
         android:background="@color/finestSilver" />
 </LinearLayout>

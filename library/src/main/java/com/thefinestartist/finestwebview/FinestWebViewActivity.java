@@ -128,30 +128,30 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         showDivider = intent.getBooleanExtra("showDivider", true);
         gradientDivider = intent.getBooleanExtra("gradientDivider", true);
         dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.finestSilver));
-        dividerHeight = intent.getFloatExtra("dividerHeight", DipPixelHelper.getPixel(this, 2));
+        dividerHeight = intent.getFloatExtra("dividerHeight", getResources().getDimension(R.dimen.defaultDividerHeight));
 
         showProgressBar = intent.getBooleanExtra("showProgressBar", true);
         progressBarColor = intent.getIntExtra("progressBarColor", colorAccent);
-        progressBarHeight = intent.getFloatExtra("progressBarHeight", DipPixelHelper.getPixel(this, 2));
+        progressBarHeight = intent.getFloatExtra("progressBarHeight", getResources().getDimension(R.dimen.defaultProgressBarHeight));
         progressBarPosition = Position.fromSerializable(intent.getSerializableExtra("progressBarPosition"));
 
         titleDefault = intent.getStringExtra("titleDefault");
         updateTitleFromHtml = intent.getBooleanExtra("updateTitleFromHtml", true);
-        titleSize = intent.getFloatExtra("titleSize", DipPixelHelper.getPixel(this, 14));
+        titleSize = intent.getFloatExtra("titleSize", getResources().getDimension(R.dimen.defaultTitleSize));
         titleFont = intent.getStringExtra("titleFont") == null ? "Roboto-Medium.ttf" : intent.getStringExtra("titleFont");
         titleColor = intent.getIntExtra("titleColor", textColorPrimary);
 
         showUrl = intent.getBooleanExtra("showUrl", true);
-        urlSize = intent.getFloatExtra("urlSize", DipPixelHelper.getPixel(this, 10));
+        urlSize = intent.getFloatExtra("urlSize", getResources().getDimension(R.dimen.defaultUrlSize));
         urlFont = intent.getStringExtra("urlFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("urlFont");
         urlColor = intent.getIntExtra("urlColor", textColorSecondary);
 
         menuColor = intent.getIntExtra("menuColor", ContextCompat.getColor(this, R.color.finestWhite));
         menuDropShadowColor = intent.getIntExtra("menuDropShadowColor", ContextCompat.getColor(this, R.color.finestSilver));
-        menuDropShadowSize = intent.getFloatExtra("menuDropShadowSize", DipPixelHelper.getPixel(this, 2));
+        menuDropShadowSize = intent.getFloatExtra("menuDropShadowSize", getResources().getDimension(R.dimen.defaultMenuDropShadowSize));
         menuSelector = intent.getIntExtra("menuSelector", R.drawable.selector_grey);
 
-        menuTextSize = intent.getFloatExtra("menuTextSize", DipPixelHelper.getPixel(this, 16));
+        menuTextSize = intent.getFloatExtra("menuTextSize", getResources().getDimension(R.dimen.defaultMenuTextSize));
         menuTextFont = intent.getStringExtra("menuTextFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("menuTextFont");
         menuTextColor = intent.getIntExtra("menuTextColor", ContextCompat.getColor(this, R.color.finestBlack));
 
@@ -528,7 +528,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 }
             });
         } else if (viewId == R.id.menuRefresh) {
-
+            webView.reload();
         }
     }
 
@@ -557,6 +557,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             default:
                 break;
         }
+
+        ViewHelper.setTranslationY(menuLayout, Math.max(verticalOffset, - getResources().getDimension(R.dimen.defaultMenuLayoutMargin)));
     }
 
     public class MyWebChromeClient extends WebChromeClient {

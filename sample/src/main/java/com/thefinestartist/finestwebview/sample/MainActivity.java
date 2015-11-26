@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
     public void show() {
         new FinestWebView.Builder(this)
                 .titleDefault("Loading...")
-                .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
+                .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
+                        | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
 //                .toolbarScrollFlags(0) // 0 for not collapsing
                 .gradientDivider(true)
 //                .dividerColorRes(R.color.black)
