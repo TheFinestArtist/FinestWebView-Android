@@ -38,6 +38,7 @@ import com.thefinestartist.finestwebview.helpers.DipPixelHelper;
 import com.thefinestartist.finestwebview.helpers.ScreenHelper;
 import com.thefinestartist.finestwebview.helpers.TypefaceHelper;
 import com.thefinestartist.finestwebview.helpers.UrlParser;
+import com.thefinestartist.finestwebview.views.ShadowLayout;
 
 
 /**
@@ -127,7 +128,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         showDivider = intent.getBooleanExtra("showDivider", true);
         gradientDivider = intent.getBooleanExtra("gradientDivider", true);
-        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.finestSilver));
+        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.finestBlack30));
         dividerHeight = intent.getFloatExtra("dividerHeight", getResources().getDimension(R.dimen.defaultDividerHeight));
 
         showProgressBar = intent.getBooleanExtra("showProgressBar", true);
@@ -194,7 +195,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected ProgressBar progressBar;
 
     protected RelativeLayout menuBackground;
-    protected LinearLayout menuLayout;
+    protected ShadowLayout menuLayout;
     protected LinearLayout menuRefresh;
     protected TextView menuRefreshTv;
     protected LinearLayout menuShareVia;
@@ -227,7 +228,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         menuBackground = (RelativeLayout) findViewById(R.id.menuBackground);
-        menuLayout = (LinearLayout) findViewById(R.id.menuLayout);
+        menuLayout = (ShadowLayout) findViewById(R.id.menuLayout);
         menuRefresh = (LinearLayout) findViewById(R.id.menuRefresh);
         menuRefreshTv = (TextView) findViewById(R.id.menuRefreshTv);
         menuShareVia = (LinearLayout) findViewById(R.id.menuShareVia);
@@ -529,6 +530,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             });
         } else if (viewId == R.id.menuRefresh) {
             webView.reload();
+        } else if (viewId == R.id.menuShareVia) {
+        } else if (viewId == R.id.menuCopyLink) {
+        } else if (viewId == R.id.menuOpenWith) {
         }
     }
 

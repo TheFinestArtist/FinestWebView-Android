@@ -14,4 +14,12 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <declare-styleable name="ShadowLayout">
+        <attr name="slCornerRadius" format="dimension"/>
+        <attr name="slShadowSize" format="dimension"/>
+        <attr name="slShadowColor" format="color"/>
+        <attr name="slDx" format="dimension"/>
+        <attr name="slDy" format="dimension"/>
+    </declare-styleable>
+
 </resources>

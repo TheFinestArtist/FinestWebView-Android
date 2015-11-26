@@ -221,12 +221,14 @@ activity_open_enter.xml
 activity_open_exit.xml
 activity_close_enter.xml
 activity_close_exit.xml
-
+```
+```xml
 modal_activity_open_enter.xml
 modal_activity_open_exit.xml
 modal_activity_close_enter.xml
 modal_activity_close_exit.xml
-
+```
+```xml
 fragment_open_enter.xml
 fragment_open_enter_reverse.xml
 fragment_close_enter.xml
