@@ -1,13 +1,10 @@
 package com.thefinestartist.finestwebview.sample;
 
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.thefinestartist.finestwebview.FinestWebView;
-
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,33 +12,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        ButterKnife.bind(this);
-//        show();
     }
 
-    @OnClick(R.id.show)
-    public void show() {
-        new FinestWebView.Builder(this)
-//                .titleDefault("Loading...")
-//                .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
-//                        | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
-//                .toolbarScrollFlags(0) // 0 for not collapsing
-//                .gradientDivider(true)
-//                .dividerColorRes(R.color.black)
-//                .dividerHeight(100)
-//                .toolbarColorRes(R.color.accent)
-//                .urlColorRes(R.color.finestBlack)
-//                .menuColorRes(R.color.finestSilver)
-//                .menuDropShadowColorRes(R.color.finestBlack40)
-//                .menuDropShadowSize(100)
-//                .dividerColorRes(R.color.black_30)
-//                .iconDefaultColorRes(R.color.accent)
-//                .iconDisabledColorRes(R.color.gray)
-//                .iconPressedColorRes(R.color.black)
-//                .progressBarHeight(DipPixelHelper.getPixel(this, 3))
-//                .progressBarColorRes(R.color.accent)
-//                .backPressToClose(false)
-                .show("http://thefinestartist.com");
-        overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
+    public void onClick(View view) {
+        if (view.getId() == R.id.defaultTheme) {
+            new FinestWebView.Builder(this)
+                    .titleDefault("Loading...")
+                    .show("http://thefinestartist.com");
+            overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
+        } else if (view.getId() == R.id.redTheme) {
+            new FinestWebView.Builder(this)
+                    .titleDefault("Red Theme")
+                    .show("http://www.blessthisstuff.com");
+            overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
+        } else if (view.getId() == R.id.blueTheme) {
+            new FinestWebView.Builder(this).show("https://vimeo.com");
+            overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
+        } else if (view.getId() == R.id.blackTheme) {
+            new FinestWebView.Builder(this)
+                    .titleDefault("Dribbble")
+                    .show("https://dribbble.com");
+            overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
+        }
     }
 }

@@ -14,4 +14,11 @@
         <item name="android:textColorSecondary">@color/finestSilver</item>
     </style>
 
+
+    <style name="RedTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/redNavBar</item>
+        <item name="colorPrimaryDark">@color/redStatusBar</item>
+        <item name="colorAccent">@color/redNavBar</item>
+    </style>
+
 </resources>

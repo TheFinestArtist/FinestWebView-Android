@@ -8,4 +8,16 @@
     <color name="secondary_text">#727272</color>
     <color name="icons">#212121</color>
     <color name="divider">#B6B6B6</color>
+
+    <color name="redStatusBar">#DD3131</color>
+    <color name="redNavBar">#FF5E5E</color>
+    <color name="redUrlText">#FFC9C9</color>
+
+    <color name="bluetatusBar">#048BFE</color>
+    <color name="blueNavBar">#2199FF</color>
+    <color name="blueUrlText">#BADFFF</color>
+
+    <color name="blackStatusBar">#282828</color>
+    <color name="blackNavBar">#2E2E2E</color>
+    <color name="blackUrlText">#8F8F8F</color>
 </resources>

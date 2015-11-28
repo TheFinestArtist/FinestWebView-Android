@@ -36,6 +36,7 @@ import com.nineoldandroids.view.ViewHelper;
 import com.thefinestartist.finestwebview.enums.Position;
 import com.thefinestartist.finestwebview.helpers.BitmapHelper;
 import com.thefinestartist.finestwebview.helpers.ClipboardHelper;
+import com.thefinestartist.finestwebview.helpers.ColorHelper;
 import com.thefinestartist.finestwebview.helpers.DipPixelHelper;
 import com.thefinestartist.finestwebview.helpers.ScreenHelper;
 import com.thefinestartist.finestwebview.helpers.TypefaceHelper;
@@ -124,8 +125,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
 
         iconDefaultColor = intent.getIntExtra("iconDefaultColor", colorAccent);
-        iconDisabledColor = intent.getIntExtra("iconDisabledColor", colorAccent);
-        iconPressedColor = intent.getIntExtra("iconPressedColor", colorAccent);
+        iconDisabledColor = intent.getIntExtra("iconDisabledColor", ColorHelper.disableColor(iconDefaultColor));
+        iconPressedColor = intent.getIntExtra("iconPressedColor", iconDefaultColor);
         iconSelector = intent.getIntExtra("iconSelector", R.drawable.selector_grey);
 
         showDivider = intent.getBooleanExtra("showDivider", true);
@@ -273,10 +274,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         }
 
         { // Icons
-            updateIcon(close, R.drawable.ic_launcher);
-            updateIcon(back, R.drawable.ic_launcher);
-            updateIcon(forward, R.drawable.ic_launcher);
-            updateIcon(more, R.drawable.ic_launcher);
+            updateIcon(close, R.drawable.close);
+            updateIcon(back, R.drawable.back);
+            updateIcon(forward, R.drawable.forward);
+            updateIcon(more, R.drawable.more);
         }
 
         { // Divider

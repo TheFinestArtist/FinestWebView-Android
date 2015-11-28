@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <Button
-        android:id="@+id/show"
+        android:id="@+id/defaultTheme"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/selector_grey"
-        android:text="Show" />
+        android:onClick="onClick"
+        android:text="Default Theme" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/redTheme"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/selector_grey"
+        android:onClick="onClick"
+        android:text="Red Theme" />
+
+    <Button
+        android:id="@+id/blueTheme"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/selector_grey"
+        android:onClick="onClick"
+        android:text="Blue Theme" />
+
+    <Button
+        android:id="@+id/blackTheme"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/selector_grey"
+        android:onClick="onClick"
+        android:text="Black Theme" />
+
+</LinearLayout>
