@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/defaultDividerHeight"
         android:layout_marginTop="@dimen/toolbarHeight"
-        android:background="@color/finestSilver" />
+        android:background="@color/finestBlack10" />
 
     <ProgressBar
         android:id="@+id/progressBar"

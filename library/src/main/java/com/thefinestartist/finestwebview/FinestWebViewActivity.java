@@ -130,7 +130,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         showDivider = intent.getBooleanExtra("showDivider", true);
         gradientDivider = intent.getBooleanExtra("gradientDivider", true);
-        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.finestBlack20));
+        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.finestBlack10));
         dividerHeight = intent.getFloatExtra("dividerHeight", getResources().getDimension(R.dimen.defaultDividerHeight));
 
         showProgressBar = intent.getBooleanExtra("showProgressBar", true);
@@ -150,7 +150,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         urlColor = intent.getIntExtra("urlColor", textColorSecondary);
 
         menuColor = intent.getIntExtra("menuColor", ContextCompat.getColor(this, R.color.finestWhite));
-        menuDropShadowColor = intent.getIntExtra("menuDropShadowColor", ContextCompat.getColor(this, R.color.finestBlack20));
+        menuDropShadowColor = intent.getIntExtra("menuDropShadowColor", ContextCompat.getColor(this, R.color.finestBlack10));
         menuDropShadowSize = intent.getFloatExtra("menuDropShadowSize", getResources().getDimension(R.dimen.defaultMenuDropShadowSize));
         menuSelector = intent.getIntExtra("menuSelector", R.drawable.selector_grey);
 

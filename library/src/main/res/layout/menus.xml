@@ -7,7 +7,8 @@
     android:clickable="true"
     android:focusable="true"
     android:onClick="onClick"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:visibility="gone">
 
     <com.thefinestartist.finestwebview.views.ShadowLayout
         android:id="@+id/shadowLayout"
@@ -18,9 +19,7 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         app:slCornerRadius="@dimen/defaultMenuDropShadowCornerRadius"
-        app:slDx="0dp"
-        app:slDy="2dp"
-        app:slShadowColor="@color/finestBlack20"
+        app:slShadowColor="@color/finestBlack10"
         app:slShadowSize="@dimen/defaultMenuDropShadowSize">
 
         <LinearLayout

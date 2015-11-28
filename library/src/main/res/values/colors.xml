@@ -2,6 +2,8 @@
 <resources>
     <color name="finestGray20">#33D2D2D2</color>
 
+    <color name="finestBlack05">#0D202020</color>
+    <color name="finestBlack10">#1A202020</color>
     <color name="finestBlack20">#33202020</color>
     <color name="finestBlack30">#4D202020</color>
     <color name="finestBlack40">#66202020</color>

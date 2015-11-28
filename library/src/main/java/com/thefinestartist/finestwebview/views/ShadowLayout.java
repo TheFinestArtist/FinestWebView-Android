@@ -5,22 +5,15 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 import com.thefinestartist.finestwebview.R;
-import com.thefinestartist.finestwebview.helpers.BitmapHelper;
 
 
 /**
@@ -66,7 +59,7 @@ public class ShadowLayout extends FrameLayout {
             shadowSize = attr.getDimension(R.styleable.ShadowLayout_slShadowSize, getResources().getDimension(R.dimen.defaultMenuDropShadowSize));
             dx = attr.getDimension(R.styleable.ShadowLayout_slDx, 0);
             dy = attr.getDimension(R.styleable.ShadowLayout_slDy, 0);
-            shadowColor = attr.getColor(R.styleable.ShadowLayout_slShadowColor, ContextCompat.getColor(getContext(), R.color.finestBlack20));
+            shadowColor = attr.getColor(R.styleable.ShadowLayout_slShadowColor, ContextCompat.getColor(getContext(), R.color.finestBlack10));
         } finally {
             attr.recycle();
         }
