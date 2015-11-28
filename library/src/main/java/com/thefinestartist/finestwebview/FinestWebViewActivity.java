@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -75,23 +76,23 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected String urlFont;
     protected int urlColor;
 
-    protected Integer menuColor;
-    protected Integer menuDropShadowColor;
-    protected Float menuDropShadowSize;
-    protected Integer menuSelector;
+    protected int menuColor;
+    protected int menuDropShadowColor;
+    protected float menuDropShadowSize;
+    protected int menuSelector;
 
-    protected Float menuTextSize;
+    protected float menuTextSize;
     protected String menuTextFont;
-    protected Integer menuTextColor;
+    protected int menuTextColor;
 
-    protected Boolean showMenuRefresh;
-    protected Integer stringResRefresh;
-    protected Boolean showMenuShareVia;
-    protected Integer stringResShareVia;
-    protected Boolean showMenuCopyLink;
-    protected Integer stringResCopyLink;
-    protected Boolean showMenuOpenWith;
-    protected Integer stringResOpenWith;
+    protected boolean showMenuRefresh;
+    protected int stringResRefresh;
+    protected boolean showMenuShareVia;
+    protected int stringResShareVia;
+    protected boolean showMenuCopyLink;
+    protected int stringResCopyLink;
+    protected boolean showMenuOpenWith;
+    protected int stringResOpenWith;
 
     protected int animationCloseEnter;
     protected int animationCloseExit;
@@ -148,7 +149,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         urlColor = intent.getIntExtra("urlColor", textColorSecondary);
 
         menuColor = intent.getIntExtra("menuColor", ContextCompat.getColor(this, R.color.finestWhite));
-        menuDropShadowColor = intent.getIntExtra("menuDropShadowColor", ContextCompat.getColor(this, R.color.finestSilver));
+        menuDropShadowColor = intent.getIntExtra("menuDropShadowColor", ContextCompat.getColor(this, R.color.finestBlack20));
         menuDropShadowSize = intent.getFloatExtra("menuDropShadowSize", getResources().getDimension(R.dimen.defaultMenuDropShadowSize));
         menuSelector = intent.getIntExtra("menuSelector", R.drawable.selector_grey);
 
@@ -194,8 +195,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected View divider;
     protected ProgressBar progressBar;
 
-    protected RelativeLayout menuBackground;
-    protected ShadowLayout menuLayout;
+    protected RelativeLayout menuLayout;
+    protected ShadowLayout shadowLayout;
+    protected LinearLayout menuBackground;
+
     protected LinearLayout menuRefresh;
     protected TextView menuRefreshTv;
     protected LinearLayout menuShareVia;
@@ -227,8 +230,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         divider = findViewById(R.id.divider);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        menuBackground = (RelativeLayout) findViewById(R.id.menuBackground);
-        menuLayout = (ShadowLayout) findViewById(R.id.menuLayout);
+        menuLayout = (RelativeLayout) findViewById(R.id.menuLayout);
+        shadowLayout = (ShadowLayout) findViewById(R.id.shadowLayout);
+        menuBackground = (LinearLayout) findViewById(R.id.menuBackground);
+
         menuRefresh = (LinearLayout) findViewById(R.id.menuRefresh);
         menuRefreshTv = (TextView) findViewById(R.id.menuRefreshTv);
         menuShareVia = (LinearLayout) findViewById(R.id.menuShareVia);
@@ -271,9 +276,6 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             updateIcon(back, R.drawable.ic_launcher);
             updateIcon(forward, R.drawable.ic_launcher);
             updateIcon(more, R.drawable.ic_launcher);
-        }
-
-        { // Content
         }
 
         { // Divider
@@ -422,6 +424,22 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         }
 
         { // Menu
+            GradientDrawable drawable = new GradientDrawable();
+            drawable.setCornerRadius(getResources().getDimension(R.dimen.defaultMenuCornerRadius));
+            drawable.setColor(menuColor);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+                menuBackground.setBackground(drawable);
+            else
+                menuBackground.setBackgroundDrawable(drawable);
+
+            shadowLayout.setShadowColor(menuDropShadowColor);
+            shadowLayout.setShadowSize(menuDropShadowSize);
+
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) shadowLayout.getLayoutParams();
+            int margin = (int) (getResources().getDimension(R.dimen.defaultMenuLayoutMargin) - menuDropShadowSize);
+            params.setMargins(0, margin, margin, 0);
+            shadowLayout.setLayoutParams(params);
+
             menuRefresh.setVisibility(showMenuRefresh ? View.VISIBLE : View.GONE);
             menuRefresh.setBackgroundResource(menuSelector);
             menuRefreshTv.setText(stringResRefresh);
@@ -508,12 +526,12 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         } else if (viewId == R.id.forward) {
             webView.goForward();
         } else if (viewId == R.id.more) {
-            menuBackground.setVisibility(View.VISIBLE);
+            menuLayout.setVisibility(View.VISIBLE);
             Animation popupAnim = AnimationUtils.loadAnimation(this, R.anim.popup_flyout_show);
-            menuLayout.startAnimation(popupAnim);
-        } else if (viewId == R.id.menuBackground) {
+            shadowLayout.startAnimation(popupAnim);
+        } else if (viewId == R.id.menuLayout) {
             Animation popupAnim = AnimationUtils.loadAnimation(this, R.anim.popup_flyout_hide);
-            menuLayout.startAnimation(popupAnim);
+            shadowLayout.startAnimation(popupAnim);
             popupAnim.setAnimationListener(new Animation.AnimationListener() {
                 @Override
                 public void onAnimationStart(Animation animation) {
@@ -521,7 +539,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    menuBackground.setVisibility(View.GONE);
+                    menuLayout.setVisibility(View.GONE);
                 }
 
                 @Override
@@ -562,7 +580,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 break;
         }
 
-        ViewHelper.setTranslationY(menuLayout, Math.max(verticalOffset, - getResources().getDimension(R.dimen.defaultMenuLayoutMargin)));
+        ViewHelper.setTranslationY(menuLayout, Math.max(verticalOffset, -getResources().getDimension(R.dimen.defaultMenuLayoutMargin)));
     }
 
     public class MyWebChromeClient extends WebChromeClient {

@@ -7,6 +7,7 @@
     <dimen name="defaultProgressBarHeight">2dp</dimen>
     <dimen name="defaultTitleSize">14dp</dimen>
     <dimen name="defaultUrlSize">10dp</dimen>
+    <dimen name="defaultMenuDropShadowCornerRadius">3dp</dimen>
     <dimen name="defaultMenuDropShadowSize">6dp</dimen>
     <dimen name="defaultMenuTextSize">16dp</dimen>
     <dimen name="defaultMenuLayoutMargin">4dp</dimen>

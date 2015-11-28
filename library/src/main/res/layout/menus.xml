@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/menuBackground"
+    android:id="@+id/menuLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
@@ -10,25 +10,23 @@
     android:orientation="vertical">
 
     <com.thefinestartist.finestwebview.views.ShadowLayout
-        android:id="@+id/menuLayout"
+        android:id="@+id/shadowLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="@dimen/defaultMenuLayoutMargin"
-        android:layout_marginTop="@dimen/defaultMenuLayoutMargin"
         android:clipChildren="false"
         android:clipToPadding="false"
-        app:slCornerRadius="2dp"
+        app:slCornerRadius="@dimen/defaultMenuDropShadowCornerRadius"
         app:slDx="0dp"
-        app:slDy="6dp"
+        app:slDy="2dp"
         app:slShadowColor="@color/finestBlack20"
         app:slShadowSize="@dimen/defaultMenuDropShadowSize">
 
         <LinearLayout
+            android:id="@+id/menuBackground"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/menu_background"
             android:orientation="vertical"
             android:paddingBottom="8dp"
             android:paddingTop="8dp">
