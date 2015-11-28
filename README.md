@@ -260,6 +260,19 @@ new FinestWebView.Builder(this)
 ```
 
 
+#### Custom Tyface
+
+You can use your own typeface for title, url, and menus. You have to add your font file in assets/fonts folder.
+
+```java
+new FinestWebView.Builder(this)
+    .titleFont("Roboto-Medium.ttf")
+    .urlFont("Roboto-Regular.ttf")
+    .menuTextFont("Roboto-Medium.ttf")
+    .show(url);
+```
+
+
 ## Designer
 
 #### [Min Kim](https://github.com/openyourboxes)
