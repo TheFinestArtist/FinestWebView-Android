@@ -22,25 +22,25 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.show)
     public void show() {
         new FinestWebView.Builder(this)
-                .titleDefault("Loading...")
-                .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
-                        | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
+//                .titleDefault("Loading...")
+//                .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
+//                        | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
 //                .toolbarScrollFlags(0) // 0 for not collapsing
-                .gradientDivider(true)
+//                .gradientDivider(true)
 //                .dividerColorRes(R.color.black)
-                .dividerHeight(100)
-                .toolbarColorRes(R.color.accent)
-                .urlColorRes(R.color.finestBlack)
+//                .dividerHeight(100)
+//                .toolbarColorRes(R.color.accent)
+//                .urlColorRes(R.color.finestBlack)
 //                .menuColorRes(R.color.finestSilver)
-                .menuDropShadowColorRes(R.color.finestBlack40)
-                .menuDropShadowSize(100)
+//                .menuDropShadowColorRes(R.color.finestBlack40)
+//                .menuDropShadowSize(100)
 //                .dividerColorRes(R.color.black_30)
 //                .iconDefaultColorRes(R.color.accent)
 //                .iconDisabledColorRes(R.color.gray)
 //                .iconPressedColorRes(R.color.black)
 //                .progressBarHeight(DipPixelHelper.getPixel(this, 3))
 //                .progressBarColorRes(R.color.accent)
-                .backPressToClose(false)
+//                .backPressToClose(false)
                 .show("http://thefinestartist.com");
         overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
     }

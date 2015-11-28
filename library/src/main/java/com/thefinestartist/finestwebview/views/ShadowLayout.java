@@ -5,15 +5,22 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 import com.thefinestartist.finestwebview.R;
+import com.thefinestartist.finestwebview.helpers.BitmapHelper;
 
 
 /**
@@ -100,12 +107,34 @@ public class ShadowLayout extends FrameLayout {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-//        setBackgroundCompat(canvas.getWidth(), canvas.getHeight());
+//        RoundRectShape rss = new RoundRectShape(new float[]{12f, 12f, 12f,
+//                12f, 12f, 12f, 12f, 12f}, null, null);
+//        ShapeDrawable sds = new ShapeDrawable(rss);
+//        sds.setShaderFactory(new ShapeDrawable.ShaderFactory() {
+//
+//            @Override
+//            public Shader resize(int width, int height) {
+//                LinearGradient lg = new LinearGradient(0, 0, 0, height,
+//                        new int[]{Color.parseColor("#e5e5e5"),
+//                                Color.parseColor("#e5e5e5"),
+//                                Color.parseColor("#e5e5e5"),
+//                                Color.parseColor("#e5e5e5")}, new float[]{0,
+//                        0.50f, 0.50f, 1}, Shader.TileMode.REPEAT);
+//                return lg;
+//            }
+//        });
+//
+//        LayerDrawable ld = new LayerDrawable(new Drawable[]{sds, sds});
+//        ld.setLayerInset(0, 5, 5, 0, 0); // inset the shadow so it doesn't start right at the left/top
+//        ld.setLayerInset(1, 0, 0, 5, 5); // inset the top drawable so we can leave a bit of space for the shadow to use
+
+        setBackgroundCompat(canvas.getWidth(), canvas.getHeight());
     }
 
     @SuppressWarnings("deprecation")
     private void setBackgroundCompat(int w, int h) {
         Bitmap bitmap = createShadowBitmap(w, h, cornerRadius, shadowSize, dx, dy, shadowColor, Color.TRANSPARENT);
+//        Bitmap coloredBitmap = BitmapHelper.getColoredBitmap(getContext(), bitmap, shadowColor);
         BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
             setBackgroundDrawable(drawable);
@@ -146,10 +175,7 @@ public class ShadowLayout extends FrameLayout {
         shadowPaint.setAntiAlias(true);
         shadowPaint.setColor(fillColor);
         shadowPaint.setStyle(Paint.Style.FILL);
-
-        if (!isInEditMode()) {
-            shadowPaint.setShadowLayer(shadowSize, dx, dy, shadowColor);
-        }
+        shadowPaint.setShadowLayer(shadowSize, dx, dy, shadowColor);
 
         canvas.drawRoundRect(shadowRect, cornerRadius, cornerRadius, shadowPaint);
 

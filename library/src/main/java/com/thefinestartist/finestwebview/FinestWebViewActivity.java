@@ -35,6 +35,7 @@ import android.widget.TextView;
 import com.nineoldandroids.view.ViewHelper;
 import com.thefinestartist.finestwebview.enums.Position;
 import com.thefinestartist.finestwebview.helpers.BitmapHelper;
+import com.thefinestartist.finestwebview.helpers.ClipboardHelper;
 import com.thefinestartist.finestwebview.helpers.DipPixelHelper;
 import com.thefinestartist.finestwebview.helpers.ScreenHelper;
 import com.thefinestartist.finestwebview.helpers.TypefaceHelper;
@@ -129,7 +130,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         showDivider = intent.getBooleanExtra("showDivider", true);
         gradientDivider = intent.getBooleanExtra("gradientDivider", true);
-        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.finestBlack30));
+        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.finestBlack20));
         dividerHeight = intent.getFloatExtra("dividerHeight", getResources().getDimension(R.dimen.defaultDividerHeight));
 
         showProgressBar = intent.getBooleanExtra("showProgressBar", true);
@@ -526,32 +527,54 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         } else if (viewId == R.id.forward) {
             webView.goForward();
         } else if (viewId == R.id.more) {
-            menuLayout.setVisibility(View.VISIBLE);
-            Animation popupAnim = AnimationUtils.loadAnimation(this, R.anim.popup_flyout_show);
-            shadowLayout.startAnimation(popupAnim);
+            showMenu();
         } else if (viewId == R.id.menuLayout) {
-            Animation popupAnim = AnimationUtils.loadAnimation(this, R.anim.popup_flyout_hide);
-            shadowLayout.startAnimation(popupAnim);
-            popupAnim.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    menuLayout.setVisibility(View.GONE);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-                }
-            });
+            hideMenu();
         } else if (viewId == R.id.menuRefresh) {
             webView.reload();
+            hideMenu();
         } else if (viewId == R.id.menuShareVia) {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
+            sendIntent.setType("text/plain");
+            startActivity(Intent.createChooser(sendIntent, getResources().getString(stringResShareVia)));
+
+            hideMenu();
         } else if (viewId == R.id.menuCopyLink) {
+            ClipboardHelper.clip(this, webView.getUrl());
+            hideMenu();
         } else if (viewId == R.id.menuOpenWith) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(webView.getUrl()));
+            startActivity(browserIntent);
+
+            hideMenu();
         }
+    }
+
+    protected void showMenu() {
+        menuLayout.setVisibility(View.VISIBLE);
+        Animation popupAnim = AnimationUtils.loadAnimation(this, R.anim.popup_flyout_show);
+        shadowLayout.startAnimation(popupAnim);
+    }
+
+    protected void hideMenu() {
+        Animation popupAnim = AnimationUtils.loadAnimation(this, R.anim.popup_flyout_hide);
+        shadowLayout.startAnimation(popupAnim);
+        popupAnim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                menuLayout.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
     }
 
     protected void close() {
