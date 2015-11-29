@@ -181,7 +181,7 @@ You can use your own Theme for FinestWebView. If you want to use pre-defined the
 ```
 
 
-## More in customization
+## More customizations
 
 #### Status Bar Color & Toolbar Color
 
