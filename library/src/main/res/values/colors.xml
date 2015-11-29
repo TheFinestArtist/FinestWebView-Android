@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="finestWhite10">#1AFFFFFF</color>
+    <color name="finestWhite20">#33FFFFFF</color>
+    <color name="finestWhite30">#4DFFFFFF</color>
+
     <color name="finestGray10">#1AD2D2D2</color>
     <color name="finestGray20">#33D2D2D2</color>
 

@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebChromeClient;
@@ -48,6 +51,8 @@ import com.thefinestartist.finestwebview.views.ShadowLayout;
  * Created by Leonardo on 11/14/15.
  */
 public class FinestWebViewActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
+
+    protected int statusBarColor;
 
     protected int toolbarColor;
     protected int toolbarScrollFlags;
@@ -100,6 +105,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected int animationCloseExit;
 
     protected boolean backPressToClose;
+    protected int stringResCopiedToClipboard;
 
     protected String url;
 
@@ -110,15 +116,19 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         TypedValue typedValue = new TypedValue();
         TypedArray a = obtainStyledAttributes(typedValue.data, new int[]{
+                R.attr.colorPrimaryDark,
                 R.attr.colorPrimary,
                 R.attr.colorAccent,
                 android.R.attr.textColorPrimary,
                 android.R.attr.textColorSecondary});
-        int colorPrimary = a.getColor(0, ContextCompat.getColor(this, R.color.finestWhite));
-        int colorAccent = a.getColor(1, ContextCompat.getColor(this, R.color.finestBlack));
-        int textColorPrimary = a.getColor(2, ContextCompat.getColor(this, R.color.finestBlack));
-        int textColorSecondary = a.getColor(3, ContextCompat.getColor(this, R.color.finestSilver));
+        int colorPrimaryDark = a.getColor(0, ContextCompat.getColor(this, R.color.finestGray));
+        int colorPrimary = a.getColor(1, ContextCompat.getColor(this, R.color.finestWhite));
+        int colorAccent = a.getColor(2, ContextCompat.getColor(this, R.color.finestBlack));
+        int textColorPrimary = a.getColor(3, ContextCompat.getColor(this, R.color.finestBlack));
+        int textColorSecondary = a.getColor(4, ContextCompat.getColor(this, R.color.finestSilver));
         a.recycle();
+
+        statusBarColor = intent.getIntExtra("statusBarColor", colorPrimaryDark);
 
         toolbarColor = intent.getIntExtra("toolbarColor", colorPrimary);
         toolbarScrollFlags = intent.getIntExtra("toolbarScrollFlags", AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
@@ -172,6 +182,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         animationCloseExit = intent.getIntExtra("animationCloseExit", R.anim.modal_activity_close_exit);
 
         backPressToClose = intent.getBooleanExtra("backPressToClose", false);
+        stringResCopiedToClipboard = intent.getIntExtra("stringResCopiedToClipboard", R.string.copied_to_clipboard);
 
         url = intent.getStringExtra("url");
     }
@@ -316,6 +327,15 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
     protected void initializeViews() {
         setSupportActionBar(toolbar);
+
+        { // StatusBar
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(statusBarColor);
+            }
+        }
 
         { // AppBar
             appBar.addOnOffsetChangedListener(this);
@@ -544,12 +564,39 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             hideMenu();
         } else if (viewId == R.id.menuCopyLink) {
             ClipboardHelper.clip(this, webView.getUrl());
+
+            Snackbar snackbar = Snackbar.make(coordinatorLayout, getString(stringResCopiedToClipboard), Snackbar.LENGTH_LONG);
+            View snackbarView = snackbar.getView();
+            snackbarView.setBackgroundColor(toolbarColor);
+            if (snackbarView instanceof ViewGroup)
+                updateChildTextView((ViewGroup) snackbarView);
+            snackbar.show();
+
             hideMenu();
         } else if (viewId == R.id.menuOpenWith) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(webView.getUrl()));
             startActivity(browserIntent);
 
             hideMenu();
+        }
+    }
+
+    protected void updateChildTextView(ViewGroup viewGroup) {
+        if (viewGroup == null || viewGroup.getChildCount() == 0)
+            return;
+
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            View view = viewGroup.getChildAt(i);
+            if (view instanceof TextView) {
+                TextView textView = (TextView) view;
+                textView.setTextColor(titleColor);
+                textView.setTypeface(TypefaceHelper.get(this, titleFont));
+                textView.setLineSpacing(0, 1.1f);
+                textView.setIncludeFontPadding(false);
+            }
+
+            if (view instanceof ViewGroup)
+                updateChildTextView((ViewGroup) view);
         }
     }
 

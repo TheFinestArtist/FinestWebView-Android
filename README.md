@@ -48,6 +48,10 @@ overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activit
 #### 1. Builder Options
 
 ```java
+// StatusBar Options
+statusBarColor(@ColorInt int color);
+statusBarColorRes(@ColorRes int color);
+
 // Toolbar Options
 toolbarColor(@ColorInt int color);
 toolbarColorRes(@ColorRes int color);
@@ -128,8 +132,8 @@ stringResOpenWith(@StringRes int stringResOpenWith);
 
 // More Options
 setCloseAnimations(@AnimRes int animationCloseEnter, @AnimRes int animationCloseExit);
-showRefresh(boolean showRefresh);
 backPressToClose(boolean backPressToClose); 
+stringResCopiedToClipboard(@StringRes int stringResCopiedToClipboard);
 ```
 
 ```java
@@ -179,7 +183,7 @@ You can use your own Theme for FinestWebView. If you want to use pre-defined the
 
 Status bar color will be set as `colorPrimaryDark` of FinestWebViewActivity's theme.  
 Toolbar color will be set as `colorPrimary` of FinestWebViewActivity's theme.  
-But, you can override this setting using builder option `toolbarColor` or `toolbarColorRes`.
+But, you can override theses settings using builder option `statusBarColor`, `statusBarColorRes`, `toolbarColor`, `toolbarColorRes`.
 
 
 #### Disable Toolbar Collapsing

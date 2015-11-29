@@ -24,6 +24,8 @@ public class FinestWebView {
 
         private final Context context;
 
+        protected Integer statusBarColor;
+
         protected Integer toolbarColor;
         protected Integer toolbarScrollFlags;
 
@@ -75,11 +77,22 @@ public class FinestWebView {
         protected Integer animationCloseExit;
 
         protected Boolean backPressToClose;
+        protected Integer stringResCopiedToClipboard;
 
         protected String url;
 
         public Builder(@NonNull Context context) {
             this.context = context;
+        }
+
+        public Builder statusBarColor(@ColorInt int color) {
+            this.statusBarColor = color;
+            return this;
+        }
+
+        public Builder statusBarColorRes(@ColorRes int color) {
+            this.statusBarColor = ContextCompat.getColor(context, color);
+            return this;
         }
 
         public Builder toolbarColor(@ColorInt int color) {
@@ -404,6 +417,11 @@ public class FinestWebView {
             return this;
         }
 
+        public Builder stringResCopiedToClipboard(@StringRes int stringResCopiedToClipboard) {
+            this.stringResCopiedToClipboard = stringResCopiedToClipboard;
+            return this;
+        }
+
         public void show(@StringRes int urlRes) {
             show(context.getString(urlRes));
         }
@@ -412,6 +430,9 @@ public class FinestWebView {
             this.url = url;
 
             Intent intent = new Intent(context, FinestWebViewActivity.class);
+
+            if (statusBarColor != null)
+                intent.putExtra("statusBarColor", statusBarColor.intValue());
 
             if (toolbarColor != null)
                 intent.putExtra("toolbarColor", toolbarColor.intValue());
@@ -505,6 +526,8 @@ public class FinestWebView {
 
             if (backPressToClose != null)
                 intent.putExtra("backPressToClose", backPressToClose.booleanValue());
+            if (stringResCopiedToClipboard != null)
+                intent.putExtra("stringResCopiedToClipboard", stringResCopiedToClipboard.intValue());
 
             intent.putExtra("url", url);
 
