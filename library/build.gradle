@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 23
@@ -23,4 +24,13 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.nineoldandroids:library:2.4.0+'
+}
+
+publish {
+    userOrg = 'thefinestartist'
+    groupId = 'com.thefinestartist'
+    artifactId = 'finestwebview'
+    publishVersion = '1.0.0'
+    desc = 'FinestWebView is an easy to use WebView for mobile Applications.'
+    website = 'https://github.com/TheFinestArtist/FinestWebView-Android'
 }

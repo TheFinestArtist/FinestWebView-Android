@@ -9,6 +9,7 @@
 * Custom themes
 * Animation support
 
+<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png" width="800">
 
 ## Gradle Dependency (jcenter)
 
