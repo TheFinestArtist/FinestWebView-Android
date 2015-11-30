@@ -14,6 +14,7 @@
 * Device rotation support
 * Collapsing toolbar support
 * Gradient divider support
+* Custom typeface support
 
 ## Screenshots
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png?raw=true" width="888">
