@@ -21,6 +21,12 @@
 
 <p align="center">
 <h3 style="text-align: center;" markdown="1">Default theme & copied to clipboard</h3>
+  <b>Some Links:</b><br>
+  <a href="#">Link 1</a> |
+  <a href="#">Link 2</a> |
+  <a href="#">Link 3</a>
+  <br><br>
+  <img src="http://s.4cdn.org/image/title/105.gif">
 </p>
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/first.png" width="888">
 
