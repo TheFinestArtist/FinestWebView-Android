@@ -24,7 +24,9 @@
 ### Back and forward & more options
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/second.png?raw=true" width="888">
 
-## Gradle Dependency (jcenter)
+## Getting started
+
+#### Gradle Dependency (jcenter)
 
 Easily reference the library in your Android projects using this dependency in your module's `build.gradle` file.
 
@@ -34,8 +36,7 @@ dependencies {
 }
 ```
 
-
-## Manifest Settings
+#### Manifest Settings
 
 FinestWebView is basically and Android activity with webview, toolbar and etc.  
 You have to add FinestWebViewActivity in your `AndroidManifest.xml`
@@ -46,8 +47,7 @@ You have to add FinestWebViewActivity in your `AndroidManifest.xml`
     android:theme="@style/FinestWebViewTheme" />
 ```
 
-
-## Basic WebView
+#### Basic WebView
 
 ```java
 new FinestWebViewActivity.Builder(this).show(url);
