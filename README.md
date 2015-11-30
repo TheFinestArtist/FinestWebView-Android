@@ -12,7 +12,20 @@
 * Custom themes
 * Animation support
 
+### Screenshots
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png" width="800">
+
+### Default Theme
+<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/default.png" width="800">
+
+### Copied to clipboard
+<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/red.png" width="800">
+
+### Back and Forward
+<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/blue.png" width="800">
+
+### More options
+<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/black.png" width="800">
 
 ## Gradle Dependency (jcenter)
 
@@ -28,7 +41,7 @@ dependencies {
 ## Manifest Settings
 
 FinestWebView is basically and Android activity with webview, toolbar and etc.  
-You have to add FinestWebViewActivity in your `AndroidManifest.xml` 
+You have to add FinestWebViewActivity in your `AndroidManifest.xml`
 
 ```xml
 <activity
@@ -38,7 +51,7 @@ You have to add FinestWebViewActivity in your `AndroidManifest.xml`
 
 
 ## Basic WebView
- 
+
 ```java
 new FinestWebViewActivity.Builder(this).show(url);
 overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
@@ -136,7 +149,7 @@ stringResOpenWith(@StringRes int stringResOpenWith);
 
 // More Options
 setCloseAnimations(@AnimRes int animationCloseEnter, @AnimRes int animationCloseExit);
-backPressToClose(boolean backPressToClose); 
+backPressToClose(boolean backPressToClose);
 stringResCopiedToClipboard(@StringRes int stringResCopiedToClipboard);
 ```
 
@@ -203,7 +216,7 @@ new FinestWebView.Builder(this)
 
 ```xml
 <style name="AppTheme.NoActionBar.FullScreen" parent="AppTheme.NoActionBar">
-    <item name="android:windowContentOverlay">@null</item> 
+    <item name="android:windowContentOverlay">@null</item>
     <item name="android:windowFullscreen">true</item>
 </style>
 <activity
