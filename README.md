@@ -16,19 +16,8 @@
 * Gradient divider support
 
 ## Screenshots
-<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png" width="800">
-
-### Default Theme
-<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/default.png" width="400">
-
-### Copied to clipboard
-<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/red.png" width="400">
-
-### Back and Forward
-<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/blue.png" width="400">
-
-### More options
-<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/black.png" width="400">
+<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/first.png" width="800">
+<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/second.png" width="800">
 
 ## Gradle Dependency (jcenter)
 
