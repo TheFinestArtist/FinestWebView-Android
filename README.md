@@ -18,10 +18,10 @@
 ## Screenshots
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png?raw=true" width="888">
 
-<h3 style="text-align: center;" markdown="1">Default theme & copied to clipboard</h3>
+### Default theme & copied to clipboard
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/first.png?raw=true" width="888">
 
-<h3 style="text-align: center;" markdown="1">Default theme & copied to clipboard</h3>
+### Back and forward & more options
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/second.png?raw=true" width="888">
 
 ## Gradle Dependency (jcenter)
