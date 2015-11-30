@@ -62,21 +62,46 @@ overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activit
 
 ## Customization
 
-### There is 2 way to customize FinestWebView.
+### There are 2 ways to customize FinestWebView.
 
-#### 1. Builder Options
+#### Using Themes
 
+You can use your own Theme for FinestWebView. If you want to use pre-defined theme, use `android:theme="@style/FinestWebViewTheme"` or `android:theme="@style/FinestWebViewTheme.Fullscreen"`
+
+```xml
+<style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryDark">@color/primary_dark</item>
+    <item name="colorAccent">@color/accent</item>
+    <item name="android:textColorPrimary">@color/primary_text</item>
+    <item name="android:textColorSecondary">@color/secondary_text</item>
+    <item name="windowActionModeOverlay">true</item>
+</style>
+```
+
+```xml
+<activity
+    android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
+    android:theme="@style/AppTheme.NoActionBar" />
+```
+
+#### Builder Options
+
+**StatusBar Options**
 ```java
-// StatusBar Options
 statusBarColor(@ColorInt int color);
 statusBarColorRes(@ColorRes int color);
+```
 
-// Toolbar Options
+**Toolbar Options**
+```java
 toolbarColor(@ColorInt int color);
 toolbarColorRes(@ColorRes int color);
 toolbarScrollFlags(@ScrollFlags int flags);
+```
 
-// Icon Options
+**Icon Options**
+```java
 iconDefaultColor(@ColorInt int color);
 iconDefaultColorRes(@ColorRes int color);
 iconDisabledColor(@ColorInt int color);
@@ -84,8 +109,10 @@ iconDisabledColorRes(@ColorRes int colorRes);
 iconPressedColor(@ColorInt int color);
 iconPressedColorRes(@ColorRes int colorRes);
 iconSelector(@DrawableRes int selectorRes);
+```
 
-// Divider Options
+**Divider Options**
+```java
 showDivider(boolean showDivider);
 gradientDivider(boolean gradientDivider);
 dividerColor(@ColorInt int color);
@@ -93,8 +120,10 @@ dividerColorRes(@ColorRes int colorRes);
 dividerHeight(float height);
 dividerHeight(int height);
 dividerHeightRes(@DimenRes int height);
+```
 
-// ProgressBar Options
+**ProgressBar Options**
+```java
 showProgressBar(boolean showProgressBar);
 progressBarColor(@ColorInt int color);
 progressBarColorRes(@ColorRes int colorRes);
@@ -102,8 +131,10 @@ progressBarHeight(float height);
 progressBarHeight(int height);
 progressBarHeightRes(@DimenRes int height);
 progressBarPosition(@NonNull Position position);
+```
 
-// Title Options
+**Title Options**
+```java
 titleDefault(@NonNull String title);
 titleDefaultRes(@StringRes int stringRes);
 updateTitleFromHtml(boolean updateTitleFromHtml);
@@ -113,8 +144,10 @@ titleSizeRes(@DimenRes int titleSize);
 titleFont(String titleFont);
 titleColor(@ColorInt int color);
 titleColorRes(@ColorRes int colorRes);
+```
 
-// Url Options
+**Url Options**
+```java
 showUrl(boolean showUrl);
 urlSize(float urlSize);
 urlSize(int urlSize);
@@ -122,8 +155,10 @@ urlSizeRes(@DimenRes int urlSize);
 urlFont(String urlFont);
 urlColor(@ColorInt int color);
 urlColorRes(@ColorRes int colorRes);
+```
 
-// Menu Options
+**Menu Options**
+```java
 menuColor(@ColorInt int color);
 menuColorRes(@ColorRes int colorRes);
 menuDropShadowColor(@ColorInt int color);
@@ -148,13 +183,16 @@ showMenuCopyLink(boolean showMenuCopyLink);
 stringResCopyLink(@StringRes int stringResCopyLink);
 showMenuOpenWith(boolean showMenuOpenWith);
 stringResOpenWith(@StringRes int stringResOpenWith);
+```
 
-// More Options
+**More Options**
+```java
 setCloseAnimations(@AnimRes int animationCloseEnter, @AnimRes int animationCloseExit);
 backPressToClose(boolean backPressToClose);
 stringResCopiedToClipboard(@StringRes int stringResCopiedToClipboard);
 ```
 
+**Builder Pattern**
 ```java
 new FinestWebView.Builder(this)
     .titleDefault("Default Title")
@@ -171,28 +209,6 @@ new FinestWebView.Builder(this)
     .backPressToClose(false)
     .show(url);
 overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
-```
-
-
-#### 2. Using Themes
-
-You can use your own Theme for FinestWebView. If you want to use pre-defined theme, use `android:theme="@style/FinestWebViewTheme"` or `android:theme="@style/FinestWebViewTheme.Fullscreen"`
-
-```xml
-<style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="colorPrimary">@color/primary</item>
-    <item name="colorPrimaryDark">@color/primary_dark</item>
-    <item name="colorAccent">@color/accent</item>
-    <item name="android:textColorPrimary">@color/primary_text</item>
-    <item name="android:textColorSecondary">@color/secondary_text</item>
-    <item name="windowActionModeOverlay">true</item>
-</style>
-```
-
-```xml
-<activity
-    android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
-    android:theme="@style/AppTheme.NoActionBar" />
 ```
 
 
