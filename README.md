@@ -13,6 +13,7 @@
 * Animation support
 * Device rotation support
 * Collapsing toolbar support
+* Gradient divider support
 
 ## Screenshots
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png" width="800">
