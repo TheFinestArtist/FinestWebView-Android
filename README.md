@@ -18,7 +18,7 @@
 ## Screenshots
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png" width="888">
 
-### Default theme & copied to clipboard
+<h3>Default theme & copied to clipboard</h3 style="width=888px; text-align: center;">
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/first.png" width="888">
 
 ### Back and forward & more options
