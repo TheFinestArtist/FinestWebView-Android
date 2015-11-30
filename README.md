@@ -62,9 +62,9 @@ overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activit
 
 ## Customization
 
-### There are 2 ways to customize FinestWebView.
+#### There are 2 ways to customize FinestWebView.
 
-#### Using Themes
+### 1. Using Themes
 
 You can use your own Theme for FinestWebView. If you want to use pre-defined theme, use `android:theme="@style/FinestWebViewTheme"` or `android:theme="@style/FinestWebViewTheme.Fullscreen"`
 
@@ -85,7 +85,7 @@ You can use your own Theme for FinestWebView. If you want to use pre-defined the
     android:theme="@style/AppTheme.NoActionBar" />
 ```
 
-#### Builder Options
+### 2. Builder Options
 
 **StatusBar Options**
 ```java
