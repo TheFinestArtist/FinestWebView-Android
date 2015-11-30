@@ -18,7 +18,10 @@
 ## Screenshots
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png" width="888">
 
+
+<p align="center">
 <h3 style="text-align: center;" markdown="1">Default theme & copied to clipboard</h3>
+</p>
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/first.png" width="888">
 
 <h3 style="text-align: center;" markdown="1">Back and forward & more options</h3>
