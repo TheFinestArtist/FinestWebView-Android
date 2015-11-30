@@ -18,15 +18,15 @@
 ## Screenshots
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png" width="888">
 
-<h3>Default theme & copied to clipboard</h3 style="width=888px; text-align: center;">
+<h3 style="text-align: center;" markdown="1">Default theme & copied to clipboard</h3>
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/first.png" width="888">
 
-### Back and forward & more options
+<h3 style="text-align: center;" markdown="1">Back and forward & more options</h3>
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/second.png" width="888">
 
 ## Gradle Dependency (jcenter)
 
-Easily reference the library in your Android projects using this dependency in your module's `build.gradle` file:
+Easily reference the library in your Android projects using this dependency in your module's `build.gradle` file.
 
 ```java
 dependencies {
