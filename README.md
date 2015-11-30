@@ -19,14 +19,10 @@
 ## Screenshots
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png?raw=true" width="888">
 
-| Default theme | Copied to clipboard |
-| :-----------: |:-------------------:|
-| <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/default.png?raw=true" width="400"> | <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/red.png?raw=true" width="400"> |
-
 ### Default theme & Copied to clipboard
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/first.png?raw=true" width="888">
 
-### Back and forward & more options
+### Back and forward & More options
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/second.png?raw=true" width="888">
 
 ## Getting started
