@@ -4,7 +4,7 @@
 [![API](https://img.shields.io/badge/API-7%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=7)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT)
 
-#### Beautiful and customizable built-in Activity that shows web pages within an app.
+#### Beautiful and customizable Android Activity that shows web pages within an app.
 
 * Builder pattern
 * Various options
