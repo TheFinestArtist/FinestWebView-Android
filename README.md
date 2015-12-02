@@ -41,7 +41,7 @@ Easily reference the library in your Android projects using this dependency in y
 
 ```java
 dependencies {
-    compile 'com.thefinestartist:finestwebview:1.0.0'
+    compile 'com.thefinestartist:finestwebview:1.0.1'
 }
 ```
 
@@ -60,7 +60,6 @@ You have to add FinestWebViewActivity in your `AndroidManifest.xml`
 
 ```java
 new FinestWebView.Builder(this).show(url);
-overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
 ```
 
 

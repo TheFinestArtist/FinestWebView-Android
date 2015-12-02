@@ -1,5 +1,6 @@
 package com.thefinestartist.finestwebview;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.AnimRes;
@@ -22,7 +23,7 @@ public class FinestWebView {
 
     public static class Builder {
 
-        private final Context context;
+        private Activity activity;
 
         protected Integer statusBarColor;
 
@@ -73,6 +74,8 @@ public class FinestWebView {
         protected Boolean showMenuOpenWith;
         protected Integer stringResOpenWith;
 
+        protected Integer animationOpenEnter;
+        protected Integer animationOpenExit;
         protected Integer animationCloseEnter;
         protected Integer animationCloseExit;
 
@@ -81,8 +84,14 @@ public class FinestWebView {
 
         protected String url;
 
+        @Deprecated
         public Builder(@NonNull Context context) {
-            this.context = context;
+            if (context instanceof Activity)
+                this.activity = (Activity) context;
+        }
+
+        public Builder(@NonNull Activity activity) {
+            this.activity = activity;
         }
 
         public Builder statusBarColor(@ColorInt int color) {
@@ -91,7 +100,7 @@ public class FinestWebView {
         }
 
         public Builder statusBarColorRes(@ColorRes int color) {
-            this.statusBarColor = ContextCompat.getColor(context, color);
+            this.statusBarColor = ContextCompat.getColor(activity, color);
             return this;
         }
 
@@ -101,7 +110,7 @@ public class FinestWebView {
         }
 
         public Builder toolbarColorRes(@ColorRes int color) {
-            this.toolbarColor = ContextCompat.getColor(context, color);
+            this.toolbarColor = ContextCompat.getColor(activity, color);
             return this;
         }
 
@@ -116,7 +125,7 @@ public class FinestWebView {
         }
 
         public Builder iconDefaultColorRes(@ColorRes int color) {
-            this.iconDefaultColor = ContextCompat.getColor(context, color);
+            this.iconDefaultColor = ContextCompat.getColor(activity, color);
             return this;
         }
 
@@ -126,7 +135,7 @@ public class FinestWebView {
         }
 
         public Builder iconDisabledColorRes(@ColorRes int colorRes) {
-            this.iconDisabledColor = ContextCompat.getColor(context, colorRes);
+            this.iconDisabledColor = ContextCompat.getColor(activity, colorRes);
             return this;
         }
 
@@ -136,7 +145,7 @@ public class FinestWebView {
         }
 
         public Builder iconPressedColorRes(@ColorRes int colorRes) {
-            this.iconPressedColor = ContextCompat.getColor(context, colorRes);
+            this.iconPressedColor = ContextCompat.getColor(activity, colorRes);
             return this;
         }
 
@@ -161,7 +170,7 @@ public class FinestWebView {
         }
 
         public Builder dividerColorRes(@ColorRes int colorRes) {
-            this.dividerColor = ContextCompat.getColor(context, colorRes);
+            this.dividerColor = ContextCompat.getColor(activity, colorRes);
             return this;
         }
 
@@ -176,7 +185,7 @@ public class FinestWebView {
         }
 
         public Builder dividerHeightRes(@DimenRes int height) {
-            this.dividerHeight = DipPixelHelper.getPixel(context, height);
+            this.dividerHeight = DipPixelHelper.getPixel(activity, height);
             return this;
         }
 
@@ -191,7 +200,7 @@ public class FinestWebView {
         }
 
         public Builder progressBarColorRes(@ColorRes int colorRes) {
-            this.progressBarColor = ContextCompat.getColor(context, colorRes);
+            this.progressBarColor = ContextCompat.getColor(activity, colorRes);
             return this;
         }
 
@@ -206,7 +215,7 @@ public class FinestWebView {
         }
 
         public Builder progressBarHeightRes(@DimenRes int height) {
-            this.progressBarHeight = DipPixelHelper.getPixel(context, height);
+            this.progressBarHeight = DipPixelHelper.getPixel(activity, height);
             return this;
         }
 
@@ -221,7 +230,7 @@ public class FinestWebView {
         }
 
         public Builder titleDefaultRes(@StringRes int stringRes) {
-            this.titleDefault = context.getString(stringRes);
+            this.titleDefault = activity.getString(stringRes);
             return this;
         }
 
@@ -241,7 +250,7 @@ public class FinestWebView {
         }
 
         public Builder titleSizeRes(@DimenRes int titleSize) {
-            this.titleSize = DipPixelHelper.getPixel(context, titleSize);
+            this.titleSize = DipPixelHelper.getPixel(activity, titleSize);
             return this;
         }
 
@@ -256,7 +265,7 @@ public class FinestWebView {
         }
 
         public Builder titleColorRes(@ColorRes int colorRes) {
-            this.titleColor = ContextCompat.getColor(context, colorRes);
+            this.titleColor = ContextCompat.getColor(activity, colorRes);
             return this;
         }
 
@@ -276,7 +285,7 @@ public class FinestWebView {
         }
 
         public Builder urlSizeRes(@DimenRes int urlSize) {
-            this.urlSize = DipPixelHelper.getPixel(context, urlSize);
+            this.urlSize = DipPixelHelper.getPixel(activity, urlSize);
             return this;
         }
 
@@ -291,7 +300,7 @@ public class FinestWebView {
         }
 
         public Builder urlColorRes(@ColorRes int colorRes) {
-            this.urlColor = ContextCompat.getColor(context, colorRes);
+            this.urlColor = ContextCompat.getColor(activity, colorRes);
             return this;
         }
 
@@ -301,7 +310,7 @@ public class FinestWebView {
         }
 
         public Builder menuColorRes(@ColorRes int colorRes) {
-            this.menuColor = ContextCompat.getColor(context, colorRes);
+            this.menuColor = ContextCompat.getColor(activity, colorRes);
             return this;
         }
 
@@ -311,7 +320,7 @@ public class FinestWebView {
         }
 
         public Builder menuDropShadowColorRes(@ColorRes int colorRes) {
-            this.menuDropShadowColor = ContextCompat.getColor(context, colorRes);
+            this.menuDropShadowColor = ContextCompat.getColor(activity, colorRes);
             return this;
         }
 
@@ -326,7 +335,7 @@ public class FinestWebView {
         }
 
         public Builder menuDropShadowSizeRes(@DimenRes int menuDropShadowSize) {
-            this.menuDropShadowSize = DipPixelHelper.getPixel(context, menuDropShadowSize);
+            this.menuDropShadowSize = DipPixelHelper.getPixel(activity, menuDropShadowSize);
             return this;
         }
 
@@ -346,7 +355,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextSizeRes(@DimenRes int menuTextSize) {
-            this.menuTextSize = DipPixelHelper.getPixel(context, menuTextSize);
+            this.menuTextSize = DipPixelHelper.getPixel(activity, menuTextSize);
             return this;
         }
 
@@ -361,7 +370,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextColorRes(@ColorRes int colorRes) {
-            this.menuTextColor = ContextCompat.getColor(context, colorRes);
+            this.menuTextColor = ContextCompat.getColor(activity, colorRes);
             return this;
         }
 
@@ -405,6 +414,20 @@ public class FinestWebView {
             return this;
         }
 
+        public Builder setCustomAnimations(@AnimRes int animationOpenEnter,
+                                           @AnimRes int animationOpenExit,
+                                           @AnimRes int animationCloseEnter,
+                                           @AnimRes int animationCloseExit) {
+            this.animationOpenEnter = animationOpenEnter;
+            this.animationOpenExit = animationOpenExit;
+            this.animationCloseEnter = animationCloseEnter;
+            this.animationCloseExit = animationCloseExit;
+            return this;
+        }
+
+        /**
+         * @deprecated As of release 1.0.1, replaced by {@link #setCustomAnimations(int, int, int, int)}
+         */
         public Builder setCloseAnimations(@AnimRes int animationCloseEnter,
                                           @AnimRes int animationCloseExit) {
             this.animationCloseEnter = animationCloseEnter;
@@ -423,13 +446,13 @@ public class FinestWebView {
         }
 
         public void show(@StringRes int urlRes) {
-            show(context.getString(urlRes));
+            show(activity.getString(urlRes));
         }
 
         public void show(@NonNull String url) {
             this.url = url;
 
-            Intent intent = new Intent(context, FinestWebViewActivity.class);
+            Intent intent = new Intent(activity, FinestWebViewActivity.class);
 
             if (statusBarColor != null)
                 intent.putExtra("statusBarColor", statusBarColor.intValue());
@@ -531,7 +554,9 @@ public class FinestWebView {
 
             intent.putExtra("url", url);
 
-            context.startActivity(intent);
+            activity.startActivity(intent);
+            activity.overridePendingTransition(animationOpenEnter == null ? R.anim.modal_activity_open_enter : animationOpenEnter,
+                    animationOpenExit == null ? R.anim.modal_activity_open_exit : animationOpenExit);
         }
     }
 }
