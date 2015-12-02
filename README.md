@@ -21,17 +21,17 @@
 ## Screenshots
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png?raw=true" width="888">
 
-### FinestWebView Demo Video - YouTube
-<a href="https://www.youtube.com/watch?v=7qmAqnspjAM">
-  <img alt="Youtube"
-       src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/youtube.png" width="100" />
-</a>
-
 ### Default theme & Copied to clipboard
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/first.png?raw=true" width="888">
 
 ### Back and forward & More options
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/second.png?raw=true" width="888">
+
+## FinestWebView Demo Video - YouTube
+<a href="https://www.youtube.com/watch?v=7qmAqnspjAM">
+  <img alt="Youtube"
+       src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/youtube.png">
+</a>
 
 ## Getting started
 
