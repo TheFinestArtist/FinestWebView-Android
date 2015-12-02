@@ -1,6 +1,7 @@
 package com.thefinestartist.finestwebview.sample;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (view.getId() == R.id.redTheme) {
             new FinestWebView.Builder(this)
                     .titleDefault("Bless This Stuff")
-                    .toolbarScrollFlags(0)
+                    .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED)
                     .statusBarColorRes(R.color.redStatusBar)
                     .toolbarColorRes(R.color.redNavBar)
                     .titleColorRes(R.color.finestWhite)

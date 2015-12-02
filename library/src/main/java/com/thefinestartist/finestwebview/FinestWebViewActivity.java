@@ -344,7 +344,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         { // Toolbar
             toolbar.setBackgroundColor(toolbarColor);
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
-            params.setScrollFlags(toolbarScrollFlags);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
+                params.setScrollFlags(0);
+            else
+                params.setScrollFlags(toolbarScrollFlags);
             toolbar.setLayoutParams(params);
         }
 
@@ -376,20 +379,20 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         { // Content
             webView.setWebChromeClient(new MyWebChromeClient());
             webView.setWebViewClient(new MyWebViewClient());
-//            webView.getSettings().setUseWideViewPort(true);
-//            webView.setInitialScale(100);
-//            webView.getSettings().setUseWideViewPort(true);
-//            webView.getSettings().setBuiltInZoomControls(true);
-//            webView.getSettings().setSupportZoom(true);
-//            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-//            webView.getSettings().setAllowFileAccess(true);
-//            webView.getSettings().setDomStorageEnabled(true);
+
             webView.getSettings().setJavaScriptEnabled(true);
             webView.getSettings().setAppCacheEnabled(true);
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-//                webView.getSettings().setDisplayZoomControls(false);
-//            else
-//                webView.getSettings().setBuiltInZoomControls(false);
+            webView.getSettings().setAllowFileAccess(true);
+            webView.getSettings().setUseWideViewPort(true);
+            webView.getSettings().setLoadWithOverviewMode(true);
+            webView.getSettings().setDomStorageEnabled(true);
+//            webView.setInitialScale(100);
+//            webView.getSettings().setSupportZoom(true);
+//            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                webView.getSettings().setDisplayZoomControls(true);
+            else
+                webView.getSettings().setBuiltInZoomControls(true);
             webView.loadUrl(url);
         }
 
@@ -532,7 +535,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
     @Override
     public void onBackPressed() {
-        if (backPressToClose || !webView.canGoBack()) {
+        if (menuLayout.getVisibility() == View.VISIBLE) {
+            hideMenu();
+        } else if (backPressToClose || !webView.canGoBack()) {
             close();
         } else {
             webView.goBack();
@@ -632,7 +637,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        if (toolbarScrollFlags == 0)
+        if (toolbarScrollFlags == 0 || Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
             return;
 
         ViewHelper.setTranslationY(gradient, verticalOffset);
@@ -724,5 +729,12 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             layoutViews();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (webView != null)
+            webView.destroy();
     }
 }
