@@ -59,7 +59,7 @@ You have to add FinestWebViewActivity in your `AndroidManifest.xml`
 #### Basic WebView
 
 ```java
-new FinestWebView.Builder(this).show(url);
+new FinestWebView.Builder(activity).show(url);
 ```
 
 
@@ -190,14 +190,17 @@ stringResOpenWith(@StringRes int stringResOpenWith);
 
 **More Options**
 ```java
-setCloseAnimations(@AnimRes int animationCloseEnter, @AnimRes int animationCloseExit);
+setCustomAnimations(@AnimRes int animationOpenEnter,
+                    @AnimRes int animationOpenExit,
+                    @AnimRes int animationCloseEnter,
+                    @AnimRes int animationCloseExit)
 backPressToClose(boolean backPressToClose);
 stringResCopiedToClipboard(@StringRes int stringResCopiedToClipboard);
 ```
 
 **Builder Pattern**
 ```java
-new FinestWebView.Builder(this)
+new FinestWebView.Builder(activity)
     .titleDefault("Default Title")
     .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
     .gradientDivider(false)
@@ -210,8 +213,8 @@ new FinestWebView.Builder(this)
     .progressBarHeight(DipPixelHelper.getPixel(this, 3))
     .progressBarColorRes(R.color.accent)
     .backPressToClose(false)
+    .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit)
     .show(url);
-overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
 ```
 
 
@@ -252,29 +255,18 @@ You can use some pre-defined animations from this library or your own animations
 
 ```java
 new FinestWebView.Builder(this)
-    .setCloseAnimations(R.anim.activity_close_enter, R.anim.activity_close_exit)
+    .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit)
     .show(url);
-overridePendingTransition(R.anim.activity_open_enter, R.anim.activity_open_exit);
 ```
 
 Pre-defined animation sets
-```xml
-activity_open_enter.xml
-activity_open_exit.xml
-activity_close_enter.xml
-activity_close_exit.xml
-```
-```xml
-modal_activity_open_enter.xml
-modal_activity_open_exit.xml
-modal_activity_close_enter.xml
-modal_activity_close_exit.xml
-```
-```xml
-fragment_open_enter.xml
-fragment_open_enter_reverse.xml
-fragment_close_enter.xml
-fragment_close_enter_reverse.xml
+
+```java
+.setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit)
+.setCustomAnimations(R.anim.fragment_open_enter, R.anim.fragment_open_exit, R.anim.fragment_close_enter, R.anim.fragment_close_exit)
+.setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
+.setCustomAnimations(R.anim.slide_left_in, R.anim.hold, R.anim.hold, R.anim.slide_right_out)
+.setCustomAnimations(R.anim.fade_in_fast, R.anim.fade_out_medium, R.anim.fade_in_medium, R.anim.fade_out_fast)
 ```
 
 

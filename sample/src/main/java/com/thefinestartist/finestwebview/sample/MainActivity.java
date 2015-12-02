@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     .progressBarColorRes(R.color.finestWhite)
                     .dividerHeight(0)
                     .gradientDivider(false)
-                    .setCustomAnimations(R.anim.fragment_open_enter, R.anim.fragment_open_exit, R.anim.fragment_close_enter, R.anim.fragment_close_exit)
+                    .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
                     .show("https://vimeo.com");
         } else if (view.getId() == R.id.blackTheme) {
             new FinestWebView.Builder(this)
@@ -62,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
                     .progressBarColorRes(R.color.finestWhite)
                     .dividerHeight(0)
                     .gradientDivider(false)
-                    .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
+//                    .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
+                    .setCustomAnimations(R.anim.slide_left_in, R.anim.hold, R.anim.hold, R.anim.slide_right_out)
+//                    .setCustomAnimations(R.anim.fade_in_fast, R.anim.fade_out_medium, R.anim.fade_in_medium, R.anim.fade_out_fast)
                     .show("https://dribbble.com");
         }
     }
