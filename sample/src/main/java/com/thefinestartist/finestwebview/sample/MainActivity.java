@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     .progressBarColorRes(R.color.finestWhite)
                     .dividerHeight(0)
                     .gradientDivider(false)
+                    .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
                     .show("https://dribbble.com");
         }
     }
