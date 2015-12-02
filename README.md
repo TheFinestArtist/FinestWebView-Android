@@ -52,7 +52,7 @@ You have to add FinestWebViewActivity in your `AndroidManifest.xml`
 #### Basic WebView
 
 ```java
-new FinestWebViewActivity.Builder(this).show(url);
+new FinestWebView.Builder(this).show(url);
 overridePendingTransition(R.anim.modal_activity_open_enter, R.anim.modal_activity_open_exit);
 ```
 
@@ -245,7 +245,7 @@ new FinestWebView.Builder(this)
 You can use some pre-defined animations from this library or your own animations.
 
 ```java
-new FinestWebViewActivity.Builder(this)
+new FinestWebView.Builder(this)
     .setCloseAnimations(R.anim.activity_close_enter, R.anim.activity_close_exit)
     .show(url);
 overridePendingTransition(R.anim.activity_open_enter, R.anim.activity_open_exit);
