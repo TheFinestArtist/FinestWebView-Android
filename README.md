@@ -210,7 +210,7 @@ new FinestWebView.Builder(activity)
     .iconDefaultColorRes(R.color.accent)
     .iconDisabledColorRes(R.color.gray)
     .iconPressedColorRes(R.color.black)
-    .progressBarHeight(DipPixelHelper.getPixel(this, 3))
+    .progressBarHeight(DipPixelHelper.getPixel(context, 3))
     .progressBarColorRes(R.color.accent)
     .backPressToClose(false)
     .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit)
@@ -230,7 +230,7 @@ But, you can override theses settings using builder option `statusBarColor`, `st
 #### Disable Toolbar Collapsing
 
 ```java
-new FinestWebView.Builder(this)
+new FinestWebView.Builder(activity)
     .toolbarScrollFlags(0) // By sending as 0, toolbar collapsing will be disabled
     .show(url);
 ```
@@ -254,7 +254,7 @@ new FinestWebView.Builder(this)
 You can use some pre-defined animations from this library or your own animations.
 
 ```java
-new FinestWebView.Builder(this)
+new FinestWebView.Builder(activity)
     .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit)
     .show(url);
 ```
@@ -288,18 +288,18 @@ Use configChange, screenOrientation to customize your orientation options
 You can make your divider gradient. If you do, webview will be under the gradient. If you disable gradient divider, webview will be below the divider.
 
 ```java
-new FinestWebView.Builder(this)
+new FinestWebView.Builder(activity)
     .gradientDivider(false)
     .show(url);
 ```
 
 
-#### Custom Tyface
+#### Custom Typeface
 
 You can use your own typeface for title, url, and menus. You have to add your font file in assets/fonts folder.
 
 ```java
-new FinestWebView.Builder(this)
+new FinestWebView.Builder(activity)
     .titleFont("Roboto-Medium.ttf")
     .urlFont("Roboto-Regular.ttf")
     .menuTextFont("Roboto-Medium.ttf")
