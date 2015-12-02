@@ -11,14 +11,21 @@
 * Material design
 * Pre-made icons
 * Custom themes
-* Animation support
-* Device rotation support
-* Collapsing toolbar support
-* Gradient divider support
-* Custom typeface support
+* Transition animations
+* Device rotation
+* Collapsing toolbar
+* Gradient divider
+* Custom typeface
+* Contextual actionbar
 
 ## Screenshots
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png?raw=true" width="888">
+
+### FinestWebView Demo Video - YouTube
+<a href="https://www.youtube.com/watch?v=7qmAqnspjAM">
+  <img alt="Youtube"
+       src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/youtube.png" width="100" />
+</a>
 
 ### Default theme & Copied to clipboard
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/first.png?raw=true" width="888">
