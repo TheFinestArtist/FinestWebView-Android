@@ -30,7 +30,8 @@
 ## FinestWebView Demo Video - YouTube
 <a href="https://www.youtube.com/watch?v=7qmAqnspjAM">
   <img alt="Youtube"
-       src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/youtube.png">
+       src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/youtube.png"
+       target="_blank">
 </a>
 
 ## Getting started
