@@ -1,5 +1,6 @@
 package com.thefinestartist.finestwebview;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -107,6 +108,15 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected boolean backPressToClose;
     protected int stringResCopiedToClipboard;
 
+    protected boolean webViewJavaScriptEnabled;
+    protected boolean webViewAppCacheEnabled;
+    protected boolean webViewAllowFileAccess;
+    protected boolean webViewUseWideViewPort;
+    protected boolean webViewLoadWithOverviewMode;
+    protected boolean webViewDomStorageEnabled;
+    protected boolean webViewDisplayZoomControls;
+    protected boolean webViewDesktopMode;
+
     protected String url;
 
     protected void getOptions() {
@@ -183,6 +193,15 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         backPressToClose = intent.getBooleanExtra("backPressToClose", false);
         stringResCopiedToClipboard = intent.getIntExtra("stringResCopiedToClipboard", R.string.copied_to_clipboard);
+
+        backPressToClose = intent.getBooleanExtra("webViewJavaScriptEnabled", true);
+        backPressToClose = intent.getBooleanExtra("webViewAppCacheEnabled", true);
+        backPressToClose = intent.getBooleanExtra("webViewAllowFileAccess", true);
+        backPressToClose = intent.getBooleanExtra("webViewUseWideViewPort", true);
+        backPressToClose = intent.getBooleanExtra("webViewLoadWithOverviewMode", true);
+        backPressToClose = intent.getBooleanExtra("webViewDomStorageEnabled", true);
+        backPressToClose = intent.getBooleanExtra("webViewDisplayZoomControls", true);
+        backPressToClose = intent.getBooleanExtra("webViewDesktopMode", false);
 
         url = intent.getStringExtra("url");
     }
@@ -380,19 +399,21 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             webView.setWebChromeClient(new MyWebChromeClient());
             webView.setWebViewClient(new MyWebViewClient());
 
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.getSettings().setAppCacheEnabled(true);
-            webView.getSettings().setAllowFileAccess(true);
-            webView.getSettings().setUseWideViewPort(true);
-            webView.getSettings().setLoadWithOverviewMode(true);
-            webView.getSettings().setDomStorageEnabled(true);
-//            webView.setInitialScale(100);
-//            webView.getSettings().setSupportZoom(true);
-//            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+            webView.getSettings().setJavaScriptEnabled(webViewJavaScriptEnabled);
+            webView.getSettings().setAppCacheEnabled(webViewAppCacheEnabled);
+            webView.getSettings().setAllowFileAccess(webViewAllowFileAccess);
+            webView.getSettings().setUseWideViewPort(webViewUseWideViewPort);
+            webView.getSettings().setLoadWithOverviewMode(webViewLoadWithOverviewMode);
+            webView.getSettings().setDomStorageEnabled(webViewDomStorageEnabled);
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                webView.getSettings().setDisplayZoomControls(true);
+                webView.getSettings().setDisplayZoomControls(webViewDisplayZoomControls);
             else
-                webView.getSettings().setBuiltInZoomControls(true);
+                webView.getSettings().setBuiltInZoomControls(webViewDisplayZoomControls);
+
+            if (webViewDesktopMode)
+                webView.getSettings().setUserAgentString("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0");
+
             webView.loadUrl(url);
         }
 

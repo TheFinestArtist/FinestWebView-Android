@@ -82,6 +82,15 @@ public class FinestWebView {
         protected Boolean backPressToClose;
         protected Integer stringResCopiedToClipboard;
 
+        protected Boolean webViewJavaScriptEnabled;
+        protected Boolean webViewAppCacheEnabled;
+        protected Boolean webViewAllowFileAccess;
+        protected Boolean webViewUseWideViewPort;
+        protected Boolean webViewLoadWithOverviewMode;
+        protected Boolean webViewDomStorageEnabled;
+        protected Boolean webViewDisplayZoomControls;
+        protected Boolean webViewDesktopMode;
+
         protected String url;
 
         @Deprecated
@@ -445,6 +454,46 @@ public class FinestWebView {
             return this;
         }
 
+        public Builder webViewJavaScriptEnabled(boolean webViewJavaScriptEnabled) {
+            this.webViewJavaScriptEnabled = webViewJavaScriptEnabled;
+            return this;
+        }
+
+        public Builder webViewAppCacheEnabled(boolean webViewAppCacheEnabled) {
+            this.webViewAppCacheEnabled = webViewAppCacheEnabled;
+            return this;
+        }
+
+        public Builder webViewAllowFileAccess(boolean webViewAllowFileAccess) {
+            this.webViewAllowFileAccess = webViewAllowFileAccess;
+            return this;
+        }
+
+        public Builder webViewUseWideViewPort(boolean webViewUseWideViewPort) {
+            this.webViewUseWideViewPort = webViewUseWideViewPort;
+            return this;
+        }
+
+        public Builder webViewLoadWithOverviewMode(boolean webViewLoadWithOverviewMode) {
+            this.webViewLoadWithOverviewMode = webViewLoadWithOverviewMode;
+            return this;
+        }
+
+        public Builder webViewDomStorageEnabled(boolean webViewDomStorageEnabled) {
+            this.webViewDomStorageEnabled = webViewDomStorageEnabled;
+            return this;
+        }
+
+        public Builder webViewDisplayZoomControls(boolean webViewDisplayZoomControls) {
+            this.webViewDisplayZoomControls = webViewDisplayZoomControls;
+            return this;
+        }
+
+        public Builder webViewDesktopMode(boolean webViewDesktopMode) {
+            this.webViewDesktopMode = webViewDesktopMode;
+            return this;
+        }
+
         public void show(@StringRes int urlRes) {
             show(activity.getString(urlRes));
         }
@@ -551,6 +600,23 @@ public class FinestWebView {
                 intent.putExtra("backPressToClose", backPressToClose.booleanValue());
             if (stringResCopiedToClipboard != null)
                 intent.putExtra("stringResCopiedToClipboard", stringResCopiedToClipboard.intValue());
+
+            if (webViewJavaScriptEnabled != null)
+                intent.putExtra("webViewJavaScriptEnabled", webViewJavaScriptEnabled.booleanValue());
+            if (webViewAppCacheEnabled != null)
+                intent.putExtra("webViewAppCacheEnabled", webViewAppCacheEnabled.booleanValue());
+            if (webViewAllowFileAccess != null)
+                intent.putExtra("webViewAllowFileAccess", webViewAllowFileAccess.booleanValue());
+            if (webViewUseWideViewPort != null)
+                intent.putExtra("webViewUseWideViewPort", webViewUseWideViewPort.booleanValue());
+            if (webViewLoadWithOverviewMode != null)
+                intent.putExtra("webViewLoadWithOverviewMode", webViewLoadWithOverviewMode.booleanValue());
+            if (webViewDomStorageEnabled != null)
+                intent.putExtra("webViewDomStorageEnabled", webViewDomStorageEnabled.booleanValue());
+            if (webViewDisplayZoomControls != null)
+                intent.putExtra("webViewDisplayZoomControls", webViewDisplayZoomControls.booleanValue());
+            if (webViewDesktopMode != null)
+                intent.putExtra("webViewDesktopMode", webViewDesktopMode.booleanValue());
 
             intent.putExtra("url", url);
 
