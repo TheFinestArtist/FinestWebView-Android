@@ -32,7 +32,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:padding="0dp"
+            app:contentInsetEnd="0dp"
             app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
             app:contentInsetStart="0dp"
             app:layout_scrollFlags="scroll|enterAlways">
 
