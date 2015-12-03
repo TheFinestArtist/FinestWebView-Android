@@ -198,6 +198,18 @@ backPressToClose(boolean backPressToClose);
 stringResCopiedToClipboard(@StringRes int stringResCopiedToClipboard);
 ```
 
+**WebView Options**
+```java
+webViewJavaScriptEnabled(boolean webViewJavaScriptEnabled);
+webViewAppCacheEnabled(boolean webViewAppCacheEnabled);
+webViewAllowFileAccess(boolean webViewAllowFileAccess);
+webViewUseWideViewPort(boolean webViewUseWideViewPort);
+webViewLoadWithOverviewMode(boolean webViewLoadWithOverviewMode);
+webViewDomStorageEnabled(boolean webViewDomStorageEnabled);
+webViewDisplayZoomControls(boolean webViewDisplayZoomControls);
+webViewDesktopMode(boolean webViewDesktopMode);
+```
+
 **Builder Pattern**
 ```java
 new FinestWebView.Builder(activity)

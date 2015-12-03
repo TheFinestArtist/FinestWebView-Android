@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         if (view.getId() == R.id.defaultTheme) {
             new FinestWebView.Builder(this)
                     .titleDefault("The Finest Artist")
-                    .show("https://www.vingle.net/");
+                    .show("http://thefinestartist.com");
         } else if (view.getId() == R.id.redTheme) {
             new FinestWebView.Builder(this)
                     .titleDefault("Bless This Stuff")
