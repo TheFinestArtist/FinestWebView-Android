@@ -194,14 +194,14 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         backPressToClose = intent.getBooleanExtra("backPressToClose", false);
         stringResCopiedToClipboard = intent.getIntExtra("stringResCopiedToClipboard", R.string.copied_to_clipboard);
 
-        backPressToClose = intent.getBooleanExtra("webViewJavaScriptEnabled", true);
-        backPressToClose = intent.getBooleanExtra("webViewAppCacheEnabled", true);
-        backPressToClose = intent.getBooleanExtra("webViewAllowFileAccess", true);
-        backPressToClose = intent.getBooleanExtra("webViewUseWideViewPort", true);
-        backPressToClose = intent.getBooleanExtra("webViewLoadWithOverviewMode", true);
-        backPressToClose = intent.getBooleanExtra("webViewDomStorageEnabled", true);
-        backPressToClose = intent.getBooleanExtra("webViewDisplayZoomControls", true);
-        backPressToClose = intent.getBooleanExtra("webViewDesktopMode", false);
+        webViewJavaScriptEnabled = intent.getBooleanExtra("webViewJavaScriptEnabled", true);
+        webViewAppCacheEnabled = intent.getBooleanExtra("webViewAppCacheEnabled", true);
+        webViewAllowFileAccess = intent.getBooleanExtra("webViewAllowFileAccess", true);
+        webViewUseWideViewPort = intent.getBooleanExtra("webViewUseWideViewPort", true);
+        webViewLoadWithOverviewMode = intent.getBooleanExtra("webViewLoadWithOverviewMode", true);
+        webViewDomStorageEnabled = intent.getBooleanExtra("webViewDomStorageEnabled", true);
+        webViewDisplayZoomControls = intent.getBooleanExtra("webViewDisplayZoomControls", true);
+        webViewDesktopMode = intent.getBooleanExtra("webViewDesktopMode", false);
 
         url = intent.getStringExtra("url");
     }
@@ -228,6 +228,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected ProgressBar progressBar;
 
     protected RelativeLayout menuLayout;
+    protected boolean isMenuLayoutVisible;
     protected ShadowLayout shadowLayout;
     protected LinearLayout menuBackground;
 
@@ -363,10 +364,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         { // Toolbar
             toolbar.setBackgroundColor(toolbarColor);
             AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) toolbar.getLayoutParams();
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
-                params.setScrollFlags(0);
-            else
-                params.setScrollFlags(toolbarScrollFlags);
+            params.setScrollFlags(toolbarScrollFlags);
             toolbar.setLayoutParams(params);
         }
 
@@ -658,7 +656,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        if (toolbarScrollFlags == 0 || Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN)
+        if (toolbarScrollFlags == 0)
             return;
 
         ViewHelper.setTranslationY(gradient, verticalOffset);
@@ -677,7 +675,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 break;
         }
 
-        ViewHelper.setTranslationY(menuLayout, Math.max(verticalOffset, -getResources().getDimension(R.dimen.defaultMenuLayoutMargin)));
+        if (menuLayout.getVisibility() == View.VISIBLE
+                && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+            ViewHelper.setTranslationY(menuLayout, Math.max(verticalOffset, -getResources().getDimension(R.dimen.defaultMenuLayoutMargin)));
     }
 
     public class MyWebChromeClient extends WebChromeClient {
