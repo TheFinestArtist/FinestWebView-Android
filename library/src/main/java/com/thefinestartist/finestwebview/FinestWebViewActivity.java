@@ -153,7 +153,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         iconPressedColor = intent.getIntExtra("iconPressedColor", iconDefaultColor);
         iconSelector = intent.getIntExtra("iconSelector", R.drawable.selector_grey);
 
-        showSwipeRefreshLayout = intent.getBooleanExtra("showSwipeRefreshLayout", false);
+        showSwipeRefreshLayout = intent.getBooleanExtra("showSwipeRefreshLayout", true);
         swipeRefreshColor = intent.getIntExtra("swipeRefreshColor", colorAccent);
         swipeRefreshColors = intent.getIntArrayExtra("swipeRefreshColors");
 
@@ -737,12 +737,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     public class MyWebChromeClient extends WebChromeClient {
         @Override
         public void onProgressChanged(WebView view, int progress) {
-            if (progress == 100)
-                progress = 0;
-            progressBar.setProgress(progress);
-
             if (showSwipeRefreshLayout) {
-                if(swipeRefreshLayout.isRefreshing() && progress == 0) {
+                if(swipeRefreshLayout.isRefreshing() && progress == 100) {
                     swipeRefreshLayout.post(new Runnable() {
                         @Override
                         public void run() {
@@ -751,7 +747,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                     });
                 }
 
-                if(!swipeRefreshLayout.isRefreshing() && progress != 0) {
+                if(!swipeRefreshLayout.isRefreshing() && progress != 100) {
                     swipeRefreshLayout.post(new Runnable() {
                         @Override
                         public void run() {
@@ -760,6 +756,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                     });
                 }
             }
+
+            if (progress == 100)
+                progress = 0;
+            progressBar.setProgress(progress);
         }
     }
 
