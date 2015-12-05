@@ -33,7 +33,7 @@
 
 ## Sample Project
 
-You can download the latest sample APK from this repo here: [sample-release.apk](https://github.com/thefinestartist/YouTubePlayerActivity/raw/master/sample/sample-release.apk)
+You can download the latest sample APK from this repo here: [sample-release.apk](https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/sample/sample-release.apk)
 
 It's also on Google Play:
 
