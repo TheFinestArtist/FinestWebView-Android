@@ -307,16 +307,6 @@ Use configChange, screenOrientation to customize your orientation options
     android:theme="@style/FinestWebViewTheme" />
 ```
 
-#### SwipeRefreshLayout
-
-You can enable SwipeRefreshLayout and setColor of indicator
-```java
-new FinestWebView.Builder(activity)
-    .showSwipeRefreshLayout(true)
-    .swipeRefreshColorRes(R.color.blueNavBar)
-    .show(url);
-```
-
 #### Gradient Divider
 
 You can make your divider gradient. If you do, webview will be under the gradient. If you disable gradient divider, webview will be below the divider.
