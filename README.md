@@ -30,6 +30,18 @@
        src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/youtube.png">
 </a>
 
+
+## Sample Project
+
+You can download the latest sample APK from this repo here: [sample-release.apk](https://github.com/thefinestartist/YouTubePlayerActivity/raw/master/sample/sample-release.apk)
+
+It's also on Google Play:
+
+<a href="https://play.google.com/store/apps/details?id=com.thefinestartist.finestwebview.sample">
+  <img alt="Get it on Google Play"
+       src="https://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
+</a>
+
 ## Getting started
 
 #### Gradle Dependency (jcenter)
