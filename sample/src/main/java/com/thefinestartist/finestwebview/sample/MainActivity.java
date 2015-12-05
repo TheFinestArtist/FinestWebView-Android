@@ -19,11 +19,11 @@ public class MainActivity extends AppCompatActivity {
         if (view.getId() == R.id.defaultTheme) {
             new FinestWebView.Builder(this)
                     .titleDefault("The Finest Artist")
+                    .showSwipeRefreshLayout(true)
                     .show("http://thefinestartist.com");
         } else if (view.getId() == R.id.redTheme) {
             new FinestWebView.Builder(this)
                     .titleDefault("Bless This Stuff")
-                    .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED)
                     .statusBarColorRes(R.color.redStatusBar)
                     .toolbarColorRes(R.color.redNavBar)
                     .titleColorRes(R.color.finestWhite)
@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
                     .iconDefaultColorRes(R.color.finestWhite)
                     .iconSelector(R.drawable.selector_white)
                     .progressBarColorRes(R.color.finestWhite)
+                    .webViewBuiltInZoomControls(true)
+                    .webViewDisplayZoomControls(true)
                     .dividerHeight(0)
                     .gradientDivider(false)
                     .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit)
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
                     .iconDefaultColorRes(R.color.finestWhite)
                     .iconSelector(R.drawable.selector_white)
                     .progressBarColorRes(R.color.finestWhite)
+                    .showSwipeRefreshLayout(true)
+                    .swipeRefreshColorRes(R.color.blueNavBar)
                     .dividerHeight(0)
                     .gradientDivider(false)
                     .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)

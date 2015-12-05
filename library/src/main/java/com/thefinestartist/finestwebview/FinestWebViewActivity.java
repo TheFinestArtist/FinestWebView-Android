@@ -1,6 +1,5 @@
 package com.thefinestartist.finestwebview;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -17,7 +16,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.NestedScrollView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -62,6 +61,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected int iconDisabledColor;
     protected int iconPressedColor;
     protected int iconSelector;
+
+    protected boolean showSwipeRefreshLayout;
+    protected int swipeRefreshColor;
+    protected int[] swipeRefreshColors;
 
     protected boolean showDivider;
     protected boolean gradientDivider;
@@ -114,6 +117,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected boolean webViewUseWideViewPort;
     protected boolean webViewLoadWithOverviewMode;
     protected boolean webViewDomStorageEnabled;
+    protected boolean webViewBuiltInZoomControls;
     protected boolean webViewDisplayZoomControls;
     protected boolean webViewDesktopMode;
 
@@ -148,6 +152,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         iconDisabledColor = intent.getIntExtra("iconDisabledColor", ColorHelper.disableColor(iconDefaultColor));
         iconPressedColor = intent.getIntExtra("iconPressedColor", iconDefaultColor);
         iconSelector = intent.getIntExtra("iconSelector", R.drawable.selector_grey);
+
+        showSwipeRefreshLayout = intent.getBooleanExtra("showSwipeRefreshLayout", false);
+        swipeRefreshColor = intent.getIntExtra("swipeRefreshColor", colorAccent);
+        swipeRefreshColors = intent.getIntArrayExtra("swipeRefreshColors");
 
         showDivider = intent.getBooleanExtra("showDivider", true);
         gradientDivider = intent.getBooleanExtra("gradientDivider", true);
@@ -200,7 +208,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         webViewUseWideViewPort = intent.getBooleanExtra("webViewUseWideViewPort", true);
         webViewLoadWithOverviewMode = intent.getBooleanExtra("webViewLoadWithOverviewMode", true);
         webViewDomStorageEnabled = intent.getBooleanExtra("webViewDomStorageEnabled", true);
-        webViewDisplayZoomControls = intent.getBooleanExtra("webViewDisplayZoomControls", true);
+        webViewBuiltInZoomControls = intent.getBooleanExtra("webViewBuiltInZoomControls", false);
+        webViewDisplayZoomControls = intent.getBooleanExtra("webViewDisplayZoomControls", false);
         webViewDesktopMode = intent.getBooleanExtra("webViewDesktopMode", false);
 
         url = intent.getStringExtra("url");
@@ -220,7 +229,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected ImageButton forward;
     protected ImageButton more;
 
-    protected NestedScrollView nestedScrollView;
+    protected SwipeRefreshLayout swipeRefreshLayout;
     protected WebView webView;
 
     protected View gradient;
@@ -228,7 +237,6 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected ProgressBar progressBar;
 
     protected RelativeLayout menuLayout;
-    protected boolean isMenuLayoutVisible;
     protected ShadowLayout shadowLayout;
     protected LinearLayout menuBackground;
 
@@ -256,7 +264,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         forward = (ImageButton) findViewById(R.id.forward);
         more = (ImageButton) findViewById(R.id.more);
 
-        nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         webView = (WebView) findViewById(R.id.webView);
 
         gradient = findViewById(R.id.gradient);
@@ -393,7 +401,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 more.setVisibility(View.GONE);
         }
 
-        { // Content
+        { // WebView
             webView.setWebChromeClient(new MyWebChromeClient());
             webView.setWebViewClient(new MyWebViewClient());
 
@@ -404,15 +412,62 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             webView.getSettings().setLoadWithOverviewMode(webViewLoadWithOverviewMode);
             webView.getSettings().setDomStorageEnabled(webViewDomStorageEnabled);
 
+//            // Other webview options
+//            webView.getSettings().setLoadWithOverviewMode(true);
+//            webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+//            webView.setScrollbarFadingEnabled(false);
+//            webView.getSettings().setBuiltInZoomControls(true);
+//            //Additional Webview Properties
+//            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+//            webView.getSettings().setDatabaseEnabled(true);
+//            webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+//            webView.getSettings().setLayoutAlgorithm(webView.getSettings().getLayoutAlgorithm().NORMAL);
+//            webView.getSettings().setLoadWithOverviewMode(true);
+//            webView.getSettings().setUseWideViewPort(false);
+//            webView.setSoundEffectsEnabled(true);
+//            webView.setHorizontalFadingEdgeEnabled(false);
+//            webView.setKeepScreenOn(true);
+//            webView.setScrollbarFadingEnabled(true);
+//            webView.setVerticalFadingEdgeEnabled(false);
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
                 webView.getSettings().setDisplayZoomControls(webViewDisplayZoomControls);
-            else
-                webView.getSettings().setBuiltInZoomControls(webViewDisplayZoomControls);
+
+            webView.getSettings().setBuiltInZoomControls(webViewBuiltInZoomControls);
+            if (webViewBuiltInZoomControls) {
+                // Remove NestedScrollView to enable BuiltInZoomControls
+                ((ViewGroup) webView.getParent()).removeAllViews();
+                swipeRefreshLayout.addView(webView);
+                swipeRefreshLayout.removeViewAt(1);
+            }
 
             if (webViewDesktopMode)
                 webView.getSettings().setUserAgentString("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0");
 
             webView.loadUrl(url);
+        }
+
+        { // SwipeRefreshLayout
+            swipeRefreshLayout.setEnabled(showSwipeRefreshLayout);
+            if (showSwipeRefreshLayout) {
+                swipeRefreshLayout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(true);
+                    }
+                });
+            }
+
+            if (swipeRefreshColors == null)
+                swipeRefreshLayout.setColorSchemeColors(swipeRefreshColor);
+            else swipeRefreshLayout.setColorSchemeColors(swipeRefreshColors);
+
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    webView.reload();
+                }
+            });
         }
 
         { // Divider
@@ -464,7 +519,6 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                     break;
             }
             progressBar.setLayoutParams(params);
-            progressBar.setProgress(30);
         }
 
         { // Menu
@@ -686,6 +740,26 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             if (progress == 100)
                 progress = 0;
             progressBar.setProgress(progress);
+
+            if (showSwipeRefreshLayout) {
+                if(swipeRefreshLayout.isRefreshing() && progress == 0) {
+                    swipeRefreshLayout.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            swipeRefreshLayout.setRefreshing(false);
+                        }
+                    });
+                }
+
+                if(!swipeRefreshLayout.isRefreshing() && progress != 0) {
+                    swipeRefreshLayout.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            swipeRefreshLayout.setRefreshing(true);
+                        }
+                    });
+                }
+            }
         }
     }
 

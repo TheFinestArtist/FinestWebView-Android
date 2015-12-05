@@ -7,16 +7,13 @@
 #### Beautiful and customizable Android Activity that shows web pages within an app.
 
 * Builder pattern
-* Various options
-* Material design
-* Pre-made icons
-* Custom themes
-* Transition animations
+* Material design & Pre-made icons
+* Custom themes & Custom transition animations
+* Support collapsing toolbar & contextual actionbar
+* SwipeRefreshLayout & Progressbar
 * Device rotation
-* Collapsing toolbar
 * Gradient divider
 * Custom typeface
-* Contextual actionbar
 
 ## Screenshots
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png?raw=true" width="888">
@@ -51,6 +48,8 @@ FinestWebView is basically and Android activity with webview, toolbar and etc.
 You have to add FinestWebViewActivity in your `AndroidManifest.xml`
 
 ```xml
+<uses-permission android:name="android.permission.INTERNET" />
+
 <activity
     android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
     android:theme="@style/FinestWebViewTheme" />
@@ -112,6 +111,15 @@ iconDisabledColorRes(@ColorRes int colorRes);
 iconPressedColor(@ColorInt int color);
 iconPressedColorRes(@ColorRes int colorRes);
 iconSelector(@DrawableRes int selectorRes);
+```
+
+**SwipeRefreshLayout Options**
+```java
+showSwipeRefreshLayout(boolean showSwipeRefreshLayout);
+swipeRefreshColor(@ColorInt int color);
+swipeRefreshColorRes(@ColorRes int colorRes);
+swipeRefreshColors(int[] colors);
+swipeRefreshColorsRes(@ArrayRes int colorsRes);
 ```
 
 **Divider Options**
@@ -207,6 +215,7 @@ webViewUseWideViewPort(boolean webViewUseWideViewPort);
 webViewLoadWithOverviewMode(boolean webViewLoadWithOverviewMode);
 webViewDomStorageEnabled(boolean webViewDomStorageEnabled);
 webViewDisplayZoomControls(boolean webViewDisplayZoomControls);
+webViewBuiltInZoomControls(boolean webViewBuiltInZoomControls);
 webViewDesktopMode(boolean webViewDesktopMode);
 ```
 
@@ -246,6 +255,10 @@ new FinestWebView.Builder(activity)
     .toolbarScrollFlags(0) // By sending as 0, toolbar collapsing will be disabled
     .show(url);
 ```
+
+
+#### Collapsing Toolbar vs WebView BuiltInZoomControls
+If you enable BuiltInZoomControls `webViewBuiltInZoomControls(true)`, it will automatically disable toolbar collapsing.
 
 
 #### Full Screen Mode
@@ -294,6 +307,15 @@ Use configChange, screenOrientation to customize your orientation options
     android:theme="@style/FinestWebViewTheme" />
 ```
 
+#### SwipeRefreshLayout
+
+You can enable SwipeRefreshLayout and setColor of indicator
+```java
+new FinestWebView.Builder(activity)
+    .showSwipeRefreshLayout(true)
+    .swipeRefreshColorRes(R.color.blueNavBar)
+    .show(url);
+```
 
 #### Gradient Divider
 
@@ -308,7 +330,7 @@ new FinestWebView.Builder(activity)
 
 #### Custom Typeface
 
-You can use your own typeface for title, url, and menus. You have to add your font file in assets/fonts folder.
+You can use your own typeface for title, url, and menus. You have to add your font file in `assets/fonts` folder.
 
 ```java
 new FinestWebView.Builder(activity)

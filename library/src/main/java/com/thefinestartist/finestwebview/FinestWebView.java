@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.AnimRes;
+import android.support.annotation.ArrayRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
@@ -34,6 +35,10 @@ public class FinestWebView {
         protected Integer iconDisabledColor;
         protected Integer iconPressedColor;
         protected Integer iconSelector;
+
+        protected Boolean showSwipeRefreshLayout;
+        protected Integer swipeRefreshColor;
+        protected Integer[] swipeRefreshColors;
 
         protected Boolean showDivider;
         protected Boolean gradientDivider;
@@ -88,6 +93,7 @@ public class FinestWebView {
         protected Boolean webViewUseWideViewPort;
         protected Boolean webViewLoadWithOverviewMode;
         protected Boolean webViewDomStorageEnabled;
+        protected Boolean webViewBuiltInZoomControls;
         protected Boolean webViewDisplayZoomControls;
         protected Boolean webViewDesktopMode;
 
@@ -161,6 +167,34 @@ public class FinestWebView {
         public Builder iconSelector(@DrawableRes int selectorRes) {
             this.iconSelector = selectorRes;
             return this;
+        }
+
+        public Builder showSwipeRefreshLayout(boolean showSwipeRefreshLayout) {
+            this.showSwipeRefreshLayout = showSwipeRefreshLayout;
+            return this;
+        }
+
+        public Builder swipeRefreshColor(@ColorInt int color) {
+            this.swipeRefreshColor = color;
+            return this;
+        }
+
+        public Builder swipeRefreshColorRes(@ColorRes int colorRes) {
+            this.swipeRefreshColor = ContextCompat.getColor(activity, colorRes);
+            return this;
+        }
+
+        public Builder swipeRefreshColors(int[] colors) {
+            Integer[] swipeRefreshColors = new Integer[colors.length];
+            for (int i = 0; i < colors.length; i++)
+                swipeRefreshColors[i] = colors[i];
+            this.swipeRefreshColors = swipeRefreshColors;
+            return this;
+        }
+
+        public Builder swipeRefreshColorsRes(@ArrayRes int colorsRes) {
+            int[] colors = activity.getResources().getIntArray(colorsRes);
+            return swipeRefreshColors(colors);
         }
 
         public Builder showDivider(boolean showDivider) {
@@ -484,6 +518,11 @@ public class FinestWebView {
             return this;
         }
 
+        public Builder webViewBuiltInZoomControls(boolean webViewBuiltInZoomControls) {
+            this.webViewBuiltInZoomControls = webViewBuiltInZoomControls;
+            return this;
+        }
+
         public Builder webViewDisplayZoomControls(boolean webViewDisplayZoomControls) {
             this.webViewDisplayZoomControls = webViewDisplayZoomControls;
             return this;
@@ -519,6 +558,17 @@ public class FinestWebView {
                 intent.putExtra("iconPressedColor", iconPressedColor.intValue());
             if (iconSelector != null)
                 intent.putExtra("iconSelector", iconSelector.intValue());
+
+            if (showSwipeRefreshLayout != null)
+                intent.putExtra("showSwipeRefreshLayout", showSwipeRefreshLayout.booleanValue());
+            if (swipeRefreshColor != null)
+                intent.putExtra("swipeRefreshColor", swipeRefreshColor.intValue());
+            if (swipeRefreshColors != null) {
+                int[] colors = new int[swipeRefreshColors.length];
+                for (int i = 0; i < swipeRefreshColors.length; i++)
+                    colors[i] = swipeRefreshColors[i];
+                intent.putExtra("swipeRefreshColors", colors);
+            }
 
             if (showDivider != null)
                 intent.putExtra("showDivider", showDivider.booleanValue());
@@ -613,6 +663,8 @@ public class FinestWebView {
                 intent.putExtra("webViewLoadWithOverviewMode", webViewLoadWithOverviewMode.booleanValue());
             if (webViewDomStorageEnabled != null)
                 intent.putExtra("webViewDomStorageEnabled", webViewDomStorageEnabled.booleanValue());
+            if (webViewBuiltInZoomControls != null)
+                intent.putExtra("webViewBuiltInZoomControls", webViewBuiltInZoomControls.booleanValue());
             if (webViewDisplayZoomControls != null)
                 intent.putExtra("webViewDisplayZoomControls", webViewDisplayZoomControls.booleanValue());
             if (webViewDesktopMode != null)
