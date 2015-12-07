@@ -104,7 +104,9 @@ You can use your own Theme for FinestWebView. If you want to use pre-defined the
 ### 2. Builder Options
 
 **Theme Options**
+```java
 theme(@StyleRes int theme);
+```
 
 **StatusBar Options**
 ```java
