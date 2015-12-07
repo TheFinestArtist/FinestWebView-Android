@@ -64,7 +64,9 @@ You have to add FinestWebViewActivity in your `AndroidManifest.xml`
 
 <activity
     android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
-    android:theme="@style/FinestWebViewTheme" />
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    android:screenOrientation="sensor"
+    android:theme="@style/FinestWebViewTheme.Light" />
 ```
 
 #### Basic WebView
@@ -100,6 +102,9 @@ You can use your own Theme for FinestWebView. If you want to use pre-defined the
 ```
 
 ### 2. Builder Options
+
+**Theme Options**
+theme(@StyleRes int theme);
 
 **StatusBar Options**
 ```java

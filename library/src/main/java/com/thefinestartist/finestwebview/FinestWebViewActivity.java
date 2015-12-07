@@ -144,8 +144,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         int colorAccent = a.getColor(2, ContextCompat.getColor(this, R.color.finestBlack));
         int textColorPrimary = a.getColor(3, ContextCompat.getColor(this, R.color.finestBlack));
         int textColorSecondary = a.getColor(4, ContextCompat.getColor(this, R.color.finestSilver));
-        int selectableItemBackground = a.getResourceId(5, R.drawable.selector_gray);
-        int selectableItemBackgroundBorderless = a.getResourceId(6, R.drawable.selector_gray);
+        int selectableItemBackground = a.getResourceId(5, R.drawable.selector_light_theme);
+        int selectableItemBackgroundBorderless = a.getResourceId(6, R.drawable.selector_light_theme);
         a.recycle();
 
         theme = intent.getIntExtra("theme", 0);

@@ -34,7 +34,7 @@
                 android:id="@+id/menuRefresh"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/selector_gray"
+                android:background="@drawable/selector_light_theme"
                 android:gravity="center_vertical|left"
                 android:onClick="onClick">
 
@@ -56,7 +56,7 @@
                 android:id="@+id/menuShareVia"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/selector_gray"
+                android:background="@drawable/selector_light_theme"
                 android:gravity="center_vertical|left"
                 android:onClick="onClick">
 
@@ -78,7 +78,7 @@
                 android:id="@+id/menuCopyLink"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/selector_gray"
+                android:background="@drawable/selector_light_theme"
                 android:gravity="center_vertical|left"
                 android:onClick="onClick">
 
@@ -100,7 +100,7 @@
                 android:id="@+id/menuOpenWith"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="@drawable/selector_gray"
+                android:background="@drawable/selector_light_theme"
                 android:gravity="center_vertical|left"
                 android:onClick="onClick">
 
