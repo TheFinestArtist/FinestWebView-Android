@@ -52,6 +52,8 @@ import com.thefinestartist.finestwebview.views.ShadowLayout;
  */
 public class FinestWebViewActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
 
+    protected int theme;
+
     protected int statusBarColor;
 
     protected int toolbarColor;
@@ -134,13 +136,19 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 R.attr.colorPrimary,
                 R.attr.colorAccent,
                 android.R.attr.textColorPrimary,
-                android.R.attr.textColorSecondary});
+                android.R.attr.textColorSecondary,
+                android.R.attr.selectableItemBackground,
+                android.R.attr.selectableItemBackgroundBorderless});
         int colorPrimaryDark = a.getColor(0, ContextCompat.getColor(this, R.color.finestGray));
         int colorPrimary = a.getColor(1, ContextCompat.getColor(this, R.color.finestWhite));
         int colorAccent = a.getColor(2, ContextCompat.getColor(this, R.color.finestBlack));
         int textColorPrimary = a.getColor(3, ContextCompat.getColor(this, R.color.finestBlack));
         int textColorSecondary = a.getColor(4, ContextCompat.getColor(this, R.color.finestSilver));
+        int selectableItemBackground = a.getResourceId(5, R.drawable.selector_gray);
+        int selectableItemBackgroundBorderless = a.getResourceId(6, R.drawable.selector_gray);
         a.recycle();
+
+        theme = intent.getIntExtra("theme", 0);
 
         statusBarColor = intent.getIntExtra("statusBarColor", colorPrimaryDark);
 
@@ -151,7 +159,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         iconDefaultColor = intent.getIntExtra("iconDefaultColor", colorAccent);
         iconDisabledColor = intent.getIntExtra("iconDisabledColor", ColorHelper.disableColor(iconDefaultColor));
         iconPressedColor = intent.getIntExtra("iconPressedColor", iconDefaultColor);
-        iconSelector = intent.getIntExtra("iconSelector", R.drawable.selector_grey);
+        iconSelector = intent.getIntExtra("iconSelector", selectableItemBackgroundBorderless);
 
         showSwipeRefreshLayout = intent.getBooleanExtra("showSwipeRefreshLayout", true);
         swipeRefreshColor = intent.getIntExtra("swipeRefreshColor", colorAccent);
@@ -181,7 +189,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         menuColor = intent.getIntExtra("menuColor", ContextCompat.getColor(this, R.color.finestWhite));
         menuDropShadowColor = intent.getIntExtra("menuDropShadowColor", ContextCompat.getColor(this, R.color.finestBlack10));
         menuDropShadowSize = intent.getFloatExtra("menuDropShadowSize", getResources().getDimension(R.dimen.defaultMenuDropShadowSize));
-        menuSelector = intent.getIntExtra("menuSelector", R.drawable.selector_grey);
+        menuSelector = intent.getIntExtra("menuSelector", selectableItemBackground);
 
         menuTextSize = intent.getFloatExtra("menuTextSize", getResources().getDimension(R.dimen.defaultMenuTextSize));
         menuTextFont = intent.getStringExtra("menuTextFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("menuTextFont");
@@ -599,8 +607,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.finest_web_view);
         getOptions();
+        if (theme != 0) setTheme(theme);
+        setContentView(R.layout.finest_web_view);
         bindViews();
         layoutViews();
         initializeViews();
@@ -738,7 +747,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         @Override
         public void onProgressChanged(WebView view, int progress) {
             if (showSwipeRefreshLayout) {
-                if(swipeRefreshLayout.isRefreshing() && progress == 100) {
+                if (swipeRefreshLayout.isRefreshing() && progress == 100) {
                     swipeRefreshLayout.post(new Runnable() {
                         @Override
                         public void run() {
@@ -747,7 +756,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                     });
                 }
 
-                if(!swipeRefreshLayout.isRefreshing() && progress != 100) {
+                if (!swipeRefreshLayout.isRefreshing() && progress != 100) {
                     swipeRefreshLayout.post(new Runnable() {
                         @Override
                         public void run() {

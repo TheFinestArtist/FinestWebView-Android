@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/redNavBar"
+        android:background="@color/redPrimary"
         android:onClick="onClick"
         android:text="Red Theme"
         android:textColor="@color/finestWhite" />
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/blueNavBar"
+        android:background="@color/bluePrimary"
         android:onClick="onClick"
         android:text="Blue Theme"
         android:textColor="@color/finestWhite" />
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/blackNavBar"
+        android:background="@color/blackPrimary"
         android:onClick="onClick"
         android:text="Black Theme"
         android:textColor="@color/finestWhite" />

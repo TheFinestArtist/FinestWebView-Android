@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="FinestWebViewTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="FinestWebViewTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/finestWhite</item>
         <item name="colorPrimaryDark">@color/finestGray</item>
         <item name="colorAccent">@color/finestBlack</item>
@@ -10,6 +10,20 @@
     </style>
 
     <style name="FinestWebViewTheme.Fullscreen" parent="FinestWebViewTheme">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="FinestWebViewTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/finestWhite</item>
+        <item name="colorPrimaryDark">@color/finestGray</item>
+        <item name="colorAccent">@color/finestBlack</item>
+        <item name="android:textColorPrimary">@color/finestBlack</item>
+        <item name="android:textColorSecondary">@color/finestSilver</item>
+        <item name="windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="FinestWebViewTheme.Light.Fullscreen" parent="FinestWebViewTheme.Light">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowFullscreen">true</item>
     </style>

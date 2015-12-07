@@ -16,9 +16,9 @@
 
 
     <style name="RedTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/redNavBar</item>
-        <item name="colorPrimaryDark">@color/redStatusBar</item>
-        <item name="colorAccent">@color/redNavBar</item>
+        <item name="colorPrimary">@color/redPrimary</item>
+        <item name="colorPrimaryDark">@color/redPrimaryDark</item>
+        <item name="colorAccent">@color/redPrimary</item>
     </style>
 
 </resources>

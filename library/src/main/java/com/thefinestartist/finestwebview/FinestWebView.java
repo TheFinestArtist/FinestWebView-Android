@@ -11,6 +11,7 @@ import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.annotation.StyleRes;
 import android.support.design.widget.AppBarLayout.LayoutParams.ScrollFlags;
 import android.support.v4.content.ContextCompat;
 
@@ -25,6 +26,8 @@ public class FinestWebView {
     public static class Builder {
 
         private Activity activity;
+
+        protected Integer theme;
 
         protected Integer statusBarColor;
 
@@ -107,6 +110,11 @@ public class FinestWebView {
 
         public Builder(@NonNull Activity activity) {
             this.activity = activity;
+        }
+
+        public Builder theme(@StyleRes int theme) {
+            this.theme = theme;
+            return this;
         }
 
         public Builder statusBarColor(@ColorInt int color) {
@@ -541,6 +549,9 @@ public class FinestWebView {
             this.url = url;
 
             Intent intent = new Intent(activity, FinestWebViewActivity.class);
+
+            if (theme != null)
+                intent.putExtra("theme", theme.intValue());
 
             if (statusBarColor != null)
                 intent.putExtra("statusBarColor", statusBarColor.intValue());
