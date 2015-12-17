@@ -20,6 +20,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -97,6 +98,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected float menuTextSize;
     protected String menuTextFont;
     protected int menuTextColor;
+
+    protected int menuTextGravity;
+    protected float menuTextPaddingLeft;
+    protected float menuTextPaddingRight;
 
     protected boolean showMenuRefresh;
     protected int stringResRefresh;
@@ -196,6 +201,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         menuTextSize = intent.getFloatExtra("menuTextSize", getResources().getDimension(R.dimen.defaultMenuTextSize));
         menuTextFont = intent.getStringExtra("menuTextFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("menuTextFont");
         menuTextColor = intent.getIntExtra("menuTextColor", ContextCompat.getColor(this, R.color.finestBlack));
+
+        menuTextGravity = intent.getIntExtra("menuTextGravity", Gravity.CENTER_VERTICAL | Gravity.START);
+        menuTextPaddingLeft = intent.getFloatExtra("menuTextPaddingLeft", getResources().getDimension(R.dimen.defaultMenuTextPaddingLeft));
+        menuTextPaddingRight = intent.getFloatExtra("menuTextPaddingRight", getResources().getDimension(R.dimen.defaultMenuTextPaddingRight));
 
         showMenuRefresh = intent.getBooleanExtra("showMenuRefresh", true);
         stringResRefresh = intent.getIntExtra("stringResRefresh", R.string.refresh);
@@ -551,31 +560,39 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
             menuRefresh.setVisibility(showMenuRefresh ? View.VISIBLE : View.GONE);
             menuRefresh.setBackgroundResource(menuSelector);
+            menuRefresh.setGravity(menuTextGravity);
             menuRefreshTv.setText(stringResRefresh);
             menuRefreshTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
             menuRefreshTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
             menuRefreshTv.setTextColor(menuTextColor);
+            menuRefreshTv.setPadding((int) menuTextPaddingLeft, 0, (int) menuTextPaddingRight, 0);
 
             menuShareVia.setVisibility(showMenuShareVia ? View.VISIBLE : View.GONE);
             menuShareVia.setBackgroundResource(menuSelector);
+            menuShareVia.setGravity(menuTextGravity);
             menuShareViaTv.setText(stringResShareVia);
             menuShareViaTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
             menuShareViaTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
             menuShareViaTv.setTextColor(menuTextColor);
+            menuShareViaTv.setPadding((int) menuTextPaddingLeft, 0, (int) menuTextPaddingRight, 0);
 
             menuCopyLink.setVisibility(showMenuCopyLink ? View.VISIBLE : View.GONE);
             menuCopyLink.setBackgroundResource(menuSelector);
+            menuCopyLink.setGravity(menuTextGravity);
             menuCopyLinkTv.setText(stringResCopyLink);
             menuCopyLinkTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
             menuCopyLinkTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
             menuCopyLinkTv.setTextColor(menuTextColor);
+            menuCopyLinkTv.setPadding((int) menuTextPaddingLeft, 0, (int) menuTextPaddingRight, 0);
 
             menuOpenWith.setVisibility(showMenuOpenWith ? View.VISIBLE : View.GONE);
             menuOpenWith.setBackgroundResource(menuSelector);
+            menuOpenWith.setGravity(menuTextGravity);
             menuOpenWithTv.setText(stringResOpenWith);
             menuOpenWithTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
             menuOpenWithTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
             menuOpenWithTv.setTextColor(menuTextColor);
+            menuOpenWithTv.setPadding((int) menuTextPaddingLeft, 0, (int) menuTextPaddingRight, 0);
         }
     }
 

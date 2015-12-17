@@ -205,6 +205,14 @@ menuTextFont(String menuTextFont);
 menuTextColor(@ColorInt int color);
 menuTextColorRes(@ColorRes int colorRes);
 
+menuTextGravity(int gravity);
+menuTextPaddingLeft(float menuTextPaddingLeft);
+menuTextPaddingLeft(int menuTextPaddingLeft);
+menuTextPaddingLeftRes(@DimenRes int menuTextPaddingLeft);
+menuTextPaddingRight(float menuTextPaddingRight);
+menuTextPaddingRight(int menuTextPaddingRight);
+menuTextPaddingRightRes(@DimenRes int menuTextPaddingRight);
+
 showMenuRefresh(boolean showMenuRefresh);
 stringResRefresh(@StringRes int stringResRefresh);
 showMenuShareVia(boolean showMenuShareVia);

@@ -2,6 +2,7 @@ package com.thefinestartist.finestwebview.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 
 import com.thefinestartist.finestwebview.FinestWebView;
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
                     .showSwipeRefreshLayout(true)
                     .swipeRefreshColorRes(R.color.bluePrimaryDark)
                     .menuSelector(R.drawable.selector_light_theme)
+                    .menuTextGravity(Gravity.CENTER)
+                    .menuTextPaddingRightRes(R.dimen.defaultMenuTextPaddingLeft)
                     .dividerHeight(0)
                     .gradientDivider(false)
                     .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
@@ -70,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                     .progressBarColorRes(R.color.finestWhite)
                     .swipeRefreshColorRes(R.color.blackPrimaryDark)
                     .menuSelector(R.drawable.selector_light_theme)
+                    .menuTextGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT)
+                    .menuTextPaddingRightRes(R.dimen.defaultMenuTextPaddingLeft)
                     .dividerHeight(0)
                     .gradientDivider(false)
 //                    .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)

@@ -73,6 +73,10 @@ public class FinestWebView {
         protected String menuTextFont;
         protected Integer menuTextColor;
 
+        protected Integer menuTextGravity;
+        protected Float menuTextPaddingLeft;
+        protected Float menuTextPaddingRight;
+
         protected Boolean showMenuRefresh;
         protected Integer stringResRefresh;
         protected Boolean showMenuShareVia;
@@ -236,7 +240,7 @@ public class FinestWebView {
         }
 
         public Builder dividerHeightRes(@DimenRes int height) {
-            this.dividerHeight = DipPixelHelper.getPixel(activity, height);
+            this.dividerHeight = activity.getResources().getDimension(height);
             return this;
         }
 
@@ -266,7 +270,7 @@ public class FinestWebView {
         }
 
         public Builder progressBarHeightRes(@DimenRes int height) {
-            this.progressBarHeight = DipPixelHelper.getPixel(activity, height);
+            this.progressBarHeight = activity.getResources().getDimension(height);
             return this;
         }
 
@@ -301,7 +305,7 @@ public class FinestWebView {
         }
 
         public Builder titleSizeRes(@DimenRes int titleSize) {
-            this.titleSize = DipPixelHelper.getPixel(activity, titleSize);
+            this.titleSize = activity.getResources().getDimension(titleSize);
             return this;
         }
 
@@ -336,7 +340,7 @@ public class FinestWebView {
         }
 
         public Builder urlSizeRes(@DimenRes int urlSize) {
-            this.urlSize = DipPixelHelper.getPixel(activity, urlSize);
+            this.urlSize = activity.getResources().getDimension(urlSize);
             return this;
         }
 
@@ -365,6 +369,41 @@ public class FinestWebView {
             return this;
         }
 
+        public Builder menuTextGravity(int gravity) {
+            this.menuTextGravity = gravity;
+            return this;
+        }
+
+        public Builder menuTextPaddingLeft(float menuTextPaddingLeft) {
+            this.menuTextPaddingLeft = menuTextPaddingLeft;
+            return this;
+        }
+
+        public Builder menuTextPaddingLeft(int menuTextPaddingLeft) {
+            this.menuTextPaddingLeft = (float) menuTextPaddingLeft;
+            return this;
+        }
+
+        public Builder menuTextPaddingLeftRes(@DimenRes int menuTextPaddingLeft) {
+            this.menuTextPaddingLeft = activity.getResources().getDimension(menuTextPaddingLeft);
+            return this;
+        }
+
+        public Builder menuTextPaddingRight(float menuTextPaddingRight) {
+            this.menuTextPaddingRight = menuTextPaddingRight;
+            return this;
+        }
+
+        public Builder menuTextPaddingRight(int menuTextPaddingRight) {
+            this.menuTextPaddingRight = (float) menuTextPaddingRight;
+            return this;
+        }
+
+        public Builder menuTextPaddingRightRes(@DimenRes int menuTextPaddingRight) {
+            this.menuTextPaddingRight = activity.getResources().getDimension(menuTextPaddingRight);
+            return this;
+        }
+
         public Builder menuDropShadowColor(@ColorInt int color) {
             this.menuDropShadowColor = color;
             return this;
@@ -386,7 +425,7 @@ public class FinestWebView {
         }
 
         public Builder menuDropShadowSizeRes(@DimenRes int menuDropShadowSize) {
-            this.menuDropShadowSize = DipPixelHelper.getPixel(activity, menuDropShadowSize);
+            this.menuDropShadowSize = activity.getResources().getDimension(menuDropShadowSize);
             return this;
         }
 
@@ -406,7 +445,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextSizeRes(@DimenRes int menuTextSize) {
-            this.menuTextSize = DipPixelHelper.getPixel(activity, menuTextSize);
+            this.menuTextSize = activity.getResources().getDimension(menuTextSize);
             return this;
         }
 
@@ -634,6 +673,13 @@ public class FinestWebView {
                 intent.putExtra("menuTextFont", menuTextFont);
             if (menuTextColor != null)
                 intent.putExtra("menuTextColor", menuTextColor.intValue());
+
+            if (menuTextGravity != null)
+                intent.putExtra("menuTextGravity", menuTextGravity.intValue());
+            if (menuTextPaddingLeft != null)
+                intent.putExtra("menuTextPaddingLeft", menuTextPaddingLeft.floatValue());
+            if (menuTextPaddingRight != null)
+                intent.putExtra("menuTextPaddingRight", menuTextPaddingRight.floatValue());
 
             if (showMenuRefresh != null)
                 intent.putExtra("showMenuRefresh", showMenuRefresh.booleanValue());

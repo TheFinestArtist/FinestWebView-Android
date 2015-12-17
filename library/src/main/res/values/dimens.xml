@@ -10,6 +10,8 @@
     <dimen name="defaultMenuDropShadowCornerRadius">2dp</dimen>
     <dimen name="defaultMenuDropShadowSize">4dp</dimen>
     <dimen name="defaultMenuTextSize">16dp</dimen>
+    <dimen name="defaultMenuTextPaddingLeft">16dp</dimen>
+    <dimen name="defaultMenuTextPaddingRight">32dp</dimen>
     <dimen name="defaultMenuLayoutMargin">4dp</dimen>
     <dimen name="defaultMenuCornerRadius">2dp</dimen>
 </resources>
