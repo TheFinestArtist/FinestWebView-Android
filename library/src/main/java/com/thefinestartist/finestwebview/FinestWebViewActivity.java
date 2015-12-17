@@ -392,6 +392,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             title.setTypeface(TypefaceHelper.get(this, titleFont));
             title.setTextColor(titleColor);
 
+            urlTv.setVisibility(showUrl ? View.VISIBLE : View.GONE);
             urlTv.setText(UrlParser.getHost(url));
             urlTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, urlSize);
             urlTv.setTypeface(TypefaceHelper.get(this, urlFont));
@@ -746,6 +747,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     }
 
     public class MyWebChromeClient extends WebChromeClient {
+
         @Override
         public void onProgressChanged(WebView view, int progress) {
             if (showSwipeRefreshLayout) {

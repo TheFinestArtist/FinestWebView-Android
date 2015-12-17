@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             new FinestWebView.Builder(this)
                     .theme(R.style.FinestWebViewTheme)
                     .titleDefault("Vimeo")
+                    .showUrl(false)
                     .toolbarScrollFlags(0)
                     .statusBarColorRes(R.color.bluePrimaryDark)
                     .toolbarColorRes(R.color.bluePrimary)
