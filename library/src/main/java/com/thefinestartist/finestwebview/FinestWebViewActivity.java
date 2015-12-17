@@ -53,6 +53,7 @@ import com.thefinestartist.finestwebview.views.ShadowLayout;
  */
 public class FinestWebViewActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
 
+    protected boolean rtl;
     protected int theme;
 
     protected int statusBarColor;
@@ -155,6 +156,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 a.getResourceId(6, 0) : R.drawable.selector_light_theme;
         a.recycle();
 
+        rtl = intent.getBooleanExtra("rtl", getResources().getBoolean(R.bool.is_right_to_left));
         theme = intent.getIntExtra("theme", 0);
 
         statusBarColor = intent.getIntExtra("statusBarColor", colorPrimaryDark);
@@ -203,8 +205,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         menuTextColor = intent.getIntExtra("menuTextColor", ContextCompat.getColor(this, R.color.finestBlack));
 
         menuTextGravity = intent.getIntExtra("menuTextGravity", Gravity.CENTER_VERTICAL | Gravity.START);
-        menuTextPaddingLeft = intent.getFloatExtra("menuTextPaddingLeft", getResources().getDimension(R.dimen.defaultMenuTextPaddingLeft));
-        menuTextPaddingRight = intent.getFloatExtra("menuTextPaddingRight", getResources().getDimension(R.dimen.defaultMenuTextPaddingRight));
+        menuTextPaddingLeft = intent.getFloatExtra("menuTextPaddingLeft",
+                rtl ? getResources().getDimension(R.dimen.defaultMenuTextPaddingRight) : getResources().getDimension(R.dimen.defaultMenuTextPaddingLeft));
+        menuTextPaddingRight = intent.getFloatExtra("menuTextPaddingRight",
+                rtl ? getResources().getDimension(R.dimen.defaultMenuTextPaddingLeft) : getResources().getDimension(R.dimen.defaultMenuTextPaddingRight));
 
         showMenuRefresh = intent.getBooleanExtra("showMenuRefresh", true);
         stringResRefresh = intent.getIntExtra("stringResRefresh", R.string.refresh);
@@ -332,10 +336,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         }
 
         { // Icons
-            updateIcon(close, R.drawable.close);
+            updateIcon(close, rtl ? R.drawable.more : R.drawable.close);
             updateIcon(back, R.drawable.back);
             updateIcon(forward, R.drawable.forward);
-            updateIcon(more, R.drawable.more);
+            updateIcon(more, rtl ? R.drawable.close : R.drawable.more);
         }
 
         { // Divider
@@ -553,9 +557,11 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             shadowLayout.setShadowColor(menuDropShadowColor);
             shadowLayout.setShadowSize(menuDropShadowSize);
 
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) shadowLayout.getLayoutParams();
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             int margin = (int) (getResources().getDimension(R.dimen.defaultMenuLayoutMargin) - menuDropShadowSize);
             params.setMargins(0, margin, margin, 0);
+            params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            params.addRule(rtl ? RelativeLayout.ALIGN_PARENT_LEFT : RelativeLayout.ALIGN_PARENT_RIGHT);
             shadowLayout.setLayoutParams(params);
 
             menuRefresh.setVisibility(showMenuRefresh ? View.VISIBLE : View.GONE);
@@ -649,13 +655,17 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     public void onClick(View view) {
         int viewId = view.getId();
         if (viewId == R.id.close) {
-            close();
+            if (rtl) showMenu();
+            else close();
         } else if (viewId == R.id.back) {
-            webView.goBack();
+            if (rtl) webView.goForward();
+            else webView.goBack();
         } else if (viewId == R.id.forward) {
-            webView.goForward();
+            if (rtl) webView.goBack();
+            else webView.goForward();
         } else if (viewId == R.id.more) {
-            showMenu();
+            if (rtl) close();
+            else showMenu();
         } else if (viewId == R.id.menuLayout) {
             hideMenu();
         } else if (viewId == R.id.menuRefresh) {
@@ -810,8 +820,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             if (view.canGoBack() || view.canGoForward()) {
                 back.setVisibility(View.VISIBLE);
                 forward.setVisibility(View.VISIBLE);
-                back.setEnabled(view.canGoBack());
-                forward.setEnabled(view.canGoForward());
+                back.setEnabled(rtl ? view.canGoForward() : view.canGoBack());
+                forward.setEnabled(rtl ? view.canGoBack() : view.canGoForward());
             } else {
                 back.setVisibility(View.GONE);
                 forward.setVisibility(View.GONE);

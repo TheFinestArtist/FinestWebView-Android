@@ -14,6 +14,7 @@
 * Device rotation
 * Gradient divider
 * Custom typeface
+* Supports Right to Left
 
 ## Screenshots
 <img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png?raw=true" width="888">
@@ -102,6 +103,11 @@ You can use your own Theme for FinestWebView. If you want to use pre-defined the
 ```
 
 ### 2. Builder Options
+
+**Right to Left Options**
+```java
+rtl(boolean rtl);
+```
 
 **Theme Options**
 ```java
@@ -357,6 +363,21 @@ new FinestWebView.Builder(activity)
     .show(url);
 ```
 
+#### Right to Left
+
+You can support right to left by setting `android:supportsRtl="true"` in `AndroidManifest.xml` or `rtl(true)`.
+
+```xml
+<application
+    ...
+    android:supportsRtl="true">
+</application>
+```
+```java
+new FinestWebView.Builder(activity)
+    .rtl(true)
+    .show(url);
+```
 
 ## Designer
 

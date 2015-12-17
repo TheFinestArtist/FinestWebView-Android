@@ -27,6 +27,7 @@ public class FinestWebView {
 
         private Activity activity;
 
+        protected Boolean rtl;
         protected Integer theme;
 
         protected Integer statusBarColor;
@@ -106,10 +107,9 @@ public class FinestWebView {
 
         protected String url;
 
-        @Deprecated
-        public Builder(@NonNull Context context) {
-            if (context instanceof Activity)
-                this.activity = (Activity) context;
+        public Builder rtl(boolean rtl) {
+            this.rtl = rtl;
+            return this;
         }
 
         public Builder(@NonNull Activity activity) {
@@ -589,6 +589,8 @@ public class FinestWebView {
 
             Intent intent = new Intent(activity, FinestWebViewActivity.class);
 
+            if (rtl != null)
+                intent.putExtra("rtl", rtl.booleanValue());
             if (theme != null)
                 intent.putExtra("theme", theme.intValue());
 
