@@ -14,7 +14,7 @@ android {
         minSdkVersion 7
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0.7"
+        versionName "1.0.8"
     }
 }
 
@@ -34,7 +34,7 @@ publish {
     userOrg = 'thefinestartist'
     groupId = 'com.thefinestartist'
     artifactId = 'finestwebview'
-    publishVersion = '1.0.7'
+    publishVersion = '1.0.8'
     desc = 'Beautiful and customizable Android Activity that shows web pages within an app.'
     website = 'https://github.com/TheFinestArtist/FinestWebView-Android'
 }
