@@ -129,6 +129,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected boolean webViewDisplayZoomControls;
     protected boolean webViewDesktopMode;
 
+    protected String injectJavaScript;
+
     protected String url;
 
     protected void getOptions() {
@@ -235,6 +237,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         webViewDisplayZoomControls = intent.getBooleanExtra("webViewDisplayZoomControls", false);
         webViewDesktopMode = intent.getBooleanExtra("webViewDesktopMode", false);
 
+        injectJavaScript = intent.getStringExtra("injectJavaScript");
         url = intent.getStringExtra("url");
     }
 
@@ -826,6 +829,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 back.setVisibility(View.GONE);
                 forward.setVisibility(View.GONE);
             }
+
+            if (injectJavaScript != null)
+                webView.loadUrl(injectJavaScript);
         }
 
         @Override

@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     .dividerHeight(0)
                     .gradientDivider(false)
                     .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit)
+                    .injectJavaScript("javascript: document.getElementById('msg').innerHTML='Hello "+"TheFinestArtist"+"!';")
                     .show("http://www.blessthisstuff.com");
         } else if (view.getId() == R.id.blueTheme) {
             new FinestWebView.Builder(this)
@@ -51,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
                     .urlColorRes(R.color.bluePrimaryLight)
                     .iconDefaultColorRes(R.color.finestWhite)
                     .progressBarColorRes(R.color.finestWhite)
+                    .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                    .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                    .stringResCopiedToClipboard(R.string.copied_to_clipboard)
                     .showSwipeRefreshLayout(true)
                     .swipeRefreshColorRes(R.color.bluePrimaryDark)
                     .menuSelector(R.drawable.selector_light_theme)

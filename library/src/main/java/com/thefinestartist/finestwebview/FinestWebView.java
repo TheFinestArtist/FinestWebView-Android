@@ -1,7 +1,6 @@
 package com.thefinestartist.finestwebview;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.AnimRes;
 import android.support.annotation.ArrayRes;
@@ -16,7 +15,6 @@ import android.support.design.widget.AppBarLayout.LayoutParams.ScrollFlags;
 import android.support.v4.content.ContextCompat;
 
 import com.thefinestartist.finestwebview.enums.Position;
-import com.thefinestartist.finestwebview.helpers.DipPixelHelper;
 
 /**
  * Created by Leonardo on 11/21/15.
@@ -104,6 +102,8 @@ public class FinestWebView {
         protected Boolean webViewBuiltInZoomControls;
         protected Boolean webViewDisplayZoomControls;
         protected Boolean webViewDesktopMode;
+
+        protected String injectJavaScript;
 
         protected String url;
 
@@ -580,6 +580,11 @@ public class FinestWebView {
             return this;
         }
 
+        public Builder injectJavaScript(String injectJavaScript) {
+            this.injectJavaScript = injectJavaScript;
+            return this;
+        }
+
         public void show(@StringRes int urlRes) {
             show(activity.getString(urlRes));
         }
@@ -728,6 +733,9 @@ public class FinestWebView {
                 intent.putExtra("webViewDisplayZoomControls", webViewDisplayZoomControls.booleanValue());
             if (webViewDesktopMode != null)
                 intent.putExtra("webViewDesktopMode", webViewDesktopMode.booleanValue());
+
+            if (injectJavaScript != null)
+                intent.putExtra("injectJavaScript", injectJavaScript);
 
             intent.putExtra("url", url);
 

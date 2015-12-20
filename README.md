@@ -13,7 +13,7 @@
 * SwipeRefreshLayout & Progressbar
 * Device rotation
 * Gradient divider
-* Custom typeface
+* Custom typeface & translation
 * Supports Right to Left
 
 ## Screenshots
@@ -250,6 +250,8 @@ webViewDomStorageEnabled(boolean webViewDomStorageEnabled);
 webViewDisplayZoomControls(boolean webViewDisplayZoomControls);
 webViewBuiltInZoomControls(boolean webViewBuiltInZoomControls);
 webViewDesktopMode(boolean webViewDesktopMode);
+
+injectJavaScript(String injectJavaScript);
 ```
 
 **Builder Pattern**
@@ -360,6 +362,21 @@ new FinestWebView.Builder(activity)
     .titleFont("Roboto-Medium.ttf")
     .urlFont("Roboto-Regular.ttf")
     .menuTextFont("Roboto-Medium.ttf")
+    .show(url);
+```
+
+
+#### Custom Translation
+
+You can use your own String resources to translate strings.
+
+```java
+new FinestWebView.Builder(activity)
+    .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+    .stringResRefresh(R.string.refresh)
+    .stringResShareVia(R.string.share_via)
+    .stringResCopyLink(R.string.copy_link)
+    .stringResOpenWith(R.string.open_with)
     .show(url);
 ```
 
