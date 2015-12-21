@@ -16,14 +16,16 @@ import android.support.v4.content.ContextCompat;
 
 import com.thefinestartist.finestwebview.enums.Position;
 
+import java.io.Serializable;
+
 /**
  * Created by Leonardo on 11/21/15.
  */
 public class FinestWebView {
 
-    public static class Builder {
+    public static class Builder implements Serializable {
 
-        private Activity activity;
+        protected final transient Activity activity;
 
         protected Boolean rtl;
         protected Integer theme;
@@ -593,151 +595,7 @@ public class FinestWebView {
             this.url = url;
 
             Intent intent = new Intent(activity, FinestWebViewActivity.class);
-
-            if (rtl != null)
-                intent.putExtra("rtl", rtl.booleanValue());
-            if (theme != null)
-                intent.putExtra("theme", theme.intValue());
-
-            if (statusBarColor != null)
-                intent.putExtra("statusBarColor", statusBarColor.intValue());
-
-            if (toolbarColor != null)
-                intent.putExtra("toolbarColor", toolbarColor.intValue());
-            if (toolbarScrollFlags != null)
-                intent.putExtra("toolbarScrollFlags", toolbarScrollFlags.intValue());
-
-            if (iconDefaultColor != null)
-                intent.putExtra("iconDefaultColor", iconDefaultColor.intValue());
-            if (iconDisabledColor != null)
-                intent.putExtra("iconDisabledColor", iconDisabledColor.intValue());
-            if (iconPressedColor != null)
-                intent.putExtra("iconPressedColor", iconPressedColor.intValue());
-            if (iconSelector != null)
-                intent.putExtra("iconSelector", iconSelector.intValue());
-
-            if (showSwipeRefreshLayout != null)
-                intent.putExtra("showSwipeRefreshLayout", showSwipeRefreshLayout.booleanValue());
-            if (swipeRefreshColor != null)
-                intent.putExtra("swipeRefreshColor", swipeRefreshColor.intValue());
-            if (swipeRefreshColors != null) {
-                int[] colors = new int[swipeRefreshColors.length];
-                for (int i = 0; i < swipeRefreshColors.length; i++)
-                    colors[i] = swipeRefreshColors[i];
-                intent.putExtra("swipeRefreshColors", colors);
-            }
-
-            if (showDivider != null)
-                intent.putExtra("showDivider", showDivider.booleanValue());
-            if (gradientDivider != null)
-                intent.putExtra("gradientDivider", gradientDivider.booleanValue());
-            if (dividerColor != null)
-                intent.putExtra("dividerColor", dividerColor.intValue());
-            if (dividerHeight != null)
-                intent.putExtra("dividerHeight", dividerHeight.floatValue());
-
-            if (showProgressBar != null)
-                intent.putExtra("showProgressBar", showProgressBar.booleanValue());
-            if (progressBarColor != null)
-                intent.putExtra("progressBarColor", progressBarColor.intValue());
-            if (progressBarHeight != null)
-                intent.putExtra("progressBarHeight", progressBarHeight.floatValue());
-            if (progressBarPosition != null)
-                intent.putExtra("progressBarPosition", progressBarPosition);
-
-            if (titleDefault != null)
-                intent.putExtra("titleDefault", titleDefault);
-            if (updateTitleFromHtml != null)
-                intent.putExtra("updateTitleFromHtml", updateTitleFromHtml.booleanValue());
-            if (titleSize != null)
-                intent.putExtra("titleSize", titleSize.floatValue());
-            if (titleFont != null)
-                intent.putExtra("titleFont", titleFont);
-            if (titleColor != null)
-                intent.putExtra("titleColor", titleColor.intValue());
-
-            if (showUrl != null)
-                intent.putExtra("showUrl", showUrl.booleanValue());
-            if (urlSize != null)
-                intent.putExtra("urlSize", urlSize.floatValue());
-            if (urlFont != null)
-                intent.putExtra("urlFont", urlFont);
-            if (urlColor != null)
-                intent.putExtra("urlColor", urlColor.intValue());
-
-            if (menuColor != null)
-                intent.putExtra("menuColor", menuColor.intValue());
-            if (menuDropShadowColor != null)
-                intent.putExtra("menuDropShadowColor", menuDropShadowColor.intValue());
-            if (menuDropShadowSize != null)
-                intent.putExtra("menuDropShadowSize", menuDropShadowSize.floatValue());
-            if (menuSelector != null)
-                intent.putExtra("menuSelector", menuSelector.intValue());
-
-            if (menuTextSize != null)
-                intent.putExtra("menuTextSize", menuTextSize.floatValue());
-            if (menuTextFont != null)
-                intent.putExtra("menuTextFont", menuTextFont);
-            if (menuTextColor != null)
-                intent.putExtra("menuTextColor", menuTextColor.intValue());
-
-            if (menuTextGravity != null)
-                intent.putExtra("menuTextGravity", menuTextGravity.intValue());
-            if (menuTextPaddingLeft != null)
-                intent.putExtra("menuTextPaddingLeft", menuTextPaddingLeft.floatValue());
-            if (menuTextPaddingRight != null)
-                intent.putExtra("menuTextPaddingRight", menuTextPaddingRight.floatValue());
-
-            if (showMenuRefresh != null)
-                intent.putExtra("showMenuRefresh", showMenuRefresh.booleanValue());
-            if (stringResRefresh != null)
-                intent.putExtra("stringResRefresh", stringResRefresh.intValue());
-            if (showMenuShareVia != null)
-                intent.putExtra("showMenuShareVia", showMenuShareVia.booleanValue());
-            if (stringResShareVia != null)
-                intent.putExtra("stringResShareVia", stringResShareVia.intValue());
-            if (showMenuCopyLink != null)
-                intent.putExtra("showMenuCopyLink", showMenuCopyLink.booleanValue());
-            if (stringResCopyLink != null)
-                intent.putExtra("stringResCopyLink", stringResCopyLink.intValue());
-            if (showMenuOpenWith != null)
-                intent.putExtra("showMenuOpenWith", showMenuOpenWith.booleanValue());
-            if (stringResOpenWith != null)
-                intent.putExtra("stringResOpenWith", stringResOpenWith.intValue());
-
-            if (animationCloseEnter != null)
-                intent.putExtra("animationCloseEnter", animationCloseEnter.intValue());
-            if (animationCloseExit != null)
-                intent.putExtra("animationCloseExit", animationCloseExit.intValue());
-
-            if (backPressToClose != null)
-                intent.putExtra("backPressToClose", backPressToClose.booleanValue());
-            if (stringResCopiedToClipboard != null)
-                intent.putExtra("stringResCopiedToClipboard", stringResCopiedToClipboard.intValue());
-
-            if (webViewJavaScriptEnabled != null)
-                intent.putExtra("webViewJavaScriptEnabled", webViewJavaScriptEnabled.booleanValue());
-            if (webViewAppCacheEnabled != null)
-                intent.putExtra("webViewAppCacheEnabled", webViewAppCacheEnabled.booleanValue());
-            if (webViewAllowFileAccess != null)
-                intent.putExtra("webViewAllowFileAccess", webViewAllowFileAccess.booleanValue());
-            if (webViewUseWideViewPort != null)
-                intent.putExtra("webViewUseWideViewPort", webViewUseWideViewPort.booleanValue());
-            if (webViewLoadWithOverviewMode != null)
-                intent.putExtra("webViewLoadWithOverviewMode", webViewLoadWithOverviewMode.booleanValue());
-            if (webViewDomStorageEnabled != null)
-                intent.putExtra("webViewDomStorageEnabled", webViewDomStorageEnabled.booleanValue());
-            if (webViewBuiltInZoomControls != null)
-                intent.putExtra("webViewBuiltInZoomControls", webViewBuiltInZoomControls.booleanValue());
-            if (webViewDisplayZoomControls != null)
-                intent.putExtra("webViewDisplayZoomControls", webViewDisplayZoomControls.booleanValue());
-            if (webViewDesktopMode != null)
-                intent.putExtra("webViewDesktopMode", webViewDesktopMode.booleanValue());
-
-            if (injectJavaScript != null)
-                intent.putExtra("injectJavaScript", injectJavaScript);
-
-            intent.putExtra("url", url);
+            intent.putExtra("builder", this);
 
             activity.startActivity(intent);
             activity.overridePendingTransition(animationOpenEnter == null ? R.anim.modal_activity_open_enter : animationOpenEnter,

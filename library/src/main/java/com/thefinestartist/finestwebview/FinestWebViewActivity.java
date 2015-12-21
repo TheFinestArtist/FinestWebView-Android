@@ -158,87 +158,94 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 a.getResourceId(6, 0) : R.drawable.selector_light_theme;
         a.recycle();
 
-        rtl = intent.getBooleanExtra("rtl", getResources().getBoolean(R.bool.is_right_to_left));
-        theme = intent.getIntExtra("theme", 0);
+        FinestWebView.Builder builder = (FinestWebView.Builder) intent.getSerializableExtra("builder");
 
-        statusBarColor = intent.getIntExtra("statusBarColor", colorPrimaryDark);
+        rtl = builder.rtl != null ? builder.rtl : getResources().getBoolean(R.bool.is_right_to_left);
+        theme = builder.theme != null ? builder.theme : 0;
 
-        toolbarColor = intent.getIntExtra("toolbarColor", colorPrimary);
-        toolbarScrollFlags = intent.getIntExtra("toolbarScrollFlags", AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
-                | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
+        statusBarColor = builder.statusBarColor != null ? builder.statusBarColor : colorPrimaryDark;
 
-        iconDefaultColor = intent.getIntExtra("iconDefaultColor", colorAccent);
-        iconDisabledColor = intent.getIntExtra("iconDisabledColor", ColorHelper.disableColor(iconDefaultColor));
-        iconPressedColor = intent.getIntExtra("iconPressedColor", iconDefaultColor);
-        iconSelector = intent.getIntExtra("iconSelector", selectableItemBackgroundBorderless);
+        toolbarColor = builder.toolbarColor != null ? builder.toolbarColor : colorPrimary;
+        toolbarScrollFlags = builder.toolbarScrollFlags != null ? builder.toolbarScrollFlags : AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
+                | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS;
 
-        showSwipeRefreshLayout = intent.getBooleanExtra("showSwipeRefreshLayout", true);
-        swipeRefreshColor = intent.getIntExtra("swipeRefreshColor", colorAccent);
-        swipeRefreshColors = intent.getIntArrayExtra("swipeRefreshColors");
+        iconDefaultColor = builder.iconDefaultColor != null ? builder.iconDefaultColor : colorAccent;
+        iconDisabledColor = builder.iconDisabledColor != null ? builder.iconDisabledColor : ColorHelper.disableColor(iconDefaultColor);
+        iconPressedColor = builder.iconPressedColor != null ? builder.iconPressedColor : iconDefaultColor;
+        iconSelector = builder.iconSelector != null ? builder.iconSelector : selectableItemBackgroundBorderless;
 
-        showDivider = intent.getBooleanExtra("showDivider", true);
-        gradientDivider = intent.getBooleanExtra("gradientDivider", true);
-        dividerColor = intent.getIntExtra("dividerColor", ContextCompat.getColor(this, R.color.finestBlack10));
-        dividerHeight = intent.getFloatExtra("dividerHeight", getResources().getDimension(R.dimen.defaultDividerHeight));
+        showSwipeRefreshLayout = builder.showSwipeRefreshLayout != null ? builder.showSwipeRefreshLayout : true;
+        swipeRefreshColor = builder.swipeRefreshColor != null ? builder.swipeRefreshColor : colorAccent;
+        if (builder.swipeRefreshColors != null) {
+            int[] colors = new int[builder.swipeRefreshColors.length];
+            for (int i = 0; i < builder.swipeRefreshColors.length; i++)
+                colors[i] = builder.swipeRefreshColors[i];
+            swipeRefreshColors = colors;
+        }
 
-        showProgressBar = intent.getBooleanExtra("showProgressBar", true);
-        progressBarColor = intent.getIntExtra("progressBarColor", colorAccent);
-        progressBarHeight = intent.getFloatExtra("progressBarHeight", getResources().getDimension(R.dimen.defaultProgressBarHeight));
-        progressBarPosition = Position.fromSerializable(intent.getSerializableExtra("progressBarPosition"));
+        showDivider = builder.showDivider != null ? builder.showDivider : true;
+        gradientDivider = builder.gradientDivider != null ? builder.gradientDivider : true;
+        dividerColor = builder.dividerColor != null ? builder.dividerColor : ContextCompat.getColor(this, R.color.finestBlack10);
+        dividerHeight = builder.dividerHeight != null ? builder.dividerHeight : getResources().getDimension(R.dimen.defaultDividerHeight);
 
-        titleDefault = intent.getStringExtra("titleDefault");
-        updateTitleFromHtml = intent.getBooleanExtra("updateTitleFromHtml", true);
-        titleSize = intent.getFloatExtra("titleSize", getResources().getDimension(R.dimen.defaultTitleSize));
-        titleFont = intent.getStringExtra("titleFont") == null ? "Roboto-Medium.ttf" : intent.getStringExtra("titleFont");
-        titleColor = intent.getIntExtra("titleColor", textColorPrimary);
+        showProgressBar = builder.showProgressBar != null ? builder.showProgressBar : true;
+        progressBarColor = builder.progressBarColor != null ? builder.progressBarColor : colorAccent;
+        progressBarHeight = builder.progressBarHeight != null ? builder.progressBarHeight : getResources().getDimension(R.dimen.defaultProgressBarHeight);
+        progressBarPosition = builder.progressBarPosition != null ? builder.progressBarPosition : Position.BOTTON_OF_TOOLBAR;
 
-        showUrl = intent.getBooleanExtra("showUrl", true);
-        urlSize = intent.getFloatExtra("urlSize", getResources().getDimension(R.dimen.defaultUrlSize));
-        urlFont = intent.getStringExtra("urlFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("urlFont");
-        urlColor = intent.getIntExtra("urlColor", textColorSecondary);
+        titleDefault = builder.titleDefault;
+        updateTitleFromHtml = builder.updateTitleFromHtml != null ? builder.updateTitleFromHtml : true;
+        titleSize = builder.titleSize != null ? builder.titleSize : getResources().getDimension(R.dimen.defaultTitleSize);
+        titleFont = builder.titleFont != null ? builder.titleFont : "Roboto-Medium.ttf";
+        titleColor = builder.titleColor != null ? builder.titleColor : textColorPrimary;
 
-        menuColor = intent.getIntExtra("menuColor", ContextCompat.getColor(this, R.color.finestWhite));
-        menuDropShadowColor = intent.getIntExtra("menuDropShadowColor", ContextCompat.getColor(this, R.color.finestBlack10));
-        menuDropShadowSize = intent.getFloatExtra("menuDropShadowSize", getResources().getDimension(R.dimen.defaultMenuDropShadowSize));
-        menuSelector = intent.getIntExtra("menuSelector", selectableItemBackground);
+        showUrl = builder.showUrl != null ? builder.showUrl : true;
+        urlSize = builder.urlSize != null ? builder.urlSize : getResources().getDimension(R.dimen.defaultUrlSize);
+        urlFont = builder.urlFont != null ? builder.urlFont : "Roboto-Regular.ttf";
+        urlColor = builder.urlColor != null ? builder.urlColor : textColorSecondary;
 
-        menuTextSize = intent.getFloatExtra("menuTextSize", getResources().getDimension(R.dimen.defaultMenuTextSize));
-        menuTextFont = intent.getStringExtra("menuTextFont") == null ? "Roboto-Regular.ttf" : intent.getStringExtra("menuTextFont");
-        menuTextColor = intent.getIntExtra("menuTextColor", ContextCompat.getColor(this, R.color.finestBlack));
+        menuColor = builder.menuColor != null ? builder.menuColor : ContextCompat.getColor(this, R.color.finestWhite);
+        menuDropShadowColor = builder.menuDropShadowColor != null ? builder.menuDropShadowColor : ContextCompat.getColor(this, R.color.finestBlack10);
+        menuDropShadowSize = builder.menuDropShadowSize != null ? builder.menuDropShadowSize : getResources().getDimension(R.dimen.defaultMenuDropShadowSize);
+        menuSelector = builder.menuSelector != null ? builder.menuSelector : selectableItemBackground;
 
-        menuTextGravity = intent.getIntExtra("menuTextGravity", Gravity.CENTER_VERTICAL | Gravity.START);
-        menuTextPaddingLeft = intent.getFloatExtra("menuTextPaddingLeft",
-                rtl ? getResources().getDimension(R.dimen.defaultMenuTextPaddingRight) : getResources().getDimension(R.dimen.defaultMenuTextPaddingLeft));
-        menuTextPaddingRight = intent.getFloatExtra("menuTextPaddingRight",
-                rtl ? getResources().getDimension(R.dimen.defaultMenuTextPaddingLeft) : getResources().getDimension(R.dimen.defaultMenuTextPaddingRight));
+        menuTextSize = builder.menuTextSize != null ? builder.menuTextSize : getResources().getDimension(R.dimen.defaultMenuTextSize);
+        menuTextFont = builder.menuTextFont != null ? builder.menuTextFont : "Roboto-Regular.ttf";
+        menuTextColor = builder.menuTextColor != null ? builder.menuTextColor : ContextCompat.getColor(this, R.color.finestBlack);
 
-        showMenuRefresh = intent.getBooleanExtra("showMenuRefresh", true);
-        stringResRefresh = intent.getIntExtra("stringResRefresh", R.string.refresh);
-        showMenuShareVia = intent.getBooleanExtra("showMenuShareVia", true);
-        stringResShareVia = intent.getIntExtra("stringResShareVia", R.string.share_via);
-        showMenuCopyLink = intent.getBooleanExtra("showMenuCopyLink", true);
-        stringResCopyLink = intent.getIntExtra("stringResCopyLink", R.string.copy_link);
-        showMenuOpenWith = intent.getBooleanExtra("showMenuOpenWith", true);
-        stringResOpenWith = intent.getIntExtra("stringResOpenWith", R.string.open_with);
+        menuTextGravity = builder.menuTextGravity != null ? builder.menuTextGravity : Gravity.CENTER_VERTICAL | Gravity.START;
+        menuTextPaddingLeft = builder.menuTextPaddingLeft != null ? builder.menuTextPaddingLeft :
+                rtl ? getResources().getDimension(R.dimen.defaultMenuTextPaddingRight) : getResources().getDimension(R.dimen.defaultMenuTextPaddingLeft);
+        menuTextPaddingRight = builder.menuTextPaddingRight != null ? builder.menuTextPaddingRight :
+                rtl ? getResources().getDimension(R.dimen.defaultMenuTextPaddingLeft) : getResources().getDimension(R.dimen.defaultMenuTextPaddingRight);
 
-        animationCloseEnter = intent.getIntExtra("animationCloseEnter", R.anim.modal_activity_close_enter);
-        animationCloseExit = intent.getIntExtra("animationCloseExit", R.anim.modal_activity_close_exit);
+        showMenuRefresh = builder.showMenuRefresh != null ? builder.showMenuRefresh : true;
+        stringResRefresh = builder.stringResRefresh != null ? builder.stringResRefresh : R.string.refresh;
+        showMenuShareVia = builder.showMenuShareVia != null ? builder.showMenuShareVia : true;
+        stringResShareVia = builder.stringResShareVia != null ? builder.stringResShareVia : R.string.share_via;
+        showMenuCopyLink = builder.showMenuCopyLink != null ? builder.showMenuCopyLink : true;
+        stringResCopyLink = builder.stringResCopyLink != null ? builder.stringResCopyLink : R.string.copy_link;
+        showMenuOpenWith = builder.showMenuOpenWith != null ? builder.showMenuOpenWith : true;
+        stringResOpenWith = builder.stringResOpenWith != null ? builder.stringResOpenWith : R.string.open_with;
 
-        backPressToClose = intent.getBooleanExtra("backPressToClose", false);
-        stringResCopiedToClipboard = intent.getIntExtra("stringResCopiedToClipboard", R.string.copied_to_clipboard);
+        animationCloseEnter = builder.animationCloseEnter != null ? builder.animationCloseEnter : R.anim.modal_activity_close_enter;
+        animationCloseExit = builder.animationCloseExit != null ? builder.animationCloseExit : R.anim.modal_activity_close_exit;
 
-        webViewJavaScriptEnabled = intent.getBooleanExtra("webViewJavaScriptEnabled", true);
-        webViewAppCacheEnabled = intent.getBooleanExtra("webViewAppCacheEnabled", true);
-        webViewAllowFileAccess = intent.getBooleanExtra("webViewAllowFileAccess", true);
-        webViewUseWideViewPort = intent.getBooleanExtra("webViewUseWideViewPort", true);
-        webViewLoadWithOverviewMode = intent.getBooleanExtra("webViewLoadWithOverviewMode", true);
-        webViewDomStorageEnabled = intent.getBooleanExtra("webViewDomStorageEnabled", true);
-        webViewBuiltInZoomControls = intent.getBooleanExtra("webViewBuiltInZoomControls", false);
-        webViewDisplayZoomControls = intent.getBooleanExtra("webViewDisplayZoomControls", false);
-        webViewDesktopMode = intent.getBooleanExtra("webViewDesktopMode", false);
+        backPressToClose = builder.backPressToClose != null ? builder.backPressToClose : false;
+        stringResCopiedToClipboard = builder.stringResCopiedToClipboard != null ? builder.stringResCopiedToClipboard : R.string.copied_to_clipboard;
 
-        injectJavaScript = intent.getStringExtra("injectJavaScript");
-        url = intent.getStringExtra("url");
+        webViewJavaScriptEnabled = builder.webViewJavaScriptEnabled != null ? builder.webViewJavaScriptEnabled : true;
+        webViewAppCacheEnabled = builder.webViewAppCacheEnabled != null ? builder.webViewAppCacheEnabled : true;
+        webViewAllowFileAccess = builder.webViewAllowFileAccess != null ? builder.webViewAllowFileAccess : true;
+        webViewUseWideViewPort = builder.webViewUseWideViewPort != null ? builder.webViewUseWideViewPort : true;
+        webViewLoadWithOverviewMode = builder.webViewLoadWithOverviewMode != null ? builder.webViewLoadWithOverviewMode : true;
+        webViewDomStorageEnabled = builder.webViewDomStorageEnabled != null ? builder.webViewDomStorageEnabled : true;
+        webViewBuiltInZoomControls = builder.webViewBuiltInZoomControls != null ? builder.webViewBuiltInZoomControls : false;
+        webViewDisplayZoomControls = builder.webViewDisplayZoomControls != null ? builder.webViewDisplayZoomControls : false;
+        webViewDesktopMode = builder.webViewDesktopMode != null ? builder.webViewDesktopMode : false;
+
+        injectJavaScript = builder.injectJavaScript;
+        url = builder.url;
     }
 
     protected CoordinatorLayout coordinatorLayout;
