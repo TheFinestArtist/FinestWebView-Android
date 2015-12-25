@@ -30,6 +30,7 @@ import android.view.animation.AnimationUtils;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -281,6 +282,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected TextView menuCopyLinkTv;
     protected LinearLayout menuOpenWith;
     protected TextView menuOpenWithTv;
+    protected FrameLayout webLayout;
 
     protected void bindViews() {
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
@@ -298,7 +300,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         more = (ImageButton) findViewById(R.id.more);
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        webView = (WebView) findViewById(R.id.webView);
+
 
         gradient = findViewById(R.id.gradient);
         divider = findViewById(R.id.divider);
@@ -316,6 +318,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         menuCopyLinkTv = (TextView) findViewById(R.id.menuCopyLinkTv);
         menuOpenWith = (LinearLayout) findViewById(R.id.menuOpenWith);
         menuOpenWithTv = (TextView) findViewById(R.id.menuOpenWithTv);
+        webLayout=(FrameLayout)findViewById(R.id.webLayout);
+        webView = new WebView(getApplicationContext());
+        webLayout.addView(webView);
     }
 
     protected void layoutViews() {
@@ -882,7 +887,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (webView != null)
+        if(webLayout!=null) {
+            webLayout.removeAllViews();
             webView.destroy();
+        }
     }
 }
