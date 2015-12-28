@@ -138,6 +138,16 @@ iconPressedColorRes(@ColorRes int colorRes);
 iconSelector(@DrawableRes int selectorRes);
 ```
 
+**Icon Options**
+showIconClose(boolean showIconClose);
+disableIconClose(boolean disableIconClose);
+showIconBack(boolean showIconBack);
+disableIconBack(boolean disableIconBack);
+showIconForward(boolean showIconForward);
+disableIconForward(boolean disableIconForward);
+showIconMenu(boolean showIconMenu);
+disableIconMenu(boolean disableIconMenu);
+
 **SwipeRefreshLayout Options**
 ```java
 showSwipeRefreshLayout(boolean showSwipeRefreshLayout);

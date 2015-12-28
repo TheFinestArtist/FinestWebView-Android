@@ -84,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
 //                    .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
                     .setCustomAnimations(R.anim.slide_left_in, R.anim.hold, R.anim.hold, R.anim.slide_right_out)
 //                    .setCustomAnimations(R.anim.fade_in_fast, R.anim.fade_out_medium, R.anim.fade_in_medium, R.anim.fade_out_fast)
+                    .disableIconBack(true)
+                    .disableIconClose(true)
+                    .disableIconForward(true)
+                    .disableIconMenu(true)
                     .show("https://dribbble.com");
         }
     }

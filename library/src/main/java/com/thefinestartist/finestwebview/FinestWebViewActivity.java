@@ -67,6 +67,15 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected int iconPressedColor;
     protected int iconSelector;
 
+    protected boolean showIconClose;
+    protected boolean disableIconClose;
+    protected boolean showIconBack;
+    protected boolean disableIconBack;
+    protected boolean showIconForward;
+    protected boolean disableIconForward;
+    protected boolean showIconMenu;
+    protected boolean disableIconMenu;
+
     protected boolean showSwipeRefreshLayout;
     protected int swipeRefreshColor;
     protected int[] swipeRefreshColors;
@@ -174,6 +183,15 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         iconDisabledColor = builder.iconDisabledColor != null ? builder.iconDisabledColor : ColorHelper.disableColor(iconDefaultColor);
         iconPressedColor = builder.iconPressedColor != null ? builder.iconPressedColor : iconDefaultColor;
         iconSelector = builder.iconSelector != null ? builder.iconSelector : selectableItemBackgroundBorderless;
+
+        showIconClose = builder.showIconClose != null ? builder.showIconClose : true;
+        disableIconClose = builder.disableIconClose != null ? builder.disableIconClose : false;
+        showIconBack = builder.showIconBack != null ? builder.showIconBack : true;
+        disableIconBack = builder.disableIconBack != null ? builder.disableIconBack : false;
+        showIconForward = builder.showIconForward != null ? builder.showIconForward : true;
+        disableIconForward = builder.disableIconForward != null ? builder.disableIconForward : false;
+        showIconMenu = builder.showIconMenu != null ? builder.showIconMenu : true;
+        disableIconMenu = builder.disableIconMenu != null ? builder.disableIconMenu : false;
 
         showSwipeRefreshLayout = builder.showSwipeRefreshLayout != null ? builder.showSwipeRefreshLayout : true;
         swipeRefreshColor = builder.swipeRefreshColor != null ? builder.swipeRefreshColor : colorAccent;
@@ -301,7 +319,6 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
 
-
         gradient = findViewById(R.id.gradient);
         divider = findViewById(R.id.divider);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -318,7 +335,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         menuCopyLinkTv = (TextView) findViewById(R.id.menuCopyLinkTv);
         menuOpenWith = (LinearLayout) findViewById(R.id.menuOpenWith);
         menuOpenWithTv = (TextView) findViewById(R.id.menuOpenWithTv);
-        webLayout=(FrameLayout)findViewById(R.id.webLayout);
+        webLayout = (FrameLayout) findViewById(R.id.webLayout);
         webView = new WebView(getApplicationContext());
         webLayout.addView(webView);
     }
@@ -434,10 +451,15 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             back.setBackgroundResource(iconSelector);
             forward.setBackgroundResource(iconSelector);
             more.setBackgroundResource(iconSelector);
-            if (showMenuRefresh || showMenuShareVia || showMenuCopyLink || showMenuOpenWith)
+
+            close.setVisibility(showIconClose ? View.VISIBLE : View.GONE);
+            close.setEnabled(!disableIconClose);
+
+            if ((showMenuRefresh || showMenuShareVia || showMenuCopyLink || showMenuOpenWith) && showIconMenu)
                 more.setVisibility(View.VISIBLE);
             else
                 more.setVisibility(View.GONE);
+            more.setEnabled(!disableIconMenu);
         }
 
         { // WebView
@@ -833,10 +855,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             requestCenterLayout();
 
             if (view.canGoBack() || view.canGoForward()) {
-                back.setVisibility(View.VISIBLE);
-                forward.setVisibility(View.VISIBLE);
-                back.setEnabled(rtl ? view.canGoForward() : view.canGoBack());
-                forward.setEnabled(rtl ? view.canGoBack() : view.canGoForward());
+                back.setVisibility(showIconBack ? View.VISIBLE : View.GONE);
+                forward.setVisibility(showIconForward ? View.VISIBLE : View.GONE);
+                back.setEnabled(!disableIconBack && (rtl ? view.canGoForward() : view.canGoBack()));
+                forward.setEnabled(!disableIconForward && (rtl ? view.canGoBack() : view.canGoForward()));
             } else {
                 back.setVisibility(View.GONE);
                 forward.setVisibility(View.GONE);
@@ -887,7 +909,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(webLayout!=null) {
+        if (webLayout != null) {
             webLayout.removeAllViews();
             webView.destroy();
         }

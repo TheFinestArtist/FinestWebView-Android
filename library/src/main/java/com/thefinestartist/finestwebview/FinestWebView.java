@@ -40,6 +40,15 @@ public class FinestWebView {
         protected Integer iconPressedColor;
         protected Integer iconSelector;
 
+        protected Boolean showIconClose;
+        protected Boolean disableIconClose;
+        protected Boolean showIconBack;
+        protected Boolean disableIconBack;
+        protected Boolean showIconForward;
+        protected Boolean disableIconForward;
+        protected Boolean showIconMenu;
+        protected Boolean disableIconMenu;
+
         protected Boolean showSwipeRefreshLayout;
         protected Integer swipeRefreshColor;
         protected Integer[] swipeRefreshColors;
@@ -180,6 +189,46 @@ public class FinestWebView {
 
         public Builder iconSelector(@DrawableRes int selectorRes) {
             this.iconSelector = selectorRes;
+            return this;
+        }
+
+        public Builder showIconClose(boolean showIconClose) {
+            this.showIconClose = showIconClose;
+            return this;
+        }
+
+        public Builder disableIconClose(boolean disableIconClose) {
+            this.disableIconClose = disableIconClose;
+            return this;
+        }
+
+        public Builder showIconBack(boolean showIconBack) {
+            this.showIconBack = showIconBack;
+            return this;
+        }
+
+        public Builder disableIconBack(boolean disableIconBack) {
+            this.disableIconBack = disableIconBack;
+            return this;
+        }
+
+        public Builder showIconForward(boolean showIconForward) {
+            this.showIconForward = showIconForward;
+            return this;
+        }
+
+        public Builder disableIconForward(boolean disableIconForward) {
+            this.disableIconForward = disableIconForward;
+            return this;
+        }
+
+        public Builder showIconMenu(boolean showIconMenu) {
+            this.showIconMenu = showIconMenu;
+            return this;
+        }
+
+        public Builder disableIconMenu(boolean disableIconMenu) {
+            this.disableIconMenu = disableIconMenu;
             return this;
         }
 
