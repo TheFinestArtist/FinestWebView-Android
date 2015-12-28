@@ -139,6 +139,7 @@ iconSelector(@DrawableRes int selectorRes);
 ```
 
 **Icon Options**
+```java
 showIconClose(boolean showIconClose);
 disableIconClose(boolean disableIconClose);
 showIconBack(boolean showIconBack);
@@ -147,6 +148,7 @@ showIconForward(boolean showIconForward);
 disableIconForward(boolean disableIconForward);
 showIconMenu(boolean showIconMenu);
 disableIconMenu(boolean disableIconMenu);
+```
 
 **SwipeRefreshLayout Options**
 ```java
