@@ -253,15 +253,47 @@ stringResCopiedToClipboard(@StringRes int stringResCopiedToClipboard);
 
 **WebView Options**
 ```java
-webViewJavaScriptEnabled(boolean webViewJavaScriptEnabled);
-webViewAppCacheEnabled(boolean webViewAppCacheEnabled);
-webViewAllowFileAccess(boolean webViewAllowFileAccess);
-webViewUseWideViewPort(boolean webViewUseWideViewPort);
-webViewLoadWithOverviewMode(boolean webViewLoadWithOverviewMode);
-webViewDomStorageEnabled(boolean webViewDomStorageEnabled);
-webViewDisplayZoomControls(boolean webViewDisplayZoomControls);
-webViewBuiltInZoomControls(boolean webViewBuiltInZoomControls);
-webViewDesktopMode(boolean webViewDesktopMode);
+webViewSupportZoom(boolean webViewSupportZoom);
+webViewMediaPlaybackRequiresUserGesture (boolean webViewMediaPlaybackRequiresUserGesture);
+webViewBuiltInZoomControls (boolean webViewBuiltInZoomControls);
+webViewDisplayZoomControls (boolean webViewDisplayZoomControls);
+webViewAllowFileAccess (boolean webViewAllowFileAccess);
+webViewAllowContentAccess (boolean webViewAllowContentAccess);
+webViewLoadWithOverviewMode (boolean webViewLoadWithOverviewMode);
+webViewSaveFormData (boolean webViewSaveFormData);
+webViewTextZoom (int webViewTextZoom);
+webViewUseWideViewPort (boolean webViewUseWideViewPort);
+webViewSupportMultipleWindows (boolean webViewSupportMultipleWindows);
+webViewLayoutAlgorithm (WebSettings.LayoutAlgorithm webViewLayoutAlgorithm);
+webViewStandardFontFamily (String webViewStandardFontFamily);
+webViewFixedFontFamily (String webViewFixedFontFamily);
+webViewSansSerifFontFamily (String webViewSansSerifFontFamily);
+webViewSerifFontFamily (String webViewSerifFontFamily);
+webViewCursiveFontFamily (String webViewCursiveFontFamily);
+webViewFantasyFontFamily (String webViewFantasyFontFamily);
+webViewMinimumFontSize (int webViewMinimumFontSize);
+webViewMinimumLogicalFontSize (int webViewMinimumLogicalFontSize);
+webViewDefaultFontSize (int webViewDefaultFontSize);
+webViewDefaultFixedFontSize (int webViewDefaultFixedFontSize);
+webViewLoadsImagesAutomatically (boolean webViewLoadsImagesAutomatically);
+webViewBlockNetworkImage (boolean webViewBlockNetworkImage);
+webViewBlockNetworkLoads (boolean webViewBlockNetworkLoads);
+webViewJavaScriptEnabled (boolean webViewJavaScriptEnabled);
+webViewAllowUniversalAccessFromFileURLs (boolean webViewAllowUniversalAccessFromFileURLs);
+webViewAllowFileAccessFromFileURLs (boolean webViewAllowFileAccessFromFileURLs);
+webViewGeolocationDatabasePath (String webViewGeolocationDatabasePath);
+webViewAppCacheEnabled (boolean webViewAppCacheEnabled);
+webViewAppCachePath (String webViewAppCachePath);
+webViewDatabaseEnabled (boolean webViewDatabaseEnabled);
+webViewDomStorageEnabled (boolean webViewDomStorageEnabled);
+webViewGeolocationEnabled (boolean webViewGeolocationEnabled);
+webViewJavaScriptCanOpenWindowsAutomatically (boolean webViewJavaScriptCanOpenWindowsAutomatically);
+webViewDefaultTextEncodingName (String webViewDefaultTextEncodingName);
+webViewUserAgentString (String webViewUserAgentString);
+webViewNeedInitialFocus (boolean webViewNeedInitialFocus);
+webViewCacheMode (int webViewCacheMode);
+webViewMixedContentMode (int webViewMixedContentMode);
+webViewOffscreenPreRaster (boolean webViewOffscreenPreRaster);
 
 injectJavaScript(String injectJavaScript);
 ```
@@ -407,6 +439,10 @@ new FinestWebView.Builder(activity)
     .rtl(true)
     .show(url);
 ```
+
+#### WebView Desktop Mode
+
+You can force WebView to show in desktop mode by setting `webViewUserAgentString("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0")`. 
 
 ## Designer
 

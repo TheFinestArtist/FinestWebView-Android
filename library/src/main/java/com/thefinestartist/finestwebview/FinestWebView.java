@@ -13,6 +13,7 @@ import android.support.annotation.StringRes;
 import android.support.annotation.StyleRes;
 import android.support.design.widget.AppBarLayout.LayoutParams.ScrollFlags;
 import android.support.v4.content.ContextCompat;
+import android.webkit.WebSettings;
 
 import com.thefinestartist.finestwebview.enums.Position;
 
@@ -104,15 +105,47 @@ public class FinestWebView {
         protected Boolean backPressToClose;
         protected Integer stringResCopiedToClipboard;
 
-        protected Boolean webViewJavaScriptEnabled;
-        protected Boolean webViewAppCacheEnabled;
-        protected Boolean webViewAllowFileAccess;
-        protected Boolean webViewUseWideViewPort;
-        protected Boolean webViewLoadWithOverviewMode;
-        protected Boolean webViewDomStorageEnabled;
+        protected Boolean webViewSupportZoom;
+        protected Boolean webViewMediaPlaybackRequiresUserGesture;
         protected Boolean webViewBuiltInZoomControls;
         protected Boolean webViewDisplayZoomControls;
-        protected Boolean webViewDesktopMode;
+        protected Boolean webViewAllowFileAccess;
+        protected Boolean webViewAllowContentAccess;
+        protected Boolean webViewLoadWithOverviewMode;
+        protected Boolean webViewSaveFormData;
+        protected Integer webViewTextZoom;
+        protected Boolean webViewUseWideViewPort;
+        protected Boolean webViewSupportMultipleWindows;
+        protected WebSettings.LayoutAlgorithm webViewLayoutAlgorithm;
+        protected String webViewStandardFontFamily;
+        protected String webViewFixedFontFamily;
+        protected String webViewSansSerifFontFamily;
+        protected String webViewSerifFontFamily;
+        protected String webViewCursiveFontFamily;
+        protected String webViewFantasyFontFamily;
+        protected Integer webViewMinimumFontSize;
+        protected Integer webViewMinimumLogicalFontSize;
+        protected Integer webViewDefaultFontSize;
+        protected Integer webViewDefaultFixedFontSize;
+        protected Boolean webViewLoadsImagesAutomatically;
+        protected Boolean webViewBlockNetworkImage;
+        protected Boolean webViewBlockNetworkLoads;
+        protected Boolean webViewJavaScriptEnabled;
+        protected Boolean webViewAllowUniversalAccessFromFileURLs;
+        protected Boolean webViewAllowFileAccessFromFileURLs;
+        protected String webViewGeolocationDatabasePath;
+        protected Boolean webViewAppCacheEnabled;
+        protected String webViewAppCachePath;
+        protected Boolean webViewDatabaseEnabled;
+        protected Boolean webViewDomStorageEnabled;
+        protected Boolean webViewGeolocationEnabled;
+        protected Boolean webViewJavaScriptCanOpenWindowsAutomatically;
+        protected String webViewDefaultTextEncodingName;
+        protected String webViewUserAgentString;
+        protected Boolean webViewNeedInitialFocus;
+        protected Integer webViewCacheMode;
+        protected Integer webViewMixedContentMode;
+        protected Boolean webViewOffscreenPreRaster;
 
         protected String injectJavaScript;
 
@@ -586,49 +619,217 @@ public class FinestWebView {
             return this;
         }
 
-        public Builder webViewJavaScriptEnabled(boolean webViewJavaScriptEnabled) {
-            this.webViewJavaScriptEnabled = webViewJavaScriptEnabled;
+        public Builder webViewSupportZoom(boolean webViewSupportZoom) {
+            this.webViewSupportZoom = webViewSupportZoom;
             return this;
         }
 
-        public Builder webViewAppCacheEnabled(boolean webViewAppCacheEnabled) {
-            this.webViewAppCacheEnabled = webViewAppCacheEnabled;
+        public Builder webViewMediaPlaybackRequiresUserGesture (boolean webViewMediaPlaybackRequiresUserGesture) {
+            this.webViewMediaPlaybackRequiresUserGesture = webViewMediaPlaybackRequiresUserGesture;
             return this;
         }
 
-        public Builder webViewAllowFileAccess(boolean webViewAllowFileAccess) {
-            this.webViewAllowFileAccess = webViewAllowFileAccess;
-            return this;
-        }
-
-        public Builder webViewUseWideViewPort(boolean webViewUseWideViewPort) {
-            this.webViewUseWideViewPort = webViewUseWideViewPort;
-            return this;
-        }
-
-        public Builder webViewLoadWithOverviewMode(boolean webViewLoadWithOverviewMode) {
-            this.webViewLoadWithOverviewMode = webViewLoadWithOverviewMode;
-            return this;
-        }
-
-        public Builder webViewDomStorageEnabled(boolean webViewDomStorageEnabled) {
-            this.webViewDomStorageEnabled = webViewDomStorageEnabled;
-            return this;
-        }
-
-        public Builder webViewBuiltInZoomControls(boolean webViewBuiltInZoomControls) {
+        public Builder webViewBuiltInZoomControls (boolean webViewBuiltInZoomControls) {
             this.webViewBuiltInZoomControls = webViewBuiltInZoomControls;
             return this;
         }
 
-        public Builder webViewDisplayZoomControls(boolean webViewDisplayZoomControls) {
+        public Builder webViewDisplayZoomControls (boolean webViewDisplayZoomControls) {
             this.webViewDisplayZoomControls = webViewDisplayZoomControls;
             return this;
         }
 
-        public Builder webViewDesktopMode(boolean webViewDesktopMode) {
-            this.webViewDesktopMode = webViewDesktopMode;
+        public Builder webViewAllowFileAccess (boolean webViewAllowFileAccess) {
+            this.webViewAllowFileAccess = webViewAllowFileAccess;
             return this;
+        }
+
+        public Builder webViewAllowContentAccess (boolean webViewAllowContentAccess) {
+            this.webViewAllowContentAccess = webViewAllowContentAccess;
+            return this;
+        }
+
+        public Builder webViewLoadWithOverviewMode (boolean webViewLoadWithOverviewMode) {
+            this.webViewLoadWithOverviewMode = webViewLoadWithOverviewMode;
+            return this;
+        }
+
+        public Builder webViewSaveFormData (boolean webViewSaveFormData) {
+            this.webViewSaveFormData = webViewSaveFormData;
+            return this;
+        }
+
+        public Builder webViewTextZoom (int webViewTextZoom) {
+            this.webViewTextZoom = webViewTextZoom;
+            return this;
+        }
+
+        public Builder webViewUseWideViewPort (boolean webViewUseWideViewPort) {
+            this.webViewUseWideViewPort = webViewUseWideViewPort;
+            return this;
+        }
+
+        public Builder webViewSupportMultipleWindows (boolean webViewSupportMultipleWindows) {
+            this.webViewSupportMultipleWindows = webViewSupportMultipleWindows;
+            return this;
+        }
+
+        public Builder webViewLayoutAlgorithm (WebSettings.LayoutAlgorithm webViewLayoutAlgorithm) {
+            this.webViewLayoutAlgorithm = webViewLayoutAlgorithm;
+            return this;
+        }
+
+        public Builder webViewStandardFontFamily (String webViewStandardFontFamily) {
+            this.webViewStandardFontFamily = webViewStandardFontFamily;
+            return this;
+        }
+
+        public Builder webViewFixedFontFamily (String webViewFixedFontFamily) {
+            this.webViewFixedFontFamily = webViewFixedFontFamily;
+            return this;
+        }
+
+        public Builder webViewSansSerifFontFamily (String webViewSansSerifFontFamily) {
+            this.webViewSansSerifFontFamily = webViewSansSerifFontFamily;
+            return this;
+        }
+
+        public Builder webViewSerifFontFamily (String webViewSerifFontFamily) {
+            this.webViewSerifFontFamily = webViewSerifFontFamily;
+            return this;
+        }
+
+        public Builder webViewCursiveFontFamily (String webViewCursiveFontFamily) {
+            this.webViewCursiveFontFamily = webViewCursiveFontFamily;
+            return this;
+        }
+
+        public Builder webViewFantasyFontFamily (String webViewFantasyFontFamily) {
+            this.webViewFantasyFontFamily = webViewFantasyFontFamily;
+            return this;
+        }
+
+        public Builder webViewMinimumFontSize (int webViewMinimumFontSize) {
+            this.webViewMinimumFontSize = webViewMinimumFontSize;
+            return this;
+        }
+
+        public Builder webViewMinimumLogicalFontSize (int webViewMinimumLogicalFontSize) {
+            this.webViewMinimumLogicalFontSize = webViewMinimumLogicalFontSize;
+            return this;
+        }
+
+        public Builder webViewDefaultFontSize (int webViewDefaultFontSize) {
+            this.webViewDefaultFontSize = webViewDefaultFontSize;
+            return this;
+        }
+
+        public Builder webViewDefaultFixedFontSize (int webViewDefaultFixedFontSize) {
+            this.webViewDefaultFixedFontSize = webViewDefaultFixedFontSize;
+            return this;
+        }
+
+        public Builder webViewLoadsImagesAutomatically (boolean webViewLoadsImagesAutomatically) {
+            this.webViewLoadsImagesAutomatically = webViewLoadsImagesAutomatically;
+            return this;
+        }
+
+        public Builder webViewBlockNetworkImage (boolean webViewBlockNetworkImage) {
+            this.webViewBlockNetworkImage = webViewBlockNetworkImage;
+            return this;
+        }
+
+        public Builder webViewBlockNetworkLoads (boolean webViewBlockNetworkLoads) {
+            this.webViewBlockNetworkLoads = webViewBlockNetworkLoads;
+            return this;
+        }
+
+        public Builder webViewJavaScriptEnabled (boolean webViewJavaScriptEnabled) {
+            this.webViewJavaScriptEnabled = webViewJavaScriptEnabled;
+            return this;
+        }
+
+        public Builder webViewAllowUniversalAccessFromFileURLs (boolean webViewAllowUniversalAccessFromFileURLs) {
+            this.webViewAllowUniversalAccessFromFileURLs = webViewAllowUniversalAccessFromFileURLs;
+            return this;
+        }
+
+        public Builder webViewAllowFileAccessFromFileURLs (boolean webViewAllowFileAccessFromFileURLs) {
+            this.webViewAllowFileAccessFromFileURLs = webViewAllowFileAccessFromFileURLs;
+            return this;
+        }
+
+        public Builder webViewGeolocationDatabasePath (String webViewGeolocationDatabasePath) {
+            this.webViewGeolocationDatabasePath = webViewGeolocationDatabasePath;
+            return this;
+        }
+
+        public Builder webViewAppCacheEnabled (boolean webViewAppCacheEnabled) {
+            this.webViewAppCacheEnabled = webViewAppCacheEnabled;
+            return this;
+        }
+
+        public Builder webViewAppCachePath (String webViewAppCachePath) {
+            this.webViewAppCachePath = webViewAppCachePath;
+            return this;
+        }
+
+        public Builder webViewDatabaseEnabled (boolean webViewDatabaseEnabled) {
+            this.webViewDatabaseEnabled = webViewDatabaseEnabled;
+            return this;
+        }
+
+        public Builder webViewDomStorageEnabled (boolean webViewDomStorageEnabled) {
+            this.webViewDomStorageEnabled = webViewDomStorageEnabled;
+            return this;
+        }
+
+        public Builder webViewGeolocationEnabled (boolean webViewGeolocationEnabled) {
+            this.webViewGeolocationEnabled = webViewGeolocationEnabled;
+            return this;
+        }
+
+        public Builder webViewJavaScriptCanOpenWindowsAutomatically (boolean webViewJavaScriptCanOpenWindowsAutomatically) {
+            this.webViewJavaScriptCanOpenWindowsAutomatically = webViewJavaScriptCanOpenWindowsAutomatically;
+            return this;
+        }
+
+        public Builder webViewDefaultTextEncodingName (String webViewDefaultTextEncodingName) {
+            this.webViewDefaultTextEncodingName = webViewDefaultTextEncodingName;
+            return this;
+        }
+
+        public Builder webViewUserAgentString (String webViewUserAgentString) {
+            this.webViewUserAgentString = webViewUserAgentString;
+            return this;
+        }
+
+        public Builder webViewNeedInitialFocus (boolean webViewNeedInitialFocus) {
+            this.webViewNeedInitialFocus = webViewNeedInitialFocus;
+            return this;
+        }
+
+        public Builder webViewCacheMode (int webViewCacheMode) {
+            this.webViewCacheMode = webViewCacheMode;
+            return this;
+        }
+
+        public Builder webViewMixedContentMode (int webViewMixedContentMode) {
+            this.webViewMixedContentMode = webViewMixedContentMode;
+            return this;
+        }
+
+        public Builder webViewOffscreenPreRaster (boolean webViewOffscreenPreRaster) {
+            this.webViewOffscreenPreRaster = webViewOffscreenPreRaster;
+            return this;
+        }
+
+        /**
+         * @deprecated As of release 1.1.1, replaced by {@link #webViewUserAgentString(String)}
+         * Use setUserAgentString("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0") instead
+         */
+        public Builder webViewDesktopMode(boolean webViewDesktopMode) {
+            return webViewUserAgentString("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0");
         }
 
         public Builder injectJavaScript(String injectJavaScript) {

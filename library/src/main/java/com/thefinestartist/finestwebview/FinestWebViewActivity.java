@@ -1,5 +1,6 @@
 package com.thefinestartist.finestwebview;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -28,6 +29,7 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
@@ -129,15 +131,47 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected boolean backPressToClose;
     protected int stringResCopiedToClipboard;
 
-    protected boolean webViewJavaScriptEnabled;
-    protected boolean webViewAppCacheEnabled;
-    protected boolean webViewAllowFileAccess;
-    protected boolean webViewUseWideViewPort;
-    protected boolean webViewLoadWithOverviewMode;
-    protected boolean webViewDomStorageEnabled;
-    protected boolean webViewBuiltInZoomControls;
-    protected boolean webViewDisplayZoomControls;
-    protected boolean webViewDesktopMode;
+    protected Boolean webViewSupportZoom;
+    protected Boolean webViewMediaPlaybackRequiresUserGesture;
+    protected Boolean webViewBuiltInZoomControls;
+    protected Boolean webViewDisplayZoomControls;
+    protected Boolean webViewAllowFileAccess;
+    protected Boolean webViewAllowContentAccess;
+    protected Boolean webViewLoadWithOverviewMode;
+    protected Boolean webViewSaveFormData;
+    protected Integer webViewTextZoom;
+    protected Boolean webViewUseWideViewPort;
+    protected Boolean webViewSupportMultipleWindows;
+    protected WebSettings.LayoutAlgorithm webViewLayoutAlgorithm;
+    protected String webViewStandardFontFamily;
+    protected String webViewFixedFontFamily;
+    protected String webViewSansSerifFontFamily;
+    protected String webViewSerifFontFamily;
+    protected String webViewCursiveFontFamily;
+    protected String webViewFantasyFontFamily;
+    protected Integer webViewMinimumFontSize;
+    protected Integer webViewMinimumLogicalFontSize;
+    protected Integer webViewDefaultFontSize;
+    protected Integer webViewDefaultFixedFontSize;
+    protected Boolean webViewLoadsImagesAutomatically;
+    protected Boolean webViewBlockNetworkImage;
+    protected Boolean webViewBlockNetworkLoads;
+    protected Boolean webViewJavaScriptEnabled;
+    protected Boolean webViewAllowUniversalAccessFromFileURLs;
+    protected Boolean webViewAllowFileAccessFromFileURLs;
+    protected String webViewGeolocationDatabasePath;
+    protected Boolean webViewAppCacheEnabled;
+    protected String webViewAppCachePath;
+    protected Boolean webViewDatabaseEnabled;
+    protected Boolean webViewDomStorageEnabled;
+    protected Boolean webViewGeolocationEnabled;
+    protected Boolean webViewJavaScriptCanOpenWindowsAutomatically;
+    protected String webViewDefaultTextEncodingName;
+    protected String webViewUserAgentString;
+    protected Boolean webViewNeedInitialFocus;
+    protected Integer webViewCacheMode;
+    protected Integer webViewMixedContentMode;
+    protected Boolean webViewOffscreenPreRaster;
 
     protected String injectJavaScript;
 
@@ -253,15 +287,48 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         backPressToClose = builder.backPressToClose != null ? builder.backPressToClose : false;
         stringResCopiedToClipboard = builder.stringResCopiedToClipboard != null ? builder.stringResCopiedToClipboard : R.string.copied_to_clipboard;
 
-        webViewJavaScriptEnabled = builder.webViewJavaScriptEnabled != null ? builder.webViewJavaScriptEnabled : true;
-        webViewAppCacheEnabled = builder.webViewAppCacheEnabled != null ? builder.webViewAppCacheEnabled : true;
-        webViewAllowFileAccess = builder.webViewAllowFileAccess != null ? builder.webViewAllowFileAccess : true;
-        webViewUseWideViewPort = builder.webViewUseWideViewPort != null ? builder.webViewUseWideViewPort : true;
-        webViewLoadWithOverviewMode = builder.webViewLoadWithOverviewMode != null ? builder.webViewLoadWithOverviewMode : true;
-        webViewDomStorageEnabled = builder.webViewDomStorageEnabled != null ? builder.webViewDomStorageEnabled : true;
+
+        webViewSupportZoom = builder.webViewSupportZoom;
+        webViewMediaPlaybackRequiresUserGesture = builder.webViewMediaPlaybackRequiresUserGesture;
         webViewBuiltInZoomControls = builder.webViewBuiltInZoomControls != null ? builder.webViewBuiltInZoomControls : false;
         webViewDisplayZoomControls = builder.webViewDisplayZoomControls != null ? builder.webViewDisplayZoomControls : false;
-        webViewDesktopMode = builder.webViewDesktopMode != null ? builder.webViewDesktopMode : false;
+        webViewAllowFileAccess = builder.webViewAllowFileAccess != null ? builder.webViewAllowFileAccess : true;
+        webViewAllowContentAccess = builder.webViewAllowContentAccess;
+        webViewLoadWithOverviewMode = builder.webViewLoadWithOverviewMode != null ? builder.webViewLoadWithOverviewMode : true;
+        webViewSaveFormData = builder.webViewSaveFormData;
+        webViewTextZoom = builder.webViewTextZoom;
+        webViewUseWideViewPort = builder.webViewUseWideViewPort != null ? builder.webViewUseWideViewPort : true;
+        webViewSupportMultipleWindows = builder.webViewSupportMultipleWindows;
+        webViewLayoutAlgorithm = builder.webViewLayoutAlgorithm;
+        webViewStandardFontFamily = builder.webViewStandardFontFamily;
+        webViewFixedFontFamily = builder.webViewFixedFontFamily;
+        webViewSansSerifFontFamily = builder.webViewSansSerifFontFamily;
+        webViewSerifFontFamily = builder.webViewSerifFontFamily;
+        webViewCursiveFontFamily = builder.webViewCursiveFontFamily;
+        webViewFantasyFontFamily = builder.webViewFantasyFontFamily;
+        webViewMinimumFontSize = builder.webViewMinimumFontSize;
+        webViewMinimumLogicalFontSize = builder.webViewMinimumLogicalFontSize;
+        webViewDefaultFontSize = builder.webViewDefaultFontSize;
+        webViewDefaultFixedFontSize = builder.webViewDefaultFixedFontSize;
+        webViewLoadsImagesAutomatically = builder.webViewLoadsImagesAutomatically;
+        webViewBlockNetworkImage = builder.webViewBlockNetworkImage;
+        webViewBlockNetworkLoads = builder.webViewBlockNetworkLoads;
+        webViewJavaScriptEnabled = builder.webViewJavaScriptEnabled != null ? builder.webViewJavaScriptEnabled : true;
+        webViewAllowUniversalAccessFromFileURLs = builder.webViewAllowUniversalAccessFromFileURLs;
+        webViewAllowFileAccessFromFileURLs = builder.webViewAllowFileAccessFromFileURLs;
+        webViewGeolocationDatabasePath = builder.webViewGeolocationDatabasePath;
+        webViewAppCacheEnabled = builder.webViewAppCacheEnabled != null ? builder.webViewAppCacheEnabled : true;
+        webViewAppCachePath = builder.webViewAppCachePath;
+        webViewDatabaseEnabled = builder.webViewDatabaseEnabled;
+        webViewDomStorageEnabled = builder.webViewDomStorageEnabled != null ? builder.webViewDomStorageEnabled : true;
+        webViewGeolocationEnabled = builder.webViewGeolocationEnabled;
+        webViewJavaScriptCanOpenWindowsAutomatically = builder.webViewJavaScriptCanOpenWindowsAutomatically;
+        webViewDefaultTextEncodingName = builder.webViewDefaultTextEncodingName;
+        webViewUserAgentString = builder.webViewUserAgentString;
+        webViewNeedInitialFocus = builder.webViewNeedInitialFocus;
+        webViewCacheMode = builder.webViewCacheMode;
+        webViewMixedContentMode = builder.webViewMixedContentMode;
+        webViewOffscreenPreRaster = builder.webViewOffscreenPreRaster;
 
         injectJavaScript = builder.injectJavaScript;
         url = builder.url;
@@ -408,6 +475,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         }
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     protected void initializeViews() {
         setSupportActionBar(toolbar);
 
@@ -466,44 +534,110 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             webView.setWebChromeClient(new MyWebChromeClient());
             webView.setWebViewClient(new MyWebViewClient());
 
-            webView.getSettings().setJavaScriptEnabled(webViewJavaScriptEnabled);
-            webView.getSettings().setAppCacheEnabled(webViewAppCacheEnabled);
-            webView.getSettings().setAllowFileAccess(webViewAllowFileAccess);
-            webView.getSettings().setUseWideViewPort(webViewUseWideViewPort);
-            webView.getSettings().setLoadWithOverviewMode(webViewLoadWithOverviewMode);
-            webView.getSettings().setDomStorageEnabled(webViewDomStorageEnabled);
+
+            WebSettings settings = webView.getSettings();
+
+            if (webViewSupportZoom != null)
+                settings.setSupportZoom(webViewSupportZoom);
+            if (webViewMediaPlaybackRequiresUserGesture != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                settings.setMediaPlaybackRequiresUserGesture(webViewMediaPlaybackRequiresUserGesture);
+            if (webViewBuiltInZoomControls != null) {
+                settings.setBuiltInZoomControls(webViewBuiltInZoomControls);
+
+                if (webViewBuiltInZoomControls) {
+                    // Remove NestedScrollView to enable BuiltInZoomControls
+                    ((ViewGroup) webView.getParent()).removeAllViews();
+                    swipeRefreshLayout.addView(webView);
+                    swipeRefreshLayout.removeViewAt(1);
+                }
+            }
+            if (webViewDisplayZoomControls != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                settings.setDisplayZoomControls(webViewDisplayZoomControls);
+
+            if (webViewAllowFileAccess != null)
+                settings.setAllowFileAccess(webViewAllowFileAccess);
+            if (webViewAllowContentAccess != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                settings.setAllowContentAccess(webViewAllowContentAccess);
+            if (webViewLoadWithOverviewMode != null)
+                settings.setLoadWithOverviewMode(webViewLoadWithOverviewMode);
+            if (webViewSaveFormData != null)
+                settings.setSaveFormData(webViewSaveFormData);
+            if (webViewTextZoom != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+                settings.setTextZoom(webViewTextZoom);
+            if (webViewUseWideViewPort != null)
+                settings.setUseWideViewPort(webViewUseWideViewPort);
+            if (webViewSupportMultipleWindows != null)
+                settings.setSupportMultipleWindows(webViewSupportMultipleWindows);
+            if (webViewLayoutAlgorithm != null)
+                settings.setLayoutAlgorithm(webViewLayoutAlgorithm);
+            if (webViewStandardFontFamily != null)
+                settings.setStandardFontFamily(webViewStandardFontFamily);
+            if (webViewFixedFontFamily != null)
+                settings.setFixedFontFamily(webViewFixedFontFamily);
+            if (webViewSansSerifFontFamily != null)
+                settings.setSansSerifFontFamily(webViewSansSerifFontFamily);
+            if (webViewSerifFontFamily != null)
+                settings.setSerifFontFamily(webViewSerifFontFamily);
+            if (webViewCursiveFontFamily != null)
+                settings.setCursiveFontFamily(webViewCursiveFontFamily);
+            if (webViewFantasyFontFamily != null)
+                settings.setFantasyFontFamily(webViewFantasyFontFamily);
+            if (webViewMinimumFontSize != null)
+                settings.setMinimumFontSize(webViewMinimumFontSize);
+            if (webViewMinimumLogicalFontSize != null)
+                settings.setMinimumLogicalFontSize(webViewMinimumLogicalFontSize);
+            if (webViewDefaultFontSize != null)
+                settings.setDefaultFontSize(webViewDefaultFontSize);
+            if (webViewDefaultFixedFontSize != null)
+                settings.setDefaultFixedFontSize(webViewDefaultFixedFontSize);
+            if (webViewLoadsImagesAutomatically != null)
+                settings.setLoadsImagesAutomatically(webViewLoadsImagesAutomatically);
+            if (webViewBlockNetworkImage != null)
+                settings.setBlockNetworkImage(webViewBlockNetworkImage);
+            if (webViewBlockNetworkLoads != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO)
+                settings.setBlockNetworkLoads(webViewBlockNetworkLoads);
+            if (webViewJavaScriptEnabled != null)
+                settings.setJavaScriptEnabled(webViewJavaScriptEnabled);
+            if (webViewAllowUniversalAccessFromFileURLs != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+                settings.setAllowUniversalAccessFromFileURLs(webViewAllowUniversalAccessFromFileURLs);
+            if (webViewAllowFileAccessFromFileURLs != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+                settings.setAllowFileAccessFromFileURLs(webViewAllowFileAccessFromFileURLs);
+            if (webViewGeolocationDatabasePath != null)
+                settings.setGeolocationDatabasePath(webViewGeolocationDatabasePath);
+            if (webViewAppCacheEnabled != null)
+                settings.setAppCacheEnabled(webViewAppCacheEnabled);
+            if (webViewAppCachePath != null)
+                settings.setAppCachePath(webViewAppCachePath);
+            if (webViewDatabaseEnabled != null)
+                settings.setDatabaseEnabled(webViewDatabaseEnabled);
+            if (webViewDomStorageEnabled != null)
+                settings.setDomStorageEnabled(webViewDomStorageEnabled);
+            if (webViewGeolocationEnabled != null)
+                settings.setGeolocationEnabled(webViewGeolocationEnabled);
+            if (webViewJavaScriptCanOpenWindowsAutomatically != null)
+                settings.setJavaScriptCanOpenWindowsAutomatically(webViewJavaScriptCanOpenWindowsAutomatically);
+            if (webViewDefaultTextEncodingName != null)
+                settings.setDefaultTextEncodingName(webViewDefaultTextEncodingName);
+            if (webViewUserAgentString != null)
+                settings.setUserAgentString(webViewUserAgentString);
+            if (webViewNeedInitialFocus != null)
+                settings.setNeedInitialFocus(webViewNeedInitialFocus);
+            if (webViewCacheMode != null)
+                settings.setCacheMode(webViewCacheMode);
+            if (webViewMixedContentMode != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                settings.setMixedContentMode(webViewMixedContentMode);
+            if (webViewOffscreenPreRaster != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                settings.setOffscreenPreRaster(webViewOffscreenPreRaster);
 
 //            // Other webview options
-//            webView.getSettings().setLoadWithOverviewMode(true);
 //            webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 //            webView.setScrollbarFadingEnabled(false);
-//            webView.getSettings().setBuiltInZoomControls(true);
 //            //Additional Webview Properties
-//            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-//            webView.getSettings().setDatabaseEnabled(true);
-//            webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
-//            webView.getSettings().setLayoutAlgorithm(webView.getSettings().getLayoutAlgorithm().NORMAL);
-//            webView.getSettings().setLoadWithOverviewMode(true);
-//            webView.getSettings().setUseWideViewPort(false);
 //            webView.setSoundEffectsEnabled(true);
 //            webView.setHorizontalFadingEdgeEnabled(false);
 //            webView.setKeepScreenOn(true);
 //            webView.setScrollbarFadingEnabled(true);
 //            webView.setVerticalFadingEdgeEnabled(false);
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                webView.getSettings().setDisplayZoomControls(webViewDisplayZoomControls);
-
-            webView.getSettings().setBuiltInZoomControls(webViewBuiltInZoomControls);
-            if (webViewBuiltInZoomControls) {
-                // Remove NestedScrollView to enable BuiltInZoomControls
-                ((ViewGroup) webView.getParent()).removeAllViews();
-                swipeRefreshLayout.addView(webView);
-                swipeRefreshLayout.removeViewAt(1);
-            }
-
-            if (webViewDesktopMode)
-                webView.getSettings().setUserAgentString("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0");
 
             webView.loadUrl(url);
         }
