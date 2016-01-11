@@ -14,7 +14,7 @@ android {
         minSdkVersion 7
         targetSdkVersion 23
         versionCode 1
-        versionName "1.1.1"
+        versionName "1.1.2"
     }
 }
 
@@ -27,14 +27,14 @@ dependencies {
     compile "com.android.support:support-annotations:${supportLibVersion}"
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
     compile "com.android.support:design:${supportLibVersion}"
-    compile 'com.nineoldandroids:library:2.4.0+'
+    compile 'com.nineoldandroids:library:2.4.0'
 }
 
 publish {
     userOrg = 'thefinestartist'
     groupId = 'com.thefinestartist'
     artifactId = 'finestwebview'
-    publishVersion = '1.1.1'
+    publishVersion = '1.1.2'
     desc = 'Beautiful and customizable Android Activity that shows web pages within an app.'
     website = 'https://github.com/TheFinestArtist/FinestWebView-Android'
 }

@@ -403,7 +403,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         menuOpenWith = (LinearLayout) findViewById(R.id.menuOpenWith);
         menuOpenWithTv = (TextView) findViewById(R.id.menuOpenWithTv);
         webLayout = (FrameLayout) findViewById(R.id.webLayout);
-        webView = new WebView(getApplicationContext());
+        webView = new WebView(this);
         webLayout.addView(webView);
     }
 

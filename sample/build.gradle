@@ -8,8 +8,8 @@ android {
         applicationId "com.thefinestartist.finestwebview.sample"
         minSdkVersion 7
         targetSdkVersion 23
-        versionCode 8
-        versionName "1.1.1"
+        versionCode 9
+        versionName "1.1.2"
     }
     buildTypes {
         release {
