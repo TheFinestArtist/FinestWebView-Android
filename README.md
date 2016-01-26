@@ -8,6 +8,7 @@
 
 * Builder pattern
 * Material design & Pre-made icons
+* Webview listeners
 * Custom themes & Custom transition animations
 * Support collapsing toolbar & contextual actionbar
 * SwipeRefreshLayout & Progressbar
@@ -103,6 +104,13 @@ You can use your own Theme for FinestWebView. If you want to use pre-defined the
 ```
 
 ### 2. Builder Options
+
+**WebView Listener Options**
+```java
+setWebViewListener(WebViewListener listener);
+addWebViewListener(WebViewListener listener);
+removeWebViewListener(WebViewListener listener);
+```
 
 **Right to Left Options**
 ```java
@@ -319,6 +327,19 @@ new FinestWebView.Builder(activity)
 
 
 ## More customizations
+
+#### WebView Listeners
+FinestWebView has its own listeners to listen event from WebView
+```java
+public void onProgressChanged(int progress);
+public void onReceivedTitle(String title);
+public void onReceivedTouchIconUrl(String url, boolean precomposed);
+
+public void onPageStarted(String url);
+public void onPageFinished(String url);
+public void onLoadResource(String url);
+public void onPageCommitVisible(String url);
+```
 
 #### Status Bar Color & Toolbar Color
 

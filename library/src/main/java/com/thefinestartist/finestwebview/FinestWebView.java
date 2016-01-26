@@ -158,6 +158,22 @@ public class FinestWebView {
 
         protected String url;
 
+        public Builder setWebViewListener(WebViewListener listener) {
+            listeners.clear();
+            listeners.add(listener);
+            return this;
+        }
+
+        public Builder addWebViewListener(WebViewListener listener) {
+            listeners.add(listener);
+            return this;
+        }
+
+        public Builder removeWebViewListener(WebViewListener listener) {
+            listeners.remove(listener);
+            return this;
+        }
+
         public Builder rtl(boolean rtl) {
             this.rtl = rtl;
             return this;
@@ -837,22 +853,6 @@ public class FinestWebView {
          */
         public Builder webViewDesktopMode(boolean webViewDesktopMode) {
             return webViewUserAgentString("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0");
-        }
-
-        public Builder setWebViewListener(WebViewListener listener) {
-            listeners.clear();
-            listeners.add(listener);
-            return this;
-        }
-
-        public Builder addWebViewListener(WebViewListener listener) {
-            listeners.add(listener);
-            return this;
-        }
-
-        public Builder removeWebViewListener(WebViewListener listener) {
-            listeners.remove(listener);
-            return this;
         }
 
         public Builder injectJavaScript(String injectJavaScript) {
