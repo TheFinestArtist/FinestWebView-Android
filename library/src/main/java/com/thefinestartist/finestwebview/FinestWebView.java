@@ -16,8 +16,12 @@ import android.support.v4.content.ContextCompat;
 import android.webkit.WebSettings;
 
 import com.thefinestartist.finestwebview.enums.Position;
+import com.thefinestartist.finestwebview.listeners.BroadCastManager;
+import com.thefinestartist.finestwebview.listeners.WebViewListener;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Leonardo on 11/21/15.
@@ -27,6 +31,9 @@ public class FinestWebView {
     public static class Builder implements Serializable {
 
         protected final transient Activity activity;
+        protected transient List<WebViewListener> listeners = new ArrayList<>();
+
+        protected Integer key;
 
         protected Boolean rtl;
         protected Integer theme;
@@ -832,6 +839,22 @@ public class FinestWebView {
             return webViewUserAgentString("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0");
         }
 
+        public Builder setWebViewListener(WebViewListener listener) {
+            listeners.clear();
+            listeners.add(listener);
+            return this;
+        }
+
+        public Builder addWebViewListener(WebViewListener listener) {
+            listeners.add(listener);
+            return this;
+        }
+
+        public Builder removeWebViewListener(WebViewListener listener) {
+            listeners.remove(listener);
+            return this;
+        }
+
         public Builder injectJavaScript(String injectJavaScript) {
             this.injectJavaScript = injectJavaScript;
             return this;
@@ -843,6 +866,8 @@ public class FinestWebView {
 
         public void show(@NonNull String url) {
             this.url = url;
+            this.key = System.identityHashCode(this);
+            if (!listeners.isEmpty()) new BroadCastManager(activity, key, listeners);
 
             Intent intent = new Intent(activity, FinestWebViewActivity.class);
             intent.putExtra("builder", this);

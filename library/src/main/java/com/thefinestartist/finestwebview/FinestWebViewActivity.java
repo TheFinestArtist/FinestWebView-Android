@@ -48,6 +48,7 @@ import com.thefinestartist.finestwebview.helpers.DipPixelHelper;
 import com.thefinestartist.finestwebview.helpers.ScreenHelper;
 import com.thefinestartist.finestwebview.helpers.TypefaceHelper;
 import com.thefinestartist.finestwebview.helpers.UrlParser;
+import com.thefinestartist.finestwebview.listeners.BroadCastManager;
 import com.thefinestartist.finestwebview.views.ShadowLayout;
 
 
@@ -55,6 +56,8 @@ import com.thefinestartist.finestwebview.views.ShadowLayout;
  * Created by Leonardo on 11/14/15.
  */
 public class FinestWebViewActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
+
+    protected int key;
 
     protected boolean rtl;
     protected int theme;
@@ -203,6 +206,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         a.recycle();
 
         FinestWebView.Builder builder = (FinestWebView.Builder) intent.getSerializableExtra("builder");
+
+        key = builder.key;
 
         rtl = builder.rtl != null ? builder.rtl : getResources().getBoolean(R.bool.is_right_to_left);
         theme = builder.theme != null ? builder.theme : 0;
@@ -475,8 +480,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         }
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
-    protected void initializeViews() {
+    @SuppressLint("SetJavaScriptEnabled") protected void initializeViews() {
         setSupportActionBar(toolbar);
 
         { // StatusBar
@@ -801,8 +805,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         icon.setImageDrawable(states);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getOptions();
         if (theme != 0) setTheme(theme);
@@ -812,8 +815,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         initializeViews();
     }
 
-    @Override
-    public void onBackPressed() {
+    @Override public void onBackPressed() {
         if (menuLayout.getVisibility() == View.VISIBLE) {
             hideMenu();
         } else if (backPressToClose || !webView.canGoBack()) {
@@ -898,17 +900,14 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         Animation popupAnim = AnimationUtils.loadAnimation(this, R.anim.popup_flyout_hide);
         shadowLayout.startAnimation(popupAnim);
         popupAnim.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
+            @Override public void onAnimationStart(Animation animation) {
             }
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
+            @Override public void onAnimationEnd(Animation animation) {
                 menuLayout.setVisibility(View.GONE);
             }
 
-            @Override
-            public void onAnimationRepeat(Animation animation) {
+            @Override public void onAnimationRepeat(Animation animation) {
             }
         });
     }
@@ -918,8 +917,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         overridePendingTransition(animationCloseEnter, animationCloseExit);
     }
 
-    @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+    @Override public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
         if (toolbarScrollFlags == 0)
             return;
 
@@ -946,8 +944,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
     public class MyWebChromeClient extends WebChromeClient {
 
-        @Override
-        public void onProgressChanged(WebView view, int progress) {
+        @Override public void onProgressChanged(WebView view, int progress) {
+            BroadCastManager.onProgressChanged(FinestWebViewActivity.this, key, progress);
+
             if (showSwipeRefreshLayout) {
                 if (swipeRefreshLayout.isRefreshing() && progress == 100) {
                     swipeRefreshLayout.post(new Runnable() {
@@ -972,17 +971,25 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 progress = 0;
             progressBar.setProgress(progress);
         }
+
+        @Override public void onReceivedTitle(WebView view, String title) {
+            BroadCastManager.onReceivedTitle(FinestWebViewActivity.this, key, title);
+        }
+
+        @Override public void onReceivedTouchIconUrl(WebView view, String url, boolean precomposed) {
+            BroadCastManager.onReceivedTouchIconUrl(FinestWebViewActivity.this, key, url, precomposed);
+        }
     }
 
     public class MyWebViewClient extends WebViewClient {
 
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-
+        @Override public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            BroadCastManager.onPageStarted(FinestWebViewActivity.this, key, url);
         }
 
-        @Override
-        public void onPageFinished(WebView view, String url) {
+        @Override public void onPageFinished(WebView view, String url) {
+            BroadCastManager.onPageFinished(FinestWebViewActivity.this, key, url);
+
             if (updateTitleFromHtml)
                 title.setText(view.getTitle());
             urlTv.setText(UrlParser.getHost(url));
@@ -1002,8 +1009,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 webView.loadUrl(injectJavaScript);
         }
 
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        @Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (url.endsWith(".mp4")) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(Uri.parse(url), "video/*");
@@ -1018,6 +1024,14 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             } else {
                 return super.shouldOverrideUrlLoading(view, url);
             }
+        }
+
+        @Override public void onLoadResource(WebView view, String url) {
+            BroadCastManager.onLoadResource(FinestWebViewActivity.this, key, url);
+        }
+
+        @Override public void onPageCommitVisible(WebView view, String url) {
+            BroadCastManager.onPageCommitVisible(FinestWebViewActivity.this, key, url);
         }
     }
 
@@ -1035,8 +1049,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         urlTv.requestLayout();
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    @Override public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -1046,9 +1059,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         }
     }
 
-    @Override
-    protected void onDestroy() {
+    @Override protected void onDestroy() {
         super.onDestroy();
+        BroadCastManager.unregister(FinestWebViewActivity.this, key);
         if (webLayout != null) {
             webLayout.removeAllViews();
             webView.destroy();

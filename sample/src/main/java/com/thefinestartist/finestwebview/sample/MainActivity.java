@@ -2,11 +2,13 @@ package com.thefinestartist.finestwebview.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebSettings;
 
 import com.thefinestartist.finestwebview.FinestWebView;
+import com.thefinestartist.finestwebview.listeners.WebViewListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +22,15 @@ public class MainActivity extends AppCompatActivity {
         if (view.getId() == R.id.defaultTheme) {
             new FinestWebView.Builder(this)
                     .titleDefault("The Finest Artist")
+                    .setWebViewListener(new WebViewListener() {
+                        @Override public void onPageFinished(String url) {
+                            Log.e("MainActivity", "onPageFinished");
+                        }
+
+                        @Override public void onProgressChanged(int progress) {
+                            Log.e("MainActivity", "onProgressChanged: " + progress);
+                        }
+                    })
                     .show("http://thefinestartist.com");
         } else if (view.getId() == R.id.redTheme) {
             new FinestWebView.Builder(this)
