@@ -178,6 +178,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
     protected String injectJavaScript;
 
+    protected String mimeType;
+    protected String encoding;
+    protected String data;
     protected String url;
 
     protected void getOptions() {
@@ -336,6 +339,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         webViewOffscreenPreRaster = builder.webViewOffscreenPreRaster;
 
         injectJavaScript = builder.injectJavaScript;
+
+        mimeType = builder.mimeType;
+        encoding = builder.encoding;
+        data = builder.data;
         url = builder.url;
     }
 
@@ -651,7 +658,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 //            webView.setScrollbarFadingEnabled(true);
 //            webView.setVerticalFadingEdgeEnabled(false);
 
-            webView.loadUrl(url);
+            if (data != null)
+                webView.loadData(data, mimeType, encoding);
+            else if (url != null)
+                webView.loadUrl(url);
         }
 
         { // SwipeRefreshLayout

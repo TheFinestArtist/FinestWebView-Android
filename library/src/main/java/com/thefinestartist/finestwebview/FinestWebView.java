@@ -105,8 +105,8 @@ public class FinestWebView {
         protected Boolean showMenuOpenWith;
         protected Integer stringResOpenWith;
 
-        protected Integer animationOpenEnter;
-        protected Integer animationOpenExit;
+        protected Integer animationOpenEnter = R.anim.modal_activity_open_enter;
+        protected Integer animationOpenExit = R.anim.modal_activity_open_exit;
         protected Integer animationCloseEnter;
         protected Integer animationCloseExit;
 
@@ -157,6 +157,9 @@ public class FinestWebView {
 
         protected String injectJavaScript;
 
+        protected String mimeType;
+        protected String encoding;
+        protected String data;
         protected String url;
 
         public Builder setWebViewListener(WebViewListener listener) {
@@ -869,13 +872,33 @@ public class FinestWebView {
             return this;
         }
 
+        public void load(@StringRes int dataRes) {
+            load(context.getString(dataRes));
+        }
+
+        public void load(String data) {
+            load(data, "text/html", "UTF-8");
+        }
+
+        public void load(String data, String mimeType, String encoding) {
+            this.mimeType = mimeType;
+            this.encoding = encoding;
+            show(null, data);
+        }
+
         public void show(@StringRes int urlRes) {
             show(context.getString(urlRes));
         }
 
         public void show(@NonNull String url) {
+            show(url, null);
+        }
+
+        protected void show(String url, String data) {
             this.url = url;
+            this.data = data;
             this.key = System.identityHashCode(this);
+
             if (!listeners.isEmpty()) new BroadCastManager(context, key, listeners);
 
             Intent intent = new Intent(context, FinestWebViewActivity.class);
@@ -884,13 +907,7 @@ public class FinestWebView {
             context.startActivity(intent);
 
             if (context instanceof Activity)
-                ((Activity) context).overridePendingTransition(
-                        animationOpenEnter == null ?
-                                R.anim.modal_activity_open_enter :
-                                animationOpenEnter,
-                        animationOpenExit == null ?
-                                R.anim.modal_activity_open_exit :
-                                animationOpenExit);
+                ((Activity) context).overridePendingTransition(animationOpenEnter, animationOpenExit);
         }
     }
 }

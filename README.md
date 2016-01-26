@@ -52,7 +52,7 @@ Easily reference the library in your Android projects using this dependency in y
 
 ```java
 dependencies {
-    compile 'com.thefinestartist:finestwebview:1.1.5'
+    compile 'com.thefinestartist:finestwebview:1.1.6'
 }
 ```
 
@@ -110,6 +110,16 @@ You can use your own Theme for FinestWebView. If you want to use pre-defined the
 Builder(@NonNull Activity activity);
 // If you use context instead of activity, FinestWebView enter animation won't work
 Builder(@NonNull Context context);
+```
+
+**Load data or Show url**
+```java
+load(@StringRes int dataRes);
+load(String data);
+load(String data, String mimeType, String encoding);
+
+show(@StringRes int urlRes);
+show(@NonNull String url);
 ```
 
 **WebView Listener Options**
