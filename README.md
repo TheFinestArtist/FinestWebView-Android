@@ -40,7 +40,7 @@ It's also on Google Play:
 
 <a href="https://play.google.com/store/apps/details?id=com.thefinestartist.finestwebview.sample" target="_blank">
   <img alt="Get it on Google Play" 
-        src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" />
+        src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" width="222"/>
 </a>
 
 ## Getting started
