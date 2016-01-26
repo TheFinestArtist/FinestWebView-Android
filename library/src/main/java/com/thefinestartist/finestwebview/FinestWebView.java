@@ -1,6 +1,7 @@
 package com.thefinestartist.finestwebview;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.AnimRes;
 import android.support.annotation.ArrayRes;
@@ -30,7 +31,7 @@ public class FinestWebView {
 
     public static class Builder implements Serializable {
 
-        protected final transient Activity activity;
+        protected final transient Context context;
         protected transient List<WebViewListener> listeners = new ArrayList<>();
 
         protected Integer key;
@@ -180,7 +181,15 @@ public class FinestWebView {
         }
 
         public Builder(@NonNull Activity activity) {
-            this.activity = activity;
+            this.context = activity;
+        }
+
+        /**
+         * If you use context instead of activity, FinestWebView won't be able to override activity animation.
+         * Try to create builder with Activity if it's possible.
+         */
+        public Builder(@NonNull Context context) {
+            this.context = context;
         }
 
         public Builder theme(@StyleRes int theme) {
@@ -194,7 +203,7 @@ public class FinestWebView {
         }
 
         public Builder statusBarColorRes(@ColorRes int color) {
-            this.statusBarColor = ContextCompat.getColor(activity, color);
+            this.statusBarColor = ContextCompat.getColor(context, color);
             return this;
         }
 
@@ -204,7 +213,7 @@ public class FinestWebView {
         }
 
         public Builder toolbarColorRes(@ColorRes int color) {
-            this.toolbarColor = ContextCompat.getColor(activity, color);
+            this.toolbarColor = ContextCompat.getColor(context, color);
             return this;
         }
 
@@ -219,7 +228,7 @@ public class FinestWebView {
         }
 
         public Builder iconDefaultColorRes(@ColorRes int color) {
-            this.iconDefaultColor = ContextCompat.getColor(activity, color);
+            this.iconDefaultColor = ContextCompat.getColor(context, color);
             return this;
         }
 
@@ -229,7 +238,7 @@ public class FinestWebView {
         }
 
         public Builder iconDisabledColorRes(@ColorRes int colorRes) {
-            this.iconDisabledColor = ContextCompat.getColor(activity, colorRes);
+            this.iconDisabledColor = ContextCompat.getColor(context, colorRes);
             return this;
         }
 
@@ -239,7 +248,7 @@ public class FinestWebView {
         }
 
         public Builder iconPressedColorRes(@ColorRes int colorRes) {
-            this.iconPressedColor = ContextCompat.getColor(activity, colorRes);
+            this.iconPressedColor = ContextCompat.getColor(context, colorRes);
             return this;
         }
 
@@ -299,7 +308,7 @@ public class FinestWebView {
         }
 
         public Builder swipeRefreshColorRes(@ColorRes int colorRes) {
-            this.swipeRefreshColor = ContextCompat.getColor(activity, colorRes);
+            this.swipeRefreshColor = ContextCompat.getColor(context, colorRes);
             return this;
         }
 
@@ -312,7 +321,7 @@ public class FinestWebView {
         }
 
         public Builder swipeRefreshColorsRes(@ArrayRes int colorsRes) {
-            int[] colors = activity.getResources().getIntArray(colorsRes);
+            int[] colors = context.getResources().getIntArray(colorsRes);
             return swipeRefreshColors(colors);
         }
 
@@ -332,7 +341,7 @@ public class FinestWebView {
         }
 
         public Builder dividerColorRes(@ColorRes int colorRes) {
-            this.dividerColor = ContextCompat.getColor(activity, colorRes);
+            this.dividerColor = ContextCompat.getColor(context, colorRes);
             return this;
         }
 
@@ -347,7 +356,7 @@ public class FinestWebView {
         }
 
         public Builder dividerHeightRes(@DimenRes int height) {
-            this.dividerHeight = activity.getResources().getDimension(height);
+            this.dividerHeight = context.getResources().getDimension(height);
             return this;
         }
 
@@ -362,7 +371,7 @@ public class FinestWebView {
         }
 
         public Builder progressBarColorRes(@ColorRes int colorRes) {
-            this.progressBarColor = ContextCompat.getColor(activity, colorRes);
+            this.progressBarColor = ContextCompat.getColor(context, colorRes);
             return this;
         }
 
@@ -377,7 +386,7 @@ public class FinestWebView {
         }
 
         public Builder progressBarHeightRes(@DimenRes int height) {
-            this.progressBarHeight = activity.getResources().getDimension(height);
+            this.progressBarHeight = context.getResources().getDimension(height);
             return this;
         }
 
@@ -392,7 +401,7 @@ public class FinestWebView {
         }
 
         public Builder titleDefaultRes(@StringRes int stringRes) {
-            this.titleDefault = activity.getString(stringRes);
+            this.titleDefault = context.getString(stringRes);
             return this;
         }
 
@@ -412,7 +421,7 @@ public class FinestWebView {
         }
 
         public Builder titleSizeRes(@DimenRes int titleSize) {
-            this.titleSize = activity.getResources().getDimension(titleSize);
+            this.titleSize = context.getResources().getDimension(titleSize);
             return this;
         }
 
@@ -427,7 +436,7 @@ public class FinestWebView {
         }
 
         public Builder titleColorRes(@ColorRes int colorRes) {
-            this.titleColor = ContextCompat.getColor(activity, colorRes);
+            this.titleColor = ContextCompat.getColor(context, colorRes);
             return this;
         }
 
@@ -447,7 +456,7 @@ public class FinestWebView {
         }
 
         public Builder urlSizeRes(@DimenRes int urlSize) {
-            this.urlSize = activity.getResources().getDimension(urlSize);
+            this.urlSize = context.getResources().getDimension(urlSize);
             return this;
         }
 
@@ -462,7 +471,7 @@ public class FinestWebView {
         }
 
         public Builder urlColorRes(@ColorRes int colorRes) {
-            this.urlColor = ContextCompat.getColor(activity, colorRes);
+            this.urlColor = ContextCompat.getColor(context, colorRes);
             return this;
         }
 
@@ -472,7 +481,7 @@ public class FinestWebView {
         }
 
         public Builder menuColorRes(@ColorRes int colorRes) {
-            this.menuColor = ContextCompat.getColor(activity, colorRes);
+            this.menuColor = ContextCompat.getColor(context, colorRes);
             return this;
         }
 
@@ -492,7 +501,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextPaddingLeftRes(@DimenRes int menuTextPaddingLeft) {
-            this.menuTextPaddingLeft = activity.getResources().getDimension(menuTextPaddingLeft);
+            this.menuTextPaddingLeft = context.getResources().getDimension(menuTextPaddingLeft);
             return this;
         }
 
@@ -507,7 +516,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextPaddingRightRes(@DimenRes int menuTextPaddingRight) {
-            this.menuTextPaddingRight = activity.getResources().getDimension(menuTextPaddingRight);
+            this.menuTextPaddingRight = context.getResources().getDimension(menuTextPaddingRight);
             return this;
         }
 
@@ -517,7 +526,7 @@ public class FinestWebView {
         }
 
         public Builder menuDropShadowColorRes(@ColorRes int colorRes) {
-            this.menuDropShadowColor = ContextCompat.getColor(activity, colorRes);
+            this.menuDropShadowColor = ContextCompat.getColor(context, colorRes);
             return this;
         }
 
@@ -532,7 +541,7 @@ public class FinestWebView {
         }
 
         public Builder menuDropShadowSizeRes(@DimenRes int menuDropShadowSize) {
-            this.menuDropShadowSize = activity.getResources().getDimension(menuDropShadowSize);
+            this.menuDropShadowSize = context.getResources().getDimension(menuDropShadowSize);
             return this;
         }
 
@@ -552,7 +561,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextSizeRes(@DimenRes int menuTextSize) {
-            this.menuTextSize = activity.getResources().getDimension(menuTextSize);
+            this.menuTextSize = context.getResources().getDimension(menuTextSize);
             return this;
         }
 
@@ -567,7 +576,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextColorRes(@ColorRes int colorRes) {
-            this.menuTextColor = ContextCompat.getColor(activity, colorRes);
+            this.menuTextColor = ContextCompat.getColor(context, colorRes);
             return this;
         }
 
@@ -647,202 +656,202 @@ public class FinestWebView {
             return this;
         }
 
-        public Builder webViewMediaPlaybackRequiresUserGesture (boolean webViewMediaPlaybackRequiresUserGesture) {
+        public Builder webViewMediaPlaybackRequiresUserGesture(boolean webViewMediaPlaybackRequiresUserGesture) {
             this.webViewMediaPlaybackRequiresUserGesture = webViewMediaPlaybackRequiresUserGesture;
             return this;
         }
 
-        public Builder webViewBuiltInZoomControls (boolean webViewBuiltInZoomControls) {
+        public Builder webViewBuiltInZoomControls(boolean webViewBuiltInZoomControls) {
             this.webViewBuiltInZoomControls = webViewBuiltInZoomControls;
             return this;
         }
 
-        public Builder webViewDisplayZoomControls (boolean webViewDisplayZoomControls) {
+        public Builder webViewDisplayZoomControls(boolean webViewDisplayZoomControls) {
             this.webViewDisplayZoomControls = webViewDisplayZoomControls;
             return this;
         }
 
-        public Builder webViewAllowFileAccess (boolean webViewAllowFileAccess) {
+        public Builder webViewAllowFileAccess(boolean webViewAllowFileAccess) {
             this.webViewAllowFileAccess = webViewAllowFileAccess;
             return this;
         }
 
-        public Builder webViewAllowContentAccess (boolean webViewAllowContentAccess) {
+        public Builder webViewAllowContentAccess(boolean webViewAllowContentAccess) {
             this.webViewAllowContentAccess = webViewAllowContentAccess;
             return this;
         }
 
-        public Builder webViewLoadWithOverviewMode (boolean webViewLoadWithOverviewMode) {
+        public Builder webViewLoadWithOverviewMode(boolean webViewLoadWithOverviewMode) {
             this.webViewLoadWithOverviewMode = webViewLoadWithOverviewMode;
             return this;
         }
 
-        public Builder webViewSaveFormData (boolean webViewSaveFormData) {
+        public Builder webViewSaveFormData(boolean webViewSaveFormData) {
             this.webViewSaveFormData = webViewSaveFormData;
             return this;
         }
 
-        public Builder webViewTextZoom (int webViewTextZoom) {
+        public Builder webViewTextZoom(int webViewTextZoom) {
             this.webViewTextZoom = webViewTextZoom;
             return this;
         }
 
-        public Builder webViewUseWideViewPort (boolean webViewUseWideViewPort) {
+        public Builder webViewUseWideViewPort(boolean webViewUseWideViewPort) {
             this.webViewUseWideViewPort = webViewUseWideViewPort;
             return this;
         }
 
-        public Builder webViewSupportMultipleWindows (boolean webViewSupportMultipleWindows) {
+        public Builder webViewSupportMultipleWindows(boolean webViewSupportMultipleWindows) {
             this.webViewSupportMultipleWindows = webViewSupportMultipleWindows;
             return this;
         }
 
-        public Builder webViewLayoutAlgorithm (WebSettings.LayoutAlgorithm webViewLayoutAlgorithm) {
+        public Builder webViewLayoutAlgorithm(WebSettings.LayoutAlgorithm webViewLayoutAlgorithm) {
             this.webViewLayoutAlgorithm = webViewLayoutAlgorithm;
             return this;
         }
 
-        public Builder webViewStandardFontFamily (String webViewStandardFontFamily) {
+        public Builder webViewStandardFontFamily(String webViewStandardFontFamily) {
             this.webViewStandardFontFamily = webViewStandardFontFamily;
             return this;
         }
 
-        public Builder webViewFixedFontFamily (String webViewFixedFontFamily) {
+        public Builder webViewFixedFontFamily(String webViewFixedFontFamily) {
             this.webViewFixedFontFamily = webViewFixedFontFamily;
             return this;
         }
 
-        public Builder webViewSansSerifFontFamily (String webViewSansSerifFontFamily) {
+        public Builder webViewSansSerifFontFamily(String webViewSansSerifFontFamily) {
             this.webViewSansSerifFontFamily = webViewSansSerifFontFamily;
             return this;
         }
 
-        public Builder webViewSerifFontFamily (String webViewSerifFontFamily) {
+        public Builder webViewSerifFontFamily(String webViewSerifFontFamily) {
             this.webViewSerifFontFamily = webViewSerifFontFamily;
             return this;
         }
 
-        public Builder webViewCursiveFontFamily (String webViewCursiveFontFamily) {
+        public Builder webViewCursiveFontFamily(String webViewCursiveFontFamily) {
             this.webViewCursiveFontFamily = webViewCursiveFontFamily;
             return this;
         }
 
-        public Builder webViewFantasyFontFamily (String webViewFantasyFontFamily) {
+        public Builder webViewFantasyFontFamily(String webViewFantasyFontFamily) {
             this.webViewFantasyFontFamily = webViewFantasyFontFamily;
             return this;
         }
 
-        public Builder webViewMinimumFontSize (int webViewMinimumFontSize) {
+        public Builder webViewMinimumFontSize(int webViewMinimumFontSize) {
             this.webViewMinimumFontSize = webViewMinimumFontSize;
             return this;
         }
 
-        public Builder webViewMinimumLogicalFontSize (int webViewMinimumLogicalFontSize) {
+        public Builder webViewMinimumLogicalFontSize(int webViewMinimumLogicalFontSize) {
             this.webViewMinimumLogicalFontSize = webViewMinimumLogicalFontSize;
             return this;
         }
 
-        public Builder webViewDefaultFontSize (int webViewDefaultFontSize) {
+        public Builder webViewDefaultFontSize(int webViewDefaultFontSize) {
             this.webViewDefaultFontSize = webViewDefaultFontSize;
             return this;
         }
 
-        public Builder webViewDefaultFixedFontSize (int webViewDefaultFixedFontSize) {
+        public Builder webViewDefaultFixedFontSize(int webViewDefaultFixedFontSize) {
             this.webViewDefaultFixedFontSize = webViewDefaultFixedFontSize;
             return this;
         }
 
-        public Builder webViewLoadsImagesAutomatically (boolean webViewLoadsImagesAutomatically) {
+        public Builder webViewLoadsImagesAutomatically(boolean webViewLoadsImagesAutomatically) {
             this.webViewLoadsImagesAutomatically = webViewLoadsImagesAutomatically;
             return this;
         }
 
-        public Builder webViewBlockNetworkImage (boolean webViewBlockNetworkImage) {
+        public Builder webViewBlockNetworkImage(boolean webViewBlockNetworkImage) {
             this.webViewBlockNetworkImage = webViewBlockNetworkImage;
             return this;
         }
 
-        public Builder webViewBlockNetworkLoads (boolean webViewBlockNetworkLoads) {
+        public Builder webViewBlockNetworkLoads(boolean webViewBlockNetworkLoads) {
             this.webViewBlockNetworkLoads = webViewBlockNetworkLoads;
             return this;
         }
 
-        public Builder webViewJavaScriptEnabled (boolean webViewJavaScriptEnabled) {
+        public Builder webViewJavaScriptEnabled(boolean webViewJavaScriptEnabled) {
             this.webViewJavaScriptEnabled = webViewJavaScriptEnabled;
             return this;
         }
 
-        public Builder webViewAllowUniversalAccessFromFileURLs (boolean webViewAllowUniversalAccessFromFileURLs) {
+        public Builder webViewAllowUniversalAccessFromFileURLs(boolean webViewAllowUniversalAccessFromFileURLs) {
             this.webViewAllowUniversalAccessFromFileURLs = webViewAllowUniversalAccessFromFileURLs;
             return this;
         }
 
-        public Builder webViewAllowFileAccessFromFileURLs (boolean webViewAllowFileAccessFromFileURLs) {
+        public Builder webViewAllowFileAccessFromFileURLs(boolean webViewAllowFileAccessFromFileURLs) {
             this.webViewAllowFileAccessFromFileURLs = webViewAllowFileAccessFromFileURLs;
             return this;
         }
 
-        public Builder webViewGeolocationDatabasePath (String webViewGeolocationDatabasePath) {
+        public Builder webViewGeolocationDatabasePath(String webViewGeolocationDatabasePath) {
             this.webViewGeolocationDatabasePath = webViewGeolocationDatabasePath;
             return this;
         }
 
-        public Builder webViewAppCacheEnabled (boolean webViewAppCacheEnabled) {
+        public Builder webViewAppCacheEnabled(boolean webViewAppCacheEnabled) {
             this.webViewAppCacheEnabled = webViewAppCacheEnabled;
             return this;
         }
 
-        public Builder webViewAppCachePath (String webViewAppCachePath) {
+        public Builder webViewAppCachePath(String webViewAppCachePath) {
             this.webViewAppCachePath = webViewAppCachePath;
             return this;
         }
 
-        public Builder webViewDatabaseEnabled (boolean webViewDatabaseEnabled) {
+        public Builder webViewDatabaseEnabled(boolean webViewDatabaseEnabled) {
             this.webViewDatabaseEnabled = webViewDatabaseEnabled;
             return this;
         }
 
-        public Builder webViewDomStorageEnabled (boolean webViewDomStorageEnabled) {
+        public Builder webViewDomStorageEnabled(boolean webViewDomStorageEnabled) {
             this.webViewDomStorageEnabled = webViewDomStorageEnabled;
             return this;
         }
 
-        public Builder webViewGeolocationEnabled (boolean webViewGeolocationEnabled) {
+        public Builder webViewGeolocationEnabled(boolean webViewGeolocationEnabled) {
             this.webViewGeolocationEnabled = webViewGeolocationEnabled;
             return this;
         }
 
-        public Builder webViewJavaScriptCanOpenWindowsAutomatically (boolean webViewJavaScriptCanOpenWindowsAutomatically) {
+        public Builder webViewJavaScriptCanOpenWindowsAutomatically(boolean webViewJavaScriptCanOpenWindowsAutomatically) {
             this.webViewJavaScriptCanOpenWindowsAutomatically = webViewJavaScriptCanOpenWindowsAutomatically;
             return this;
         }
 
-        public Builder webViewDefaultTextEncodingName (String webViewDefaultTextEncodingName) {
+        public Builder webViewDefaultTextEncodingName(String webViewDefaultTextEncodingName) {
             this.webViewDefaultTextEncodingName = webViewDefaultTextEncodingName;
             return this;
         }
 
-        public Builder webViewUserAgentString (String webViewUserAgentString) {
+        public Builder webViewUserAgentString(String webViewUserAgentString) {
             this.webViewUserAgentString = webViewUserAgentString;
             return this;
         }
 
-        public Builder webViewNeedInitialFocus (boolean webViewNeedInitialFocus) {
+        public Builder webViewNeedInitialFocus(boolean webViewNeedInitialFocus) {
             this.webViewNeedInitialFocus = webViewNeedInitialFocus;
             return this;
         }
 
-        public Builder webViewCacheMode (int webViewCacheMode) {
+        public Builder webViewCacheMode(int webViewCacheMode) {
             this.webViewCacheMode = webViewCacheMode;
             return this;
         }
 
-        public Builder webViewMixedContentMode (int webViewMixedContentMode) {
+        public Builder webViewMixedContentMode(int webViewMixedContentMode) {
             this.webViewMixedContentMode = webViewMixedContentMode;
             return this;
         }
 
-        public Builder webViewOffscreenPreRaster (boolean webViewOffscreenPreRaster) {
+        public Builder webViewOffscreenPreRaster(boolean webViewOffscreenPreRaster) {
             this.webViewOffscreenPreRaster = webViewOffscreenPreRaster;
             return this;
         }
@@ -861,20 +870,27 @@ public class FinestWebView {
         }
 
         public void show(@StringRes int urlRes) {
-            show(activity.getString(urlRes));
+            show(context.getString(urlRes));
         }
 
         public void show(@NonNull String url) {
             this.url = url;
             this.key = System.identityHashCode(this);
-            if (!listeners.isEmpty()) new BroadCastManager(activity, key, listeners);
+            if (!listeners.isEmpty()) new BroadCastManager(context, key, listeners);
 
-            Intent intent = new Intent(activity, FinestWebViewActivity.class);
+            Intent intent = new Intent(context, FinestWebViewActivity.class);
             intent.putExtra("builder", this);
 
-            activity.startActivity(intent);
-            activity.overridePendingTransition(animationOpenEnter == null ? R.anim.modal_activity_open_enter : animationOpenEnter,
-                    animationOpenExit == null ? R.anim.modal_activity_open_exit : animationOpenExit);
+            context.startActivity(intent);
+
+            if (context instanceof Activity)
+                ((Activity) context).overridePendingTransition(
+                        animationOpenEnter == null ?
+                                R.anim.modal_activity_open_enter :
+                                animationOpenEnter,
+                        animationOpenExit == null ?
+                                R.anim.modal_activity_open_exit :
+                                animationOpenExit);
         }
     }
 }
