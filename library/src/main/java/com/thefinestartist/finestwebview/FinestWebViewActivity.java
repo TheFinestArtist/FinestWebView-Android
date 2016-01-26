@@ -478,6 +478,14 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             }
             progressBar.setLayoutParams(params);
         }
+
+        { // WebLayout
+            float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
+            int screenHeight = ScreenHelper.getHeight(this);
+            float webLayoutMinimumHeight = screenHeight - toolbarHeight;
+            if (showDivider && !gradientDivider) webLayoutMinimumHeight -= dividerHeight;
+            webLayout.setMinimumHeight((int) webLayoutMinimumHeight);
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled") protected void initializeViews() {

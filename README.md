@@ -52,7 +52,7 @@ Easily reference the library in your Android projects using this dependency in y
 
 ```java
 dependencies {
-    compile 'com.thefinestartist:finestwebview:1.1.4'
+    compile 'com.thefinestartist:finestwebview:1.1.5'
 }
 ```
 
