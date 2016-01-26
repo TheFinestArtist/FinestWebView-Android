@@ -39,8 +39,8 @@ You can download the latest sample APK from this repo here: [sample-release.apk]
 It's also on Google Play:
 
 <a href="https://play.google.com/store/apps/details?id=com.thefinestartist.finestwebview.sample" target="_blank">
-  <img alt="Get it on Google Play"
-       src="https://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
+  <img alt="Get it on Google Play" 
+        src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" />
 </a>
 
 ## Getting started
