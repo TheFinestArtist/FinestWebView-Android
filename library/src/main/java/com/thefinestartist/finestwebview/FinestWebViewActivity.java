@@ -488,8 +488,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         { // WebLayout
             float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
+            int statusBarHeight = ScreenHelper.getSBHeight(this);
             int screenHeight = ScreenHelper.getHeight(this);
-            float webLayoutMinimumHeight = screenHeight - toolbarHeight;
+            float webLayoutMinimumHeight = screenHeight - toolbarHeight - statusBarHeight;
             if (showDivider && !gradientDivider) webLayoutMinimumHeight -= dividerHeight;
             webLayout.setMinimumHeight((int) webLayoutMinimumHeight);
         }
