@@ -28,6 +28,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -554,7 +555,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         { // WebView
             webView.setWebChromeClient(new MyWebChromeClient());
             webView.setWebViewClient(new MyWebViewClient());
-
+            webView.setDownloadListener(downloadListener);
 
             WebSettings settings = webView.getSettings();
 
@@ -1068,6 +1069,13 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             BroadCastManager.onPageCommitVisible(FinestWebViewActivity.this, key, url);
         }
     }
+
+    DownloadListener downloadListener = new DownloadListener() {
+        @Override
+        public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+            BroadCastManager.onDownloadStart(FinestWebViewActivity.this, key, url, userAgent, contentDisposition, mimetype, contentLength);
+        }
+    };
 
     protected void requestCenterLayout() {
         int maxWidth;

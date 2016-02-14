@@ -13,4 +13,6 @@ public abstract class WebViewListener {
     public void onPageFinished(String url) {}
     public void onLoadResource(String url) {}
     public void onPageCommitVisible(String url) {}
+
+    public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {}
 }
