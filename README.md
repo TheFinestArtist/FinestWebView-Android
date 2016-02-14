@@ -258,6 +258,8 @@ menuTextPaddingRightRes(@DimenRes int menuTextPaddingRight);
 
 showMenuRefresh(boolean showMenuRefresh);
 stringResRefresh(@StringRes int stringResRefresh);
+showMenuFind(boolean showMenuFind);
+stringResFind(@StringRes int stringResFind);
 showMenuShareVia(boolean showMenuShareVia);
 stringResShareVia(@StringRes int stringResShareVia);
 showMenuCopyLink(boolean showMenuCopyLink);
@@ -356,6 +358,8 @@ public void onPageStarted(String url);
 public void onPageFinished(String url);
 public void onLoadResource(String url);
 public void onPageCommitVisible(String url);
+
+public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength)
 ```
 
 #### Status Bar Color & Toolbar Color

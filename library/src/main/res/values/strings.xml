@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="refresh">Refresh</string>
+    <string name="find">Find</string>
     <string name="share_via">Share via</string>
     <string name="copy_link">Copy Link</string>
     <string name="open_with">Open with</string>

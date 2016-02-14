@@ -98,6 +98,8 @@ public class FinestWebView {
 
         protected Boolean showMenuRefresh;
         protected Integer stringResRefresh;
+        protected Boolean showMenuFind;
+        protected Integer stringResFind;
         protected Boolean showMenuShareVia;
         protected Integer stringResShareVia;
         protected Boolean showMenuCopyLink;
@@ -590,6 +592,16 @@ public class FinestWebView {
 
         public Builder stringResRefresh(@StringRes int stringResRefresh) {
             this.stringResRefresh = stringResRefresh;
+            return this;
+        }
+
+        public Builder showMenuFind(boolean showMenuFind) {
+            this.showMenuFind = showMenuFind;
+            return this;
+        }
+
+        public Builder stringResFind(@StringRes int stringResFind) {
+            this.stringResFind = stringResFind;
             return this;
         }
 

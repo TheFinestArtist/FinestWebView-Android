@@ -53,6 +53,28 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/menuFind"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/selector_light_theme"
+                android:gravity="center_vertical|left"
+                android:onClick="onClick">
+
+                <TextView
+                    android:id="@+id/menuFindTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="32dp"
+                    android:singleLine="true"
+                    android:text="@string/find"
+                    android:textColor="@color/finestBlack"
+                    android:textSize="@dimen/defaultMenuTextSize" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/menuShareVia"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"

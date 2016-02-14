@@ -122,6 +122,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
     protected boolean showMenuRefresh;
     protected int stringResRefresh;
+    protected boolean showMenuFind;
+    protected int stringResFind;
     protected boolean showMenuShareVia;
     protected int stringResShareVia;
     protected boolean showMenuCopyLink;
@@ -283,6 +285,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         showMenuRefresh = builder.showMenuRefresh != null ? builder.showMenuRefresh : true;
         stringResRefresh = builder.stringResRefresh != null ? builder.stringResRefresh : R.string.refresh;
+        showMenuFind = builder.showMenuFind != null ? builder.showMenuFind : false;
+        stringResFind = builder.stringResFind != null ? builder.stringResFind : R.string.find;
         showMenuShareVia = builder.showMenuShareVia != null ? builder.showMenuShareVia : true;
         stringResShareVia = builder.stringResShareVia != null ? builder.stringResShareVia : R.string.share_via;
         showMenuCopyLink = builder.showMenuCopyLink != null ? builder.showMenuCopyLink : true;
@@ -374,6 +378,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
     protected LinearLayout menuRefresh;
     protected TextView menuRefreshTv;
+    protected LinearLayout menuFind;
+    protected TextView menuFindTv;
     protected LinearLayout menuShareVia;
     protected TextView menuShareViaTv;
     protected LinearLayout menuCopyLink;
@@ -409,6 +415,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         menuRefresh = (LinearLayout) findViewById(R.id.menuRefresh);
         menuRefreshTv = (TextView) findViewById(R.id.menuRefreshTv);
+        menuFind = (LinearLayout) findViewById(R.id.menuFind);
+        menuFindTv = (TextView) findViewById(R.id.menuFindTv);
         menuShareVia = (LinearLayout) findViewById(R.id.menuShareVia);
         menuShareViaTv = (TextView) findViewById(R.id.menuShareViaTv);
         menuCopyLink = (LinearLayout) findViewById(R.id.menuCopyLink);
@@ -545,7 +553,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             close.setVisibility(showIconClose ? View.VISIBLE : View.GONE);
             close.setEnabled(!disableIconClose);
 
-            if ((showMenuRefresh || showMenuShareVia || showMenuCopyLink || showMenuOpenWith) && showIconMenu)
+            if ((showMenuRefresh || showMenuFind || showMenuShareVia || showMenuCopyLink || showMenuOpenWith) && showIconMenu)
                 more.setVisibility(View.VISIBLE);
             else
                 more.setVisibility(View.GONE);
@@ -769,6 +777,15 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             menuRefreshTv.setTextColor(menuTextColor);
             menuRefreshTv.setPadding((int) menuTextPaddingLeft, 0, (int) menuTextPaddingRight, 0);
 
+            menuFind.setVisibility(showMenuFind ? View.VISIBLE : View.GONE);
+            menuFind.setBackgroundResource(menuSelector);
+            menuFind.setGravity(menuTextGravity);
+            menuFindTv.setText(stringResFind);
+            menuFindTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
+            menuFindTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
+            menuFindTv.setTextColor(menuTextColor);
+            menuFindTv.setPadding((int) menuTextPaddingLeft, 0, (int) menuTextPaddingRight, 0);
+
             menuShareVia.setVisibility(showMenuShareVia ? View.VISIBLE : View.GONE);
             menuShareVia.setBackgroundResource(menuSelector);
             menuShareVia.setGravity(menuTextGravity);
@@ -866,6 +883,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             hideMenu();
         } else if (viewId == R.id.menuRefresh) {
             webView.reload();
+            hideMenu();
+        } else if (viewId == R.id.menuFind) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                webView.showFindDialog("", true);
             hideMenu();
         } else if (viewId == R.id.menuShareVia) {
             Intent sendIntent = new Intent();
