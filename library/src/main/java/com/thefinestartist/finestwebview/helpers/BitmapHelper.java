@@ -13,7 +13,7 @@ import android.support.annotation.NonNull;
  */
 public class BitmapHelper {
 
-    public static Bitmap getColoredBitmap(@NonNull Context context, @NonNull Bitmap bitmap, @ColorInt int color) {
+    public static Bitmap getColoredBitmap(@NonNull Bitmap bitmap, @ColorInt int color) {
         int alpha = Color.alpha(color);
         int red = Color.red(color);
         int green = Color.green(color);
@@ -35,7 +35,7 @@ public class BitmapHelper {
 
     public static Bitmap getColoredBitmap(@NonNull Context context, @DrawableRes int drawableRes, @ColorInt int color) {
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), drawableRes);
-        return getColoredBitmap(context, bitmap, color);
+        return getColoredBitmap(bitmap, color);
     }
 
     public static Bitmap getGradientBitmap(int width, int height, @ColorInt int color) {

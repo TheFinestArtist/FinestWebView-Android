@@ -38,3 +38,5 @@ publish {
     desc = 'Beautiful and customizable Android Activity that shows web pages within an app.'
     website = 'https://github.com/TheFinestArtist/FinestWebView-Android'
 }
+
+//$ ./gradlew clean build bintrayUpload -PbintrayUser=thefinestartist -PbintrayKey=BINTRAY_KEY -PdryRun=false

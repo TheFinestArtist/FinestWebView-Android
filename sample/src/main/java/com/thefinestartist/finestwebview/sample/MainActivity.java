@@ -21,22 +21,6 @@ public class MainActivity extends AppCompatActivity {
         if (view.getId() == R.id.defaultTheme) {
             new FinestWebView.Builder(this)
                     .titleDefault("The Finest Artist")
-                    .setWebViewListener(new WebViewListener() {
-                        @Override
-                        public void onPageFinished(String url) {
-                            Log.e("MainActivity", "onPageFinished");
-                        }
-
-                        @Override
-                        public void onProgressChanged(int progress) {
-                            Log.e("MainActivity", "onProgressChanged: " + progress);
-                        }
-
-                        @Override
-                        public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
-                            Log.e("MainActivity", "onDownloadStart: " + url + ", " + userAgent + ", " + contentDisposition + ", " + mimeType + ", " + contentLength);
-                        }
-                    })
                     .show("http://thefinestartist.com");
         } else if (view.getId() == R.id.redTheme) {
             new FinestWebView.Builder(this)
