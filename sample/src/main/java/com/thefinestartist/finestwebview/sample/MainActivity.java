@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.webkit.WebSettings;
 
 import com.thefinestartist.finestwebview.FinestWebView;
 import com.thefinestartist.finestwebview.listeners.WebViewListener;
@@ -23,12 +22,19 @@ public class MainActivity extends AppCompatActivity {
             new FinestWebView.Builder(this)
                     .titleDefault("The Finest Artist")
                     .setWebViewListener(new WebViewListener() {
-                        @Override public void onPageFinished(String url) {
+                        @Override
+                        public void onPageFinished(String url) {
                             Log.e("MainActivity", "onPageFinished");
                         }
 
-                        @Override public void onProgressChanged(int progress) {
+                        @Override
+                        public void onProgressChanged(int progress) {
                             Log.e("MainActivity", "onProgressChanged: " + progress);
+                        }
+
+                        @Override
+                        public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimeType, long contentLength) {
+                            Log.e("MainActivity", "onDownloadStart: " + url + ", " + userAgent + ", " + contentDisposition + ", " + mimeType + ", " + contentLength);
                         }
                     })
                     .show("http://thefinestartist.com");
@@ -50,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     .dividerHeight(0)
                     .gradientDivider(false)
                     .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit)
-                    .injectJavaScript("javascript: document.getElementById('msg').innerHTML='Hello "+"TheFinestArtist"+"!';")
+                    .injectJavaScript("javascript: document.getElementById('msg').innerHTML='Hello " + "TheFinestArtist" + "!';")
                     .show("http://www.blessthisstuff.com");
         } else if (view.getId() == R.id.blueTheme) {
             new FinestWebView.Builder(this)

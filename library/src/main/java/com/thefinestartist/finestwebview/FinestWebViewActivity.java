@@ -1048,11 +1048,13 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 intent.setDataAndType(Uri.parse(url), "video/*");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 view.getContext().startActivity(intent);
+                // If we return true, onPageStarted, onPageFinished won't be called.
                 return true;
             } else if (url.startsWith("tel:") || url.startsWith("sms:") || url.startsWith("smsto:") || url.startsWith("mms:") || url.startsWith("mmsto:")) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 view.getContext().startActivity(intent);
+                // If we return true, onPageStarted, onPageFinished won't be called.
                 return true;
             } else {
                 return super.shouldOverrideUrlLoading(view, url);
