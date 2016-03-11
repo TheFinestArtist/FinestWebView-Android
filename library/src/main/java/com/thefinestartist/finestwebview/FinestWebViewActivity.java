@@ -12,6 +12,7 @@ import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.DrawableRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -23,6 +24,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -1129,9 +1131,21 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected void onDestroy() {
         super.onDestroy();
         BroadCastManager.unregister(FinestWebViewActivity.this, key);
-        if (webLayout != null) {
+        if (webLayout != null)
             webLayout.removeAllViews();
-            webView.destroy();
-        }
+        destroyWebView();
+    }
+
+    // Wait for zoom control to fade away
+    // https://code.google.com/p/android/issues/detail?id=15694
+    // http://stackoverflow.com/a/5966151/1797648
+    private void destroyWebView() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (webView != null)
+                    webView.destroy();
+            }
+        }, ViewConfiguration.getZoomControlsTimeout() + 1000L);
     }
 }
