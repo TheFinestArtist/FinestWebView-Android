@@ -33,4 +33,5 @@ ext {
     versionName = '1.1.7'
 
     supportLibVersion = '23.2.0'
+    playLibVersion = '8.4.0'
 }
