@@ -2,11 +2,13 @@ package com.thefinestartist.finestwebview;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
@@ -17,10 +19,13 @@ import android.support.annotation.DrawableRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -43,16 +48,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nineoldandroids.view.ViewHelper;
+import com.thefinestartist.converters.UnitConverter;
 import com.thefinestartist.finestwebview.enums.Position;
 import com.thefinestartist.finestwebview.helpers.BitmapHelper;
-import com.thefinestartist.finestwebview.helpers.ClipboardHelper;
 import com.thefinestartist.finestwebview.helpers.ColorHelper;
-import com.thefinestartist.finestwebview.helpers.DipPixelHelper;
-import com.thefinestartist.finestwebview.helpers.ScreenHelper;
 import com.thefinestartist.finestwebview.helpers.TypefaceHelper;
 import com.thefinestartist.finestwebview.helpers.UrlParser;
 import com.thefinestartist.finestwebview.listeners.BroadCastManager;
 import com.thefinestartist.finestwebview.views.ShadowLayout;
+import com.thefinestartist.utils.service.ClipboardManagerUtil;
+import com.thefinestartist.utils.ui.DisplayUtil;
+import com.thefinestartist.utils.ui.ViewUtil;
 
 
 /**
@@ -223,8 +229,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         statusBarColor = builder.statusBarColor != null ? builder.statusBarColor : colorPrimaryDark;
 
         toolbarColor = builder.toolbarColor != null ? builder.toolbarColor : colorPrimary;
-        toolbarScrollFlags = builder.toolbarScrollFlags != null ? builder.toolbarScrollFlags : AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
-                | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS;
+        toolbarScrollFlags = builder.toolbarScrollFlags != null ?
+                builder.toolbarScrollFlags :
+                AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS;
 
         iconDefaultColor = builder.iconDefaultColor != null ? builder.iconDefaultColor : colorAccent;
         iconDisabledColor = builder.iconDisabledColor != null ? builder.iconDisabledColor : ColorHelper.disableColor(iconDefaultColor);
@@ -302,7 +309,6 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         backPressToClose = builder.backPressToClose != null ? builder.backPressToClose : false;
         stringResCopiedToClipboard = builder.stringResCopiedToClipboard != null ? builder.stringResCopiedToClipboard : R.string.copied_to_clipboard;
 
-
         webViewSupportZoom = builder.webViewSupportZoom;
         webViewMediaPlaybackRequiresUserGesture = builder.webViewMediaPlaybackRequiresUserGesture;
         webViewBuiltInZoomControls = builder.webViewBuiltInZoomControls != null ? builder.webViewBuiltInZoomControls : false;
@@ -312,7 +318,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         webViewLoadWithOverviewMode = builder.webViewLoadWithOverviewMode != null ? builder.webViewLoadWithOverviewMode : true;
         webViewSaveFormData = builder.webViewSaveFormData;
         webViewTextZoom = builder.webViewTextZoom;
-        webViewUseWideViewPort = builder.webViewUseWideViewPort != null ? builder.webViewUseWideViewPort : true;
+        webViewUseWideViewPort = builder.webViewUseWideViewPort;
         webViewSupportMultipleWindows = builder.webViewSupportMultipleWindows;
         webViewLayoutAlgorithm = builder.webViewLayoutAlgorithm;
         webViewStandardFontFamily = builder.webViewStandardFontFamily;
@@ -362,10 +368,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected TextView title;
     protected TextView urlTv;
 
-    protected ImageButton close;
-    protected ImageButton back;
-    protected ImageButton forward;
-    protected ImageButton more;
+    protected AppCompatImageButton close;
+    protected AppCompatImageButton back;
+    protected AppCompatImageButton forward;
+    protected AppCompatImageButton more;
 
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected WebView webView;
@@ -388,6 +394,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected TextView menuCopyLinkTv;
     protected LinearLayout menuOpenWith;
     protected TextView menuOpenWithTv;
+
     protected FrameLayout webLayout;
 
     protected void bindViews() {
@@ -400,10 +407,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         title = (TextView) findViewById(R.id.title);
         urlTv = (TextView) findViewById(R.id.url);
 
-        close = (ImageButton) findViewById(R.id.close);
-        back = (ImageButton) findViewById(R.id.back);
-        forward = (ImageButton) findViewById(R.id.forward);
-        more = (ImageButton) findViewById(R.id.more);
+        close = (AppCompatImageButton) findViewById(R.id.close);
+        back = (AppCompatImageButton) findViewById(R.id.back);
+        forward = (AppCompatImageButton) findViewById(R.id.forward);
+        more = (AppCompatImageButton) findViewById(R.id.more);
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
 
@@ -425,6 +432,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         menuCopyLinkTv = (TextView) findViewById(R.id.menuCopyLinkTv);
         menuOpenWith = (LinearLayout) findViewById(R.id.menuOpenWith);
         menuOpenWithTv = (TextView) findViewById(R.id.menuOpenWithTv);
+
         webLayout = (FrameLayout) findViewById(R.id.webLayout);
         webView = new WebView(this);
         webLayout.addView(webView);
@@ -491,7 +499,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                     params.setMargins(0, (int) toolbarHeight, 0, 0);
                     break;
                 case BOTTOM_OF_WEBVIEW:
-                    params.setMargins(0, ScreenHelper.getHeight(this) - (int) progressBarHeight, 0, 0);
+                    params.setMargins(0, DisplayUtil.getHeight() - (int) progressBarHeight, 0, 0);
                     break;
             }
             progressBar.setLayoutParams(params);
@@ -499,8 +507,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         { // WebLayout
             float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
-            int statusBarHeight = ScreenHelper.getSBHeight(this);
-            int screenHeight = ScreenHelper.getHeight(this);
+            int statusBarHeight = DisplayUtil.getStatusBarHeight();
+            int screenHeight = DisplayUtil.getHeight();
             float webLayoutMinimumHeight = screenHeight - toolbarHeight - statusBarHeight;
             if (showDivider && !gradientDivider) webLayoutMinimumHeight -= dividerHeight;
             webLayout.setMinimumHeight((int) webLayoutMinimumHeight);
@@ -704,14 +712,10 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             gradient.setVisibility(showDivider && gradientDivider ? View.VISIBLE : View.GONE);
             divider.setVisibility(showDivider && !gradientDivider ? View.VISIBLE : View.GONE);
             if (gradientDivider) {
-                int dividerWidth = ScreenHelper.getWidth(this);
+                int dividerWidth = DisplayUtil.getWidth();
                 Bitmap bitmap = BitmapHelper.getGradientBitmap(dividerWidth, (int) dividerHeight, dividerColor);
                 BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                    gradient.setBackgroundDrawable(drawable);
-                } else {
-                    gradient.setBackground(drawable);
-                }
+                ViewUtil.setBackground(gradient, drawable);
 
                 CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) gradient.getLayoutParams();
                 params.height = (int) dividerHeight;
@@ -745,7 +749,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                     params.setMargins(0, (int) toolbarHeight, 0, 0);
                     break;
                 case BOTTOM_OF_WEBVIEW:
-                    params.setMargins(0, ScreenHelper.getHeight(this) - (int) progressBarHeight, 0, 0);
+                    params.setMargins(0, DisplayUtil.getHeight() - (int) progressBarHeight, 0, 0);
                     break;
             }
             progressBar.setLayoutParams(params);
@@ -819,30 +823,30 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
     protected int getMaxWidth() {
         if (forward.getVisibility() == View.VISIBLE) {
-            return (int) (ScreenHelper.getWidth(this) - DipPixelHelper.getPixel(this, 100));
+            return DisplayUtil.getWidth() - UnitConverter.dpToPx(100);
         } else {
-            return (int) (ScreenHelper.getWidth(this) - DipPixelHelper.getPixel(this, 52));
+            return DisplayUtil.getWidth() - UnitConverter.dpToPx(52);
         }
     }
 
     protected void updateIcon(ImageButton icon, @DrawableRes int drawableRes) {
-        StateListDrawable states = new StateListDrawable();
-        {
-            Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconPressedColor);
-            BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
-            states.addState(new int[]{android.R.attr.state_pressed}, drawable);
-        }
-        {
-            Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconDisabledColor);
-            BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
-            states.addState(new int[]{-android.R.attr.state_enabled}, drawable);
-        }
-        {
-            Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconDefaultColor);
-            BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
-            states.addState(new int[]{}, drawable);
-        }
-        icon.setImageDrawable(states);
+        VectorDrawableCompat drawable = (VectorDrawableCompat) ContextCompat.getDrawable(this, drawableRes);
+
+        int[][] states = new int[][]{
+                new int[]{-android.R.attr.state_enabled}, // disabled
+                new int[]{android.R.attr.state_pressed}, // pressed
+                new int[]{}  // default
+        };
+
+        int[] colors = new int[]{
+                iconDisabledColor,
+                iconPressedColor,
+                iconDefaultColor
+        };
+
+        ColorStateList colorStateList = new ColorStateList(states, colors);
+        drawable.setTintList(colorStateList);
+        icon.setImageDrawable(drawable);
     }
 
     @Override
@@ -899,7 +903,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
             hideMenu();
         } else if (viewId == R.id.menuCopyLink) {
-            ClipboardHelper.clip(this, webView.getUrl());
+            ClipboardManagerUtil.setText(webView.getUrl());
 
             Snackbar snackbar = Snackbar.make(coordinatorLayout, getString(stringResCopiedToClipboard), Snackbar.LENGTH_LONG);
             View snackbarView = snackbar.getView();
@@ -1039,6 +1043,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             BroadCastManager.onPageStarted(FinestWebViewActivity.this, key, url);
+            if (!url.contains("docs.google.com") && url.endsWith(".pdf")) {
+                webView.loadUrl("http://docs.google.com/gview?embedded=true&url=" + url);
+            }
         }
 
         @Override
@@ -1077,8 +1084,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 view.getContext().startActivity(intent);
-                // If we return true, onPageStarted, onPageFinished won't be called.
-                return true;
+                return true; // If we return true, onPageStarted, onPageFinished won't be called.
             } else {
                 return super.shouldOverrideUrlLoading(view, url);
             }
@@ -1105,9 +1111,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected void requestCenterLayout() {
         int maxWidth;
         if (webView.canGoBack() || webView.canGoForward()) {
-            maxWidth = (int) (ScreenHelper.getWidth(this) - DipPixelHelper.getPixel(this, 48) * 4);
+            maxWidth = DisplayUtil.getWidth() - UnitConverter.dpToPx(48) * 4;
         } else {
-            maxWidth = (int) (ScreenHelper.getWidth(this) - DipPixelHelper.getPixel(this, 48) * 2);
+            maxWidth = DisplayUtil.getWidth() - UnitConverter.dpToPx(48) * 2;
         }
 
         title.setMaxWidth(maxWidth);
@@ -1131,8 +1137,6 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected void onDestroy() {
         super.onDestroy();
         BroadCastManager.unregister(FinestWebViewActivity.this, key);
-        if (webLayout != null)
-            webLayout.removeAllViews();
         destroyWebView();
     }
 

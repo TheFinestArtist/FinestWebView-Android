@@ -13,12 +13,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.annotation.StyleRes;
 import android.support.design.widget.AppBarLayout.LayoutParams.ScrollFlags;
-import android.support.v4.content.ContextCompat;
 import android.webkit.WebSettings;
 
+import com.thefinestartist.Base;
 import com.thefinestartist.finestwebview.enums.Position;
 import com.thefinestartist.finestwebview.listeners.BroadCastManager;
 import com.thefinestartist.finestwebview.listeners.WebViewListener;
+import com.thefinestartist.utils.content.ResourcesUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -187,6 +188,7 @@ public class FinestWebView {
 
         public Builder(@NonNull Activity activity) {
             this.context = activity;
+            Base.initialize(activity);
         }
 
         /**
@@ -195,6 +197,7 @@ public class FinestWebView {
          */
         public Builder(@NonNull Context context) {
             this.context = context;
+            Base.initialize(context);
         }
 
         public Builder theme(@StyleRes int theme) {
@@ -207,8 +210,8 @@ public class FinestWebView {
             return this;
         }
 
-        public Builder statusBarColorRes(@ColorRes int color) {
-            this.statusBarColor = ContextCompat.getColor(context, color);
+        public Builder statusBarColorRes(@ColorRes int colorRes) {
+            this.statusBarColor = ResourcesUtil.getColor(colorRes);
             return this;
         }
 
@@ -217,8 +220,8 @@ public class FinestWebView {
             return this;
         }
 
-        public Builder toolbarColorRes(@ColorRes int color) {
-            this.toolbarColor = ContextCompat.getColor(context, color);
+        public Builder toolbarColorRes(@ColorRes int colorRes) {
+            this.toolbarColor = ResourcesUtil.getColor(colorRes);
             return this;
         }
 
@@ -233,7 +236,7 @@ public class FinestWebView {
         }
 
         public Builder iconDefaultColorRes(@ColorRes int color) {
-            this.iconDefaultColor = ContextCompat.getColor(context, color);
+            this.iconDefaultColor = ResourcesUtil.getColor(color);
             return this;
         }
 
@@ -243,7 +246,7 @@ public class FinestWebView {
         }
 
         public Builder iconDisabledColorRes(@ColorRes int colorRes) {
-            this.iconDisabledColor = ContextCompat.getColor(context, colorRes);
+            this.iconDisabledColor = ResourcesUtil.getColor(colorRes);
             return this;
         }
 
@@ -253,7 +256,7 @@ public class FinestWebView {
         }
 
         public Builder iconPressedColorRes(@ColorRes int colorRes) {
-            this.iconPressedColor = ContextCompat.getColor(context, colorRes);
+            this.iconPressedColor = ResourcesUtil.getColor(colorRes);
             return this;
         }
 
@@ -313,7 +316,7 @@ public class FinestWebView {
         }
 
         public Builder swipeRefreshColorRes(@ColorRes int colorRes) {
-            this.swipeRefreshColor = ContextCompat.getColor(context, colorRes);
+            this.swipeRefreshColor = ResourcesUtil.getColor(colorRes);
             return this;
         }
 
@@ -326,7 +329,7 @@ public class FinestWebView {
         }
 
         public Builder swipeRefreshColorsRes(@ArrayRes int colorsRes) {
-            int[] colors = context.getResources().getIntArray(colorsRes);
+            int[] colors = ResourcesUtil.getIntArray(colorsRes);
             return swipeRefreshColors(colors);
         }
 
@@ -346,7 +349,7 @@ public class FinestWebView {
         }
 
         public Builder dividerColorRes(@ColorRes int colorRes) {
-            this.dividerColor = ContextCompat.getColor(context, colorRes);
+            this.dividerColor = ResourcesUtil.getColor(colorRes);
             return this;
         }
 
@@ -361,7 +364,7 @@ public class FinestWebView {
         }
 
         public Builder dividerHeightRes(@DimenRes int height) {
-            this.dividerHeight = context.getResources().getDimension(height);
+            this.dividerHeight = ResourcesUtil.getDimension(height);
             return this;
         }
 
@@ -376,7 +379,7 @@ public class FinestWebView {
         }
 
         public Builder progressBarColorRes(@ColorRes int colorRes) {
-            this.progressBarColor = ContextCompat.getColor(context, colorRes);
+            this.progressBarColor = ResourcesUtil.getColor(colorRes);
             return this;
         }
 
@@ -391,7 +394,7 @@ public class FinestWebView {
         }
 
         public Builder progressBarHeightRes(@DimenRes int height) {
-            this.progressBarHeight = context.getResources().getDimension(height);
+            this.progressBarHeight = ResourcesUtil.getDimension(height);
             return this;
         }
 
@@ -406,7 +409,7 @@ public class FinestWebView {
         }
 
         public Builder titleDefaultRes(@StringRes int stringRes) {
-            this.titleDefault = context.getString(stringRes);
+            this.titleDefault = ResourcesUtil.getString(stringRes);
             return this;
         }
 
@@ -426,7 +429,7 @@ public class FinestWebView {
         }
 
         public Builder titleSizeRes(@DimenRes int titleSize) {
-            this.titleSize = context.getResources().getDimension(titleSize);
+            this.titleSize = ResourcesUtil.getDimension(titleSize);
             return this;
         }
 
@@ -441,7 +444,7 @@ public class FinestWebView {
         }
 
         public Builder titleColorRes(@ColorRes int colorRes) {
-            this.titleColor = ContextCompat.getColor(context, colorRes);
+            this.titleColor = ResourcesUtil.getColor(colorRes);
             return this;
         }
 
@@ -461,7 +464,7 @@ public class FinestWebView {
         }
 
         public Builder urlSizeRes(@DimenRes int urlSize) {
-            this.urlSize = context.getResources().getDimension(urlSize);
+            this.urlSize = ResourcesUtil.getDimension(urlSize);
             return this;
         }
 
@@ -476,7 +479,7 @@ public class FinestWebView {
         }
 
         public Builder urlColorRes(@ColorRes int colorRes) {
-            this.urlColor = ContextCompat.getColor(context, colorRes);
+            this.urlColor = ResourcesUtil.getColor(colorRes);
             return this;
         }
 
@@ -486,7 +489,7 @@ public class FinestWebView {
         }
 
         public Builder menuColorRes(@ColorRes int colorRes) {
-            this.menuColor = ContextCompat.getColor(context, colorRes);
+            this.menuColor = ResourcesUtil.getColor(colorRes);
             return this;
         }
 
@@ -506,7 +509,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextPaddingLeftRes(@DimenRes int menuTextPaddingLeft) {
-            this.menuTextPaddingLeft = context.getResources().getDimension(menuTextPaddingLeft);
+            this.menuTextPaddingLeft = ResourcesUtil.getDimension(menuTextPaddingLeft);
             return this;
         }
 
@@ -521,7 +524,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextPaddingRightRes(@DimenRes int menuTextPaddingRight) {
-            this.menuTextPaddingRight = context.getResources().getDimension(menuTextPaddingRight);
+            this.menuTextPaddingRight = ResourcesUtil.getDimension(menuTextPaddingRight);
             return this;
         }
 
@@ -531,7 +534,7 @@ public class FinestWebView {
         }
 
         public Builder menuDropShadowColorRes(@ColorRes int colorRes) {
-            this.menuDropShadowColor = ContextCompat.getColor(context, colorRes);
+            this.menuDropShadowColor = ResourcesUtil.getColor(colorRes);
             return this;
         }
 
@@ -546,7 +549,7 @@ public class FinestWebView {
         }
 
         public Builder menuDropShadowSizeRes(@DimenRes int menuDropShadowSize) {
-            this.menuDropShadowSize = context.getResources().getDimension(menuDropShadowSize);
+            this.menuDropShadowSize = ResourcesUtil.getDimension(menuDropShadowSize);
             return this;
         }
 
@@ -566,7 +569,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextSizeRes(@DimenRes int menuTextSize) {
-            this.menuTextSize = context.getResources().getDimension(menuTextSize);
+            this.menuTextSize = ResourcesUtil.getDimension(menuTextSize);
             return this;
         }
 
@@ -581,7 +584,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextColorRes(@ColorRes int colorRes) {
-            this.menuTextColor = ContextCompat.getColor(context, colorRes);
+            this.menuTextColor = ResourcesUtil.getColor(colorRes);
             return this;
         }
 
@@ -885,7 +888,7 @@ public class FinestWebView {
         }
 
         public void load(@StringRes int dataRes) {
-            load(context.getString(dataRes));
+            load(ResourcesUtil.getString(dataRes));
         }
 
         public void load(String data) {
@@ -899,7 +902,7 @@ public class FinestWebView {
         }
 
         public void show(@StringRes int urlRes) {
-            show(context.getString(urlRes));
+            show(ResourcesUtil.getString(urlRes));
         }
 
         public void show(@NonNull String url) {
