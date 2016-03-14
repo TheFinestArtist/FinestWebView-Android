@@ -18,6 +18,10 @@ android {
         versionName rootProject.ext.versionName
         vectorDrawables.useSupportLibrary = true
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
