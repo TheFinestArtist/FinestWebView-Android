@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -827,7 +828,6 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     }
 
     protected void updateIcon(ImageButton icon, @DrawableRes int drawableRes) {
-        VectorDrawableCompat drawable = (VectorDrawableCompat) ContextCompat.getDrawable(this, drawableRes);
 
         int[][] states = new int[][]{
                 new int[]{-android.R.attr.state_enabled}, // disabled
@@ -842,8 +842,17 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         };
 
         ColorStateList colorStateList = new ColorStateList(states, colors);
-        drawable.setTintList(colorStateList);
-        icon.setImageDrawable(drawable);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            VectorDrawable drawable = (VectorDrawable) ContextCompat.getDrawable(this, drawableRes);
+            drawable.setTintList(colorStateList);
+            icon.setImageDrawable(drawable);
+
+        } else {
+            VectorDrawableCompat drawable = (VectorDrawableCompat) ContextCompat.getDrawable(this, drawableRes);
+            drawable.setTintList(colorStateList);
+            icon.setImageDrawable(drawable);
+        }
     }
 
     @Override
