@@ -30,8 +30,8 @@ dependencies {
     compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:design:${rootProject.ext.supportLibVersion}"
     compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.thefinestartist:utils:0.8.5'
-    apt 'com.thefinestartist:compilers:0.8.5'
+    compile 'com.thefinestartist:utils:0.9.0'
+    apt 'com.thefinestartist:compilers:0.9.0'
 }
 
 publish {

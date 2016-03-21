@@ -19,7 +19,8 @@ import com.thefinestartist.Base;
 import com.thefinestartist.finestwebview.enums.Position;
 import com.thefinestartist.finestwebview.listeners.BroadCastManager;
 import com.thefinestartist.finestwebview.listeners.WebViewListener;
-import com.thefinestartist.utils.content.ResourcesUtil;
+import com.thefinestartist.utils.content.Ctx;
+import com.thefinestartist.utils.content.Res;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -211,7 +212,7 @@ public class FinestWebView {
         }
 
         public Builder statusBarColorRes(@ColorRes int colorRes) {
-            this.statusBarColor = ResourcesUtil.getColor(colorRes);
+            this.statusBarColor = Res.getColor(colorRes);
             return this;
         }
 
@@ -221,7 +222,7 @@ public class FinestWebView {
         }
 
         public Builder toolbarColorRes(@ColorRes int colorRes) {
-            this.toolbarColor = ResourcesUtil.getColor(colorRes);
+            this.toolbarColor = Res.getColor(colorRes);
             return this;
         }
 
@@ -236,7 +237,7 @@ public class FinestWebView {
         }
 
         public Builder iconDefaultColorRes(@ColorRes int color) {
-            this.iconDefaultColor = ResourcesUtil.getColor(color);
+            this.iconDefaultColor = Res.getColor(color);
             return this;
         }
 
@@ -246,7 +247,7 @@ public class FinestWebView {
         }
 
         public Builder iconDisabledColorRes(@ColorRes int colorRes) {
-            this.iconDisabledColor = ResourcesUtil.getColor(colorRes);
+            this.iconDisabledColor = Res.getColor(colorRes);
             return this;
         }
 
@@ -256,7 +257,7 @@ public class FinestWebView {
         }
 
         public Builder iconPressedColorRes(@ColorRes int colorRes) {
-            this.iconPressedColor = ResourcesUtil.getColor(colorRes);
+            this.iconPressedColor = Res.getColor(colorRes);
             return this;
         }
 
@@ -316,7 +317,7 @@ public class FinestWebView {
         }
 
         public Builder swipeRefreshColorRes(@ColorRes int colorRes) {
-            this.swipeRefreshColor = ResourcesUtil.getColor(colorRes);
+            this.swipeRefreshColor = Res.getColor(colorRes);
             return this;
         }
 
@@ -329,7 +330,7 @@ public class FinestWebView {
         }
 
         public Builder swipeRefreshColorsRes(@ArrayRes int colorsRes) {
-            int[] colors = ResourcesUtil.getIntArray(colorsRes);
+            int[] colors = Res.getIntArray(colorsRes);
             return swipeRefreshColors(colors);
         }
 
@@ -349,7 +350,7 @@ public class FinestWebView {
         }
 
         public Builder dividerColorRes(@ColorRes int colorRes) {
-            this.dividerColor = ResourcesUtil.getColor(colorRes);
+            this.dividerColor = Res.getColor(colorRes);
             return this;
         }
 
@@ -364,7 +365,7 @@ public class FinestWebView {
         }
 
         public Builder dividerHeightRes(@DimenRes int height) {
-            this.dividerHeight = ResourcesUtil.getDimension(height);
+            this.dividerHeight = Res.getDimension(height);
             return this;
         }
 
@@ -379,7 +380,7 @@ public class FinestWebView {
         }
 
         public Builder progressBarColorRes(@ColorRes int colorRes) {
-            this.progressBarColor = ResourcesUtil.getColor(colorRes);
+            this.progressBarColor = Res.getColor(colorRes);
             return this;
         }
 
@@ -394,7 +395,7 @@ public class FinestWebView {
         }
 
         public Builder progressBarHeightRes(@DimenRes int height) {
-            this.progressBarHeight = ResourcesUtil.getDimension(height);
+            this.progressBarHeight = Res.getDimension(height);
             return this;
         }
 
@@ -409,7 +410,7 @@ public class FinestWebView {
         }
 
         public Builder titleDefaultRes(@StringRes int stringRes) {
-            this.titleDefault = ResourcesUtil.getString(stringRes);
+            this.titleDefault = Res.getString(stringRes);
             return this;
         }
 
@@ -429,7 +430,7 @@ public class FinestWebView {
         }
 
         public Builder titleSizeRes(@DimenRes int titleSize) {
-            this.titleSize = ResourcesUtil.getDimension(titleSize);
+            this.titleSize = Res.getDimension(titleSize);
             return this;
         }
 
@@ -444,7 +445,7 @@ public class FinestWebView {
         }
 
         public Builder titleColorRes(@ColorRes int colorRes) {
-            this.titleColor = ResourcesUtil.getColor(colorRes);
+            this.titleColor = Res.getColor(colorRes);
             return this;
         }
 
@@ -464,7 +465,7 @@ public class FinestWebView {
         }
 
         public Builder urlSizeRes(@DimenRes int urlSize) {
-            this.urlSize = ResourcesUtil.getDimension(urlSize);
+            this.urlSize = Res.getDimension(urlSize);
             return this;
         }
 
@@ -479,7 +480,7 @@ public class FinestWebView {
         }
 
         public Builder urlColorRes(@ColorRes int colorRes) {
-            this.urlColor = ResourcesUtil.getColor(colorRes);
+            this.urlColor = Res.getColor(colorRes);
             return this;
         }
 
@@ -489,7 +490,7 @@ public class FinestWebView {
         }
 
         public Builder menuColorRes(@ColorRes int colorRes) {
-            this.menuColor = ResourcesUtil.getColor(colorRes);
+            this.menuColor = Res.getColor(colorRes);
             return this;
         }
 
@@ -509,7 +510,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextPaddingLeftRes(@DimenRes int menuTextPaddingLeft) {
-            this.menuTextPaddingLeft = ResourcesUtil.getDimension(menuTextPaddingLeft);
+            this.menuTextPaddingLeft = Res.getDimension(menuTextPaddingLeft);
             return this;
         }
 
@@ -524,7 +525,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextPaddingRightRes(@DimenRes int menuTextPaddingRight) {
-            this.menuTextPaddingRight = ResourcesUtil.getDimension(menuTextPaddingRight);
+            this.menuTextPaddingRight = Res.getDimension(menuTextPaddingRight);
             return this;
         }
 
@@ -534,7 +535,7 @@ public class FinestWebView {
         }
 
         public Builder menuDropShadowColorRes(@ColorRes int colorRes) {
-            this.menuDropShadowColor = ResourcesUtil.getColor(colorRes);
+            this.menuDropShadowColor = Res.getColor(colorRes);
             return this;
         }
 
@@ -549,7 +550,7 @@ public class FinestWebView {
         }
 
         public Builder menuDropShadowSizeRes(@DimenRes int menuDropShadowSize) {
-            this.menuDropShadowSize = ResourcesUtil.getDimension(menuDropShadowSize);
+            this.menuDropShadowSize = Res.getDimension(menuDropShadowSize);
             return this;
         }
 
@@ -569,7 +570,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextSizeRes(@DimenRes int menuTextSize) {
-            this.menuTextSize = ResourcesUtil.getDimension(menuTextSize);
+            this.menuTextSize = Res.getDimension(menuTextSize);
             return this;
         }
 
@@ -584,7 +585,7 @@ public class FinestWebView {
         }
 
         public Builder menuTextColorRes(@ColorRes int colorRes) {
-            this.menuTextColor = ResourcesUtil.getColor(colorRes);
+            this.menuTextColor = Res.getColor(colorRes);
             return this;
         }
 
@@ -888,7 +889,7 @@ public class FinestWebView {
         }
 
         public void load(@StringRes int dataRes) {
-            load(ResourcesUtil.getString(dataRes));
+            load(Res.getString(dataRes));
         }
 
         public void load(String data) {
@@ -902,7 +903,7 @@ public class FinestWebView {
         }
 
         public void show(@StringRes int urlRes) {
-            show(ResourcesUtil.getString(urlRes));
+            show(Res.getString(urlRes));
         }
 
         public void show(@NonNull String url) {
@@ -919,7 +920,7 @@ public class FinestWebView {
             Intent intent = new Intent(context, FinestWebViewActivity.class);
             intent.putExtra("builder", this);
 
-            context.startActivity(intent);
+            Ctx.startActivity(intent);
 
             if (context instanceof Activity)
                 ((Activity) context).overridePendingTransition(animationOpenEnter, animationOpenExit);
