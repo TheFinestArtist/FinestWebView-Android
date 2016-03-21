@@ -33,6 +33,6 @@ ext {
     versionCode = 9
     versionName = '1.2.1'
 
-    supportLibVersion = '23.2.0'
+    supportLibVersion = '23.2.1'
     playLibVersion = '8.4.0'
 }
