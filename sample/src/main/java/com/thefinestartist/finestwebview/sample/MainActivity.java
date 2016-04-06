@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
 //                    .toolbarScrollFlags(0)
                     .webViewJavaScriptEnabled(true)
                     .webViewUseWideViewPort(false)
-                    .show("http://andrewliu.in/2016/01/30/聊聊Redis的订阅发布/");
+//                    .show("http://andrewliu.in/2016/01/30/聊聊Redis的订阅发布/");
+                    .show("http://www.youtube.com");
         } else if (view.getId() == R.id.redTheme) {
             Intent intent = new Intent(this, WebViewActivity.class);
             startActivity(intent);

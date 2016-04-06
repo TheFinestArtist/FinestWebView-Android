@@ -58,7 +58,7 @@ buildscript {
 }
 
 dependencies {
-    compile 'com.thefinestartist:finestwebview:1.2.2'
+    compile 'com.thefinestartist:finestwebview:1.2.3'
 }
 ```
 

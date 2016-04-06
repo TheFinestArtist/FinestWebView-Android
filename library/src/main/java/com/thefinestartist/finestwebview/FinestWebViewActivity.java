@@ -54,6 +54,7 @@ import com.thefinestartist.finestwebview.helpers.TypefaceHelper;
 import com.thefinestartist.finestwebview.helpers.UrlParser;
 import com.thefinestartist.finestwebview.listeners.BroadCastManager;
 import com.thefinestartist.finestwebview.views.ShadowLayout;
+import com.thefinestartist.utils.etc.APILevel;
 import com.thefinestartist.utils.service.ClipboardManagerUtil;
 import com.thefinestartist.utils.ui.DisplayUtil;
 import com.thefinestartist.utils.ui.ViewUtil;
@@ -1143,7 +1144,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected void onDestroy() {
         super.onDestroy();
         BroadCastManager.unregister(FinestWebViewActivity.this, key);
-        destroyWebView();
+        if (webView == null) return;
+        if (APILevel.require(11)) webView.onPause();
     }
 
     // Wait for zoom control to fade away
@@ -1153,8 +1155,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (webView != null)
-                    webView.destroy();
+                if (webView != null) webView.destroy();
             }
         }, ViewConfiguration.getZoomControlsTimeout() + 1000L);
     }
