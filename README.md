@@ -51,8 +51,14 @@ It's also on Google Play:
 Easily reference the library in your Android projects using this dependency in your module's `build.gradle` file.
 
 ```java
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.0.0-rc3'
+    }
+}
+
 dependencies {
-    compile 'com.thefinestartist:finestwebview:1.2.1'
+    compile 'com.thefinestartist:finestwebview:1.2.2'
 }
 ```
 
