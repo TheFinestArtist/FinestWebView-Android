@@ -50,6 +50,8 @@ It's also on Google Play:
 
 Easily reference the library in your Android projects using this dependency in your module's `build.gradle` file.
 
+**Use android support API version 23.2.1 or 23.2.0**
+
 ```java
 buildscript {
     dependencies {
