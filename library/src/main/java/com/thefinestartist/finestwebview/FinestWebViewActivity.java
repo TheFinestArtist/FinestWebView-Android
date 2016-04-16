@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
@@ -63,7 +64,7 @@ import com.thefinestartist.utils.ui.ViewUtil;
 /**
  * Created by Leonardo on 11/14/15.
  */
-public class FinestWebViewActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
+public class FinestWebViewActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener, View.OnClickListener {
 
     protected int key;
 
@@ -199,7 +200,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             return;
 
         TypedValue typedValue = new TypedValue();
-        TypedArray a = obtainStyledAttributes(typedValue.data, new int[]{
+        TypedArray typedArray = obtainStyledAttributes(typedValue.data, new int[]{
                 R.attr.colorPrimaryDark,
                 R.attr.colorPrimary,
                 R.attr.colorAccent,
@@ -207,16 +208,16 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 android.R.attr.textColorSecondary,
                 android.R.attr.selectableItemBackground,
                 android.R.attr.selectableItemBackgroundBorderless});
-        int colorPrimaryDark = a.getColor(0, ContextCompat.getColor(this, R.color.finestGray));
-        int colorPrimary = a.getColor(1, ContextCompat.getColor(this, R.color.finestWhite));
-        int colorAccent = a.getColor(2, ContextCompat.getColor(this, R.color.finestBlack));
-        int textColorPrimary = a.getColor(3, ContextCompat.getColor(this, R.color.finestBlack));
-        int textColorSecondary = a.getColor(4, ContextCompat.getColor(this, R.color.finestSilver));
+        int colorPrimaryDark = typedArray.getColor(0, ContextCompat.getColor(this, R.color.finestGray));
+        int colorPrimary = typedArray.getColor(1, ContextCompat.getColor(this, R.color.finestWhite));
+        int colorAccent = typedArray.getColor(2, ContextCompat.getColor(this, R.color.finestBlack));
+        int textColorPrimary = typedArray.getColor(3, ContextCompat.getColor(this, R.color.finestBlack));
+        int textColorSecondary = typedArray.getColor(4, ContextCompat.getColor(this, R.color.finestSilver));
         int selectableItemBackground = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ?
-                a.getResourceId(5, 0) : R.drawable.selector_light_theme;
+                typedArray.getResourceId(5, 0) : R.drawable.selector_light_theme;
         int selectableItemBackgroundBorderless = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
-                a.getResourceId(6, 0) : R.drawable.selector_light_theme;
-        a.recycle();
+                typedArray.getResourceId(6, 0) : R.drawable.selector_light_theme;
+        typedArray.recycle();
 
         FinestWebView.Builder builder = (FinestWebView.Builder) intent.getSerializableExtra("builder");
 
@@ -410,6 +411,11 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         back = (AppCompatImageButton) findViewById(R.id.back);
         forward = (AppCompatImageButton) findViewById(R.id.forward);
         more = (AppCompatImageButton) findViewById(R.id.more);
+
+        close.setOnClickListener(this);
+        back.setOnClickListener(this);
+        forward.setOnClickListener(this);
+        more.setOnClickListener(this);
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
 
@@ -844,16 +850,29 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         ColorStateList colorStateList = new ColorStateList(states, colors);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            VectorDrawable drawable = (VectorDrawable) ContextCompat.getDrawable(this, drawableRes);
-            drawable.setTintList(colorStateList);
-            icon.setImageDrawable(drawable);
-
+        Drawable drawable = ContextCompat.getDrawable(this, drawableRes);
+        if (APILevel.require(21)) {
+            VectorDrawable vectorDrawable = (VectorDrawable) drawable;
+            vectorDrawable.setTintList(colorStateList);
+            icon.setImageDrawable(vectorDrawable);
         } else {
-            VectorDrawableCompat drawable = (VectorDrawableCompat) ContextCompat.getDrawable(this, drawableRes);
-            drawable.setTintList(colorStateList);
-            icon.setImageDrawable(drawable);
+            VectorDrawableCompat vectorDrawable = (VectorDrawableCompat) drawable;
+            vectorDrawable.setTintList(colorStateList);
+            icon.setImageDrawable(vectorDrawable);
         }
+
+//        if (drawable instanceof VectorDrawable) {
+//            VectorDrawable vectorDrawable = (VectorDrawable) drawable;
+//            vectorDrawable.setTintList(colorStateList);
+//            icon.setImageDrawable(vectorDrawable);
+//        } else if (drawable instanceof VectorDrawableCompat) {
+//            VectorDrawableCompat vectorDrawable = (VectorDrawableCompat) drawable;
+//            vectorDrawable.setTintList(colorStateList);
+//            icon.setImageDrawable(vectorDrawable);
+//        } else {
+//            //TODO: Add BitmapUtil to update BitmapDrawable with corresponding color
+//            throw new RuntimeException("Update your gradle setting to 2.0.0 by adding following line:classpath \'com.android.tools.build:gradle:2.0.0\'");
+//        }
     }
 
     @Override
@@ -878,8 +897,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         }
     }
 
-    public void onClick(View view) {
-        int viewId = view.getId();
+    @Override
+    public void onClick(View v) {
+        int viewId = v.getId();
         if (viewId == R.id.close) {
             if (rtl) showMenu();
             else close();
@@ -1146,6 +1166,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         BroadCastManager.unregister(FinestWebViewActivity.this, key);
         if (webView == null) return;
         if (APILevel.require(11)) webView.onPause();
+        destroyWebView();
     }
 
     // Wait for zoom control to fade away

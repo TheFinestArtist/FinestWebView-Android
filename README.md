@@ -53,12 +53,12 @@ Easily reference the library in your Android projects using this dependency in y
 ```java
 buildscript {
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0-rc3'
+        classpath 'com.android.tools.build:gradle:2.0.0'
     }
 }
 
 dependencies {
-    compile 'com.thefinestartist:finestwebview:1.2.3'
+    compile 'com.thefinestartist:finestwebview:1.2.5'
 }
 ```
 

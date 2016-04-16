@@ -10,6 +10,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -21,11 +23,14 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':library')
-//    compile "com.thefinestartist:finestwebview:${rootProject.ext.versionName}"
+    compile 'com.android.support:multidex:1.0.1'
+
+//    compile project(':library')
+    compile "com.thefinestartist:finestwebview:${rootProject.ext.versionName}"
 
     compile "com.android.support:support-annotations:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+//    compile "com.android.support:support-vector-drawable:${rootProject.ext.supportLibVersion}"
 //    compile "com.android.support:palette-v7:${rootProject.ext.supportLibVersion}"
     compile "com.android.support:design:${rootProject.ext.supportLibVersion}"
 //    compile "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"

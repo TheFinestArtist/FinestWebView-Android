@@ -20,34 +20,34 @@ public class MainActivity extends AppCompatActivity {
         if (view.getId() == R.id.defaultTheme) {
             new FinestWebView.Builder(this)
                     .titleDefault("The Finest Artist")
-//                    .show("http://thefinestartist.com");
-//                    .toolbarScrollFlags(0)
-                    .webViewJavaScriptEnabled(true)
-                    .webViewUseWideViewPort(false)
-//                    .show("http://andrewliu.in/2016/01/30/聊聊Redis的订阅发布/");
-                    .show("http://www.youtube.com");
+                    .show("http://thefinestartist.com");
+////                    .toolbarScrollFlags(0)
+//                    .webViewJavaScriptEnabled(true)
+//                    .webViewUseWideViewPort(false)
+////                    .show("http://andrewliu.in/2016/01/30/聊聊Redis的订阅发布/");
+//                    .show("http://www.youtube.com");
         } else if (view.getId() == R.id.redTheme) {
-            Intent intent = new Intent(this, WebViewActivity.class);
-            startActivity(intent);
-//            new FinestWebView.Builder(this)
-//                    .theme(R.style.FinestWebViewTheme)
-//                    .titleDefault("Bless This Stuff")
-//                    .statusBarColorRes(R.color.redPrimaryDark)
-//                    .toolbarColorRes(R.color.redPrimary)
-//                    .titleColorRes(R.color.finestWhite)
-//                    .urlColorRes(R.color.redPrimaryLight)
-//                    .iconDefaultColorRes(R.color.finestWhite)
-//                    .progressBarColorRes(R.color.finestWhite)
-//                    .webViewBuiltInZoomControls(true)
-//                    .webViewDisplayZoomControls(true)
-//                    .swipeRefreshColorRes(R.color.redPrimaryDark)
-//                    .menuColorRes(R.color.redPrimaryDark)
-//                    .menuTextColorRes(R.color.finestWhite)
-//                    .dividerHeight(0)
-//                    .gradientDivider(false)
-//                    .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit)
-//                    .injectJavaScript("javascript: document.getElementById('msg').innerHTML='Hello " + "TheFinestArtist" + "!';")
-//                    .show("http://www.blessthisstuff.com");
+//            Intent intent = new Intent(this, WebViewActivity.class);
+//            startActivity(intent);
+            new FinestWebView.Builder(this)
+                    .theme(R.style.FinestWebViewTheme)
+                    .titleDefault("Bless This Stuff")
+                    .statusBarColorRes(R.color.redPrimaryDark)
+                    .toolbarColorRes(R.color.redPrimary)
+                    .titleColorRes(R.color.finestWhite)
+                    .urlColorRes(R.color.redPrimaryLight)
+                    .iconDefaultColorRes(R.color.finestWhite)
+                    .progressBarColorRes(R.color.finestWhite)
+                    .webViewBuiltInZoomControls(true)
+                    .webViewDisplayZoomControls(true)
+                    .swipeRefreshColorRes(R.color.redPrimaryDark)
+                    .menuColorRes(R.color.redPrimaryDark)
+                    .menuTextColorRes(R.color.finestWhite)
+                    .dividerHeight(0)
+                    .gradientDivider(false)
+                    .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit)
+                    .injectJavaScript("javascript: document.getElementById('msg').innerHTML='Hello " + "TheFinestArtist" + "!';")
+                    .show("http://www.blessthisstuff.com");
         } else if (view.getId() == R.id.blueTheme) {
             new FinestWebView.Builder(this)
                     .theme(R.style.FinestWebViewTheme)

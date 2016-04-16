@@ -19,7 +19,6 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:background="@drawable/selector_light_theme"
-            android:onClick="onClick"
             app:srcCompat="@drawable/close"/>
 
         <android.support.v7.widget.AppCompatImageButton
@@ -28,7 +27,6 @@
             android:layout_height="match_parent"
             android:layout_toLeftOf="@+id/centerLayout"
             android:background="@drawable/selector_light_theme"
-            android:onClick="onClick"
             android:visibility="gone"
             app:srcCompat="@drawable/back"/>
 
@@ -75,7 +73,6 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/centerLayout"
             android:background="@drawable/selector_light_theme"
-            android:onClick="onClick"
             android:visibility="gone"
             app:srcCompat="@drawable/forward"/>
 
@@ -86,7 +83,6 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/selector_light_theme"
-            android:onClick="onClick"
             app:srcCompat="@drawable/more"/>
     </RelativeLayout>
 
