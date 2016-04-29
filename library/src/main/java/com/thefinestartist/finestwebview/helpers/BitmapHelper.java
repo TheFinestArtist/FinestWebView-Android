@@ -9,6 +9,8 @@ import android.support.annotation.ColorInt;
  */
 public class BitmapHelper {
 
+    private BitmapHelper() {}
+
     public static Bitmap getGradientBitmap(int width, int height, @ColorInt int color) {
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 

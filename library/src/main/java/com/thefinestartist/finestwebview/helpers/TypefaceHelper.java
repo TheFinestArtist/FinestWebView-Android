@@ -26,6 +26,8 @@ import android.support.v4.util.SimpleArrayMap;
 */
 public class TypefaceHelper {
 
+    private TypefaceHelper() {}
+
     private static final SimpleArrayMap<String, Typeface> cache = new SimpleArrayMap<>();
 
     public static Typeface get(Context c, String name) {

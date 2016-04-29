@@ -31,6 +31,8 @@ import java.util.List;
  */
 public class FinestWebView {
 
+    private FinestWebView() {}
+
     public static class Builder implements Serializable {
 
         protected final transient Context context;
