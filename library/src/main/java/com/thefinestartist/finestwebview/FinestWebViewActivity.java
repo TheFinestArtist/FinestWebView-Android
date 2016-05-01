@@ -8,9 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -194,11 +192,17 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected String data;
     protected String url;
 
-    protected void getOptions() {
+    protected void initializeOptions() {
         Intent intent = getIntent();
         if (intent == null)
             return;
 
+        FinestWebView.Builder builder = (FinestWebView.Builder) intent.getSerializableExtra("builder");
+
+        // set theme before resolving attributes depending on those
+        setTheme(builder.theme != null ? builder.theme : 0);
+
+        // resolve themed attributes
         TypedValue typedValue = new TypedValue();
         TypedArray typedArray = obtainStyledAttributes(typedValue.data, new int[]{
                 R.attr.colorPrimaryDark,
@@ -219,12 +223,9 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 typedArray.getResourceId(6, 0) : R.drawable.selector_light_theme;
         typedArray.recycle();
 
-        FinestWebView.Builder builder = (FinestWebView.Builder) intent.getSerializableExtra("builder");
-
         key = builder.key;
 
         rtl = builder.rtl != null ? builder.rtl : getResources().getBoolean(R.bool.is_right_to_left);
-        theme = builder.theme != null ? builder.theme : 0;
 
         statusBarColor = builder.statusBarColor != null ? builder.statusBarColor : colorPrimaryDark;
 
@@ -878,8 +879,8 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getOptions();
-        if (theme != 0) setTheme(theme);
+        initializeOptions();
+
         setContentView(R.layout.finest_web_view);
         bindViews();
         layoutViews();
