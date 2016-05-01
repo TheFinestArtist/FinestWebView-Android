@@ -850,29 +850,12 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
 
         ColorStateList colorStateList = new ColorStateList(states, colors);
 
-        Drawable drawable = ContextCompat.getDrawable(this, drawableRes);
-        if (APILevel.require(21)) {
-            VectorDrawable vectorDrawable = (VectorDrawable) drawable;
-            vectorDrawable.setTintList(colorStateList);
-            icon.setImageDrawable(vectorDrawable);
-        } else {
-            VectorDrawableCompat vectorDrawable = (VectorDrawableCompat) drawable;
-            vectorDrawable.setTintList(colorStateList);
-            icon.setImageDrawable(vectorDrawable);
-        }
+        VectorDrawableCompat drawable = VectorDrawableCompat.create(getResources(), drawableRes, null);
+        if(drawable == null)
+            throw new IllegalArgumentException("Could not parse vector drawable");
 
-//        if (drawable instanceof VectorDrawable) {
-//            VectorDrawable vectorDrawable = (VectorDrawable) drawable;
-//            vectorDrawable.setTintList(colorStateList);
-//            icon.setImageDrawable(vectorDrawable);
-//        } else if (drawable instanceof VectorDrawableCompat) {
-//            VectorDrawableCompat vectorDrawable = (VectorDrawableCompat) drawable;
-//            vectorDrawable.setTintList(colorStateList);
-//            icon.setImageDrawable(vectorDrawable);
-//        } else {
-//            //TODO: Add BitmapUtil to update BitmapDrawable with corresponding color
-//            throw new RuntimeException("Update your gradle setting to 2.0.0 by adding following line:classpath \'com.android.tools.build:gradle:2.0.0\'");
-//        }
+        drawable.setTintList(colorStateList);
+        icon.setImageDrawable(drawable);
     }
 
     @Override
