@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0'
+        classpath 'com.android.tools.build:gradle:2.1.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'com.novoda:bintray-release:0.3.4'
     }
@@ -25,7 +25,7 @@ ext {
     minSdkVersion = 7
     targetSdkVersion = 23
     compileSdkVersion = 23
-    buildToolsVersion = '23.0.2'
+    buildToolsVersion = '23.0.3'
 
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
@@ -33,6 +33,6 @@ ext {
     versionCode = 9
     versionName = '1.2.5'
 
-    supportLibVersion = '23.2.1'
+    supportLibVersion = '23.3.0'
     playLibVersion = '8.4.0'
 }

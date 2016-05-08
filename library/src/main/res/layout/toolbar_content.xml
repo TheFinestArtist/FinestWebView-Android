@@ -19,7 +19,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:background="@drawable/selector_light_theme"
-            app:srcCompat="@drawable/close"/>
+            android:src="@drawable/close"/>
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/back"
@@ -28,7 +28,7 @@
             android:layout_toLeftOf="@+id/centerLayout"
             android:background="@drawable/selector_light_theme"
             android:visibility="gone"
-            app:srcCompat="@drawable/back"/>
+            android:src="@drawable/back"/>
 
         <LinearLayout
             android:id="@id/centerLayout"
@@ -74,7 +74,7 @@
             android:layout_toRightOf="@+id/centerLayout"
             android:background="@drawable/selector_light_theme"
             android:visibility="gone"
-            app:srcCompat="@drawable/forward"/>
+            android:src="@drawable/forward"/>
 
         <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/more"
@@ -83,7 +83,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@drawable/selector_light_theme"
-            app:srcCompat="@drawable/more"/>
+            android:src="@drawable/more"/>
     </RelativeLayout>
 
     <View

@@ -2,15 +2,13 @@ package com.thefinestartist.finestwebview;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.VectorDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +17,6 @@ import android.support.annotation.DrawableRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -835,43 +832,47 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     }
 
     protected void updateIcon(ImageButton icon, @DrawableRes int drawableRes) {
-
-        int[][] states = new int[][]{
-                new int[]{-android.R.attr.state_enabled}, // disabled
-                new int[]{android.R.attr.state_pressed}, // pressed
-                new int[]{}  // default
-        };
-
-        int[] colors = new int[]{
-                iconDisabledColor,
-                iconPressedColor,
-                iconDefaultColor
-        };
-
-        ColorStateList colorStateList = new ColorStateList(states, colors);
-
-        Drawable drawable = ContextCompat.getDrawable(this, drawableRes);
-        if (APILevel.require(21)) {
-            VectorDrawable vectorDrawable = (VectorDrawable) drawable;
-            vectorDrawable.setTintList(colorStateList);
-            icon.setImageDrawable(vectorDrawable);
-        } else {
-            VectorDrawableCompat vectorDrawable = (VectorDrawableCompat) drawable;
-            vectorDrawable.setTintList(colorStateList);
-            icon.setImageDrawable(vectorDrawable);
+        StateListDrawable states = new StateListDrawable();
+        {
+            Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconPressedColor);
+            BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+            states.addState(new int[]{android.R.attr.state_pressed}, drawable);
         }
+        {
+            Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconDisabledColor);
+            BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+            states.addState(new int[]{-android.R.attr.state_enabled}, drawable);
+        }
+        {
+            Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconDefaultColor);
+            BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+            states.addState(new int[]{}, drawable);
+        }
+        icon.setImageDrawable(states);
 
-//        if (drawable instanceof VectorDrawable) {
+//        int[][] states = new int[][]{
+//                new int[]{-android.R.attr.state_enabled}, // disabled
+//                new int[]{android.R.attr.state_pressed}, // pressed
+//                new int[]{}  // default
+//        };
+//
+//        int[] colors = new int[]{
+//                iconDisabledColor,
+//                iconPressedColor,
+//                iconDefaultColor
+//        };
+//
+//        ColorStateList colorStateList = new ColorStateList(states, colors);
+//
+//        Drawable drawable = ContextCompat.getDrawable(this, drawableRes);
+//        if (APILevel.require(21)) {
 //            VectorDrawable vectorDrawable = (VectorDrawable) drawable;
 //            vectorDrawable.setTintList(colorStateList);
 //            icon.setImageDrawable(vectorDrawable);
-//        } else if (drawable instanceof VectorDrawableCompat) {
+//        } else {
 //            VectorDrawableCompat vectorDrawable = (VectorDrawableCompat) drawable;
 //            vectorDrawable.setTintList(colorStateList);
 //            icon.setImageDrawable(vectorDrawable);
-//        } else {
-//            //TODO: Add BitmapUtil to update BitmapDrawable with corresponding color
-//            throw new RuntimeException("Update your gradle setting to 2.0.0 by adding following line:classpath \'com.android.tools.build:gradle:2.0.0\'");
 //        }
     }
 
