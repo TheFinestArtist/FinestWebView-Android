@@ -33,8 +33,8 @@ public class BroadCastManager {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (context == null || intent == null) return;
-            int keyTmp = intent.getIntExtra(EXTRA_KEY, Integer.MIN_VALUE);
-            if (BroadCastManager.this.key == keyTmp) handleIntent(intent);
+            int key = intent.getIntExtra(EXTRA_KEY, Integer.MIN_VALUE);
+            if (BroadCastManager.this.key == key) handleIntent(intent);
         }
     };
 

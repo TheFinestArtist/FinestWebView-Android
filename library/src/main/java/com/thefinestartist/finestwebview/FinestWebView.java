@@ -322,10 +322,10 @@ public class FinestWebView {
         }
 
         public Builder swipeRefreshColors(int[] colors) {
-            Integer[] swipeRefreshColorsTmp = new Integer[colors.length];
+            Integer[] swipeRefreshColors = new Integer[colors.length];
             for (int i = 0; i < colors.length; i++)
-                swipeRefreshColorsTmp[i] = colors[i];
-            this.swipeRefreshColors = swipeRefreshColorsTmp;
+                swipeRefreshColors[i] = colors[i];
+            this.swipeRefreshColors = swipeRefreshColors;
             return this;
         }
 

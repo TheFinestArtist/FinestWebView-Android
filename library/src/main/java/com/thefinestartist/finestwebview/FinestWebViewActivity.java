@@ -895,7 +895,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         if (menuLayout.getVisibility() == View.VISIBLE) {
             hideMenu();
         } else if (backPressToClose || !webView.canGoBack()) {
-            closeView();
+            exitActivity();
         } else {
             webView.goBack();
         }
@@ -906,7 +906,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         int viewId = v.getId();
         if (viewId == R.id.close) {
             if (rtl) showMenu();
-            else closeView();
+            else exitActivity();
         } else if (viewId == R.id.back) {
             if (rtl) webView.goForward();
             else webView.goBack();
@@ -914,7 +914,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             if (rtl) webView.goBack();
             else webView.goForward();
         } else if (viewId == R.id.more) {
-            if (rtl) closeView();
+            if (rtl) exitActivity();
             else showMenu();
         } else if (viewId == R.id.menuLayout) {
             hideMenu();
@@ -996,7 +996,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         });
     }
 
-    protected void closeView() {
+    protected void exitActivity() {
         super.onBackPressed();
         overridePendingTransition(animationCloseEnter, animationCloseExit);
     }
