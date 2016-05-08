@@ -1,6 +1,5 @@
 package com.thefinestartist.finestwebview.sample;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -30,19 +29,10 @@ public class MainActivity extends AppCompatActivity {
 //            Intent intent = new Intent(this, WebViewActivity.class);
 //            startActivity(intent);
             new FinestWebView.Builder(this)
-                    .theme(R.style.FinestWebViewTheme)
+                    .theme(R.style.RedTheme)
                     .titleDefault("Bless This Stuff")
-                    .statusBarColorRes(R.color.redPrimaryDark)
-                    .toolbarColorRes(R.color.redPrimary)
-                    .titleColorRes(R.color.finestWhite)
-                    .urlColorRes(R.color.redPrimaryLight)
-                    .iconDefaultColorRes(R.color.finestWhite)
-                    .progressBarColorRes(R.color.finestWhite)
                     .webViewBuiltInZoomControls(true)
                     .webViewDisplayZoomControls(true)
-                    .swipeRefreshColorRes(R.color.redPrimaryDark)
-                    .menuColorRes(R.color.redPrimaryDark)
-                    .menuTextColorRes(R.color.finestWhite)
                     .dividerHeight(0)
                     .gradientDivider(false)
                     .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit)
@@ -70,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     .dividerHeight(0)
                     .gradientDivider(false)
                     .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
-                    .show("http://uet.vnu.edu.vn/~chauttm/e-books/java/Effective.Java.2nd.Edition.May.2008.3000th.Release.pdf");
+                    .show("http://example.com");
         } else if (view.getId() == R.id.blackTheme) {
             new FinestWebView.Builder(this)
                     .theme(R.style.FinestWebViewTheme)
