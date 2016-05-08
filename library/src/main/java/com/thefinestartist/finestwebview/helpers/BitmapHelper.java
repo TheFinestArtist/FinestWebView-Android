@@ -13,6 +13,9 @@ import android.support.annotation.NonNull;
  */
 public class BitmapHelper {
 
+    private BitmapHelper() {
+    }
+
     public static Bitmap getColoredBitmap(@NonNull Bitmap bitmap, @ColorInt int color) {
         int alpha = Color.alpha(color);
         int red = Color.red(color);

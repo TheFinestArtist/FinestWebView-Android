@@ -7,6 +7,9 @@ import android.graphics.Color;
  */
 public class ColorHelper {
 
+    private ColorHelper() {
+    }
+
     public static int disableColor(int color) {
         int alpha = Color.alpha(color);
         int red = Color.red(color);
