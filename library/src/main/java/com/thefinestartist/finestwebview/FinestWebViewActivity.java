@@ -1099,7 +1099,7 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
             }
 
             if (injectJavaScript != null)
-                webView.evaluateJavaScript(injectJavaScript);
+                webView.evaluateJavaScript(injectJavaScript, null);
         }
 
         @Override
