@@ -191,6 +191,44 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
     protected String data;
     protected String url;
 
+    protected CoordinatorLayout coordinatorLayout;
+
+    protected AppBarLayout appBar;
+    protected Toolbar toolbar;
+    protected RelativeLayout toolbarLayout;
+
+    protected TextView title;
+    protected TextView urlTv;
+
+    protected AppCompatImageButton close;
+    protected AppCompatImageButton back;
+    protected AppCompatImageButton forward;
+    protected AppCompatImageButton more;
+
+    protected SwipeRefreshLayout swipeRefreshLayout;
+    protected WebView webView;
+
+    protected View gradient;
+    protected View divider;
+    protected ProgressBar progressBar;
+
+    protected RelativeLayout menuLayout;
+    protected ShadowLayout shadowLayout;
+    protected LinearLayout menuBackground;
+
+    protected LinearLayout menuRefresh;
+    protected TextView menuRefreshTv;
+    protected LinearLayout menuFind;
+    protected TextView menuFindTv;
+    protected LinearLayout menuShareVia;
+    protected TextView menuShareViaTv;
+    protected LinearLayout menuCopyLink;
+    protected TextView menuCopyLinkTv;
+    protected LinearLayout menuOpenWith;
+    protected TextView menuOpenWithTv;
+
+    protected FrameLayout webLayout;
+
     protected void getOptions() {
         Intent intent = getIntent();
         if (intent == null)
@@ -355,44 +393,6 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
         data = builder.data;
         url = builder.url;
     }
-
-    protected CoordinatorLayout coordinatorLayout;
-
-    protected AppBarLayout appBar;
-    protected Toolbar toolbar;
-    protected RelativeLayout toolbarLayout;
-
-    protected TextView title;
-    protected TextView urlTv;
-
-    protected AppCompatImageButton close;
-    protected AppCompatImageButton back;
-    protected AppCompatImageButton forward;
-    protected AppCompatImageButton more;
-
-    protected SwipeRefreshLayout swipeRefreshLayout;
-    protected WebView webView;
-
-    protected View gradient;
-    protected View divider;
-    protected ProgressBar progressBar;
-
-    protected RelativeLayout menuLayout;
-    protected ShadowLayout shadowLayout;
-    protected LinearLayout menuBackground;
-
-    protected LinearLayout menuRefresh;
-    protected TextView menuRefreshTv;
-    protected LinearLayout menuFind;
-    protected TextView menuFindTv;
-    protected LinearLayout menuShareVia;
-    protected TextView menuShareViaTv;
-    protected LinearLayout menuCopyLink;
-    protected TextView menuCopyLinkTv;
-    protected LinearLayout menuOpenWith;
-    protected TextView menuOpenWithTv;
-
-    protected FrameLayout webLayout;
 
     protected void bindViews() {
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);

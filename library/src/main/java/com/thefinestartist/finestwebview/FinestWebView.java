@@ -166,6 +166,20 @@ public class FinestWebView {
         protected String data;
         protected String url;
 
+        public Builder(@NonNull Activity activity) {
+            this.context = activity;
+            Base.initialize(activity);
+        }
+
+        /**
+         * If you use context instead of activity, FinestWebView won't be able to override activity animation.
+         * Try to create builder with Activity if it's possible.
+         */
+        public Builder(@NonNull Context context) {
+            this.context = context;
+            Base.initialize(context);
+        }
+
         public Builder setWebViewListener(WebViewListener listener) {
             listeners.clear();
             listeners.add(listener);
@@ -185,20 +199,6 @@ public class FinestWebView {
         public Builder rtl(boolean rtl) {
             this.rtl = rtl;
             return this;
-        }
-
-        public Builder(@NonNull Activity activity) {
-            this.context = activity;
-            Base.initialize(activity);
-        }
-
-        /**
-         * If you use context instead of activity, FinestWebView won't be able to override activity animation.
-         * Try to create builder with Activity if it's possible.
-         */
-        public Builder(@NonNull Context context) {
-            this.context = context;
-            Base.initialize(context);
         }
 
         public Builder theme(@StyleRes int theme) {
