@@ -57,7 +57,7 @@ import com.thefinestartist.utils.service.ClipboardManagerUtil;
 import com.thefinestartist.utils.ui.DisplayUtil;
 import com.thefinestartist.utils.ui.ViewUtil;
 
-//Andrew Low 01/06/2016 - New Imports
+//MailTo Imports
 import android.net.MailTo;
 
 /**
@@ -1120,15 +1120,19 @@ public class FinestWebViewActivity extends AppCompatActivity implements AppBarLa
                 return true; // If we return true, onPageStarted, onPageFinished won't be called.
             }
               /*******************************************************
-               * Andrew Low 01/06/2016 - Added in support for mailto:
+               * Added in support for mailto:
                *******************************************************/
               else if (url.startsWith("mailto:")) {
               
               	MailTo mt = MailTo.parse(url);
 					
 				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
 				emailIntent.setType("text/html");
 				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{mt.getTo()});
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, mt.getSubject());
+                emailIntent.putExtra(Intent.EXTRA_CC, mt.getCc());
+                emailIntent.putExtra(Intent.EXTRA_TEXT, mt.getBody());
 
 				startActivity(emailIntent);  
     			
