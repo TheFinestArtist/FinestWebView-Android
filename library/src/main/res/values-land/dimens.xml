@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="toolbarHeight">48dp</dimen>
-    <dimen name="menusWidth">224dp</dimen>
+  <dimen name="toolbarHeight">48dp</dimen>
+  <dimen name="menusWidth">224dp</dimen>
 </resources>

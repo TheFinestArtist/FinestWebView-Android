@@ -1,26 +1,26 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
-    </style>
+  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryDark">@color/primary_dark</item>
+    <item name="colorAccent">@color/accent</item>
+  </style>
 
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
-        <item name="android:textColorPrimary">@color/finestBlack</item>
-        <item name="android:textColorSecondary">@color/finestSilver</item>
-    </style>
+  <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryDark">@color/primary_dark</item>
+    <item name="colorAccent">@color/accent</item>
+    <item name="android:textColorPrimary">@color/finestBlack</item>
+    <item name="android:textColorSecondary">@color/finestSilver</item>
+  </style>
 
 
-    <style name="RedTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/redPrimary</item>
-        <item name="colorPrimaryDark">@color/redPrimaryDark</item>
-        <item name="colorAccent">@color/finestWhite</item>
-        <item name="android:textColorPrimary">@color/finestWhite</item>
-        <item name="android:textColorSecondary">@color/finestSilver</item>
-    </style>
+  <style name="RedTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/redPrimary</item>
+    <item name="colorPrimaryDark">@color/redPrimaryDark</item>
+    <item name="colorAccent">@color/finestWhite</item>
+    <item name="android:textColorPrimary">@color/finestWhite</item>
+    <item name="android:textColorSecondary">@color/finestSilver</item>
+  </style>
 
 </resources>

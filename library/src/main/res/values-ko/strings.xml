@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="refresh">새로고침</string>
-    <string name="find">찾기</string>
-    <string name="share_via">주소 공유하기</string>
-    <string name="copy_link">주소 복사하기</string>
-    <string name="open_with">다른 앱으로 열기</string>
-    <string name="copied_to_clipboard">주소가 복사 되었습니다</string>
+  <string name="refresh">새로고침</string>
+  <string name="find">찾기</string>
+  <string name="share_via">주소 공유하기</string>
+  <string name="copy_link">주소 복사하기</string>
+  <string name="open_with">다른 앱으로 열기</string>
+  <string name="copied_to_clipboard">주소가 복사 되었습니다</string>
 </resources>

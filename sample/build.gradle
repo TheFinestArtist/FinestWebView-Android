@@ -1,44 +1,44 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+  compileSdkVersion rootProject.ext.compileSdkVersion
+  buildToolsVersion rootProject.ext.buildToolsVersion
 
-    defaultConfig {
-        applicationId "com.thefinestartist.finestwebview.sample"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
-        vectorDrawables.useSupportLibrary = true
-        multiDexEnabled true
+  defaultConfig {
+    applicationId "com.thefinestartist.finestwebview.sample"
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+    versionCode rootProject.ext.versionCode
+    versionName rootProject.ext.versionName
+    vectorDrawables.useSupportLibrary = true
+    multiDexEnabled true
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
+  }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:multidex:1.0.1'
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+  compile 'com.android.support:multidex:1.0.1'
 
-    compile project(':library')
-//    compile "com.thefinestartist:finestwebview:${rootProject.ext.versionName}"
+  compile project(':library')
+  //    compile "com.thefinestartist:finestwebview:${rootProject.ext.versionName}"
 
-    compile "com.android.support:support-annotations:${rootProject.ext.supportLibVersion}"
-    compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
-//    compile "com.android.support:support-vector-drawable:${rootProject.ext.supportLibVersion}"
-//    compile "com.android.support:palette-v7:${rootProject.ext.supportLibVersion}"
-    compile "com.android.support:design:${rootProject.ext.supportLibVersion}"
-//    compile "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"
+  compile "com.android.support:support-annotations:${rootProject.ext.supportLibVersion}"
+  compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+  //    compile "com.android.support:support-vector-drawable:${rootProject.ext.supportLibVersion}"
+  //    compile "com.android.support:palette-v7:${rootProject.ext.supportLibVersion}"
+  compile "com.android.support:design:${rootProject.ext.supportLibVersion}"
+  //    compile "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"
 
-//    compile "com.google.android.gms:play-services-base:${rootProject.ext.playLibVersion}"
-//    compile "com.google.android.gms:play-services-gcm:${rootProject.ext.playLibVersion}"
-//    compile "com.google.android.gms:play-services-plus:${rootProject.ext.playLibVersion}"
-//    compile "com.google.android.gms:play-services-analytics:${rootProject.ext.playLibVersion}"
-//    compile "com.google.android.gms:play-services-location:${rootProject.ext.playLibVersion}"
-//    compile "com.google.android.gms:play-services-maps:${rootProject.ext.playLibVersion}"
+  //    compile "com.google.android.gms:play-services-base:${rootProject.ext.playLibVersion}"
+  //    compile "com.google.android.gms:play-services-gcm:${rootProject.ext.playLibVersion}"
+  //    compile "com.google.android.gms:play-services-plus:${rootProject.ext.playLibVersion}"
+  //    compile "com.google.android.gms:play-services-analytics:${rootProject.ext.playLibVersion}"
+  //    compile "com.google.android.gms:play-services-location:${rootProject.ext.playLibVersion}"
+  //    compile "com.google.android.gms:play-services-maps:${rootProject.ext.playLibVersion}"
 }

@@ -2,46 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
-    <Button
-        android:id="@+id/defaultTheme"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/finestWhite"
-        android:onClick="onClick"
-        android:text="Default Theme"
-        android:textColor="@color/finestBlack" />
+  <Button
+      android:id="@+id/defaultTheme"
+      android:layout_width="match_parent"
+      android:layout_height="64dp"
+      android:layout_alignParentBottom="true"
+      android:background="@color/finestWhite"
+      android:onClick="onClick"
+      android:text="Default Theme"
+      android:textColor="@color/finestBlack"
+      />
 
-    <Button
-        android:id="@+id/redTheme"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/redPrimary"
-        android:onClick="onClick"
-        android:text="Red Theme"
-        android:textColor="@color/finestWhite" />
+  <Button
+      android:id="@+id/redTheme"
+      android:layout_width="match_parent"
+      android:layout_height="64dp"
+      android:layout_alignParentBottom="true"
+      android:background="@color/redPrimary"
+      android:onClick="onClick"
+      android:text="Red Theme"
+      android:textColor="@color/finestWhite"
+      />
 
-    <Button
-        android:id="@+id/blueTheme"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/bluePrimary"
-        android:onClick="onClick"
-        android:text="Blue Theme"
-        android:textColor="@color/finestWhite" />
+  <Button
+      android:id="@+id/blueTheme"
+      android:layout_width="match_parent"
+      android:layout_height="64dp"
+      android:layout_alignParentBottom="true"
+      android:background="@color/bluePrimary"
+      android:onClick="onClick"
+      android:text="Blue Theme"
+      android:textColor="@color/finestWhite"
+      />
 
-    <Button
-        android:id="@+id/blackTheme"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/blackPrimary"
-        android:onClick="onClick"
-        android:text="Black Theme"
-        android:textColor="@color/finestWhite" />
+  <Button
+      android:id="@+id/blackTheme"
+      android:layout_width="match_parent"
+      android:layout_height="64dp"
+      android:layout_alignParentBottom="true"
+      android:background="@color/blackPrimary"
+      android:onClick="onClick"
+      android:text="Black Theme"
+      android:textColor="@color/finestWhite"
+      />
 
 </LinearLayout>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="toolbarHeight">56dp</dimen>
-    <dimen name="menusWidth">168dp</dimen>
+  <dimen name="toolbarHeight">56dp</dimen>
+  <dimen name="menusWidth">168dp</dimen>
 
-    <dimen name="defaultDividerHeight">4dp</dimen>
-    <dimen name="defaultProgressBarHeight">1dp</dimen>
-    <dimen name="defaultTitleSize">14dp</dimen>
-    <dimen name="defaultUrlSize">10dp</dimen>
-    <dimen name="defaultMenuDropShadowCornerRadius">2dp</dimen>
-    <dimen name="defaultMenuDropShadowSize">4dp</dimen>
-    <dimen name="defaultMenuTextSize">16dp</dimen>
-    <dimen name="defaultMenuTextPaddingLeft">16dp</dimen>
-    <dimen name="defaultMenuTextPaddingRight">32dp</dimen>
-    <dimen name="defaultMenuLayoutMargin">4dp</dimen>
-    <dimen name="defaultMenuCornerRadius">2dp</dimen>
+  <dimen name="defaultDividerHeight">4dp</dimen>
+  <dimen name="defaultProgressBarHeight">1dp</dimen>
+  <dimen name="defaultTitleSize">14dp</dimen>
+  <dimen name="defaultUrlSize">10dp</dimen>
+  <dimen name="defaultMenuDropShadowCornerRadius">2dp</dimen>
+  <dimen name="defaultMenuDropShadowSize">4dp</dimen>
+  <dimen name="defaultMenuTextSize">16dp</dimen>
+  <dimen name="defaultMenuTextPaddingLeft">16dp</dimen>
+  <dimen name="defaultMenuTextPaddingRight">32dp</dimen>
+  <dimen name="defaultMenuLayoutMargin">4dp</dimen>
+  <dimen name="defaultMenuCornerRadius">2dp</dimen>
 </resources>
