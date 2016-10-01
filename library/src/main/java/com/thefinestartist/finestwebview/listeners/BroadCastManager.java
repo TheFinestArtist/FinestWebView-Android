@@ -130,6 +130,9 @@ public class BroadCastManager {
       case PAGE_COMMIT_VISIBLE:
         onPageCommitVisible(intent);
         break;
+      case DOWNLOADED_START:
+        onDownloadStart(intent);
+        break;
       case UNREGISTER:
         unregister();
         break;
