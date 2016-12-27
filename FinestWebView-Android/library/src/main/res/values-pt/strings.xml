@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="refresh">Carregar</string>
+  <string name="find">Buscar</string>
+  <string name="share_via">Partilhar</string>
+  <string name="copy_link">Copiar endereço</string>
+  <string name="open_with">Abrir com</string>
+  <string name="copied_to_clipboard">Copiado para a área de transferência</string>
+</resources>
