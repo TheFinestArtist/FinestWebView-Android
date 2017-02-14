@@ -2,11 +2,16 @@ package com.thefinestartist.finestwebview.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.webkit.JavascriptInterface;
+
 import com.thefinestartist.finestwebview.FinestWebView;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+public class MainActivity extends AppCompatActivity implements Serializable{
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -31,12 +36,11 @@ public class MainActivity extends AppCompatActivity {
           .webViewDisplayZoomControls(true)
           .dividerHeight(0)
           .gradientDivider(false)
+              .webViewJavaScriptEnabled(true)//设置可以和JAVA交互
+          .addJavascriptInterface(new JsInteration())//JS将可以调用该类下面的@JavascriptInterface修饰的方法，此类须implements Serializable
           .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit,
               R.anim.activity_close_enter, R.anim.activity_close_exit)
-          .injectJavaScript("javascript: document.getElementById('msg').innerHTML='Hello "
-              + "TheFinestArtist"
-              + "!';")
-          .show("http://www.blessthisstuff.com");
+          .show("http://test.2000new.com/nyd/water/index.html");
     } else if (view.getId() == R.id.blueTheme) {
       new FinestWebView.Builder(this).theme(R.style.FinestWebViewTheme)
           .titleDefault("Vimeo")
@@ -47,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
           .urlColorRes(R.color.bluePrimaryLight)
           .iconDefaultColorRes(R.color.finestWhite)
           .progressBarColorRes(R.color.finestWhite)
+              .webViewJavaScriptEnabled(true)//设置可以和JAVA交互
+              .addJavascriptInterface(this)//JS将可以调用该类下面的@JavascriptInterface修饰的方法，此类须implements Serializable
           .stringResCopiedToClipboard(R.string.copied_to_clipboard)
           .stringResCopiedToClipboard(R.string.copied_to_clipboard)
           .stringResCopiedToClipboard(R.string.copied_to_clipboard)
@@ -57,8 +63,9 @@ public class MainActivity extends AppCompatActivity {
           .menuTextPaddingRightRes(R.dimen.defaultMenuTextPaddingLeft)
           .dividerHeight(0)
           .gradientDivider(false)
+
           .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
-          .show("http://example.com");
+          .show("http://test.2000new.com/nyd/water/index.html");
     } else if (view.getId() == R.id.blackTheme) {
       new FinestWebView.Builder(this).theme(R.style.FinestWebViewTheme)
           .titleDefault("Dribbble")
@@ -84,6 +91,22 @@ public class MainActivity extends AppCompatActivity {
           .disableIconForward(true)
           .disableIconMenu(true)
           .show("https://dribbble.com");
+    }
+  }
+  @JavascriptInterface
+  public String kk() {
+    Log.e("aaa", "bbbbb");
+    return "kkkkk00ggaa";
+  }
+  class JsInteration implements Serializable{
+    JsInteration() {
+      Log.e("aaa", "JsInteration");
+    }
+
+    @JavascriptInterface
+    public String kk() {
+      Log.e("aaa", "bbbbb");
+      return "kkkkk00gg";
     }
   }
 }
