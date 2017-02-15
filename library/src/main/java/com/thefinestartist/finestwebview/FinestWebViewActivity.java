@@ -226,6 +226,7 @@ public class FinestWebViewActivity extends AppCompatActivity
     protected LinearLayout menuOpenWith;
     protected TextView menuOpenWithTv;
     protected FrameLayout webLayout;
+    protected FinestWebView.Builder builder;
     DownloadListener downloadListener = new DownloadListener() {
         @Override
         public void onDownloadStart(String url, String userAgent, String contentDisposition,
@@ -239,7 +240,7 @@ public class FinestWebViewActivity extends AppCompatActivity
         Intent intent = getIntent();
         if (intent == null) return;
 
-        FinestWebView.Builder builder = (FinestWebView.Builder) intent.getSerializableExtra("builder");
+        builder = (FinestWebView.Builder) intent.getSerializableExtra("builder");
 
         // set theme before resolving attributes depending on those
         setTheme(builder.theme != null ? builder.theme : 0);
@@ -481,6 +482,7 @@ public class FinestWebViewActivity extends AppCompatActivity
         webLayout = (FrameLayout) findViewById(R.id.webLayout);
         webView = new WebView(this);
         webLayout.addView(webView);
+
     }
 
     protected void layoutViews() {
@@ -748,10 +750,14 @@ public class FinestWebViewActivity extends AppCompatActivity
             //            webView.setKeepScreenOn(true);
             //            webView.setScrollbarFadingEnabled(true);
             //            webView.setVerticalFadingEdgeEnabled(false);
-
+            builder.setWebView(webView);
             if (data != null) {
                 webView.loadData(data, mimeType, encoding);
-            } else if (url != null) webView.loadUrl(url);
+            } else if (url != null) {
+                webView.loadUrl(url);
+            }
+
+
         }
 
         { // SwipeRefreshLayout
