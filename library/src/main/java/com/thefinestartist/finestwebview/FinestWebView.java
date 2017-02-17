@@ -160,7 +160,7 @@ public class FinestWebView {
     protected Boolean webViewOffscreenPreRaster;
 
     protected String injectJavaScript;
-    protected Object jsInteration;
+    protected BaseJsInteration jsInteration;
 
     protected String mimeType;
     protected String encoding;
@@ -193,7 +193,7 @@ public class FinestWebView {
       return this;
     }
 
-    public Builder addJavascriptInterface(Object jsInteration) {
+    public Builder addJavascriptInterface(BaseJsInteration jsInteration) {
       this.jsInteration=jsInteration;
       return this;
     }

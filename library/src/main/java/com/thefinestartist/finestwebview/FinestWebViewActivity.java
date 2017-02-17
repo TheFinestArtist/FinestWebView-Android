@@ -33,6 +33,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.BaseInterpolator;
 import android.webkit.DownloadListener;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
@@ -192,7 +193,7 @@ public class FinestWebViewActivity extends AppCompatActivity
     protected Boolean webViewOffscreenPreRaster;
 
     protected String injectJavaScript;
-    protected Object jsInteration;
+    protected BaseJsInteration jsInteration;
     protected String mimeType;
     protected String encoding;
     protected String data;
@@ -738,6 +739,7 @@ public class FinestWebViewActivity extends AppCompatActivity
             }
             if (jsInteration != null) {
                 settings.setJavaScriptEnabled(true);
+                jsInteration.setContext(this);
                 webView.addJavascriptInterface(jsInteration, "android");
             }
 
@@ -751,6 +753,7 @@ public class FinestWebViewActivity extends AppCompatActivity
             //            webView.setScrollbarFadingEnabled(true);
             //            webView.setVerticalFadingEdgeEnabled(false);
             builder.setWebView(webView);
+            jsInteration.setWebView(webView);
             if (data != null) {
                 webView.loadData(data, mimeType, encoding);
             } else if (url != null) {

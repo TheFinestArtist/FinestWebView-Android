@@ -2,18 +2,14 @@ package com.thefinestartist.finestwebview.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebView;
 
 import com.thefinestartist.finestwebview.FinestWebView;
 
-import java.io.Serializable;
 
-
-public class MainActivity extends AppCompatActivity implements Serializable {
+public class MainActivity extends AppCompatActivity{
 
     private FinestWebView.Builder builder;
 
@@ -56,8 +52,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     .urlColorRes(R.color.bluePrimaryLight)
                     .iconDefaultColorRes(R.color.finestWhite)
                     .progressBarColorRes(R.color.finestWhite)
-//                    .webViewJavaScriptEnabled(true)//设置可以和JAVA交互
-                    .addJavascriptInterface(this)//JS将可以调用该类下面的@JavascriptInterface修饰的方法，此类须implements Serializable
                     .stringResCopiedToClipboard(R.string.copied_to_clipboard)
                     .stringResCopiedToClipboard(R.string.copied_to_clipboard)
                     .stringResCopiedToClipboard(R.string.copied_to_clipboard)
@@ -108,13 +102,5 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             }
         });
         return "JS调用安卓";
-    }
-
-    class JsInteration implements Serializable {
-
-        @JavascriptInterface
-        public String jsToAndroid() {
-            return "JS调用安卓";
-        }
     }
 }
