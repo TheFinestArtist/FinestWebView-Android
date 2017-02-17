@@ -52,7 +52,7 @@ Easily reference the library in your Android projects using this dependency in y
 
 ```java
 dependencies {
-    compile 'com.thefinestartist:finestwebview:1.2.7'
+    compile 'aom.andan:webview:1.0.0'
 }
 ```
 
@@ -342,6 +342,60 @@ new FinestWebView.Builder(activity)
     .backPressToClose(false)
     .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit)
     .show(url);
+```
+#javascrpit interactive#
+you class must to implements Serializable:
+ ```java   
+ MainActivity extends AppCompatActivity implements Serializable
+ ```
+ 
+```java
+builder=new FinestWebView.Builder(activity)
+    .titleDefault("Default Title")
+    .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
+    .gradientDivider(false)
+    .dividerHeight(100)
+    .toolbarColorRes(R.color.accent)
+    .dividerColorRes(R.color.black_30)
+    .iconDefaultColorRes(R.color.accent)
+    .iconDisabledColorRes(R.color.gray)
+    .addJavascriptInterface(this)//JS将可以调用该类下面的@JavascriptInterface修饰的方法，此类须implements Serializable
+    .iconPressedColorRes(R.color.black)
+    .progressBarHeight(DipPixelHelper.getPixel(context, 3))
+    .progressBarColorRes(R.color.accent)
+    .backPressToClose(false)
+    .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit);
+    builder.show(url);
+```
+if yout want your js invok android,you need use @JavascriptInterface you metohd;
+```java
+@JavascriptInterface
+    public String jsToAndroid() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //这是安卓调用JS中的方法，JS中必须声明了对应androidToJs(param)函数，第二个参数为回调，如果你需要该方法的返回值就加上回调接口
+                //该方法必须在UIThread中调用。如果你是在Fragment中可以用getActivity.runOnUiThread
+                builder.getWebView().evaluateJavascript("javascript:anroidToJs('Android invok JS ')", null);
+            }
+        });
+        return "JS invok Android";
+    }
+```
+in yout html code:
+```java
+<img src="images/booknow.png" onclick="s()" />
+<script type="text/javascript">
+			 function s(){
+			 
+				var dd=android.jsToAndroid();
+				alert(dd);
+				
+			}
+			function anroidToJs(param){
+				 alert(param);
+			}
+		</script>
 ```
 
 
