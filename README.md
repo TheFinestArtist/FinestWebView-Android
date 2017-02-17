@@ -344,11 +344,9 @@ new FinestWebView.Builder(activity)
     .show(url);
 ```
 #javascrpit interactive#
-you need to new class like:
+you need to new a class like
  ```java   
 public class JsInteration extends BaseJsInteration implements Serializable {
-
-
     @JavascriptInterface
     public void toActivity() {
         Intent intent = new Intent(instance, TestActivity.class);
