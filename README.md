@@ -344,7 +344,7 @@ new FinestWebView.Builder(activity)
     .show(url);
 ```
 #javascrpit interactive#
-**important**you need to new a class like [JsInteration.java](sample/src/main/java/com/thefinestartist/finestwebview/sample/JsInteration.java)
+**important**  you need to new a class like [JsInteration.java](sample/src/main/java/com/thefinestartist/finestwebview/sample/JsInteration.java)
 
  
 ```java
