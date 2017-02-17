@@ -344,44 +344,50 @@ new FinestWebView.Builder(activity)
     .show(url);
 ```
 #javascrpit interactive#
-you class must to implements Serializable:
- ```java   
- MainActivity extends AppCompatActivity implements Serializable
- ```
- 
-```java
-builder=new FinestWebView.Builder(activity)
-    .titleDefault("Default Title")
-    .toolbarScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS)
-    .gradientDivider(false)
-    .dividerHeight(100)
-    .toolbarColorRes(R.color.accent)
-    .dividerColorRes(R.color.black_30)
-    .iconDefaultColorRes(R.color.accent)
-    .iconDisabledColorRes(R.color.gray)
-    .addJavascriptInterface(this)//JS将可以调用该类下面的@JavascriptInterface修饰的方法，此类须implements Serializable
-    .iconPressedColorRes(R.color.black)
-    .progressBarHeight(DipPixelHelper.getPixel(context, 3))
-    .progressBarColorRes(R.color.accent)
-    .backPressToClose(false)
-    .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit);
-    builder.show(url);
-```
-if yout want your js invok android,you need use @JavascriptInterface you metohd;
-```java
-@JavascriptInterface
+you need to new class like:
+ ```java   
+public class JsInteration extends BaseJsInteration implements Serializable {
+
+
+    @JavascriptInterface
+    public void toActivity() {
+        Intent intent = new Intent(instance, TestActivity.class);
+        instance.startActivity(intent);
+    }
+
+    @JavascriptInterface
     public String jsToAndroid() {
-        runOnUiThread(new Runnable() {
+        instance.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //这是安卓调用JS中的方法，JS中必须声明了对应androidToJs(param)函数，第二个参数为回调，如果你需要该方法的返回值就加上回调接口
-                //该方法必须在UIThread中调用。如果你是在Fragment中可以用getActivity.runOnUiThread
-                builder.getWebView().evaluateJavascript("javascript:anroidToJs('Android invok JS ')", null);
-            }
+                //这是安卓调用JS中的方法，JS中必须声明了对应androidToJs(param)函数，第二个参数为回调，如果你需要该方法的返回值就加上回调接口
+                //该方法必须在UIThread中调用。如果你是在Fragment中可以用getActivity.runOnUiThread
+                if(webView!=null){
+                    webView.evaluateJavascript("javascript:anroidToJs('Android invok JS ')", null);
+                }else{
+                    L.e("webview is null");
+                }
+            }
         });
         return "JS invok Android";
     }
+}
+ ```
+ 
+```java
+new FinestWebView.Builder(this).theme(R.style.RedTheme)
+                    .titleDefault("Bless This Stuff")
+                    .webViewBuiltInZoomControls(true)
+                    .webViewDisplayZoomControls(true)
+                    .dividerHeight(0)
+                    .gradientDivider(false)
+                    .webViewJavaScriptEnabled(true)//设置可以和JAVA交互
+                    .addJavascriptInterface(new JsInteration())//JS将可以调用该类下面的@JavascriptInterface修饰的方法，此类须implements Serializable
+                    .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit,
+                            R.anim.activity_close_enter, R.anim.activity_close_exit)
+                    .show("http://test.2000new.com/nyd/water/index.html");
 ```
+
 in yout html code:
 ```java
 <img src="images/booknow.png" onclick="s()" />
