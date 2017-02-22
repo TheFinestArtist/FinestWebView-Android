@@ -52,7 +52,7 @@ Easily reference the library in your Android projects using this dependency in y
 
 ```java
 dependencies {
-    compile 'aom.andan:webview:1.0.0'
+    compile 'aom.andan:webview:1.2.1'
 }
 ```
 
