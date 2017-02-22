@@ -741,6 +741,7 @@ public class FinestWebViewActivity extends AppCompatActivity
                 settings.setJavaScriptEnabled(true);
                 jsInteration.setContext(this);
                 webView.addJavascriptInterface(jsInteration, "android");
+                jsInteration.setWebView(webView);
             }
 
             //            // Other webview options
@@ -753,7 +754,6 @@ public class FinestWebViewActivity extends AppCompatActivity
             //            webView.setScrollbarFadingEnabled(true);
             //            webView.setVerticalFadingEdgeEnabled(false);
             builder.setWebView(webView);
-            jsInteration.setWebView(webView);
             if (data != null) {
                 webView.loadData(data, mimeType, encoding);
             } else if (url != null) {
