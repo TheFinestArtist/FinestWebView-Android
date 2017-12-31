@@ -105,14 +105,14 @@ You can use your own Theme for FinestWebView. If you want to use pre-defined the
 
 ### 2. Builder Options
 
-**Constructors**
+#### Constructors
 ```java
 Builder(@NonNull Activity activity);
 // If you use context instead of activity, FinestWebView enter animation won't work
 Builder(@NonNull Context context);
 ```
 
-**Load data or Show url**
+#### Load data or Show url
 ```java
 load(@StringRes int dataRes);
 load(String data);
@@ -122,37 +122,37 @@ show(@StringRes int urlRes);
 show(@NonNull String url);
 ```
 
-**WebView Listener Options**
+#### WebView Listener Options
 ```java
 setWebViewListener(WebViewListener listener);
 addWebViewListener(WebViewListener listener);
 removeWebViewListener(WebViewListener listener);
 ```
 
-**Right to Left Options**
+#### Right to Left Options
 ```java
 rtl(boolean rtl);
 ```
 
-**Theme Options**
+#### Theme Options
 ```java
 theme(@StyleRes int theme);
 ```
 
-**StatusBar Options**
+#### StatusBar Options
 ```java
 statusBarColor(@ColorInt int color);
 statusBarColorRes(@ColorRes int color);
 ```
 
-**Toolbar Options**
+#### Toolbar Options
 ```java
 toolbarColor(@ColorInt int color);
 toolbarColorRes(@ColorRes int color);
 toolbarScrollFlags(@ScrollFlags int flags);
 ```
 
-**Icon Options**
+#### Icon Options
 ```java
 iconDefaultColor(@ColorInt int color);
 iconDefaultColorRes(@ColorRes int color);
@@ -163,7 +163,7 @@ iconPressedColorRes(@ColorRes int colorRes);
 iconSelector(@DrawableRes int selectorRes);
 ```
 
-**Icon Options**
+#### Icon Options
 ```java
 showIconClose(boolean showIconClose);
 disableIconClose(boolean disableIconClose);
@@ -175,7 +175,7 @@ showIconMenu(boolean showIconMenu);
 disableIconMenu(boolean disableIconMenu);
 ```
 
-**SwipeRefreshLayout Options**
+#### SwipeRefreshLayout Options
 ```java
 showSwipeRefreshLayout(boolean showSwipeRefreshLayout);
 swipeRefreshColor(@ColorInt int color);
@@ -184,7 +184,7 @@ swipeRefreshColors(int[] colors);
 swipeRefreshColorsRes(@ArrayRes int colorsRes);
 ```
 
-**Divider Options**
+#### Divider Options
 ```java
 showDivider(boolean showDivider);
 gradientDivider(boolean gradientDivider);
@@ -195,7 +195,7 @@ dividerHeight(int height);
 dividerHeightRes(@DimenRes int height);
 ```
 
-**ProgressBar Options**
+#### ProgressBar Options
 ```java
 showProgressBar(boolean showProgressBar);
 progressBarColor(@ColorInt int color);
@@ -206,7 +206,7 @@ progressBarHeightRes(@DimenRes int height);
 progressBarPosition(@NonNull Position position);
 ```
 
-**Title Options**
+#### Title Options
 ```java
 titleDefault(@NonNull String title);
 titleDefaultRes(@StringRes int stringRes);
@@ -219,7 +219,7 @@ titleColor(@ColorInt int color);
 titleColorRes(@ColorRes int colorRes);
 ```
 
-**Url Options**
+#### Url Options
 ```java
 showUrl(boolean showUrl);
 urlSize(float urlSize);
@@ -230,7 +230,7 @@ urlColor(@ColorInt int color);
 urlColorRes(@ColorRes int colorRes);
 ```
 
-**Menu Options**
+#### Menu Options
 ```java
 menuColor(@ColorInt int color);
 menuColorRes(@ColorRes int colorRes);
@@ -268,7 +268,7 @@ showMenuOpenWith(boolean showMenuOpenWith);
 stringResOpenWith(@StringRes int stringResOpenWith);
 ```
 
-**More Options**
+#### More Options
 ```java
 setCustomAnimations(@AnimRes int animationOpenEnter,
                     @AnimRes int animationOpenExit,
@@ -278,7 +278,7 @@ backPressToClose(boolean backPressToClose);
 stringResCopiedToClipboard(@StringRes int stringResCopiedToClipboard);
 ```
 
-**WebView Options**
+#### WebView Options
 ```java
 webViewSupportZoom(boolean webViewSupportZoom);
 webViewMediaPlaybackRequiresUserGesture (boolean webViewMediaPlaybackRequiresUserGesture);
@@ -325,7 +325,7 @@ webViewOffscreenPreRaster (boolean webViewOffscreenPreRaster);
 injectJavaScript(String injectJavaScript);
 ```
 
-**Builder Pattern**
+#### Builder Pattern
 ```java
 new FinestWebView.Builder(activity)
     .titleDefault("Default Title")
