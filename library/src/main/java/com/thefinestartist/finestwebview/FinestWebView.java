@@ -14,6 +14,8 @@ import android.support.annotation.StringRes;
 import android.support.annotation.StyleRes;
 import android.support.design.widget.AppBarLayout.LayoutParams.ScrollFlags;
 import android.webkit.WebSettings;
+import android.webkit.WebView;
+
 import com.thefinestartist.Base;
 import com.thefinestartist.finestwebview.enums.Position;
 import com.thefinestartist.finestwebview.listeners.BroadCastManager;
@@ -158,12 +160,13 @@ public class FinestWebView {
     protected Boolean webViewOffscreenPreRaster;
 
     protected String injectJavaScript;
+    protected BaseJsInteration jsInteration;
 
     protected String mimeType;
     protected String encoding;
     protected String data;
     protected String url;
-
+    protected WebView webView;
     public Builder(@NonNull Activity activity) {
       this.context = activity;
       Base.initialize(activity);
@@ -187,6 +190,11 @@ public class FinestWebView {
 
     public Builder addWebViewListener(WebViewListener listener) {
       listeners.add(listener);
+      return this;
+    }
+
+    public Builder addJavascriptInterface(BaseJsInteration jsInteration) {
+      this.jsInteration=jsInteration;
       return this;
     }
 
@@ -890,6 +898,15 @@ public class FinestWebView {
     public Builder injectJavaScript(String injectJavaScript) {
       this.injectJavaScript = injectJavaScript;
       return this;
+    }
+
+    public WebView getWebView() {
+//      webView.getSettings().setJavaScriptEnabled(true);
+      return webView;
+    }
+
+    public void setWebView(WebView webView) {
+      this.webView = webView;
     }
 
     public void load(@StringRes int dataRes) {

@@ -52,7 +52,7 @@ Easily reference the library in your Android projects using this dependency in y
 
 ```java
 dependencies {
-    compile 'com.thefinestartist:finestwebview:1.2.7'
+    compile 'aom.andan:webview:1.2.1'
 }
 ```
 
@@ -342,6 +342,39 @@ new FinestWebView.Builder(activity)
     .backPressToClose(false)
     .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit, R.anim.activity_close_enter, R.anim.activity_close_exit)
     .show(url);
+```
+#javascrpit interactive#
+**important**  you need to new a class like [JsInteration.java](sample/src/main/java/com/thefinestartist/finestwebview/sample/JsInteration.java)
+
+ 
+```java
+new FinestWebView.Builder(this).theme(R.style.RedTheme)
+                    .titleDefault("Bless This Stuff")
+                    .webViewBuiltInZoomControls(true)
+                    .webViewDisplayZoomControls(true)
+                    .dividerHeight(0)
+                    .gradientDivider(false)
+                    .webViewJavaScriptEnabled(true)//设置可以和JAVA交互
+                    .addJavascriptInterface(new JsInteration())//JS将可以调用该类下面的@JavascriptInterface修饰的方法，此类须implements Serializable
+                    .setCustomAnimations(R.anim.activity_open_enter, R.anim.activity_open_exit,
+                            R.anim.activity_close_enter, R.anim.activity_close_exit)
+                    .show("http://test.2000new.com/nyd/water/index.html");
+```
+
+in yout html code:
+```java
+<img src="images/booknow.png" onclick="s()" />
+<script type="text/javascript">
+			 function s(){
+			 
+				var dd=android.jsToAndroid();
+				alert(dd);
+				
+			}
+			function anroidToJs(param){
+				 alert(param);
+			}
+		</script>
 ```
 
 
