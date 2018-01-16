@@ -15,18 +15,11 @@
       app:layout_behavior="@string/appbar_scrolling_view_behavior"
       >
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-
-      <FrameLayout
-          android:id="@+id/webLayout"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          />
-
-    </android.support.v4.widget.NestedScrollView>
+    <FrameLayout
+        android:id="@+id/webLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
   </android.support.v4.widget.SwipeRefreshLayout>
 
   <android.support.design.widget.AppBarLayout
