@@ -322,8 +322,9 @@ public class FinestWebView {
 
     public Builder swipeRefreshColors(int[] colors) {
       Integer[] swipeRefreshColors = new Integer[colors.length];
-      for (int i = 0; i < colors.length; i++)
+      for (int i = 0; i < colors.length; i++) {
         swipeRefreshColors[i] = colors[i];
+      }
       this.swipeRefreshColors = swipeRefreshColors;
       return this;
     }
@@ -878,8 +879,8 @@ public class FinestWebView {
     }
 
     /**
-     * @deprecated As of release 1.1.1, replaced by {@link #webViewUserAgentString(String)}
-     * Use setUserAgentString("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101
+     * @deprecated As of release 1.1.1, replaced by {@link #webViewUserAgentString(String)} Use
+     * setUserAgentString("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101
      * Firefox/4.0") instead
      */
     public Builder webViewDesktopMode(boolean webViewDesktopMode) {
@@ -919,7 +920,9 @@ public class FinestWebView {
       this.data = data;
       this.key = System.identityHashCode(this);
 
-      if (!listeners.isEmpty()) new BroadCastManager(context, key, listeners);
+      if (!listeners.isEmpty()) {
+        new BroadCastManager(context, key, listeners);
+      }
 
       Intent intent = new Intent(context, FinestWebViewActivity.class);
       intent.putExtra("builder", this);

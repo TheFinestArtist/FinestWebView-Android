@@ -1,0 +1,15 @@
+ext.versions = [
+        minSdk            : 14,
+        compileSdk        : 27,
+        buildTools        : '27.0.3',
+
+        gradlePlugin      : '3.1.2',
+        bintrayRelease    : '0.8.1',
+        kotlin            : '1.2.40',
+
+        publishVersion    : '1.2.7',
+        publishVersionCode: 9,
+
+        supportLib        : '27.1.1',
+        playLib           : '27.1.1',
+]

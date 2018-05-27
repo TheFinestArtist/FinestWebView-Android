@@ -29,10 +29,15 @@ public class BroadCastManager {
   protected List<WebViewListener> listeners;
   protected LocalBroadcastManager manager;
   protected BroadcastReceiver receiver = new BroadcastReceiver() {
-    @Override public void onReceive(Context context, Intent intent) {
-      if (context == null || intent == null) return;
+    @Override
+    public void onReceive(Context context, Intent intent) {
+      if (context == null || intent == null) {
+        return;
+      }
       int key = intent.getIntExtra(EXTRA_KEY, Integer.MIN_VALUE);
-      if (BroadCastManager.this.key == key) handleIntent(intent);
+      if (BroadCastManager.this.key == key) {
+        handleIntent(intent);
+      }
     }
   };
 
@@ -140,50 +145,60 @@ public class BroadCastManager {
   }
 
   public void onProgressChanged(Intent intent) {
-    for (WebViewListener listener : listeners)
+    for (WebViewListener listener : listeners) {
       listener.onProgressChanged(intent.getIntExtra(EXTRA_PROGESS, 0));
+    }
   }
 
   public void onReceivedTitle(Intent intent) {
-    for (WebViewListener listener : listeners)
+    for (WebViewListener listener : listeners) {
       listener.onReceivedTitle(intent.getStringExtra(EXTRA_TITLE));
+    }
   }
 
   public void onReceivedTouchIconUrl(Intent intent) {
-    for (WebViewListener listener : listeners)
+    for (WebViewListener listener : listeners) {
       listener.onReceivedTouchIconUrl(intent.getStringExtra(EXTRA_URL),
           intent.getBooleanExtra(EXTRA_PRECOMPOSED, false));
+    }
   }
 
   public void onPageStarted(Intent intent) {
-    for (WebViewListener listener : listeners)
+    for (WebViewListener listener : listeners) {
       listener.onPageStarted(intent.getStringExtra(EXTRA_URL));
+    }
   }
 
   public void onPageFinished(Intent intent) {
-    for (WebViewListener listener : listeners)
+    for (WebViewListener listener : listeners) {
       listener.onPageFinished(intent.getStringExtra(EXTRA_URL));
+    }
   }
 
   public void onLoadResource(Intent intent) {
-    for (WebViewListener listener : listeners)
+    for (WebViewListener listener : listeners) {
       listener.onLoadResource(intent.getStringExtra(EXTRA_URL));
+    }
   }
 
   public void onPageCommitVisible(Intent intent) {
-    for (WebViewListener listener : listeners)
+    for (WebViewListener listener : listeners) {
       listener.onPageCommitVisible(intent.getStringExtra(EXTRA_URL));
+    }
   }
 
   public void onDownloadStart(Intent intent) {
-    for (WebViewListener listener : listeners)
+    for (WebViewListener listener : listeners) {
       listener.onDownloadStart(intent.getStringExtra(EXTRA_URL),
           intent.getStringExtra(EXTRA_USER_AGENT), intent.getStringExtra(EXTRA_CONTENT_DISPOSITION),
           intent.getStringExtra(EXTRA_MIME_TYPE), intent.getLongExtra(EXTRA_CONTENT_LENGTH, 0l));
+    }
   }
 
   private void unregister() {
-    if (manager != null && receiver != null) manager.unregisterReceiver(receiver);
+    if (manager != null && receiver != null) {
+      manager.unregisterReceiver(receiver);
+    }
   }
 
   public enum Type {

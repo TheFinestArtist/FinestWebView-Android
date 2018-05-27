@@ -222,7 +222,8 @@ public class FinestWebViewActivity extends AppCompatActivity
   protected TextView menuOpenWithTv;
   protected FrameLayout webLayout;
   DownloadListener downloadListener = new DownloadListener() {
-    @Override public void onDownloadStart(String url, String userAgent, String contentDisposition,
+    @Override
+    public void onDownloadStart(String url, String userAgent, String contentDisposition,
         String mimetype, long contentLength) {
       BroadCastManager.onDownloadStart(FinestWebViewActivity.this, key, url, userAgent,
           contentDisposition, mimetype, contentLength);
@@ -231,7 +232,9 @@ public class FinestWebViewActivity extends AppCompatActivity
 
   protected void initializeOptions() {
     Intent intent = getIntent();
-    if (intent == null) return;
+    if (intent == null) {
+      return;
+    }
 
     FinestWebView.Builder builder = (FinestWebView.Builder) intent.getSerializableExtra("builder");
 
@@ -240,7 +243,7 @@ public class FinestWebViewActivity extends AppCompatActivity
 
     // resolve themed attributes
     TypedValue typedValue = new TypedValue();
-    TypedArray typedArray = obtainStyledAttributes(typedValue.data, new int[] {
+    TypedArray typedArray = obtainStyledAttributes(typedValue.data, new int[]{
         R.attr.colorPrimaryDark, R.attr.colorPrimary, R.attr.colorAccent,
         android.R.attr.textColorPrimary, android.R.attr.textColorSecondary,
         android.R.attr.selectableItemBackground, android.R.attr.selectableItemBackgroundBorderless
@@ -293,8 +296,9 @@ public class FinestWebViewActivity extends AppCompatActivity
     swipeRefreshColor = builder.swipeRefreshColor != null ? builder.swipeRefreshColor : colorAccent;
     if (builder.swipeRefreshColors != null) {
       int[] colors = new int[builder.swipeRefreshColors.length];
-      for (int i = 0; i < builder.swipeRefreshColors.length; i++)
+      for (int i = 0; i < builder.swipeRefreshColors.length; i++) {
         colors[i] = builder.swipeRefreshColors[i];
+      }
       swipeRefreshColors = colors;
     }
 
@@ -482,7 +486,9 @@ public class FinestWebViewActivity extends AppCompatActivity
 
     { // AppBar
       float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
-      if (!gradientDivider) toolbarHeight += dividerHeight;
+      if (!gradientDivider) {
+        toolbarHeight += dividerHeight;
+      }
       CoordinatorLayout.LayoutParams params =
           new CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
               (int) toolbarHeight);
@@ -551,12 +557,15 @@ public class FinestWebViewActivity extends AppCompatActivity
       int statusBarHeight = DisplayUtil.getStatusBarHeight();
       int screenHeight = DisplayUtil.getHeight();
       float webLayoutMinimumHeight = screenHeight - toolbarHeight - statusBarHeight;
-      if (showDivider && !gradientDivider) webLayoutMinimumHeight -= dividerHeight;
+      if (showDivider && !gradientDivider) {
+        webLayoutMinimumHeight -= dividerHeight;
+      }
       webLayout.setMinimumHeight((int) webLayoutMinimumHeight);
     }
   }
 
-  @SuppressLint("SetJavaScriptEnabled") protected void initializeViews() {
+  @SuppressLint("SetJavaScriptEnabled")
+  protected void initializeViews() {
     setSupportActionBar(toolbar);
 
     { // StatusBar
@@ -622,7 +631,9 @@ public class FinestWebViewActivity extends AppCompatActivity
 
       WebSettings settings = webView.getSettings();
 
-      if (webViewSupportZoom != null) settings.setSupportZoom(webViewSupportZoom);
+      if (webViewSupportZoom != null) {
+        settings.setSupportZoom(webViewSupportZoom);
+      }
       if (webViewMediaPlaybackRequiresUserGesture != null
           && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
         settings.setMediaPlaybackRequiresUserGesture(webViewMediaPlaybackRequiresUserGesture);
@@ -642,7 +653,9 @@ public class FinestWebViewActivity extends AppCompatActivity
         settings.setDisplayZoomControls(webViewDisplayZoomControls);
       }
 
-      if (webViewAllowFileAccess != null) settings.setAllowFileAccess(webViewAllowFileAccess);
+      if (webViewAllowFileAccess != null) {
+        settings.setAllowFileAccess(webViewAllowFileAccess);
+      }
       if (webViewAllowContentAccess != null
           && Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
         settings.setAllowContentAccess(webViewAllowContentAccess);
@@ -650,42 +663,64 @@ public class FinestWebViewActivity extends AppCompatActivity
       if (webViewLoadWithOverviewMode != null) {
         settings.setLoadWithOverviewMode(webViewLoadWithOverviewMode);
       }
-      if (webViewSaveFormData != null) settings.setSaveFormData(webViewSaveFormData);
+      if (webViewSaveFormData != null) {
+        settings.setSaveFormData(webViewSaveFormData);
+      }
       if (webViewTextZoom != null
           && Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
         settings.setTextZoom(webViewTextZoom);
       }
-      if (webViewUseWideViewPort != null) settings.setUseWideViewPort(webViewUseWideViewPort);
+      if (webViewUseWideViewPort != null) {
+        settings.setUseWideViewPort(webViewUseWideViewPort);
+      }
       if (webViewSupportMultipleWindows != null) {
         settings.setSupportMultipleWindows(webViewSupportMultipleWindows);
       }
-      if (webViewLayoutAlgorithm != null) settings.setLayoutAlgorithm(webViewLayoutAlgorithm);
+      if (webViewLayoutAlgorithm != null) {
+        settings.setLayoutAlgorithm(webViewLayoutAlgorithm);
+      }
       if (webViewStandardFontFamily != null) {
         settings.setStandardFontFamily(webViewStandardFontFamily);
       }
-      if (webViewFixedFontFamily != null) settings.setFixedFontFamily(webViewFixedFontFamily);
+      if (webViewFixedFontFamily != null) {
+        settings.setFixedFontFamily(webViewFixedFontFamily);
+      }
       if (webViewSansSerifFontFamily != null) {
         settings.setSansSerifFontFamily(webViewSansSerifFontFamily);
       }
-      if (webViewSerifFontFamily != null) settings.setSerifFontFamily(webViewSerifFontFamily);
-      if (webViewCursiveFontFamily != null) settings.setCursiveFontFamily(webViewCursiveFontFamily);
-      if (webViewFantasyFontFamily != null) settings.setFantasyFontFamily(webViewFantasyFontFamily);
-      if (webViewMinimumFontSize != null) settings.setMinimumFontSize(webViewMinimumFontSize);
+      if (webViewSerifFontFamily != null) {
+        settings.setSerifFontFamily(webViewSerifFontFamily);
+      }
+      if (webViewCursiveFontFamily != null) {
+        settings.setCursiveFontFamily(webViewCursiveFontFamily);
+      }
+      if (webViewFantasyFontFamily != null) {
+        settings.setFantasyFontFamily(webViewFantasyFontFamily);
+      }
+      if (webViewMinimumFontSize != null) {
+        settings.setMinimumFontSize(webViewMinimumFontSize);
+      }
       if (webViewMinimumLogicalFontSize != null) {
         settings.setMinimumLogicalFontSize(webViewMinimumLogicalFontSize);
       }
-      if (webViewDefaultFontSize != null) settings.setDefaultFontSize(webViewDefaultFontSize);
+      if (webViewDefaultFontSize != null) {
+        settings.setDefaultFontSize(webViewDefaultFontSize);
+      }
       if (webViewDefaultFixedFontSize != null) {
         settings.setDefaultFixedFontSize(webViewDefaultFixedFontSize);
       }
       if (webViewLoadsImagesAutomatically != null) {
         settings.setLoadsImagesAutomatically(webViewLoadsImagesAutomatically);
       }
-      if (webViewBlockNetworkImage != null) settings.setBlockNetworkImage(webViewBlockNetworkImage);
+      if (webViewBlockNetworkImage != null) {
+        settings.setBlockNetworkImage(webViewBlockNetworkImage);
+      }
       if (webViewBlockNetworkLoads != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
         settings.setBlockNetworkLoads(webViewBlockNetworkLoads);
       }
-      if (webViewJavaScriptEnabled != null) settings.setJavaScriptEnabled(webViewJavaScriptEnabled);
+      if (webViewJavaScriptEnabled != null) {
+        settings.setJavaScriptEnabled(webViewJavaScriptEnabled);
+      }
       if (webViewAllowUniversalAccessFromFileURLs != null
           && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
         settings.setAllowUniversalAccessFromFileURLs(webViewAllowUniversalAccessFromFileURLs);
@@ -697,10 +732,18 @@ public class FinestWebViewActivity extends AppCompatActivity
       if (webViewGeolocationDatabasePath != null) {
         settings.setGeolocationDatabasePath(webViewGeolocationDatabasePath);
       }
-      if (webViewAppCacheEnabled != null) settings.setAppCacheEnabled(webViewAppCacheEnabled);
-      if (webViewAppCachePath != null) settings.setAppCachePath(webViewAppCachePath);
-      if (webViewDatabaseEnabled != null) settings.setDatabaseEnabled(webViewDatabaseEnabled);
-      if (webViewDomStorageEnabled != null) settings.setDomStorageEnabled(webViewDomStorageEnabled);
+      if (webViewAppCacheEnabled != null) {
+        settings.setAppCacheEnabled(webViewAppCacheEnabled);
+      }
+      if (webViewAppCachePath != null) {
+        settings.setAppCachePath(webViewAppCachePath);
+      }
+      if (webViewDatabaseEnabled != null) {
+        settings.setDatabaseEnabled(webViewDatabaseEnabled);
+      }
+      if (webViewDomStorageEnabled != null) {
+        settings.setDomStorageEnabled(webViewDomStorageEnabled);
+      }
       if (webViewGeolocationEnabled != null) {
         settings.setGeolocationEnabled(webViewGeolocationEnabled);
       }
@@ -711,9 +754,15 @@ public class FinestWebViewActivity extends AppCompatActivity
       if (webViewDefaultTextEncodingName != null) {
         settings.setDefaultTextEncodingName(webViewDefaultTextEncodingName);
       }
-      if (webViewUserAgentString != null) settings.setUserAgentString(webViewUserAgentString);
-      if (webViewNeedInitialFocus != null) settings.setNeedInitialFocus(webViewNeedInitialFocus);
-      if (webViewCacheMode != null) settings.setCacheMode(webViewCacheMode);
+      if (webViewUserAgentString != null) {
+        settings.setUserAgentString(webViewUserAgentString);
+      }
+      if (webViewNeedInitialFocus != null) {
+        settings.setNeedInitialFocus(webViewNeedInitialFocus);
+      }
+      if (webViewCacheMode != null) {
+        settings.setCacheMode(webViewCacheMode);
+      }
       if (webViewMixedContentMode != null
           && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         settings.setMixedContentMode(webViewMixedContentMode);
@@ -734,14 +783,17 @@ public class FinestWebViewActivity extends AppCompatActivity
 
       if (data != null) {
         webView.loadData(data, mimeType, encoding);
-      } else if (url != null) webView.loadUrl(url);
+      } else if (url != null) {
+        webView.loadUrl(url);
+      }
     }
 
     { // SwipeRefreshLayout
       swipeRefreshLayout.setEnabled(showSwipeRefreshLayout);
       if (showSwipeRefreshLayout) {
         swipeRefreshLayout.post(new Runnable() {
-          @Override public void run() {
+          @Override
+          public void run() {
             swipeRefreshLayout.setRefreshing(true);
           }
         });
@@ -754,7 +806,8 @@ public class FinestWebViewActivity extends AppCompatActivity
       }
 
       swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-        @Override public void onRefresh() {
+        @Override
+        public void onRefresh() {
           webView.reload();
         }
       });
@@ -891,17 +944,17 @@ public class FinestWebViewActivity extends AppCompatActivity
     {
       Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconPressedColor);
       BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
-      states.addState(new int[] { android.R.attr.state_pressed }, drawable);
+      states.addState(new int[]{android.R.attr.state_pressed}, drawable);
     }
     {
       Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconDisabledColor);
       BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
-      states.addState(new int[] { -android.R.attr.state_enabled }, drawable);
+      states.addState(new int[]{-android.R.attr.state_enabled}, drawable);
     }
     {
       Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconDefaultColor);
       BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
-      states.addState(new int[] {}, drawable);
+      states.addState(new int[]{}, drawable);
     }
     icon.setImageDrawable(states);
 
@@ -931,7 +984,8 @@ public class FinestWebViewActivity extends AppCompatActivity
     //        }
   }
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     initializeOptions();
 
@@ -941,7 +995,8 @@ public class FinestWebViewActivity extends AppCompatActivity
     initializeViews();
   }
 
-  @Override public void onBackPressed() {
+  @Override
+  public void onBackPressed() {
     if (menuLayout.getVisibility() == View.VISIBLE) {
       hideMenu();
     } else if (backPressToClose || !webView.canGoBack()) {
@@ -951,7 +1006,8 @@ public class FinestWebViewActivity extends AppCompatActivity
     }
   }
 
-  @Override public void onClick(View v) {
+  @Override
+  public void onClick(View v) {
     int viewId = v.getId();
     if (viewId == R.id.close) {
       if (rtl) {
@@ -983,7 +1039,9 @@ public class FinestWebViewActivity extends AppCompatActivity
       webView.reload();
       hideMenu();
     } else if (viewId == R.id.menuFind) {
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) webView.showFindDialog("", true);
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        webView.showFindDialog("", true);
+      }
       hideMenu();
     } else if (viewId == R.id.menuShareVia) {
       Intent sendIntent = new Intent();
@@ -1000,7 +1058,9 @@ public class FinestWebViewActivity extends AppCompatActivity
           Snackbar.LENGTH_LONG);
       View snackbarView = snackbar.getView();
       snackbarView.setBackgroundColor(toolbarColor);
-      if (snackbarView instanceof ViewGroup) updateChildTextView((ViewGroup) snackbarView);
+      if (snackbarView instanceof ViewGroup) {
+        updateChildTextView((ViewGroup) snackbarView);
+      }
       snackbar.show();
 
       hideMenu();
@@ -1013,7 +1073,9 @@ public class FinestWebViewActivity extends AppCompatActivity
   }
 
   protected void updateChildTextView(ViewGroup viewGroup) {
-    if (viewGroup == null || viewGroup.getChildCount() == 0) return;
+    if (viewGroup == null || viewGroup.getChildCount() == 0) {
+      return;
+    }
 
     for (int i = 0; i < viewGroup.getChildCount(); i++) {
       View view = viewGroup.getChildAt(i);
@@ -1025,7 +1087,9 @@ public class FinestWebViewActivity extends AppCompatActivity
         textView.setIncludeFontPadding(false);
       }
 
-      if (view instanceof ViewGroup) updateChildTextView((ViewGroup) view);
+      if (view instanceof ViewGroup) {
+        updateChildTextView((ViewGroup) view);
+      }
     }
   }
 
@@ -1039,14 +1103,17 @@ public class FinestWebViewActivity extends AppCompatActivity
     Animation popupAnim = AnimationUtils.loadAnimation(this, R.anim.popup_flyout_hide);
     shadowLayout.startAnimation(popupAnim);
     popupAnim.setAnimationListener(new Animation.AnimationListener() {
-      @Override public void onAnimationStart(Animation animation) {
+      @Override
+      public void onAnimationStart(Animation animation) {
       }
 
-      @Override public void onAnimationEnd(Animation animation) {
+      @Override
+      public void onAnimationEnd(Animation animation) {
         menuLayout.setVisibility(View.GONE);
       }
 
-      @Override public void onAnimationRepeat(Animation animation) {
+      @Override
+      public void onAnimationRepeat(Animation animation) {
       }
     });
   }
@@ -1056,8 +1123,11 @@ public class FinestWebViewActivity extends AppCompatActivity
     overridePendingTransition(animationCloseEnter, animationCloseExit);
   }
 
-  @Override public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-    if (toolbarScrollFlags == 0) return;
+  @Override
+  public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+    if (toolbarScrollFlags == 0) {
+      return;
+    }
 
     ViewHelper.setTranslationY(gradient, verticalOffset);
     ViewHelper.setAlpha(gradient,
@@ -1098,7 +1168,8 @@ public class FinestWebViewActivity extends AppCompatActivity
     urlTv.requestLayout();
   }
 
-  @Override public void onConfigurationChanged(Configuration newConfig) {
+  @Override
+  public void onConfigurationChanged(Configuration newConfig) {
     super.onConfigurationChanged(newConfig);
 
     if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -1108,11 +1179,16 @@ public class FinestWebViewActivity extends AppCompatActivity
     }
   }
 
-  @Override protected void onDestroy() {
+  @Override
+  protected void onDestroy() {
     super.onDestroy();
     BroadCastManager.unregister(FinestWebViewActivity.this, key);
-    if (webView == null) return;
-    if (APILevel.require(11)) webView.onPause();
+    if (webView == null) {
+      return;
+    }
+    if (APILevel.require(11)) {
+      webView.onPause();
+    }
     destroyWebView();
   }
 
@@ -1121,21 +1197,26 @@ public class FinestWebViewActivity extends AppCompatActivity
   // http://stackoverflow.com/a/5966151/1797648
   private void destroyWebView() {
     new Handler().postDelayed(new Runnable() {
-      @Override public void run() {
-        if (webView != null) webView.destroy();
+      @Override
+      public void run() {
+        if (webView != null) {
+          webView.destroy();
+        }
       }
     }, ViewConfiguration.getZoomControlsTimeout() + 1000L);
   }
 
   public class MyWebChromeClient extends WebChromeClient {
 
-    @Override public void onProgressChanged(WebView view, int progress) {
+    @Override
+    public void onProgressChanged(WebView view, int progress) {
       BroadCastManager.onProgressChanged(FinestWebViewActivity.this, key, progress);
 
       if (showSwipeRefreshLayout) {
         if (swipeRefreshLayout.isRefreshing() && progress == 100) {
           swipeRefreshLayout.post(new Runnable() {
-            @Override public void run() {
+            @Override
+            public void run() {
               swipeRefreshLayout.setRefreshing(false);
             }
           });
@@ -1143,39 +1224,48 @@ public class FinestWebViewActivity extends AppCompatActivity
 
         if (!swipeRefreshLayout.isRefreshing() && progress != 100) {
           swipeRefreshLayout.post(new Runnable() {
-            @Override public void run() {
+            @Override
+            public void run() {
               swipeRefreshLayout.setRefreshing(true);
             }
           });
         }
       }
 
-      if (progress == 100) progress = 0;
+      if (progress == 100) {
+        progress = 0;
+      }
       progressBar.setProgress(progress);
     }
 
-    @Override public void onReceivedTitle(WebView view, String title) {
+    @Override
+    public void onReceivedTitle(WebView view, String title) {
       BroadCastManager.onReceivedTitle(FinestWebViewActivity.this, key, title);
     }
 
-    @Override public void onReceivedTouchIconUrl(WebView view, String url, boolean precomposed) {
+    @Override
+    public void onReceivedTouchIconUrl(WebView view, String url, boolean precomposed) {
       BroadCastManager.onReceivedTouchIconUrl(FinestWebViewActivity.this, key, url, precomposed);
     }
   }
 
   public class MyWebViewClient extends WebViewClient {
 
-    @Override public void onPageStarted(WebView view, String url, Bitmap favicon) {
+    @Override
+    public void onPageStarted(WebView view, String url, Bitmap favicon) {
       BroadCastManager.onPageStarted(FinestWebViewActivity.this, key, url);
       if (!url.contains("docs.google.com") && url.endsWith(".pdf")) {
         webView.loadUrl("http://docs.google.com/gview?embedded=true&url=" + url);
       }
     }
 
-    @Override public void onPageFinished(WebView view, String url) {
+    @Override
+    public void onPageFinished(WebView view, String url) {
       BroadCastManager.onPageFinished(FinestWebViewActivity.this, key, url);
 
-      if (updateTitleFromHtml) title.setText(view.getTitle());
+      if (updateTitleFromHtml) {
+        title.setText(view.getTitle());
+      }
       urlTv.setText(UrlParser.getHost(url));
       requestCenterLayout();
 
@@ -1194,7 +1284,8 @@ public class FinestWebViewActivity extends AppCompatActivity
       }
     }
 
-    @Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
+    @Override
+    public boolean shouldOverrideUrlLoading(WebView view, String url) {
       if (url.endsWith(".mp4")) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.parse(url), "video/*");
@@ -1219,7 +1310,7 @@ public class FinestWebViewActivity extends AppCompatActivity
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 
         emailIntent.setType("text/html");
-        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { mt.getTo() });
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{mt.getTo()});
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, mt.getSubject());
         emailIntent.putExtra(Intent.EXTRA_CC, mt.getCc());
         emailIntent.putExtra(Intent.EXTRA_TEXT, mt.getBody());
@@ -1232,11 +1323,13 @@ public class FinestWebViewActivity extends AppCompatActivity
       }
     }
 
-    @Override public void onLoadResource(WebView view, String url) {
+    @Override
+    public void onLoadResource(WebView view, String url) {
       BroadCastManager.onLoadResource(FinestWebViewActivity.this, key, url);
     }
 
-    @Override public void onPageCommitVisible(WebView view, String url) {
+    @Override
+    public void onPageCommitVisible(WebView view, String url) {
       BroadCastManager.onPageCommitVisible(FinestWebViewActivity.this, key, url);
     }
   }

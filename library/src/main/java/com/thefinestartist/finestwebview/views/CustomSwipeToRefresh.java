@@ -29,12 +29,16 @@ public class CustomSwipeToRefresh extends SwipeRefreshLayout {
     scrollBuffer = UnitConverter.dpToPx(SCROLL_BUFFER_DIMEN);
   }
 
-  @Override public void addView(View child) {
+  @Override
+  public void addView(View child) {
     super.addView(child);
-    if (child instanceof WebView) this.webView = (WebView) child;
+    if (child instanceof WebView) {
+      this.webView = (WebView) child;
+    }
   }
 
-  @Override public boolean onInterceptTouchEvent(MotionEvent event) {
+  @Override
+  public boolean onInterceptTouchEvent(MotionEvent event) {
     return webView.getScrollY() <= scrollBuffer && super.onInterceptTouchEvent(event);
   }
 }

@@ -49,7 +49,9 @@ public class ShadowLayout extends FrameLayout {
 
   private void initAttributes(AttributeSet attrs) {
     TypedArray attr = getContext().obtainStyledAttributes(attrs, R.styleable.ShadowLayout, 0, 0);
-    if (attr == null) return;
+    if (attr == null) {
+      return;
+    }
 
     try {
       cornerRadius = attr.getDimension(R.styleable.ShadowLayout_slCornerRadius,
@@ -96,7 +98,8 @@ public class ShadowLayout extends FrameLayout {
     setPadding();
   }
 
-  @Override protected void onDraw(Canvas canvas) {
+  @Override
+  protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
 
     //        RoundRectShape rss = new RoundRectShape(new float[]{12f, 12f, 12f,
@@ -123,7 +126,8 @@ public class ShadowLayout extends FrameLayout {
     setBackgroundCompat(canvas.getWidth(), canvas.getHeight());
   }
 
-  @SuppressWarnings("deprecation") private void setBackgroundCompat(int w, int h) {
+  @SuppressWarnings("deprecation")
+  private void setBackgroundCompat(int w, int h) {
     Bitmap bitmap =
         createShadowBitmap(w, h, cornerRadius, shadowSize, dx, dy, shadowColor, Color.TRANSPARENT);
     //        Bitmap coloredBitmap = BitmapHelper.getColoredBitmap(getContext(), bitmap, shadowColor);
@@ -171,11 +175,13 @@ public class ShadowLayout extends FrameLayout {
     return output;
   }
 
-  @Override protected int getSuggestedMinimumWidth() {
+  @Override
+  protected int getSuggestedMinimumWidth() {
     return 0;
   }
 
-  @Override protected int getSuggestedMinimumHeight() {
+  @Override
+  protected int getSuggestedMinimumHeight() {
     return 0;
   }
 }
