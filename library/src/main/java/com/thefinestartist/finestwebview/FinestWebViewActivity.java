@@ -185,6 +185,7 @@ public class FinestWebViewActivity extends AppCompatActivity
   protected Integer webViewCacheMode;
   protected Integer webViewMixedContentMode;
   protected Boolean webViewOffscreenPreRaster;
+  protected Boolean webViewSafeBrowsingEnabled;
 
   protected String injectJavaScript;
 
@@ -426,6 +427,7 @@ public class FinestWebViewActivity extends AppCompatActivity
     webViewCacheMode = builder.webViewCacheMode;
     webViewMixedContentMode = builder.webViewMixedContentMode;
     webViewOffscreenPreRaster = builder.webViewOffscreenPreRaster;
+    webViewSafeBrowsingEnabled = builder.webViewSafeBrowsingEnabled;
 
     injectJavaScript = builder.injectJavaScript;
 
@@ -769,6 +771,10 @@ public class FinestWebViewActivity extends AppCompatActivity
       }
       if (webViewOffscreenPreRaster != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         settings.setOffscreenPreRaster(webViewOffscreenPreRaster);
+      }
+      if (webViewSafeBrowsingEnabled != null
+          && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        settings.setSafeBrowsingEnabled(webViewSafeBrowsingEnabled);
       }
 
       //            // Other webview options
