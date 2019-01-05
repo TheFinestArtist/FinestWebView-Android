@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Toast;
+
 import com.thefinestartist.finestwebview.FinestWebView;
+import com.thefinestartist.finestwebview.listeners.WebViewListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
           .dividerHeight(0)
           .gradientDivider(false)
           .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
+              .addWebViewListener(new WebViewListener() {
+                @Override
+                public void onPageSelected(String url) {
+                  Toast.makeText(MainActivity.this,url,Toast.LENGTH_LONG)
+                          .show();
+                }
+              })
           .show("http://example.com");
     } else if (view.getId() == R.id.blackTheme) {
       new FinestWebView.Builder(this).theme(R.style.FinestWebViewTheme)
@@ -83,6 +93,13 @@ public class MainActivity extends AppCompatActivity {
           .disableIconClose(true)
           .disableIconForward(true)
           .disableIconMenu(true)
+              .addWebViewListener(new WebViewListener() {
+                  @Override
+                  public void onPageSelected(String url) {
+                      Toast.makeText(MainActivity.this,url,Toast.LENGTH_LONG)
+                              .show();
+                  }
+              })
           .show("https://dribbble.com");
     }
   }

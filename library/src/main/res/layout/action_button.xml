@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button android:id="@+id/action"
+    android:text="@string/webview_action_text"
+    android:textColor="@android:color/white"
+    android:layout_gravity="bottom|center"
+    android:background="#3c96ff"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

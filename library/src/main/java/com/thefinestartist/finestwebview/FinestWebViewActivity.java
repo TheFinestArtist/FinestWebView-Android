@@ -37,6 +37,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -479,6 +480,19 @@ public class FinestWebViewActivity extends AppCompatActivity
     webLayout = (FrameLayout) findViewById(R.id.webLayout);
     webView = new WebView(this);
     webLayout.addView(webView);
+
+    Button actionButton = (Button) getLayoutInflater().inflate(R.layout.action_button,null,false);
+    CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+    params.gravity = Gravity.BOTTOM;
+    actionButton.setLayoutParams(params);
+    coordinatorLayout.addView(actionButton);
+    actionButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        BroadCastManager.onPageSelected(FinestWebViewActivity.this, key, webView.getUrl());
+      }
+    });
+
   }
 
   protected void layoutViews() {
