@@ -186,6 +186,7 @@ public class FinestWebViewActivity extends AppCompatActivity
   protected Integer webViewCacheMode;
   protected Integer webViewMixedContentMode;
   protected Boolean webViewOffscreenPreRaster;
+  protected Boolean actionButtonVisible;
 
   protected String injectJavaScript;
 
@@ -427,9 +428,8 @@ public class FinestWebViewActivity extends AppCompatActivity
     webViewCacheMode = builder.webViewCacheMode;
     webViewMixedContentMode = builder.webViewMixedContentMode;
     webViewOffscreenPreRaster = builder.webViewOffscreenPreRaster;
-
     injectJavaScript = builder.injectJavaScript;
-
+    actionButtonVisible = builder.showActionButton;
     mimeType = builder.mimeType;
     encoding = builder.encoding;
     data = builder.data;
@@ -492,6 +492,7 @@ public class FinestWebViewActivity extends AppCompatActivity
         BroadCastManager.onPageSelected(FinestWebViewActivity.this, key, webView.getUrl());
       }
     });
+    actionButton.setVisibility(actionButtonVisible ? View.VISIBLE : View.GONE);
 
   }
 

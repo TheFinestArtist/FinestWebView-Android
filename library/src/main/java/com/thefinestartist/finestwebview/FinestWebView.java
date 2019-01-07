@@ -57,6 +57,7 @@ public class FinestWebView {
     protected Boolean disableIconForward;
     protected Boolean showIconMenu;
     protected Boolean disableIconMenu;
+    protected Boolean showActionButton;
 
     protected Boolean showSwipeRefreshLayout;
     protected Integer swipeRefreshColor;
@@ -267,6 +268,11 @@ public class FinestWebView {
 
     public Builder showIconClose(boolean showIconClose) {
       this.showIconClose = showIconClose;
+      return this;
+    }
+
+    public Builder showActionButton(boolean showActionButton) {
+      this.showActionButton = showActionButton;
       return this;
     }
 
