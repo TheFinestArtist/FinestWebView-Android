@@ -59,6 +59,11 @@ public class BroadCastManager {
   }
 
   // Handle Each Event Type
+  public static void onPageSelected(Context context, int key, String url) {
+    Intent intent = getBaseIntent(key, Type.PAGE_SELECTED).putExtra(EXTRA_URL, url);
+    sendBroadCast(context, intent);
+  }
+
   public static void onProgressChanged(Context context, int key, int progress) {
     Intent intent = getBaseIntent(key, Type.PROGRESS_CHANGED).putExtra(EXTRA_PROGESS, progress);
     sendBroadCast(context, intent);
@@ -140,7 +145,15 @@ public class BroadCastManager {
         break;
       case UNREGISTER:
         unregister();
+      case PAGE_SELECTED:
+        pageSelected(intent);
         break;
+    }
+  }
+
+  public void pageSelected(Intent intent) {
+    for (WebViewListener listener : listeners) {
+      listener.onPageSelected(intent.getStringExtra(EXTRA_URL));
     }
   }
 
@@ -202,6 +215,6 @@ public class BroadCastManager {
   }
 
   public enum Type {
-    PROGRESS_CHANGED, RECEIVED_TITLE, RECEIVED_TOUCH_ICON_URL, PAGE_STARTED, PAGE_FINISHED, LOAD_RESOURCE, PAGE_COMMIT_VISIBLE, DOWNLOADED_START, UNREGISTER
+    PROGRESS_CHANGED, RECEIVED_TITLE, RECEIVED_TOUCH_ICON_URL, PAGE_STARTED, PAGE_FINISHED, LOAD_RESOURCE, PAGE_COMMIT_VISIBLE, DOWNLOADED_START, UNREGISTER,PAGE_SELECTED
   }
 }

@@ -19,6 +19,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageButton;
@@ -37,6 +38,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -185,6 +187,7 @@ public class FinestWebViewActivity extends AppCompatActivity
   protected Integer webViewCacheMode;
   protected Integer webViewMixedContentMode;
   protected Boolean webViewOffscreenPreRaster;
+  protected Boolean actionButtonVisible;
 
   protected String injectJavaScript;
 
@@ -221,6 +224,7 @@ public class FinestWebViewActivity extends AppCompatActivity
   protected LinearLayout menuOpenWith;
   protected TextView menuOpenWithTv;
   protected FrameLayout webLayout;
+  private NestedScrollView nestedScrollView;
   DownloadListener downloadListener = new DownloadListener() {
     @Override
     public void onDownloadStart(String url, String userAgent, String contentDisposition,
@@ -426,9 +430,8 @@ public class FinestWebViewActivity extends AppCompatActivity
     webViewCacheMode = builder.webViewCacheMode;
     webViewMixedContentMode = builder.webViewMixedContentMode;
     webViewOffscreenPreRaster = builder.webViewOffscreenPreRaster;
-
     injectJavaScript = builder.injectJavaScript;
-
+    actionButtonVisible = builder.showActionButton;
     mimeType = builder.mimeType;
     encoding = builder.encoding;
     data = builder.data;
@@ -436,7 +439,9 @@ public class FinestWebViewActivity extends AppCompatActivity
   }
 
   protected void bindViews() {
+
     coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+    nestedScrollView = findViewById(R.id.nestedScrollView);
 
     appBar = (AppBarLayout) findViewById(R.id.appBar);
     toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -479,6 +484,20 @@ public class FinestWebViewActivity extends AppCompatActivity
     webLayout = (FrameLayout) findViewById(R.id.webLayout);
     webView = new WebView(this);
     webLayout.addView(webView);
+
+    Button actionButton = (Button) getLayoutInflater().inflate(R.layout.action_button,null,false);
+    CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+    params.gravity = Gravity.BOTTOM;
+    actionButton.setLayoutParams(params);
+    coordinatorLayout.addView(actionButton);
+    actionButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        BroadCastManager.onPageSelected(FinestWebViewActivity.this, key, webView.getUrl());
+      }
+    });
+    actionButton.setVisibility(actionButtonVisible ? View.VISIBLE : View.GONE);
+
   }
 
   protected void layoutViews() {
@@ -1120,6 +1139,7 @@ public class FinestWebViewActivity extends AppCompatActivity
 
   protected void exitActivity() {
     super.onBackPressed();
+    BroadCastManager.unregister(this,key);
     overridePendingTransition(animationCloseEnter, animationCloseExit);
   }
 
@@ -1253,6 +1273,7 @@ public class FinestWebViewActivity extends AppCompatActivity
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
+      nestedScrollView.scrollTo(0,0);
       BroadCastManager.onPageStarted(FinestWebViewActivity.this, key, url);
       if (!url.contains("docs.google.com") && url.endsWith(".pdf")) {
         webView.loadUrl("http://docs.google.com/gview?embedded=true&url=" + url);
@@ -1261,6 +1282,7 @@ public class FinestWebViewActivity extends AppCompatActivity
 
     @Override
     public void onPageFinished(WebView view, String url) {
+      nestedScrollView.scrollTo(0,0);
       BroadCastManager.onPageFinished(FinestWebViewActivity.this, key, url);
 
       if (updateTitleFromHtml) {
