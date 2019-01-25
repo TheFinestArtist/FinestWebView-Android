@@ -646,6 +646,10 @@ public class FinestWebViewActivity extends AppCompatActivity
           ((ViewGroup) webView.getParent()).removeAllViews();
           swipeRefreshLayout.addView(webView);
           swipeRefreshLayout.removeViewAt(1);
+
+          // Compensate coordinatorLayout pushing swipeRefreshLayout below appBar
+          float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
+          swipeRefreshLayout.setPadding(0, 0, 0, (int) toolbarHeight);
         }
       }
       if (webViewDisplayZoomControls != null
