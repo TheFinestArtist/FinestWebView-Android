@@ -92,6 +92,12 @@ class MainActivity : AppCompatActivity() {
                         .disableIconMenu(true)
                         .show("https://dribbble.com")
             }
+            R.id.noToolbarTheme -> {
+                FinestWebView.Builder(this)
+                        .titleDefault("Awwwards")
+                        .showToolbar(false)
+                        .show("https://www.awwwards.com/")
+            }
         }
     }
 }

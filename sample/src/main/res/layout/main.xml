@@ -40,4 +40,13 @@
         android:text="Black Theme"
         android:textColor="@color/finestWhite" />
 
+    <Button
+        android:id="@+id/noToolbarTheme"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@color/primary"
+        android:onClick="onClick"
+        android:text="No Action Bar"
+        android:textColor="@color/finestWhite" />
+
 </LinearLayout>

@@ -46,6 +46,7 @@ public class FinestWebView {
 
         protected Integer toolbarColor;
         protected Integer toolbarScrollFlags;
+        protected Boolean showToolbar = true;
 
         protected Integer iconDefaultColor;
         protected Integer iconDisabledColor;
@@ -220,6 +221,11 @@ public class FinestWebView {
 
         public Builder toolbarColor(@ColorInt int color) {
             this.toolbarColor = color;
+            return this;
+        }
+
+        public Builder showToolbar(boolean show) {
+            this.showToolbar = show;
             return this;
         }
 

@@ -76,6 +76,7 @@ public class FinestWebViewActivity extends AppCompatActivity
 
     protected int toolbarColor;
     protected int toolbarScrollFlags;
+    protected boolean showToolbar;
 
     protected int iconDefaultColor;
     protected int iconDisabledColor;
@@ -275,6 +276,7 @@ public class FinestWebViewActivity extends AppCompatActivity
         toolbarScrollFlags = builder.toolbarScrollFlags != null ? builder.toolbarScrollFlags :
                 AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
                         | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS;
+        showToolbar = builder.showToolbar;
 
         iconDefaultColor = builder.iconDefaultColor != null ? builder.iconDefaultColor : colorAccent;
         iconDisabledColor = builder.iconDisabledColor != null ? builder.iconDisabledColor
@@ -304,7 +306,7 @@ public class FinestWebViewActivity extends AppCompatActivity
             swipeRefreshColors = colors;
         }
 
-        showDivider = builder.showDivider != null ? builder.showDivider : true;
+        showDivider = (builder.showDivider != null ? builder.showDivider : true) && builder.showToolbar;
         gradientDivider = builder.gradientDivider != null ? builder.gradientDivider : true;
         dividerColor = builder.dividerColor != null ? builder.dividerColor
                 : ContextCompat.getColor(this, R.color.finestBlack10);
@@ -487,7 +489,7 @@ public class FinestWebViewActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         { // AppBar
-            float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
+            float toolbarHeight = showToolbar ? getResources().getDimension(R.dimen.toolbarHeight) : 0;
             if (!gradientDivider) {
                 toolbarHeight += dividerHeight;
             }
@@ -496,10 +498,12 @@ public class FinestWebViewActivity extends AppCompatActivity
                             (int) toolbarHeight);
             appBar.setLayoutParams(params);
             coordinatorLayout.requestLayout();
+
+            if (!showToolbar) appBar.setVisibility(View.GONE);
         }
 
         { // Toolbar
-            float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
+            float toolbarHeight = showToolbar ? getResources().getDimension(R.dimen.toolbarHeight) : 0;
             LinearLayout.LayoutParams params =
                     new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) toolbarHeight);
             toolbarLayout.setMinimumHeight((int) toolbarHeight);
@@ -845,7 +849,7 @@ public class FinestWebViewActivity extends AppCompatActivity
             CoordinatorLayout.LayoutParams params =
                     new CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                             (int) progressBarHeight);
-            float toolbarHeight = getResources().getDimension(R.dimen.toolbarHeight);
+            float toolbarHeight = showToolbar ? getResources().getDimension(R.dimen.toolbarHeight) : 0;
             switch (progressBarPosition) {
                 case TOP_OF_TOOLBAR:
                     params.setMargins(0, 0, 0, 0);

@@ -378,11 +378,11 @@ new FinestWebView.Builder(activity)
     .show(url);
 ```
 
-#### Hide Toolbar
+#### Show / hide Toolbar
 
 ```java
 new FinestWebView.Builder(activity)
-    .hideToolbar(true) // default is false
+    .showToolbar(true) // default is true
     .show(url);
 ```
 
