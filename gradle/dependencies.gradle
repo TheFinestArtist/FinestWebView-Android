@@ -6,8 +6,8 @@ ext.versions = [
         gradlePlugin      : '4.0.1',
         kotlin            : '1.4.10',
 
-        publishVersion    : '1.2.7',
-        publishVersionCode: 9,
+        publishVersion    : '2.0.0',
+        publishVersionCode: 10,
 
         coreKtx           : '1.3.2',
         multidex          : '2.0.1',
