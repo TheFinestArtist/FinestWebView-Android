@@ -1,6 +1,7 @@
 apply from: '../gradle/dependencies.gradle'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion versions.compileSdk
@@ -32,6 +33,34 @@ dependencies {
     implementation 'com.thefinestartist:utils:0.9.0'
     annotationProcessor 'com.thefinestartist:compilers:0.9.0'
 }
+
 repositories {
     mavenCentral()
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = "com.adeeandra.finestwebview"
+                artifactId = getArtifactId()
+                version = versions.publishVersion
+                artifact("$buildDir/outputs/aar/${getArtifactId()}-release.aar")
+            }
+        }
+
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/addeeandra/FinestWebView-Android") // Github Package
+                credentials {
+                    Properties githubProperties = new Properties()
+                    githubProperties.load(project.rootProject.file('github.properties').newDataInputStream())
+
+                    username = githubProperties.get("gpr.usr")
+                    password = githubProperties.get("gpr.key")
+                }
+            }
+        }
+    }
 }

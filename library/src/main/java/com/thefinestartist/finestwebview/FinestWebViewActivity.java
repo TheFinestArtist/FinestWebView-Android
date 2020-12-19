@@ -53,9 +53,9 @@ import com.thefinestartist.finestwebview.helpers.ColorHelper;
 import com.thefinestartist.finestwebview.helpers.TypefaceHelper;
 import com.thefinestartist.finestwebview.helpers.UrlParser;
 import com.thefinestartist.finestwebview.listeners.BroadCastManager;
+import com.thefinestartist.finestwebview.utils.APILevel;
+import com.thefinestartist.finestwebview.utils.ClipboardManagerUtil;
 import com.thefinestartist.finestwebview.views.ShadowLayout;
-import com.thefinestartist.utils.etc.APILevel;
-import com.thefinestartist.utils.service.ClipboardManagerUtil;
 import com.thefinestartist.utils.ui.DisplayUtil;
 import com.thefinestartist.utils.ui.ViewUtil;
 
@@ -232,6 +232,7 @@ public class FinestWebViewActivity extends AppCompatActivity
                     contentDisposition, mimetype, contentLength);
         }
     };
+    private ClipboardManagerUtil mClipboardManager;
 
     protected void initializeOptions() {
         Intent intent = getIntent();
@@ -1058,7 +1059,7 @@ public class FinestWebViewActivity extends AppCompatActivity
 
             hideMenu();
         } else if (viewId == R.id.menuCopyLink) {
-            ClipboardManagerUtil.setText(webView.getUrl());
+            mClipboardManager.setText(webView.getUrl());
 
             Snackbar snackbar = Snackbar.make(coordinatorLayout, getString(stringResCopiedToClipboard),
                     Snackbar.LENGTH_LONG);
