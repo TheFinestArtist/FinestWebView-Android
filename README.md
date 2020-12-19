@@ -1,5 +1,4 @@
 # FinestWebView
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FinestWebView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/2861)
 [![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
 [![API](https://img.shields.io/badge/API-7%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=7)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT)
@@ -7,24 +6,25 @@
 #### Beautiful and customizable Android Activity that shows web pages within an app.
 
 * Builder pattern
-* Material design & Pre-made icons
-* Webview listeners
-* Custom themes & Custom transition animations
+* Material design & pre-made icons
+* WebView listeners
+* Custom themes & custom transition animations
 * Support collapsing toolbar & contextual actionbar
-* SwipeRefreshLayout & Progressbar
+* SwipeRefreshLayout & ProgressBar
 * Device rotation
 * Gradient divider
 * Custom typeface & translation
 * Supports Right to Left
+* Kotlin extensions (WIP)
 
 ## Screenshots
-<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/screenshots.png?raw=true" width="888">
+<img src="https://github.com/addeeandra/FinestWebView-Android/blob/master/art/screenshots.png?raw=true" width="888">
 
 ### Default theme & Copied to clipboard
-<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/first.png?raw=true" width="888">
+<img src="https://github.com/addeeandra/FinestWebView-Android/blob/master/art/first.png?raw=true" width="888">
 
 ### Back and forward & More options
-<img src="https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/art/second.png?raw=true" width="888">
+<img src="https://github.com/addeeandra/FinestWebView-Android/blob/master/art/second.png?raw=true" width="888">
 
 ## FinestWebView Demo Video - YouTube
 <a href="https://www.youtube.com/watch?v=7qmAqnspjAM" target="_blank">
@@ -35,9 +35,9 @@
 
 ## Sample Project
 
-You can download the latest sample APK from this repo here: [sample-release.apk](https://github.com/TheFinestArtist/FinestWebView-Android/blob/master/sample/sample-release.apk?raw=true)
+You can download the latest sample APK from this repo here: **TBA**.
 
-It's also on Google Play:
+It's also on Google Play (TBA) :
 
 <a href="https://play.google.com/store/apps/details?id=com.thefinestartist.finestwebview.sample" target="_blank">
   <img alt="Get it on Google Play"
@@ -46,13 +46,13 @@ It's also on Google Play:
 
 ## Getting started
 
-#### Gradle Dependency (jcenter)
+#### Gradle Dependency (TBA)
 
 Easily reference the library in your Android projects using this dependency in your module's `build.gradle` file.
 
-```java
+```groovy
 dependencies {
-    compile 'com.thefinestartist:finestwebview:1.2.7'
+    compile '...'
 }
 ```
 
@@ -108,6 +108,7 @@ You can use your own Theme for FinestWebView. If you want to use pre-defined the
 #### Constructors
 ```java
 Builder(@NonNull Activity activity);
+
 // If you use context instead of activity, FinestWebView enter animation won't work
 Builder(@NonNull Context context);
 ```
@@ -377,6 +378,14 @@ new FinestWebView.Builder(activity)
     .show(url);
 ```
 
+#### Hide Toolbar
+
+```java
+new FinestWebView.Builder(activity)
+    .hideToolbar(true) // default is false
+    .show(url);
+```
+
 
 #### Collapsing Toolbar vs WebView BuiltInZoomControls
 If you enable BuiltInZoomControls `webViewBuiltInZoomControls(true)`, it will automatically disable toolbar collapsing.
@@ -493,6 +502,14 @@ You can force WebView to show in desktop mode by setting `webViewUserAgentString
 * User Interface Design
 * Graphic Design
 
+See here for the original repository [https://github.com/TheFinestArtist/FinestWebView-Android](FinestWebView-Android)
+
+## Maintainer
+
+#### [Aditya Chandra](https://github.com/addeeandra)
+
+* Software Engineer
+* Android & Backend Developer
 
 ## License
 
