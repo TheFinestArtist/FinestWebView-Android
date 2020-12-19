@@ -30,6 +30,7 @@ public class BroadCastManager {
     protected int key;
     protected List<WebViewListener> listeners;
     protected LocalBroadcastManager manager;
+
     protected BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

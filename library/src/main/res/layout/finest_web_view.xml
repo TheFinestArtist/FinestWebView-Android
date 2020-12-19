@@ -22,6 +22,7 @@
                 android:layout_height="wrap_content" />
 
         </androidx.core.widget.NestedScrollView>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.appbar.AppBarLayout
@@ -43,7 +44,9 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
             <include layout="@layout/toolbar_content" />
+
         </androidx.appcompat.widget.Toolbar>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <View

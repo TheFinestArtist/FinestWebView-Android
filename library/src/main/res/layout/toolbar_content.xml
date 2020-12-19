@@ -64,6 +64,7 @@
                 android:singleLine="true"
                 android:textColor="@color/finestSilver"
                 android:textSize="@dimen/defaultUrlSize" />
+
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageButton
@@ -91,4 +92,5 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/defaultDividerHeight"
         android:background="@color/finestSilver" />
+
 </LinearLayout>

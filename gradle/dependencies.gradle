@@ -13,4 +13,5 @@ ext.versions = [
         multidex          : '2.0.1',
         supportLib        : '27.1.1',
         playLib           : '27.1.1',
+        materialLib       : '1.2.1'
 ]

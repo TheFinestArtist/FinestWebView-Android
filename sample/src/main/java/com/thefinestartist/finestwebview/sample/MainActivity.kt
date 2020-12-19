@@ -34,9 +34,11 @@ class MainActivity : AppCompatActivity() {
                                 R.anim.activity_close_enter,
                                 R.anim.activity_close_exit
                         )
-                        .injectJavaScript("javascript: document.getElementById('msg').innerHTML='Hello "
-                                + "TheFinestArtist"
-                                + "!';")
+                        .injectJavaScript("""
+                            javascript: document
+                                .getElementById('msg')
+                                .innerHTML='Hello TheFinestArtist!';
+                        """.trimIndent())
                         .show("https://github.com/")
             }
             R.id.blueTheme -> {

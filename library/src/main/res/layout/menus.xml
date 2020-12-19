@@ -15,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:clipChildren="false"
         android:clipToPadding="false"
@@ -50,6 +51,7 @@
                     android:text="@string/refresh"
                     android:textColor="@color/finestBlack"
                     android:textSize="@dimen/defaultMenuTextSize" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -72,6 +74,7 @@
                     android:text="@string/find"
                     android:textColor="@color/finestBlack"
                     android:textSize="@dimen/defaultMenuTextSize" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -94,6 +97,7 @@
                     android:text="@string/share_via"
                     android:textColor="@color/finestBlack"
                     android:textSize="@dimen/defaultMenuTextSize" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -116,6 +120,7 @@
                     android:text="@string/copy_link"
                     android:textColor="@color/finestBlack"
                     android:textSize="@dimen/defaultMenuTextSize" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -141,5 +146,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
     </com.thefinestartist.finestwebview.views.ShadowLayout>
+
 </RelativeLayout>

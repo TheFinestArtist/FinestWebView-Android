@@ -30,12 +30,9 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin
     implementation 'androidx.core:core-ktx:' + versions.coreKtx
     implementation 'androidx.multidex:multidex:' + versions.multidex
+    implementation 'com.google.android.material:material:' + versions.materialLib
 
     implementation project(':library')
-
-    implementation 'com.android.support:support-annotations:' + versions.supportLib
-    implementation 'com.android.support:appcompat-v7:' + versions.supportLib
-    implementation 'com.android.support:design:' + versions.supportLib
 }
 repositories {
     mavenCentral()
