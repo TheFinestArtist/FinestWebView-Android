@@ -2,7 +2,8 @@ package com.thefinestartist.finestwebview.helpers;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v4.util.SimpleArrayMap;
+
+import androidx.collection.SimpleArrayMap;
 
 /**
  * Created by Leonardo on 11/14/15.
@@ -26,23 +27,23 @@ import android.support.v4.util.SimpleArrayMap;
 */
 public class TypefaceHelper {
 
-  private static final SimpleArrayMap<String, Typeface> cache = new SimpleArrayMap<>();
+    private static final SimpleArrayMap<String, Typeface> cache = new SimpleArrayMap<>();
 
-  private TypefaceHelper() {
-  }
-
-  public static Typeface get(Context c, String name) {
-    synchronized (cache) {
-      if (!cache.containsKey(name)) {
-        try {
-          Typeface t = Typeface.createFromAsset(c.getAssets(), String.format("fonts/%s", name));
-          cache.put(name, t);
-          return t;
-        } catch (RuntimeException e) {
-          return null;
-        }
-      }
-      return cache.get(name);
+    private TypefaceHelper() {
     }
-  }
+
+    public static Typeface get(Context c, String name) {
+        synchronized (cache) {
+            if (!cache.containsKey(name)) {
+                try {
+                    Typeface t = Typeface.createFromAsset(c.getAssets(), String.format("fonts/%s", name));
+                    cache.put(name, t);
+                    return t;
+                } catch (RuntimeException e) {
+                    return null;
+                }
+            }
+            return cache.get(name);
+        }
+    }
 }

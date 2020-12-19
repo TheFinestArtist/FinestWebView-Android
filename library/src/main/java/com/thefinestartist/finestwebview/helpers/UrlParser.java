@@ -8,15 +8,15 @@ import java.net.URL;
  */
 public class UrlParser {
 
-  private UrlParser() {
-  }
-
-  public static String getHost(String url) {
-    try {
-      return new URL(url).getHost();
-    } catch (MalformedURLException e) {
-      e.printStackTrace();
+    private UrlParser() {
     }
-    return url;
-  }
+
+    public static String getHost(String url) {
+        try {
+            return new URL(url).getHost();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
 }
