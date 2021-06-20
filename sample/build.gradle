@@ -33,18 +33,8 @@ dependencies {
 
     implementation 'com.android.support:support-annotations:' + versions.supportLib
     implementation 'com.android.support:appcompat-v7:' + versions.supportLib
-    //    implementation 'com.android.support:support-vector-drawable:' + versions.supportLib
-    //    implementation 'com.android.support:palette-v7:' + versions.supportLib
     implementation 'com.android.support:design:' + versions.supportLib
     implementation deps.kotlin.stdlib8
-    //    implementation 'com.android.support:recyclerview-v7:' + versions.supportLib
-
-    //    implementation 'com.google.android.gms:play-services-base:' + versions.playLib
-    //    implementation 'com.google.android.gms:play-services-gcm:' + versions.playLib
-    //    implementation 'com.google.android.gms:play-services-plus:' + versions.playLib
-    //    implementation 'com.google.android.gms:play-services-analytics:' + versions.playLib
-    //    implementation 'com.google.android.gms:play-services-location:' + versions.playLib
-    //    implementation 'com.google.android.gms:play-services-maps:' + versions.playLib
 }
 repositories {
     mavenCentral()
