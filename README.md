@@ -1,7 +1,7 @@
 # FinestWebView
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FinestWebView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/2861)
 [![Platform](https://img.shields.io/badge/platform-android-green.svg)](http://developer.android.com/index.html)
-[![API](https://img.shields.io/badge/API-7%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=7)
+[![API](https://img.shields.io/badge/API-7%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT)
 
 #### Beautiful and customizable Android Activity that shows web pages within an app.
