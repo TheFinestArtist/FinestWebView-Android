@@ -37,7 +37,6 @@ import android.webkit.WebSettings.LayoutAlgorithm
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
-import com.nineoldandroids.view.ViewHelper
 import com.thefinestartist.finestwebview.enums.ProgressBarPosition
 import com.thefinestartist.finestwebview.listeners.BroadCastManager.Companion.onDownloadStart
 import com.thefinestartist.finestwebview.listeners.BroadCastManager.Companion.onLoadResource
@@ -252,7 +251,7 @@ class FinestWebViewActivity : AppCompatActivity(), OnOffsetChangedListener, View
     statusBarColor = if (builder.statusBarColor != null) builder.statusBarColor!! else colorPrimaryDark
     toolbarColor = if (builder.toolbarColor != null) builder.toolbarColor!! else colorPrimary
     toolbarScrollFlags = if (builder.toolbarScrollFlags != null) builder.toolbarScrollFlags!! else AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
-        iconDefaultColor = if (builder.iconDefaultColor != null) builder.iconDefaultColor!! else colorAccent
+    iconDefaultColor = if (builder.iconDefaultColor != null) builder.iconDefaultColor!! else colorAccent
     iconDisabledColor = if (builder.iconDisabledColor != null) builder.iconDisabledColor!! else disableColor(iconDefaultColor)
     iconPressedColor = if (builder.iconPressedColor != null) builder.iconPressedColor!! else iconDefaultColor
     iconSelector = if (builder.iconSelector != null) builder.iconSelector!! else selectableItemBackgroundBorderless
@@ -969,23 +968,17 @@ class FinestWebViewActivity : AppCompatActivity(), OnOffsetChangedListener, View
     if (toolbarScrollFlags == 0) {
       return
     }
-    ViewHelper.setTranslationY(gradient, verticalOffset.toFloat())
-    ViewHelper.setAlpha(gradient,
-        1 - Math.abs(verticalOffset).toFloat() / appBarLayout.totalScrollRange.toFloat())
+    gradient?.translationY = verticalOffset.toFloat()
+    gradient?.alpha = 1 - Math.abs(verticalOffset).toFloat() / appBarLayout.totalScrollRange.toFloat()
     when (progressBarPosition) {
-      ProgressBarPosition.BOTTOM_OF_TOOLBAR -> ViewHelper.setTranslationY(progressBar,
-          Math.max(verticalOffset.toFloat(), progressBarHeight - appBarLayout.totalScrollRange))
-      ProgressBarPosition.TOP_OF_WEBVIEW -> ViewHelper.setTranslationY(progressBar, verticalOffset.toFloat())
+      ProgressBarPosition.BOTTOM_OF_TOOLBAR -> progressBar?.translationY = verticalOffset.toFloat().coerceAtLeast(progressBarHeight - appBarLayout.totalScrollRange)
+      ProgressBarPosition.TOP_OF_WEBVIEW -> progressBar?.translationY = verticalOffset.toFloat()
       ProgressBarPosition.TOP_OF_TOOLBAR, ProgressBarPosition.BOTTOM_OF_WEBVIEW -> {
       }
       else -> {
       }
     }
-    if (menuLayout!!.visibility == View.VISIBLE
-        && VERSION.SDK_INT >= VERSION_CODES.HONEYCOMB) {
-      ViewHelper.setTranslationY(menuLayout,
-          Math.max(verticalOffset.toFloat(), -resources.getDimension(R.dimen.defaultMenuLayoutMargin)))
-    }
+    menuLayout?.translationY = verticalOffset.toFloat().coerceAtLeast(-resources.getDimension(R.dimen.defaultMenuLayoutMargin))
   }
 
   protected fun requestCenterLayout() {
