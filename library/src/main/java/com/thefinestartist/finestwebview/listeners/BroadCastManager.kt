@@ -4,8 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.support.v4.content.LocalBroadcastManager
-import com.thefinestartist.finestwebview.listeners.BroadCastManager
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 /**
  * Created by TheFinestArtist on 1/26/16.

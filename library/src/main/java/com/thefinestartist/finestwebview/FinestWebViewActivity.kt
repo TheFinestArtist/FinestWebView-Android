@@ -16,16 +16,6 @@ import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.os.Handler
-import android.support.annotation.DrawableRes
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.AppBarLayout.OnOffsetChangedListener
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatImageButton
-import android.support.v7.widget.Toolbar
 import android.util.TypedValue
 import android.view.*
 import android.view.animation.Animation
@@ -37,6 +27,15 @@ import android.webkit.WebSettings.LayoutAlgorithm
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
+import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageButton
+import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.snackbar.Snackbar
 import com.thefinestartist.finestwebview.enums.ProgressBarPosition
 import com.thefinestartist.finestwebview.listeners.BroadCastManager.Companion.onDownloadStart
 import com.thefinestartist.finestwebview.listeners.BroadCastManager.Companion.onLoadResource
@@ -61,7 +60,7 @@ import com.thefinestartist.finestwebview.views.ShadowLayout
 /**
  * Created by Leonardo on 11/14/15.
  */
-class FinestWebViewActivity : AppCompatActivity(), OnOffsetChangedListener, View.OnClickListener {
+class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener, View.OnClickListener {
 
   protected var key = 0
 

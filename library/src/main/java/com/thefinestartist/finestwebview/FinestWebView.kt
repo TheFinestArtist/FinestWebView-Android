@@ -3,10 +3,12 @@ package com.thefinestartist.finestwebview
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.support.annotation.*
-import android.support.design.widget.AppBarLayout.LayoutParams.ScrollFlags
-import android.support.v4.content.ContextCompat
 import android.webkit.WebSettings.LayoutAlgorithm
+import androidx.annotation.*
+import androidx.core.content.ContextCompat
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.LayoutParams
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.*
 import com.thefinestartist.finestwebview.enums.ProgressBarPosition
 import com.thefinestartist.finestwebview.listeners.BroadCastManager
 import com.thefinestartist.finestwebview.listeners.WebViewListener

@@ -1,11 +1,11 @@
 package com.thefinestartist.finestwebview.views
 
 import android.content.Context
-import android.support.v4.widget.SwipeRefreshLayout
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.webkit.WebView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.thefinestartist.finestwebview.utils.UnitConverter.dpToPx
 
 /**
