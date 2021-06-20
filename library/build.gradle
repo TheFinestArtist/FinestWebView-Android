@@ -28,7 +28,7 @@ dependencies {
     implementation 'com.nineoldandroids:library:' + versions.nineoldandroids
     implementation 'com.thefinestartist:utils:' + versions.thefinestartist
     annotationProcessor 'com.thefinestartist:compilers:' + versions.thefinestartist
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin
+    implementation deps.kotlin.stdlib8
 }
 
 publish {
@@ -39,6 +39,7 @@ publish {
     desc = 'Beautiful and customizable Android Activity that shows web pages within an app.'
     website = 'https://finestwebview.com'
 }
+
 repositories {
     mavenCentral()
 }

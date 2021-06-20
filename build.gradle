@@ -1,22 +1,20 @@
-apply from: rootProject.file('dependencies.gradle')
-
 buildscript {
     apply from: rootProject.file('dependencies.gradle')
 
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:' + versions.gradlePlugin
-        classpath 'com.novoda:bintray-release:' + versions.bintrayRelease
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:' + versions.kotlin
+        classpath deps.gradlePlugins.android
+        classpath deps.gradlePlugins.kotlin
+        classpath deps.gradlePlugins.bintray
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
 }

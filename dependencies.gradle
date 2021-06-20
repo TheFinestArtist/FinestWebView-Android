@@ -1,18 +1,31 @@
 ext.versions = [
-        minSdk              : 14,
-        compileSdk          : 30,
-        buildTools          : '30.0.2',
+    minSdk            : 14,
+    compileSdk        : 30,
+    buildTools        : '30.0.2',
 
-        gradlePlugin        : '4.1.2',
-        bintrayRelease      : '0.9',
-        kotlin              : '1.5.10',
+    publishVersion    : '1.2.7',
+    publishVersionCode: 9,
 
-        publishVersion      : '1.2.7',
-        publishVersionCode  : 9,
+    supportLib        : '28.0.0',
+    multidex          : '1.0.3',
+    playLib           : '27.1.1',
+    nineoldandroids   : '2.4.0',
+    thefinestartist   : '0.9.5'
+]
 
-        supportLib          : '28.0.0',
-        multidex            : '1.0.3',
-        playLib             : '27.1.1',
-        nineoldandroids     : '2.4.0',
-        thefinestartist     : '0.9.5'
+ext.deps = [
+    gradlePlugins: [
+        android: "com.android.tools.build:gradle:4.1.2",
+        kotlin: "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10",
+        bintray: "com.novoda:bintray-release:0.9",
+    ],
+
+    androidx: [
+        annotations: "androidx.annotation:annotation:1.1.0",
+        appcompat: "androidx.appcompat:appcompat:1.1.0",
+    ],
+
+    kotlin: [
+        stdlib8: "org.jetbrains.kotlin:kotlin-stdlib-jdk8",
+    ],
 ]

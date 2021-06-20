@@ -38,7 +38,7 @@ dependencies {
     //    implementation 'com.android.support:support-vector-drawable:' + versions.supportLib
     //    implementation 'com.android.support:palette-v7:' + versions.supportLib
     implementation 'com.android.support:design:' + versions.supportLib
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin
+    implementation deps.kotlin.stdlib8
     //    implementation 'com.android.support:recyclerview-v7:' + versions.supportLib
 
     //    implementation 'com.google.android.gms:play-services-base:' + versions.playLib
