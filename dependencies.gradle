@@ -5,25 +5,26 @@ ext.versions = [
 
     publishVersion    : '1.2.7',
     publishVersionCode: 9,
-
-    supportLib        : '28.0.0',
-    nineoldandroids   : '2.4.0',
-    thefinestartist   : '0.9.5'
 ]
 
 ext.deps = [
     gradlePlugins: [
-        android: "com.android.tools.build:gradle:4.2.1",
-        kotlin: "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10",
-        bintray: "com.novoda:bintray-release:0.9",
+        android: 'com.android.tools.build:gradle:4.2.1',
+        kotlin: 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10',
+        bintray: 'com.novoda:bintray-release:0.9',
     ],
 
     androidx: [
-        annotations: "androidx.annotation:annotation:1.1.0",
-        appcompat: "androidx.appcompat:appcompat:1.1.0",
+        appcompat: 'androidx.appcompat:appcompat:1.3.0',
+        coordinatorlayout: 'androidx.coordinatorlayout:coordinatorlayout:1.1.0',
+        swiperefreshlayout: 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0',
     ],
 
+    material: 'com.google.android.material:material:1.3.0',
+
     kotlin: [
-        stdlib8: "org.jetbrains.kotlin:kotlin-stdlib-jdk8",
+        stdlib8: 'org.jetbrains.kotlin:kotlin-stdlib-jdk8',
     ],
+
+    finestWebView: 'com.thefinestartist:finestwebview:' + versions.publishVersionCode
 ]
