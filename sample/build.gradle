@@ -1,5 +1,6 @@
 apply from: '../gradle/dependencies.gradle'
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion versions.compileSdk
@@ -37,6 +38,7 @@ dependencies {
     //    implementation 'com.android.support:support-vector-drawable:' + versions.supportLib
     //    implementation 'com.android.support:palette-v7:' + versions.supportLib
     implementation 'com.android.support:design:' + versions.supportLib
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + versions.kotlin
     //    implementation 'com.android.support:recyclerview-v7:' + versions.supportLib
 
     //    implementation 'com.google.android.gms:play-services-base:' + versions.playLib
@@ -45,4 +47,7 @@ dependencies {
     //    implementation 'com.google.android.gms:play-services-analytics:' + versions.playLib
     //    implementation 'com.google.android.gms:play-services-location:' + versions.playLib
     //    implementation 'com.google.android.gms:play-services-maps:' + versions.playLib
+}
+repositories {
+    mavenCentral()
 }
