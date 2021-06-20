@@ -18,7 +18,7 @@ public class BroadCastManager {
   static final String EXTRA_TYPE = "EXTRA_TYPE";
   static final String EXTRA_URL = "EXTRA_URL";
   static final String EXTRA_TITLE = "EXTRA_TITLE";
-  static final String EXTRA_PROGESS = "EXTRA_PROGESS";
+  static final String EXTRA_PROGRESS = "EXTRA_PROGRESS";
   static final String EXTRA_PRECOMPOSED = "EXTRA_PRECOMPOSED";
   static final String EXTRA_USER_AGENT = "EXTRA_USER_AGENT";
   static final String EXTRA_CONTENT_DISPOSITION = "EXTRA_CONTENT_DISPOSITION";
@@ -60,7 +60,7 @@ public class BroadCastManager {
 
   // Handle Each Event Type
   public static void onProgressChanged(Context context, int key, int progress) {
-    Intent intent = getBaseIntent(key, Type.PROGRESS_CHANGED).putExtra(EXTRA_PROGESS, progress);
+    Intent intent = getBaseIntent(key, Type.PROGRESS_CHANGED).putExtra(EXTRA_PROGRESS, progress);
     sendBroadCast(context, intent);
   }
 
@@ -146,7 +146,7 @@ public class BroadCastManager {
 
   public void onProgressChanged(Intent intent) {
     for (WebViewListener listener : listeners) {
-      listener.onProgressChanged(intent.getIntExtra(EXTRA_PROGESS, 0));
+      listener.onProgressChanged(intent.getIntExtra(EXTRA_PROGRESS, 0));
     }
   }
 
