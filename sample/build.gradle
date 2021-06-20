@@ -16,7 +16,6 @@ android {
         versionCode versions.publishVersionCode
         versionName versions.publishVersion
         vectorDrawables.useSupportLibrary = true
-        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -28,7 +27,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:multidex:' + versions.multidex
 
     implementation project(':library')
     //    implementation "com.thefinestartist:finestwebview:${rootProject.ext.versionName}"
