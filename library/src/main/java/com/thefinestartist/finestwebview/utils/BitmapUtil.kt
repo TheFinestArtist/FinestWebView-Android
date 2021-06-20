@@ -11,7 +11,6 @@ import android.support.annotation.DrawableRes
  * Created by Leonardo on 11/21/15.
  */
 object BitmapUtil {
-  @JvmStatic
   fun getColoredBitmap(
       context: Context, @DrawableRes drawableRes: Int,
       @ColorInt color: Int
@@ -20,7 +19,6 @@ object BitmapUtil {
     return getColoredBitmap(bitmap, color)
   }
 
-  @JvmStatic
   fun getGradientBitmap(width: Int, height: Int, @ColorInt color: Int): Bitmap {
     val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
     val alpha = Color.alpha(color)
