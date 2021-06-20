@@ -168,682 +168,254 @@ data class FinestWebView(
 
   fun addWebViewListener(listener: WebViewListener) = apply { listeners.add(listener) }
   fun removeWebViewListener(listener: WebViewListener) = apply { listeners.remove(listener) }
+
   fun rtl(rtl: Boolean) = apply { this.rtl = rtl }
+
   fun theme(@StyleRes theme: Int) = apply { this.theme = theme }
 
-  fun statusBarColor(@ColorInt color: Int): Builder {
-    statusBarColor = color
-    return this
-  }
+  fun statusBarColor(@ColorInt color: Int) = apply { this.statusBarColor = color }
+  fun statusBarColorRes(@ColorRes colorRes: Int) = apply { this.statusBarColor = ContextCompat.getColor(context, colorRes) }
 
-  fun statusBarColorRes(@ColorRes colorRes: Int): Builder {
-    statusBarColor = ContextCompat.getColor(context, colorRes)
-    return this
-  }
+  fun toolbarColor(@ColorInt color: Int) = apply { this.toolbarColor = color }
+  fun toolbarColorRes(@ColorRes colorRes: Int) = apply { this.toolbarColor = ContextCompat.getColor(context, colorRes) }
+  fun toolbarScrollFlags(@AppBarLayout.LayoutParams.ScrollFlags flags: Int) = apply { this.toolbarScrollFlags = flags }
 
-  fun toolbarColor(@ColorInt color: Int): Builder {
-    toolbarColor = color
-    return this
-  }
+  fun iconDefaultColor(@ColorInt color: Int) = apply { this.iconDefaultColor = color }
+  fun iconDefaultColorRes(@ColorRes color: Int) = apply { this.iconDefaultColor = ContextCompat.getColor(context, color) }
+  fun iconDisabledColor(@ColorInt color: Int) = apply { this.iconDisabledColor = color }
+  fun iconDisabledColorRes(@ColorRes colorRes: Int) = apply { this.iconDisabledColor = ContextCompat.getColor(context, colorRes) }
+  fun iconPressedColor(@ColorInt color: Int) = apply { this.iconPressedColor = color }
+  fun iconPressedColorRes(@ColorRes colorRes: Int) = apply { this.iconPressedColor = ContextCompat.getColor(context, colorRes) }
+  fun iconSelector(@DrawableRes selectorRes: Int) = apply { this.iconSelector = selectorRes }
 
-  fun toolbarColorRes(@ColorRes colorRes: Int): Builder {
-    toolbarColor = ContextCompat.getColor(context, colorRes)
-    return this
-  }
+  fun showIconClose(showIconClose: Boolean) = apply { this.showIconClose = showIconClose }
+  fun disableIconClose(disableIconClose: Boolean) = apply { this.disableIconClose = disableIconClose }
 
-  fun toolbarScrollFlags(@ScrollFlags flags: Int): Builder {
-    toolbarScrollFlags = flags
-    return this
-  }
+  fun showIconBack(showIconBack: Boolean) = apply { this.showIconBack = showIconBack }
+  fun disableIconBack(disableIconBack: Boolean) = apply { this.disableIconBack = disableIconBack }
 
-  fun iconDefaultColor(@ColorInt color: Int): Builder {
-    iconDefaultColor = color
-    return this
-  }
+  fun showIconForward(showIconForward: Boolean) = apply { this.showIconForward = showIconForward }
+  fun disableIconForward(disableIconForward: Boolean) = apply { this.disableIconForward = disableIconForward }
 
-  fun iconDefaultColorRes(@ColorRes color: Int): Builder {
-    iconDefaultColor = ContextCompat.getColor(context, color)
-    return this
-  }
+  fun showIconMenu(showIconMenu: Boolean) = apply { this.showIconMenu = showIconMenu }
+  fun disableIconMenu(disableIconMenu: Boolean) = apply { this.disableIconMenu = disableIconMenu }
 
-  fun iconDisabledColor(@ColorInt color: Int): Builder {
-    iconDisabledColor = color
-    return this
-  }
+  fun showSwipeRefreshLayout(showSwipeRefreshLayout: Boolean) = apply { this.showSwipeRefreshLayout = showSwipeRefreshLayout }
 
-  fun iconDisabledColorRes(@ColorRes colorRes: Int): Builder {
-    iconDisabledColor = ContextCompat.getColor(context, colorRes)
-    return this
-  }
-
-  fun iconPressedColor(@ColorInt color: Int): Builder {
-    iconPressedColor = color
-    return this
-  }
-
-  fun iconPressedColorRes(@ColorRes colorRes: Int): Builder {
-    iconPressedColor = ContextCompat.getColor(context, colorRes)
-    return this
-  }
-
-  fun iconSelector(@DrawableRes selectorRes: Int): Builder {
-    iconSelector = selectorRes
-    return this
-  }
-
-  fun showIconClose(showIconClose: Boolean): Builder {
-    this.showIconClose = showIconClose
-    return this
-  }
-
-  fun disableIconClose(disableIconClose: Boolean): Builder {
-    this.disableIconClose = disableIconClose
-    return this
-  }
-
-  fun showIconBack(showIconBack: Boolean): Builder {
-    this.showIconBack = showIconBack
-    return this
-  }
-
-  fun disableIconBack(disableIconBack: Boolean): Builder {
-    this.disableIconBack = disableIconBack
-    return this
-  }
-
-  fun showIconForward(showIconForward: Boolean): Builder {
-    this.showIconForward = showIconForward
-    return this
-  }
-
-  fun disableIconForward(disableIconForward: Boolean): Builder {
-    this.disableIconForward = disableIconForward
-    return this
-  }
-
-  fun showIconMenu(showIconMenu: Boolean): Builder {
-    this.showIconMenu = showIconMenu
-    return this
-  }
-
-  fun disableIconMenu(disableIconMenu: Boolean): Builder {
-    this.disableIconMenu = disableIconMenu
-    return this
-  }
-
-  fun showSwipeRefreshLayout(showSwipeRefreshLayout: Boolean): Builder {
-    this.showSwipeRefreshLayout = showSwipeRefreshLayout
-    return this
-  }
-
-  fun swipeRefreshColor(@ColorInt color: Int): Builder {
-    swipeRefreshColor = color
-    return this
-  }
-
-  fun swipeRefreshColorRes(@ColorRes colorRes: Int): Builder {
-    swipeRefreshColor = ContextCompat.getColor(context, colorRes)
-    return this
-  }
-
-  fun swipeRefreshColors(colors: IntArray): Builder {
+  fun swipeRefreshColor(@ColorInt color: Int) = apply { this.swipeRefreshColor = color }
+  fun swipeRefreshColorRes(@ColorRes colorRes: Int) = apply { this.swipeRefreshColor = ContextCompat.getColor(context, colorRes) }
+  fun swipeRefreshColors(colors: IntArray) = apply {
     val swipeRefreshColors = IntArray(colors.size)
     for (i in colors.indices) {
       swipeRefreshColors[i] = colors[i]
     }
-    this.swipeRefreshColors = swipeRefreshColors
-    return this
-  }
+    this.swipeRefreshColors = swipeRefreshColors }
 
-  fun swipeRefreshColorsRes(@ArrayRes colorsRes: Int): Builder {
+  fun swipeRefreshColorsRes(@ArrayRes colorsRes: Int) = apply {
     val colors = context.resources.getIntArray(colorsRes)
-    return swipeRefreshColors(colors)
+    swipeRefreshColors(colors)
   }
 
-  fun showDivider(showDivider: Boolean): Builder {
-    this.showDivider = showDivider
-    return this
-  }
+  fun showDivider(showDivider: Boolean) = apply { this.showDivider = showDivider }
 
-  fun gradientDivider(gradientDivider: Boolean): Builder {
-    this.gradientDivider = gradientDivider
-    return this
-  }
+  fun gradientDivider(gradientDivider: Boolean) = apply { this.gradientDivider = gradientDivider }
 
-  fun dividerColor(@ColorInt color: Int): Builder {
-    dividerColor = color
-    return this
-  }
+  fun dividerColor(@ColorInt color: Int) = apply { this.dividerColor = color }
+  fun dividerColorRes(@ColorRes colorRes: Int) = apply { this.dividerColor = ContextCompat.getColor(context, colorRes) }
+  fun dividerHeight(height: Float) = apply { this.dividerHeight = height }
+  fun dividerHeight(height: Int) = apply { this.dividerHeight = height.toFloat() }
+  fun dividerHeightRes(@DimenRes height: Int) = apply { this.dividerHeight = context.resources.getDimension(height) }
 
-  fun dividerColorRes(@ColorRes colorRes: Int): Builder {
-    dividerColor = ContextCompat.getColor(context, colorRes)
-    return this
-  }
+  fun showProgressBar(showProgressBar: Boolean) = apply { this.showProgressBar = showProgressBar }
 
-  fun dividerHeight(height: Float): Builder {
-    dividerHeight = height
-    return this
-  }
+  fun progressBarColor(@ColorInt color: Int) = apply { this.progressBarColor = color }
+  fun progressBarColorRes(@ColorRes colorRes: Int) = apply { this.progressBarColor = ContextCompat.getColor(context, colorRes) }
 
-  fun dividerHeight(height: Int): Builder {
-    dividerHeight = height.toFloat()
-    return this
-  }
+  fun progressBarHeight(height: Float) = apply { this.progressBarHeight = height }
+  fun progressBarHeight(height: Int) = apply { this.progressBarHeight = height.toFloat() }
+  fun progressBarHeightRes(@DimenRes height: Int) = apply { this.progressBarHeight = context.resources.getDimension(height) }
+  fun progressBarPosition(progressBarPosition: ProgressBarPosition) = apply { this.progressBarPosition = progressBarPosition }
 
-  fun dividerHeightRes(@DimenRes height: Int): Builder {
-    dividerHeight = context.resources.getDimension(height)
-    return this
-  }
+  fun titleDefault(title: String) = apply { this.titleDefault = title }
+  fun titleDefaultRes(@StringRes stringRes: Int) = apply { this.titleDefault = context.getString(stringRes) }
 
-  fun showProgressBar(showProgressBar: Boolean): Builder {
-    this.showProgressBar = showProgressBar
-    return this
-  }
+  fun updateTitleFromHtml(updateTitleFromHtml: Boolean) = apply { this.updateTitleFromHtml = updateTitleFromHtml }
 
-  fun progressBarColor(@ColorInt color: Int): Builder {
-    progressBarColor = color
-    return this
-  }
+  fun titleSize(titleSize: Float) = apply { this.titleSize = titleSize }
+  fun titleSize(titleSize: Int) = apply { this.titleSize = titleSize.toFloat() }
+  fun titleSizeRes(@DimenRes titleSize: Int) = apply { this.titleSize = context.resources.getDimension(titleSize) }
 
-  fun progressBarColorRes(@ColorRes colorRes: Int): Builder {
-    progressBarColor = ContextCompat.getColor(context, colorRes)
-    return this
-  }
+  fun titleFont(titleFont: String?) = apply { this.titleFont = titleFont }
+  fun titleColor(@ColorInt color: Int) = apply { this.titleColor = color }
+  fun titleColorRes(@ColorRes colorRes: Int) = apply { this.titleColor = ContextCompat.getColor(context, colorRes) }
 
-  fun progressBarHeight(height: Float): Builder {
-    progressBarHeight = height
-    return this
-  }
+  fun showUrl(showUrl: Boolean) = apply { this.showUrl = showUrl }
 
-  fun progressBarHeight(height: Int): Builder {
-    progressBarHeight = height.toFloat()
-    return this
-  }
+  fun urlSize(urlSize: Float) = apply { this.urlSize = urlSize }
+  fun urlSize(urlSize: Int) = apply { this.urlSize = urlSize.toFloat() }
+  fun urlSizeRes(@DimenRes urlSize: Int) = apply { this.urlSize = context.resources.getDimension(urlSize) }
 
-  fun progressBarHeightRes(@DimenRes height: Int): Builder {
-    progressBarHeight = context.resources.getDimension(height)
-    return this
-  }
+  fun urlFont(urlFont: String?) = apply { this.urlFont = urlFont }
 
-  fun progressBarPosition(progressBarPosition: ProgressBarPosition): Builder {
-    this.progressBarPosition = progressBarPosition
-    return this
-  }
+  fun urlColor(@ColorInt color: Int) = apply { this.urlColor = color }
+  fun urlColorRes(@ColorRes colorRes: Int) = apply { this.urlColor = ContextCompat.getColor(context, colorRes) }
 
-  fun titleDefault(title: String): Builder {
-    titleDefault = title
-    return this
-  }
+  fun menuColor(@ColorInt color: Int) = apply { this.menuColor = color }
+  fun menuColorRes(@ColorRes colorRes: Int) = apply { this.menuColor = ContextCompat.getColor(context, colorRes) }
 
-  fun titleDefaultRes(@StringRes stringRes: Int): Builder {
-    titleDefault = context.getString(stringRes)
-    return this
-  }
+  fun menuTextGravity(gravity: Int) = apply { this.menuTextGravity = gravity }
 
-  fun updateTitleFromHtml(updateTitleFromHtml: Boolean): Builder {
-    this.updateTitleFromHtml = updateTitleFromHtml
-    return this
-  }
+  fun menuTextPaddingLeft(menuTextPaddingLeft: Float) = apply { this.menuTextPaddingLeft = menuTextPaddingLeft }
+  fun menuTextPaddingLeft(menuTextPaddingLeft: Int)= apply { this.menuTextPaddingLeft = menuTextPaddingLeft.toFloat() }
+  fun menuTextPaddingLeftRes(@DimenRes menuTextPaddingLeft: Int) = apply { this.menuTextPaddingLeft = context.resources.getDimension(menuTextPaddingLeft) }
 
-  fun titleSize(titleSize: Float): Builder {
-    this.titleSize = titleSize
-    return this
-  }
+  fun menuTextPaddingRight(menuTextPaddingRight: Float) = apply { this.menuTextPaddingRight = menuTextPaddingRight }
+  fun menuTextPaddingRight(menuTextPaddingRight: Int) = apply { this.menuTextPaddingRight = menuTextPaddingRight.toFloat() }
+  fun menuTextPaddingRightRes(@DimenRes menuTextPaddingRight: Int) = apply { this.menuTextPaddingRight = context.resources.getDimension(menuTextPaddingRight) }
 
-  fun titleSize(titleSize: Int): Builder {
-    this.titleSize = titleSize.toFloat()
-    return this
-  }
+  fun menuDropShadowColor(@ColorInt color: Int) = apply { this.menuDropShadowColor = color }
+  fun menuDropShadowColorRes(@ColorRes colorRes: Int) = apply { this.menuDropShadowColor = ContextCompat.getColor(context, colorRes) }
 
-  fun titleSizeRes(@DimenRes titleSize: Int): Builder {
-    this.titleSize = context.resources.getDimension(titleSize)
-    return this
-  }
+  fun menuDropShadowSize(menuDropShadowSize: Float) = apply { this.menuDropShadowSize = menuDropShadowSize }
+  fun menuDropShadowSize(menuDropShadowSize: Int) = apply { this.menuDropShadowSize = menuDropShadowSize.toFloat() }
+  fun menuDropShadowSizeRes(@DimenRes menuDropShadowSize: Int) = apply { this.menuDropShadowSize = context.resources.getDimension(menuDropShadowSize) }
 
-  fun titleFont(titleFont: String?): Builder {
-    this.titleFont = titleFont
-    return this
-  }
+  fun menuSelector(@DrawableRes selectorRes: Int) = apply { this.menuSelector = selectorRes }
 
-  fun titleColor(@ColorInt color: Int): Builder {
-    titleColor = color
-    return this
-  }
+  fun menuTextSize(menuTextSize: Float) = apply { this.menuTextSize = menuTextSize }
+  fun menuTextSize(menuTextSize: Int) = apply { this.menuTextSize = menuTextSize.toFloat() }
+  fun menuTextSizeRes(@DimenRes menuTextSize: Int)= apply { this.menuTextSize = context.resources.getDimension(menuTextSize) }
 
-  fun titleColorRes(@ColorRes colorRes: Int): Builder {
-    titleColor = ContextCompat.getColor(context, colorRes)
-    return this
-  }
+  fun menuTextFont(menuTextFont: String?) = apply { this.menuTextFont = menuTextFont }
 
-  fun showUrl(showUrl: Boolean): Builder {
-    this.showUrl = showUrl
-    return this
-  }
+  fun menuTextColor(@ColorInt color: Int) = apply { this.menuTextColor = color }
+  fun menuTextColorRes(@ColorRes colorRes: Int) = apply { this.menuTextColor = ContextCompat.getColor(context, colorRes) }
 
-  fun urlSize(urlSize: Float): Builder {
-    this.urlSize = urlSize
-    return this
-  }
+  fun showMenuRefresh(showMenuRefresh: Boolean) = apply { this.showMenuRefresh = showMenuRefresh }
 
-  fun urlSize(urlSize: Int): Builder {
-    this.urlSize = urlSize.toFloat()
-    return this
-  }
+  fun stringResRefresh(@StringRes stringResRefresh: Int) = apply { this.stringResRefresh = stringResRefresh }
 
-  fun urlSizeRes(@DimenRes urlSize: Int): Builder {
-    this.urlSize = context.resources.getDimension(urlSize)
-    return this
-  }
+  fun showMenuFind(showMenuFind: Boolean) = apply { this.showMenuFind = showMenuFind }
 
-  fun urlFont(urlFont: String?): Builder {
-    this.urlFont = urlFont
-    return this
-  }
+  fun stringResFind(@StringRes stringResFind: Int) = apply { this.stringResFind = stringResFind }
 
-  fun urlColor(@ColorInt color: Int): Builder {
-    urlColor = color
-    return this
-  }
+  fun showMenuShareVia(showMenuShareVia: Boolean) = apply { this.showMenuShareVia = showMenuShareVia }
 
-  fun urlColorRes(@ColorRes colorRes: Int): Builder {
-    urlColor = ContextCompat.getColor(context, colorRes)
-    return this
-  }
+  fun stringResShareVia(@StringRes stringResShareVia: Int) = apply { this.stringResShareVia = stringResShareVia }
 
-  fun menuColor(@ColorInt color: Int): Builder {
-    menuColor = color
-    return this
-  }
+  fun showMenuCopyLink(showMenuCopyLink: Boolean) = apply { this.showMenuCopyLink = showMenuCopyLink }
 
-  fun menuColorRes(@ColorRes colorRes: Int): Builder {
-    menuColor = ContextCompat.getColor(context, colorRes)
-    return this
-  }
+  fun stringResCopyLink(@StringRes stringResCopyLink: Int) = apply { this.stringResCopyLink = stringResCopyLink }
 
-  fun menuTextGravity(gravity: Int): Builder {
-    menuTextGravity = gravity
-    return this
-  }
+  fun showMenuOpenWith(showMenuOpenWith: Boolean) = apply { this.showMenuOpenWith = showMenuOpenWith }
 
-  fun menuTextPaddingLeft(menuTextPaddingLeft: Float): Builder {
-    this.menuTextPaddingLeft = menuTextPaddingLeft
-    return this
-  }
-
-  fun menuTextPaddingLeft(menuTextPaddingLeft: Int): Builder {
-    this.menuTextPaddingLeft = menuTextPaddingLeft.toFloat()
-    return this
-  }
-
-  fun menuTextPaddingLeftRes(@DimenRes menuTextPaddingLeft: Int): Builder {
-    this.menuTextPaddingLeft = context.resources.getDimension(menuTextPaddingLeft)
-    return this
-  }
-
-  fun menuTextPaddingRight(menuTextPaddingRight: Float): Builder {
-    this.menuTextPaddingRight = menuTextPaddingRight
-    return this
-  }
-
-  fun menuTextPaddingRight(menuTextPaddingRight: Int): Builder {
-    this.menuTextPaddingRight = menuTextPaddingRight.toFloat()
-    return this
-  }
-
-  fun menuTextPaddingRightRes(@DimenRes menuTextPaddingRight: Int): Builder {
-    this.menuTextPaddingRight = context.resources.getDimension(menuTextPaddingRight)
-    return this
-  }
-
-  fun menuDropShadowColor(@ColorInt color: Int): Builder {
-    menuDropShadowColor = color
-    return this
-  }
-
-  fun menuDropShadowColorRes(@ColorRes colorRes: Int): Builder {
-    menuDropShadowColor = ContextCompat.getColor(context, colorRes)
-    return this
-  }
-
-  fun menuDropShadowSize(menuDropShadowSize: Float): Builder {
-    this.menuDropShadowSize = menuDropShadowSize
-    return this
-  }
-
-  fun menuDropShadowSize(menuDropShadowSize: Int): Builder {
-    this.menuDropShadowSize = menuDropShadowSize.toFloat()
-    return this
-  }
-
-  fun menuDropShadowSizeRes(@DimenRes menuDropShadowSize: Int): Builder {
-    this.menuDropShadowSize = context.resources.getDimension(menuDropShadowSize)
-    return this
-  }
-
-  fun menuSelector(@DrawableRes selectorRes: Int): Builder {
-    menuSelector = selectorRes
-    return this
-  }
-
-  fun menuTextSize(menuTextSize: Float): Builder {
-    this.menuTextSize = menuTextSize
-    return this
-  }
-
-  fun menuTextSize(menuTextSize: Int): Builder {
-    this.menuTextSize = menuTextSize.toFloat()
-    return this
-  }
-
-  fun menuTextSizeRes(@DimenRes menuTextSize: Int): Builder {
-    this.menuTextSize = context.resources.getDimension(menuTextSize)
-    return this
-  }
-
-  fun menuTextFont(menuTextFont: String?): Builder {
-    this.menuTextFont = menuTextFont
-    return this
-  }
-
-  fun menuTextColor(@ColorInt color: Int): Builder {
-    menuTextColor = color
-    return this
-  }
-
-  fun menuTextColorRes(@ColorRes colorRes: Int): Builder {
-    menuTextColor = ContextCompat.getColor(context, colorRes)
-    return this
-  }
-
-  fun showMenuRefresh(showMenuRefresh: Boolean): Builder {
-    this.showMenuRefresh = showMenuRefresh
-    return this
-  }
-
-  fun stringResRefresh(@StringRes stringResRefresh: Int): Builder {
-    this.stringResRefresh = stringResRefresh
-    return this
-  }
-
-  fun showMenuFind(showMenuFind: Boolean): Builder {
-    this.showMenuFind = showMenuFind
-    return this
-  }
-
-  fun stringResFind(@StringRes stringResFind: Int): Builder {
-    this.stringResFind = stringResFind
-    return this
-  }
-
-  fun showMenuShareVia(showMenuShareVia: Boolean): Builder {
-    this.showMenuShareVia = showMenuShareVia
-    return this
-  }
-
-  fun stringResShareVia(@StringRes stringResShareVia: Int): Builder {
-    this.stringResShareVia = stringResShareVia
-    return this
-  }
-
-  fun showMenuCopyLink(showMenuCopyLink: Boolean): Builder {
-    this.showMenuCopyLink = showMenuCopyLink
-    return this
-  }
-
-  fun stringResCopyLink(@StringRes stringResCopyLink: Int): Builder {
-    this.stringResCopyLink = stringResCopyLink
-    return this
-  }
-
-  fun showMenuOpenWith(showMenuOpenWith: Boolean): Builder {
-    this.showMenuOpenWith = showMenuOpenWith
-    return this
-  }
-
-  fun stringResOpenWith(@StringRes stringResOpenWith: Int): Builder {
-    this.stringResOpenWith = stringResOpenWith
-    return this
-  }
+  fun stringResOpenWith(@StringRes stringResOpenWith: Int) = apply { this.stringResOpenWith = stringResOpenWith }
 
   fun setCustomAnimations(
       @AnimRes animationOpenEnter: Int,
       @AnimRes animationOpenExit: Int,
       @AnimRes animationCloseEnter: Int,
-      @AnimRes animationCloseExit: Int): Builder {
+      @AnimRes animationCloseExit: Int) = apply {
     this.animationOpenEnter = animationOpenEnter
     this.animationOpenExit = animationOpenExit
     this.animationCloseEnter = animationCloseEnter
     this.animationCloseExit = animationCloseExit
-    return this
   }
 
   @Deprecated("As of release 1.0.1, replaced by {@link #setCustomAnimations(int, int, int, int)}")
   fun setCloseAnimations(
-      @AnimRes animationCloseEnter: Int, @AnimRes animationCloseExit: Int): Builder {
+      @AnimRes animationCloseEnter: Int, @AnimRes animationCloseExit: Int) = apply {
     this.animationCloseEnter = animationCloseEnter
     this.animationCloseExit = animationCloseExit
-    return this
   }
 
-  fun backPressToClose(backPressToClose: Boolean): Builder {
-    this.backPressToClose = backPressToClose
-    return this
-  }
+  fun backPressToClose(backPressToClose: Boolean) = apply { this.backPressToClose = backPressToClose }
 
-  fun stringResCopiedToClipboard(@StringRes stringResCopiedToClipboard: Int): Builder {
-    this.stringResCopiedToClipboard = stringResCopiedToClipboard
-    return this
-  }
+  fun stringResCopiedToClipboard(@StringRes stringResCopiedToClipboard: Int) = apply { this.stringResCopiedToClipboard = stringResCopiedToClipboard }
 
-  fun webViewSupportZoom(webViewSupportZoom: Boolean): Builder {
-    this.webViewSupportZoom = webViewSupportZoom
-    return this
-  }
+  fun webViewSupportZoom(webViewSupportZoom: Boolean) = apply { this.webViewSupportZoom = webViewSupportZoom }
 
-  fun webViewMediaPlaybackRequiresUserGesture(
-      webViewMediaPlaybackRequiresUserGesture: Boolean): Builder {
-    this.webViewMediaPlaybackRequiresUserGesture = webViewMediaPlaybackRequiresUserGesture
-    return this
-  }
+  fun webViewMediaPlaybackRequiresUserGesture( webViewMediaPlaybackRequiresUserGesture: Boolean) = apply { this.webViewMediaPlaybackRequiresUserGesture = webViewMediaPlaybackRequiresUserGesture }
 
-  fun webViewBuiltInZoomControls(webViewBuiltInZoomControls: Boolean): Builder {
-    this.webViewBuiltInZoomControls = webViewBuiltInZoomControls
-    return this
-  }
+  fun webViewBuiltInZoomControls(webViewBuiltInZoomControls: Boolean) = apply { this.webViewBuiltInZoomControls = webViewBuiltInZoomControls }
 
-  fun webViewDisplayZoomControls(webViewDisplayZoomControls: Boolean): Builder {
-    this.webViewDisplayZoomControls = webViewDisplayZoomControls
-    return this
-  }
+  fun webViewDisplayZoomControls(webViewDisplayZoomControls: Boolean) = apply { this.webViewDisplayZoomControls = webViewDisplayZoomControls }
 
-  fun webViewAllowFileAccess(webViewAllowFileAccess: Boolean): Builder {
-    this.webViewAllowFileAccess = webViewAllowFileAccess
-    return this
-  }
+  fun webViewAllowFileAccess(webViewAllowFileAccess: Boolean) = apply { this.webViewAllowFileAccess = webViewAllowFileAccess }
 
-  fun webViewAllowContentAccess(webViewAllowContentAccess: Boolean): Builder {
-    this.webViewAllowContentAccess = webViewAllowContentAccess
-    return this
-  }
+  fun webViewAllowContentAccess(webViewAllowContentAccess: Boolean) = apply { this.webViewAllowContentAccess = webViewAllowContentAccess }
 
-  fun webViewLoadWithOverviewMode(webViewLoadWithOverviewMode: Boolean): Builder {
-    this.webViewLoadWithOverviewMode = webViewLoadWithOverviewMode
-    return this
-  }
+  fun webViewLoadWithOverviewMode(webViewLoadWithOverviewMode: Boolean) = apply { this.webViewLoadWithOverviewMode = webViewLoadWithOverviewMode }
 
-  fun webViewSaveFormData(webViewSaveFormData: Boolean): Builder {
-    this.webViewSaveFormData = webViewSaveFormData
-    return this
-  }
+  fun webViewSaveFormData(webViewSaveFormData: Boolean) = apply { this.webViewSaveFormData = webViewSaveFormData }
 
-  fun webViewTextZoom(webViewTextZoom: Int): Builder {
-    this.webViewTextZoom = webViewTextZoom
-    return this
-  }
+  fun webViewTextZoom(webViewTextZoom: Int) = apply { this.webViewTextZoom = webViewTextZoom }
 
-  fun webViewUseWideViewPort(webViewUseWideViewPort: Boolean): Builder {
-    this.webViewUseWideViewPort = webViewUseWideViewPort
-    return this
-  }
+  fun webViewUseWideViewPort(webViewUseWideViewPort: Boolean) = apply { this.webViewUseWideViewPort = webViewUseWideViewPort }
 
-  fun webViewSupportMultipleWindows(webViewSupportMultipleWindows: Boolean): Builder {
-    this.webViewSupportMultipleWindows = webViewSupportMultipleWindows
-    return this
-  }
+  fun webViewSupportMultipleWindows(webViewSupportMultipleWindows: Boolean)= apply { this.webViewSupportMultipleWindows = webViewSupportMultipleWindows }
 
-  fun webViewLayoutAlgorithm(webViewLayoutAlgorithm: LayoutAlgorithm?): Builder {
-    this.webViewLayoutAlgorithm = webViewLayoutAlgorithm
-    return this
-  }
+  fun webViewLayoutAlgorithm(webViewLayoutAlgorithm: LayoutAlgorithm?) = apply { this.webViewLayoutAlgorithm = webViewLayoutAlgorithm }
 
-  fun webViewStandardFontFamily(webViewStandardFontFamily: String?): Builder {
-    this.webViewStandardFontFamily = webViewStandardFontFamily
-    return this
-  }
+  fun webViewStandardFontFamily(webViewStandardFontFamily: String?) = apply { this.webViewStandardFontFamily = webViewStandardFontFamily }
 
-  fun webViewFixedFontFamily(webViewFixedFontFamily: String?): Builder {
-    this.webViewFixedFontFamily = webViewFixedFontFamily
-    return this
-  }
+  fun webViewFixedFontFamily(webViewFixedFontFamily: String?) = apply { this.webViewFixedFontFamily = webViewFixedFontFamily }
 
-  fun webViewSansSerifFontFamily(webViewSansSerifFontFamily: String?): Builder {
-    this.webViewSansSerifFontFamily = webViewSansSerifFontFamily
-    return this
-  }
+  fun webViewSansSerifFontFamily(webViewSansSerifFontFamily: String?) = apply { this.webViewSansSerifFontFamily = webViewSansSerifFontFamily }
 
-  fun webViewSerifFontFamily(webViewSerifFontFamily: String?): Builder {
-    this.webViewSerifFontFamily = webViewSerifFontFamily
-    return this
-  }
+  fun webViewSerifFontFamily(webViewSerifFontFamily: String?) = apply { this.webViewSerifFontFamily = webViewSerifFontFamily }
 
-  fun webViewCursiveFontFamily(webViewCursiveFontFamily: String?): Builder {
-    this.webViewCursiveFontFamily = webViewCursiveFontFamily
-    return this
-  }
+  fun webViewCursiveFontFamily(webViewCursiveFontFamily: String?) = apply { this.webViewCursiveFontFamily = webViewCursiveFontFamily }
 
-  fun webViewFantasyFontFamily(webViewFantasyFontFamily: String?): Builder {
-    this.webViewFantasyFontFamily = webViewFantasyFontFamily
-    return this
-  }
+  fun webViewFantasyFontFamily(webViewFantasyFontFamily: String?) = apply { this.webViewFantasyFontFamily = webViewFantasyFontFamily }
 
-  fun webViewMinimumFontSize(webViewMinimumFontSize: Int): Builder {
-    this.webViewMinimumFontSize = webViewMinimumFontSize
-    return this
-  }
+  fun webViewMinimumFontSize(webViewMinimumFontSize: Int) = apply { this.webViewMinimumFontSize = webViewMinimumFontSize }
 
-  fun webViewMinimumLogicalFontSize(webViewMinimumLogicalFontSize: Int): Builder {
-    this.webViewMinimumLogicalFontSize = webViewMinimumLogicalFontSize
-    return this
-  }
+  fun webViewMinimumLogicalFontSize(webViewMinimumLogicalFontSize: Int) = apply { this.webViewMinimumLogicalFontSize = webViewMinimumLogicalFontSize }
 
-  fun webViewDefaultFontSize(webViewDefaultFontSize: Int): Builder {
-    this.webViewDefaultFontSize = webViewDefaultFontSize
-    return this
-  }
+  fun webViewDefaultFontSize(webViewDefaultFontSize: Int) = apply { this.webViewDefaultFontSize = webViewDefaultFontSize }
 
-  fun webViewDefaultFixedFontSize(webViewDefaultFixedFontSize: Int): Builder {
-    this.webViewDefaultFixedFontSize = webViewDefaultFixedFontSize
-    return this
-  }
+  fun webViewDefaultFixedFontSize(webViewDefaultFixedFontSize: Int) = apply { this.webViewDefaultFixedFontSize = webViewDefaultFixedFontSize }
 
-  fun webViewLoadsImagesAutomatically(webViewLoadsImagesAutomatically: Boolean): Builder {
-    this.webViewLoadsImagesAutomatically = webViewLoadsImagesAutomatically
-    return this
-  }
+  fun webViewLoadsImagesAutomatically(webViewLoadsImagesAutomatically: Boolean) = apply { this.webViewLoadsImagesAutomatically = webViewLoadsImagesAutomatically }
 
-  fun webViewBlockNetworkImage(webViewBlockNetworkImage: Boolean): Builder {
-    this.webViewBlockNetworkImage = webViewBlockNetworkImage
-    return this
-  }
+  fun webViewBlockNetworkImage(webViewBlockNetworkImage: Boolean) = apply { this.webViewBlockNetworkImage = webViewBlockNetworkImage }
 
-  fun webViewBlockNetworkLoads(webViewBlockNetworkLoads: Boolean): Builder {
-    this.webViewBlockNetworkLoads = webViewBlockNetworkLoads
-    return this
-  }
+  fun webViewBlockNetworkLoads(webViewBlockNetworkLoads: Boolean) = apply { this.webViewBlockNetworkLoads = webViewBlockNetworkLoads }
 
-  fun webViewJavaScriptEnabled(webViewJavaScriptEnabled: Boolean): Builder {
-    this.webViewJavaScriptEnabled = webViewJavaScriptEnabled
-    return this
-  }
+  fun webViewJavaScriptEnabled(webViewJavaScriptEnabled: Boolean) = apply { this.webViewJavaScriptEnabled = webViewJavaScriptEnabled }
 
-  fun webViewAllowUniversalAccessFromFileURLs(
-      webViewAllowUniversalAccessFromFileURLs: Boolean): Builder {
-    this.webViewAllowUniversalAccessFromFileURLs = webViewAllowUniversalAccessFromFileURLs
-    return this
-  }
+  fun webViewAllowUniversalAccessFromFileURLs(webViewAllowUniversalAccessFromFileURLs: Boolean) = apply { this.webViewAllowUniversalAccessFromFileURLs = webViewAllowUniversalAccessFromFileURLs }
 
-  fun webViewAllowFileAccessFromFileURLs(webViewAllowFileAccessFromFileURLs: Boolean): Builder {
-    this.webViewAllowFileAccessFromFileURLs = webViewAllowFileAccessFromFileURLs
-    return this
-  }
+  fun webViewAllowFileAccessFromFileURLs(webViewAllowFileAccessFromFileURLs: Boolean) = apply { this.webViewAllowFileAccessFromFileURLs = webViewAllowFileAccessFromFileURLs }
 
-  fun webViewGeolocationDatabasePath(webViewGeolocationDatabasePath: String?): Builder {
-    this.webViewGeolocationDatabasePath = webViewGeolocationDatabasePath
-    return this
-  }
+  fun webViewGeolocationDatabasePath(webViewGeolocationDatabasePath: String?) = apply { this.webViewGeolocationDatabasePath = webViewGeolocationDatabasePath }
 
-  fun webViewAppCacheEnabled(webViewAppCacheEnabled: Boolean): Builder {
-    this.webViewAppCacheEnabled = webViewAppCacheEnabled
-    return this
-  }
+  fun webViewAppCacheEnabled(webViewAppCacheEnabled: Boolean) = apply { this.webViewAppCacheEnabled = webViewAppCacheEnabled }
 
-  fun webViewAppCachePath(webViewAppCachePath: String?): Builder {
-    this.webViewAppCachePath = webViewAppCachePath
-    return this
-  }
+  fun webViewAppCachePath(webViewAppCachePath: String?) = apply { this.webViewAppCachePath = webViewAppCachePath }
 
-  fun webViewDatabaseEnabled(webViewDatabaseEnabled: Boolean): Builder {
-    this.webViewDatabaseEnabled = webViewDatabaseEnabled
-    return this
-  }
+  fun webViewDatabaseEnabled(webViewDatabaseEnabled: Boolean) = apply { this.webViewDatabaseEnabled = webViewDatabaseEnabled }
 
-  fun webViewDomStorageEnabled(webViewDomStorageEnabled: Boolean): Builder {
-    this.webViewDomStorageEnabled = webViewDomStorageEnabled
-    return this
-  }
+  fun webViewDomStorageEnabled(webViewDomStorageEnabled: Boolean) = apply { this.webViewDomStorageEnabled = webViewDomStorageEnabled }
 
-  fun webViewGeolocationEnabled(webViewGeolocationEnabled: Boolean): Builder {
-    this.webViewGeolocationEnabled = webViewGeolocationEnabled
-    return this
-  }
+  fun webViewGeolocationEnabled(webViewGeolocationEnabled: Boolean) = apply { this.webViewGeolocationEnabled = webViewGeolocationEnabled }
 
-  fun webViewJavaScriptCanOpenWindowsAutomatically(
-      webViewJavaScriptCanOpenWindowsAutomatically: Boolean): Builder {
-    this.webViewJavaScriptCanOpenWindowsAutomatically = webViewJavaScriptCanOpenWindowsAutomatically
-    return this
-  }
+  fun webViewJavaScriptCanOpenWindowsAutomatically(webViewJavaScriptCanOpenWindowsAutomatically: Boolean) = apply { this.webViewJavaScriptCanOpenWindowsAutomatically = webViewJavaScriptCanOpenWindowsAutomatically }
 
-  fun webViewDefaultTextEncodingName(webViewDefaultTextEncodingName: String?): Builder {
-    this.webViewDefaultTextEncodingName = webViewDefaultTextEncodingName
-    return this
-  }
+  fun webViewDefaultTextEncodingName(webViewDefaultTextEncodingName: String?) = apply { this.webViewDefaultTextEncodingName = webViewDefaultTextEncodingName }
 
-  fun webViewUserAgentString(webViewUserAgentString: String?): Builder {
-    this.webViewUserAgentString = webViewUserAgentString
-    return this
-  }
+  fun webViewUserAgentString(webViewUserAgentString: String?) = apply { this.webViewUserAgentString = webViewUserAgentString }
 
-  fun webViewNeedInitialFocus(webViewNeedInitialFocus: Boolean): Builder {
-    this.webViewNeedInitialFocus = webViewNeedInitialFocus
-    return this
-  }
+  fun webViewNeedInitialFocus(webViewNeedInitialFocus: Boolean) = apply { this.webViewNeedInitialFocus = webViewNeedInitialFocus }
 
-  fun webViewCacheMode(webViewCacheMode: Int): Builder {
-    this.webViewCacheMode = webViewCacheMode
-    return this
-  }
+  fun webViewCacheMode(webViewCacheMode: Int) = apply { this.webViewCacheMode = webViewCacheMode }
 
-  fun webViewMixedContentMode(webViewMixedContentMode: Int): Builder {
-    this.webViewMixedContentMode = webViewMixedContentMode
-    return this
-  }
+  fun webViewMixedContentMode(webViewMixedContentMode: Int) = apply { this.webViewMixedContentMode = webViewMixedContentMode }
 
-  fun webViewOffscreenPreRaster(webViewOffscreenPreRaster: Boolean): Builder {
-    this.webViewOffscreenPreRaster = webViewOffscreenPreRaster
-    return this
-  }
+  fun webViewOffscreenPreRaster(webViewOffscreenPreRaster: Boolean) = apply { this.webViewOffscreenPreRaster = webViewOffscreenPreRaster }
 
-  fun webViewDesktopMode(webViewDesktopMode: Boolean): Builder {
+  fun webViewDesktopMode(webViewDesktopMode: Boolean) = apply {
     return if (webViewDesktopMode) {
       webViewUserAgentString(
           "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0")
@@ -852,10 +424,7 @@ data class FinestWebView(
     }
   }
 
-  fun injectJavaScript(injectJavaScript: String?): Builder {
-    this.injectJavaScript = injectJavaScript
-    return this
-  }
+  fun injectJavaScript(injectJavaScript: String?) = apply { this.injectJavaScript = injectJavaScript }
 
   fun load(@StringRes dataRes: Int) {
     load(context.getString(dataRes))
