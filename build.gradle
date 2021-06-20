@@ -1,7 +1,7 @@
-apply from: './gradle/dependencies.gradle'
+apply from: rootProject.file('dependencies.gradle')
 
 buildscript {
-    apply from: './gradle/dependencies.gradle'
+    apply from: rootProject.file('dependencies.gradle')
 
     repositories {
         jcenter()

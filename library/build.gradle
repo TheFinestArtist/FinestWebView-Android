@@ -1,4 +1,4 @@
-apply from: '../gradle/dependencies.gradle'
+apply from: rootProject.file('dependencies.gradle')
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.novoda.bintray-release'
