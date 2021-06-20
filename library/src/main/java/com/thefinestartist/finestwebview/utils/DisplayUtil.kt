@@ -1,4 +1,4 @@
-package com.thefinestartist.finestwebview.helpers
+package com.thefinestartist.finestwebview.utils
 
 import android.content.Context
 import android.graphics.Point

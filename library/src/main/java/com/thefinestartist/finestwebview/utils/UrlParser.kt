@@ -1,4 +1,4 @@
-package com.thefinestartist.finestwebview.helpers
+package com.thefinestartist.finestwebview.utils
 
 import java.net.MalformedURLException
 import java.net.URL

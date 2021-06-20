@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
-import com.thefinestartist.finestwebview.helpers.UnitConverter;
+import com.thefinestartist.finestwebview.utils.UnitConverter;
 
 /**
  * Created by TheFinestArtist on 3/12/16.

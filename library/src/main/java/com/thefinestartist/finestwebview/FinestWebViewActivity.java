@@ -50,12 +50,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.nineoldandroids.view.ViewHelper;
 import com.thefinestartist.finestwebview.enums.ProgressBarPosition;
-import com.thefinestartist.finestwebview.helpers.BitmapHelper;
-import com.thefinestartist.finestwebview.helpers.ColorHelper;
-import com.thefinestartist.finestwebview.helpers.DisplayUtil;
-import com.thefinestartist.finestwebview.helpers.TypefaceHelper;
-import com.thefinestartist.finestwebview.helpers.UnitConverter;
-import com.thefinestartist.finestwebview.helpers.UrlParser;
+import com.thefinestartist.finestwebview.utils.BitmapHelper;
+import com.thefinestartist.finestwebview.utils.ColorHelper;
+import com.thefinestartist.finestwebview.utils.DisplayUtil;
+import com.thefinestartist.finestwebview.utils.TypefaceHelper;
+import com.thefinestartist.finestwebview.utils.UnitConverter;
+import com.thefinestartist.finestwebview.utils.UrlParser;
 import com.thefinestartist.finestwebview.listeners.BroadCastManager;
 import com.thefinestartist.finestwebview.views.ShadowLayout;
 
