@@ -26,7 +26,6 @@ import android.support.v4.util.SimpleArrayMap
 object TypefaceUtil {
   private val cache = SimpleArrayMap<String, Typeface>()
 
-  @JvmStatic
   operator fun get(c: Context, name: String): Typeface? {
     synchronized(cache) {
       return if (!cache.containsKey(name)) {
