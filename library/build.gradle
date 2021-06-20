@@ -22,7 +22,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:support-annotations:' + versions.supportLib
     implementation 'com.android.support:appcompat-v7:' + versions.supportLib
     implementation 'com.android.support:design:' + versions.supportLib
     implementation deps.kotlin.stdlib8
