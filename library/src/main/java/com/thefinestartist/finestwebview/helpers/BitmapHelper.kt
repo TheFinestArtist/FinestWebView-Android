@@ -11,28 +11,6 @@ import android.support.annotation.DrawableRes
  * Created by Leonardo on 11/21/15.
  */
 object BitmapHelper {
-    fun getColoredBitmap(bitmap: Bitmap, @ColorInt color: Int): Bitmap {
-        val alpha = Color.alpha(color)
-        val red = Color.red(color)
-        val green = Color.green(color)
-        val blue = Color.blue(color)
-        val pixels = IntArray(bitmap.width * bitmap.height)
-        bitmap.getPixels(pixels, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
-        for (i in pixels.indices) {
-            val pixel = pixels[i]
-            val pixelAlpha = Color.alpha(pixel)
-            if (pixelAlpha != 0) {
-                pixels[i] = Color.argb((pixelAlpha * alpha / 256f).toInt(), red, green, blue)
-            }
-        }
-        val coloredBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
-        coloredBitmap.setPixels(
-            pixels, 0, bitmap.width, 0, 0, bitmap.width,
-            bitmap.height
-        )
-        return coloredBitmap
-    }
-
     @JvmStatic
     fun getColoredBitmap(
         context: Context, @DrawableRes drawableRes: Int,
@@ -61,5 +39,27 @@ object BitmapHelper {
         }
         bitmap.setPixels(pixels, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
         return bitmap
+    }
+
+    private fun getColoredBitmap(bitmap: Bitmap, @ColorInt color: Int): Bitmap {
+        val alpha = Color.alpha(color)
+        val red = Color.red(color)
+        val green = Color.green(color)
+        val blue = Color.blue(color)
+        val pixels = IntArray(bitmap.width * bitmap.height)
+        bitmap.getPixels(pixels, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
+        for (i in pixels.indices) {
+            val pixel = pixels[i]
+            val pixelAlpha = Color.alpha(pixel)
+            if (pixelAlpha != 0) {
+                pixels[i] = Color.argb((pixelAlpha * alpha / 256f).toInt(), red, green, blue)
+            }
+        }
+        val coloredBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
+        coloredBitmap.setPixels(
+            pixels, 0, bitmap.width, 0, 0, bitmap.width,
+            bitmap.height
+        )
+        return coloredBitmap
     }
 }
