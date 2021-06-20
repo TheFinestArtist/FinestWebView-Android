@@ -50,10 +50,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.nineoldandroids.view.ViewHelper;
 import com.thefinestartist.finestwebview.enums.ProgressBarPosition;
-import com.thefinestartist.finestwebview.utils.BitmapHelper;
-import com.thefinestartist.finestwebview.utils.ColorHelper;
+import com.thefinestartist.finestwebview.utils.BitmapUtil;
+import com.thefinestartist.finestwebview.utils.ColorUtil;
 import com.thefinestartist.finestwebview.utils.DisplayUtil;
-import com.thefinestartist.finestwebview.utils.TypefaceHelper;
+import com.thefinestartist.finestwebview.utils.TypefaceUtil;
 import com.thefinestartist.finestwebview.utils.UnitConverter;
 import com.thefinestartist.finestwebview.utils.UrlParser;
 import com.thefinestartist.finestwebview.listeners.BroadCastManager;
@@ -276,7 +276,7 @@ public class FinestWebViewActivity extends AppCompatActivity
 
     iconDefaultColor = builder.iconDefaultColor != null ? builder.iconDefaultColor : colorAccent;
     iconDisabledColor = builder.iconDisabledColor != null ? builder.iconDisabledColor
-        : ColorHelper.disableColor(iconDefaultColor);
+        : ColorUtil.disableColor(iconDefaultColor);
     iconPressedColor =
         builder.iconPressedColor != null ? builder.iconPressedColor : iconDefaultColor;
     iconSelector =
@@ -591,13 +591,13 @@ public class FinestWebViewActivity extends AppCompatActivity
     { // TextViews
       title.setText(titleDefault);
       title.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize);
-      title.setTypeface(TypefaceHelper.get(this, titleFont));
+      title.setTypeface(TypefaceUtil.get(this, titleFont));
       title.setTextColor(titleColor);
 
       urlTv.setVisibility(showUrl ? View.VISIBLE : View.GONE);
       urlTv.setText(UrlParser.getHost(url));
       urlTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, urlSize);
-      urlTv.setTypeface(TypefaceHelper.get(this, urlFont));
+      urlTv.setTypeface(TypefaceUtil.get(this, urlFont));
       urlTv.setTextColor(urlColor);
 
       requestCenterLayout();
@@ -819,7 +819,7 @@ public class FinestWebViewActivity extends AppCompatActivity
       if (gradientDivider) {
         int dividerWidth = DisplayUtil.getWidth(this);
         Bitmap bitmap =
-            BitmapHelper.getGradientBitmap(dividerWidth, (int) dividerHeight, dividerColor);
+            BitmapUtil.getGradientBitmap(dividerWidth, (int) dividerHeight, dividerColor);
         BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
         gradient.setBackground(drawable);
 
@@ -889,7 +889,7 @@ public class FinestWebViewActivity extends AppCompatActivity
       menuRefresh.setGravity(menuTextGravity);
       menuRefreshTv.setText(stringResRefresh);
       menuRefreshTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
-      menuRefreshTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
+      menuRefreshTv.setTypeface(TypefaceUtil.get(this, menuTextFont));
       menuRefreshTv.setTextColor(menuTextColor);
       menuRefreshTv.setPadding((int) menuTextPaddingLeft, 0, (int) menuTextPaddingRight, 0);
 
@@ -898,7 +898,7 @@ public class FinestWebViewActivity extends AppCompatActivity
       menuFind.setGravity(menuTextGravity);
       menuFindTv.setText(stringResFind);
       menuFindTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
-      menuFindTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
+      menuFindTv.setTypeface(TypefaceUtil.get(this, menuTextFont));
       menuFindTv.setTextColor(menuTextColor);
       menuFindTv.setPadding((int) menuTextPaddingLeft, 0, (int) menuTextPaddingRight, 0);
 
@@ -907,7 +907,7 @@ public class FinestWebViewActivity extends AppCompatActivity
       menuShareVia.setGravity(menuTextGravity);
       menuShareViaTv.setText(stringResShareVia);
       menuShareViaTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
-      menuShareViaTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
+      menuShareViaTv.setTypeface(TypefaceUtil.get(this, menuTextFont));
       menuShareViaTv.setTextColor(menuTextColor);
       menuShareViaTv.setPadding((int) menuTextPaddingLeft, 0, (int) menuTextPaddingRight, 0);
 
@@ -916,7 +916,7 @@ public class FinestWebViewActivity extends AppCompatActivity
       menuCopyLink.setGravity(menuTextGravity);
       menuCopyLinkTv.setText(stringResCopyLink);
       menuCopyLinkTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
-      menuCopyLinkTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
+      menuCopyLinkTv.setTypeface(TypefaceUtil.get(this, menuTextFont));
       menuCopyLinkTv.setTextColor(menuTextColor);
       menuCopyLinkTv.setPadding((int) menuTextPaddingLeft, 0, (int) menuTextPaddingRight, 0);
 
@@ -925,7 +925,7 @@ public class FinestWebViewActivity extends AppCompatActivity
       menuOpenWith.setGravity(menuTextGravity);
       menuOpenWithTv.setText(stringResOpenWith);
       menuOpenWithTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, menuTextSize);
-      menuOpenWithTv.setTypeface(TypefaceHelper.get(this, menuTextFont));
+      menuOpenWithTv.setTypeface(TypefaceUtil.get(this, menuTextFont));
       menuOpenWithTv.setTextColor(menuTextColor);
       menuOpenWithTv.setPadding((int) menuTextPaddingLeft, 0, (int) menuTextPaddingRight, 0);
     }
@@ -942,17 +942,17 @@ public class FinestWebViewActivity extends AppCompatActivity
   protected void updateIcon(ImageButton icon, @DrawableRes int drawableRes) {
     StateListDrawable states = new StateListDrawable();
     {
-      Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconPressedColor);
+      Bitmap bitmap = BitmapUtil.getColoredBitmap(this, drawableRes, iconPressedColor);
       BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
       states.addState(new int[]{android.R.attr.state_pressed}, drawable);
     }
     {
-      Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconDisabledColor);
+      Bitmap bitmap = BitmapUtil.getColoredBitmap(this, drawableRes, iconDisabledColor);
       BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
       states.addState(new int[]{-android.R.attr.state_enabled}, drawable);
     }
     {
-      Bitmap bitmap = BitmapHelper.getColoredBitmap(this, drawableRes, iconDefaultColor);
+      Bitmap bitmap = BitmapUtil.getColoredBitmap(this, drawableRes, iconDefaultColor);
       BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
       states.addState(new int[]{}, drawable);
     }
@@ -1083,7 +1083,7 @@ public class FinestWebViewActivity extends AppCompatActivity
       if (view instanceof TextView) {
         TextView textView = (TextView) view;
         textView.setTextColor(titleColor);
-        textView.setTypeface(TypefaceHelper.get(this, titleFont));
+        textView.setTypeface(TypefaceUtil.get(this, titleFont));
         textView.setLineSpacing(0, 1.1f);
         textView.setIncludeFontPadding(false);
       }

@@ -23,7 +23,7 @@ import android.support.v4.util.SimpleArrayMap
         zip:/data/app/com.your.packagenage-1.apk:/assets/Roboto-Regular.ttf: 123K
         zip:/data/app/com.your.packagenage-1.apk:/assets/Roboto-Medium.ttf: 125K
 */
-object TypefaceHelper {
+object TypefaceUtil {
     private val cache = SimpleArrayMap<String, Typeface>()
     @JvmStatic
     operator fun get(c: Context, name: String): Typeface? {

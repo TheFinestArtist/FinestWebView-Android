@@ -10,7 +10,7 @@ import android.support.annotation.DrawableRes
 /**
  * Created by Leonardo on 11/21/15.
  */
-object BitmapHelper {
+object BitmapUtil {
     @JvmStatic
     fun getColoredBitmap(
         context: Context, @DrawableRes drawableRes: Int,

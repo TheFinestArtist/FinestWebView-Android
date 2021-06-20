@@ -5,7 +5,7 @@ import android.graphics.Color
 /**
  * Created by Leonardo on 11/28/15.
  */
-object ColorHelper {
+object ColorUtil {
     @JvmStatic
     fun disableColor(color: Int): Int {
         val alpha = Color.alpha(color)
