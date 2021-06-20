@@ -6,9 +6,7 @@ import android.content.Intent
 import android.webkit.WebSettings.LayoutAlgorithm
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
-import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.AppBarLayout.LayoutParams
-import com.google.android.material.appbar.AppBarLayout.LayoutParams.*
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.ScrollFlags
 import com.thefinestartist.finestwebview.enums.ProgressBarPosition
 import com.thefinestartist.finestwebview.listeners.BroadCastManager
 import com.thefinestartist.finestwebview.listeners.WebViewListener
