@@ -26,8 +26,6 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:' + versions.supportLib
     implementation 'com.android.support:design:' + versions.supportLib
     implementation 'com.nineoldandroids:library:' + versions.nineoldandroids
-    implementation 'com.thefinestartist:utils:' + versions.thefinestartist
-    annotationProcessor 'com.thefinestartist:compilers:' + versions.thefinestartist
     implementation deps.kotlin.stdlib8
 }
 
