@@ -15,7 +15,7 @@ import android.support.annotation.StyleRes;
 import android.support.design.widget.AppBarLayout.LayoutParams.ScrollFlags;
 import android.webkit.WebSettings;
 import com.thefinestartist.Base;
-import com.thefinestartist.finestwebview.enums.Position;
+import com.thefinestartist.finestwebview.enums.ProgressBarPosition;
 import com.thefinestartist.finestwebview.listeners.BroadCastManager;
 import com.thefinestartist.finestwebview.listeners.WebViewListener;
 import com.thefinestartist.utils.content.Ctx;
@@ -70,7 +70,7 @@ public class FinestWebView {
     protected Boolean showProgressBar;
     protected Integer progressBarColor;
     protected Float progressBarHeight;
-    protected Position progressBarPosition;
+    protected ProgressBarPosition progressBarPosition;
 
     protected String titleDefault;
     protected Boolean updateTitleFromHtml;
@@ -399,8 +399,8 @@ public class FinestWebView {
       return this;
     }
 
-    public Builder progressBarPosition(@NonNull Position position) {
-      this.progressBarPosition = position;
+    public Builder progressBarPosition(@NonNull ProgressBarPosition progressBarPosition) {
+      this.progressBarPosition = progressBarPosition;
       return this;
     }
 

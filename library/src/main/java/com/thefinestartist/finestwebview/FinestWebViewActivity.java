@@ -45,7 +45,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.nineoldandroids.view.ViewHelper;
 import com.thefinestartist.converters.UnitConverter;
-import com.thefinestartist.finestwebview.enums.Position;
+import com.thefinestartist.finestwebview.enums.ProgressBarPosition;
 import com.thefinestartist.finestwebview.helpers.BitmapHelper;
 import com.thefinestartist.finestwebview.helpers.ColorHelper;
 import com.thefinestartist.finestwebview.helpers.TypefaceHelper;
@@ -101,7 +101,7 @@ public class FinestWebViewActivity extends AppCompatActivity
   protected boolean showProgressBar;
   protected int progressBarColor;
   protected float progressBarHeight;
-  protected Position progressBarPosition;
+  protected ProgressBarPosition progressBarPosition;
 
   protected String titleDefault;
   protected boolean updateTitleFromHtml;
@@ -314,7 +314,7 @@ public class FinestWebViewActivity extends AppCompatActivity
     progressBarHeight = builder.progressBarHeight != null ? builder.progressBarHeight
         : getResources().getDimension(R.dimen.defaultProgressBarHeight);
     progressBarPosition = builder.progressBarPosition != null ? builder.progressBarPosition
-        : Position.BOTTON_OF_TOOLBAR;
+        : ProgressBarPosition.BOTTOM_OF_TOOLBAR;
 
     titleDefault = builder.titleDefault;
     updateTitleFromHtml = builder.updateTitleFromHtml != null ? builder.updateTitleFromHtml : true;
@@ -539,7 +539,7 @@ public class FinestWebViewActivity extends AppCompatActivity
         case TOP_OF_TOOLBAR:
           params.setMargins(0, 0, 0, 0);
           break;
-        case BOTTON_OF_TOOLBAR:
+        case BOTTOM_OF_TOOLBAR:
           params.setMargins(0, (int) toolbarHeight - (int) progressBarHeight, 0, 0);
           break;
         case TOP_OF_WEBVIEW:
@@ -848,7 +848,7 @@ public class FinestWebViewActivity extends AppCompatActivity
         case TOP_OF_TOOLBAR:
           params.setMargins(0, 0, 0, 0);
           break;
-        case BOTTON_OF_TOOLBAR:
+        case BOTTOM_OF_TOOLBAR:
           params.setMargins(0, (int) toolbarHeight - (int) progressBarHeight, 0, 0);
           break;
         case TOP_OF_WEBVIEW:
@@ -1134,7 +1134,7 @@ public class FinestWebViewActivity extends AppCompatActivity
         1 - (float) Math.abs(verticalOffset) / (float) appBarLayout.getTotalScrollRange());
 
     switch (progressBarPosition) {
-      case BOTTON_OF_TOOLBAR:
+      case BOTTOM_OF_TOOLBAR:
         ViewHelper.setTranslationY(progressBar,
             Math.max(verticalOffset, progressBarHeight - appBarLayout.getTotalScrollRange()));
         break;
