@@ -24,19 +24,20 @@ import android.support.v4.util.SimpleArrayMap
         zip:/data/app/com.your.packagenage-1.apk:/assets/Roboto-Medium.ttf: 125K
 */
 object TypefaceUtil {
-    private val cache = SimpleArrayMap<String, Typeface>()
-    @JvmStatic
-    operator fun get(c: Context, name: String): Typeface? {
-        synchronized(cache) {
-            return if (!cache.containsKey(name)) {
-                try {
-                    val t = Typeface.createFromAsset(c.assets, String.format("fonts/%s", name))
-                    cache.put(name, t)
-                    t
-                } catch (e: RuntimeException) {
-                    null
-                }
-            } else cache[name]
+  private val cache = SimpleArrayMap<String, Typeface>()
+
+  @JvmStatic
+  operator fun get(c: Context, name: String): Typeface? {
+    synchronized(cache) {
+      return if (!cache.containsKey(name)) {
+        try {
+          val t = Typeface.createFromAsset(c.assets, String.format("fonts/%s", name))
+          cache.put(name, t)
+          t
+        } catch (e: RuntimeException) {
+          null
         }
+      } else cache[name]
     }
+  }
 }
