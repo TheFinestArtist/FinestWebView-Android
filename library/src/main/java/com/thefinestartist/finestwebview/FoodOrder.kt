@@ -27,7 +27,7 @@ class FoodOrder private constructor(
       .build()
 }
 
-data class FoodOrder2 (
+data class FoodOrder2(
     var bread: String = "Bread",
     var condiments: String? = null,
     var meat: String? = null,
