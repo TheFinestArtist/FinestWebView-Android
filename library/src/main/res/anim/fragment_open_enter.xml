@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<set
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<set xmlns:android="http://schemas.android.com/apk/res/android"
   android:shareInterpolator="false"
   android:zAdjustment="top">
   <alpha
@@ -10,7 +9,7 @@
     android:fillEnabled="true"
     android:fromAlpha="0.0"
     android:interpolator="@anim/decelerate_quart"
-    android:toAlpha="1.0"/>
+    android:toAlpha="1.0" />
   <translate
     android:duration="350"
     android:fillAfter="true"
@@ -18,5 +17,5 @@
     android:fillEnabled="true"
     android:fromYDelta="8.000004%"
     android:interpolator="@anim/decelerate_quint"
-    android:toYDelta="0.0"/>
+    android:toYDelta="0.0" />
 </set>

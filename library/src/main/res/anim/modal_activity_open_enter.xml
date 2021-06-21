@@ -5,5 +5,5 @@
     android:duration="250"
     android:fromYDelta="100.0%p"
     android:interpolator="@anim/decelerate_cubic"
-    android:toYDelta="0.0%p"/>
+    android:toYDelta="0.0%p" />
 </set>
