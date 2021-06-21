@@ -15,89 +15,89 @@ import java.util.*
 
 /** Created by Leonardo on 11/21/15.  */
 data class FinestWebView(
-    @Transient val context: Context,
+    @Transient var context: Context,
     @Transient var listeners: MutableList<WebViewListener> = ArrayList(),
 
-    var key: Int = 0,
+    var key: Int? = null,
 
-    var rtl: Boolean = false,
+    var rtl: Boolean? = null,
     var theme: Int? = null,
 
-    var statusBarColor: Int = 0,
+    var statusBarColor: Int? = null,
 
-    var toolbarColor: Int = 0,
-    var toolbarScrollFlags: Int = 0,
+    var toolbarColor: Int? = null,
+    var toolbarScrollFlags: Int? = null,
 
-    var iconDefaultColor: Int = 0,
-    var iconDisabledColor: Int = 0,
-    var iconPressedColor: Int = 0,
-    var iconSelector: Int = 0,
+    var iconDefaultColor: Int? = null,
+    var iconDisabledColor: Int? = null,
+    var iconPressedColor: Int? = null,
+    var iconSelector: Int? = null,
 
-    var showIconClose: Boolean = false,
-    var disableIconClose: Boolean = false,
-    var showIconBack: Boolean = false,
-    var disableIconBack: Boolean = false,
-    var showIconForward: Boolean = false,
-    var disableIconForward: Boolean = false,
-    var showIconMenu: Boolean = false,
-    var disableIconMenu: Boolean = false,
+    var showIconClose: Boolean? = null,
+    var disableIconClose: Boolean? = null,
+    var showIconBack: Boolean? = null,
+    var disableIconBack: Boolean? = null,
+    var showIconForward: Boolean? = null,
+    var disableIconForward: Boolean? = null,
+    var showIconMenu: Boolean? = null,
+    var disableIconMenu: Boolean? = null,
 
-    var showSwipeRefreshLayout: Boolean = false,
-    var swipeRefreshColor: Int = 0,
+    var showSwipeRefreshLayout: Boolean? = null,
+    var swipeRefreshColor: Int? = null,
     var swipeRefreshColors: IntArray? = null,
 
-    var showDivider: Boolean = false,
-    var gradientDivider: Boolean = false,
-    var dividerColor: Int = 0,
-    var dividerHeight: Float = 0f,
+    var showDivider: Boolean? = null,
+    var gradientDivider: Boolean? = null,
+    var dividerColor: Int? = null,
+    var dividerHeight: Float? = null,
 
-    var showProgressBar: Boolean = false,
-    var progressBarColor: Int = 0,
-    var progressBarHeight: Float = 0f,
+    var showProgressBar: Boolean? = null,
+    var progressBarColor: Int? = null,
+    var progressBarHeight: Float? = null,
     var progressBarPosition: ProgressBarPosition? = null,
 
     var titleDefault: String? = null,
-    var updateTitleFromHtml: Boolean = false,
-    var titleSize: Float = 0f,
+    var updateTitleFromHtml: Boolean? = null,
+    var titleSize: Float? = null,
     var titleFont: String? = null,
-    var titleColor: Int = 0,
+    var titleColor: Int? = null,
 
-    var showUrl: Boolean = false,
-    var urlSize: Float = 0f,
+    var showUrl: Boolean? = null,
+    var urlSize: Float? = null,
     var urlFont: String? = null,
-    var urlColor: Int = 0,
+    var urlColor: Int? = null,
 
-    var menuColor: Int = 0,
-    var menuDropShadowColor: Int = 0,
-    var menuDropShadowSize: Float = 0f,
-    var menuSelector: Int = 0,
+    var menuColor: Int? = null,
+    var menuDropShadowColor: Int? = null,
+    var menuDropShadowSize: Float? = null,
+    var menuSelector: Int? = null,
 
-    var menuTextSize: Float = 0f,
+    var menuTextSize: Float? = null,
     var menuTextFont: String? = null,
-    var menuTextColor: Int = 0,
+    var menuTextColor: Int? = null,
 
-    var menuTextGravity: Int = 0,
-    var menuTextPaddingLeft: Float = 0f,
-    var menuTextPaddingRight: Float = 0f,
+    var menuTextGravity: Int? = null,
+    var menuTextPaddingLeft: Float? = null,
+    var menuTextPaddingRight: Float? = null,
 
-    var showMenuRefresh: Boolean = false,
-    var stringResRefresh: Int = 0,
-    var showMenuFind: Boolean = false,
-    var stringResFind: Int = 0,
-    var showMenuShareVia: Boolean = false,
-    var stringResShareVia: Int = 0,
-    var showMenuCopyLink: Boolean = false,
-    var stringResCopyLink: Int = 0,
-    var showMenuOpenWith: Boolean = false,
-    var stringResOpenWith: Int = 0,
+    var showMenuRefresh: Boolean? = null,
+    var stringResRefresh: Int? = null,
+    var showMenuFind: Boolean? = null,
+    var stringResFind: Int? = null,
+    var showMenuShareVia: Boolean? = null,
+    var stringResShareVia: Int? = null,
+    var showMenuCopyLink: Boolean? = null,
+    var stringResCopyLink: Int? = null,
+    var showMenuOpenWith: Boolean? = null,
+    var stringResOpenWith: Int? = null,
 
     var animationOpenEnter: Int = R.anim.modal_activity_open_enter,
     var animationOpenExit: Int = R.anim.modal_activity_open_exit,
-    var animationCloseEnter: Int = 0,
-    var animationCloseExit: Int = 0,
+    var animationCloseEnter: Int? = null,
+    var animationCloseExit: Int? = null,
 
-    var backPressToClose: Boolean = false,
-    var stringResCopiedToClipboard: Int = 0,
+    var backPressToClose: Boolean? = null,
+    var stringResCopiedToClipboard: Int? = null,
 
     var webViewSupportZoom: Boolean? = null,
     var webViewMediaPlaybackRequiresUserGesture: Boolean? = null,
@@ -147,19 +147,15 @@ data class FinestWebView(
     var encoding: String? = null,
     var data: String? = null,
     var url: String? = null,
-) : Serializable {
+): Serializable {
 
-//  constructor(activity: Activity) {
-//    context = activity
-//  }
-//
-//  /**
-//   * If you use context instead of activity, FinestWebView won't be able to override activity
-//   * animation. Try to create builder with Activity if it's possible.
-//   */
-//  constructor(context: Context) {
-//    this.context = context
-//  }
+  constructor(ctx: Context) : this(context = ctx)
+
+  /**
+   * If you use context instead of activity, FinestWebView won't be able to override activity
+   * animation. Try to create builder with Activity if it's possible.
+   */
+  constructor(activity: Activity) : this(context = activity)
 
   fun setWebViewListener(listener: WebViewListener) = apply {
     listeners.clear()
@@ -178,7 +174,7 @@ data class FinestWebView(
 
   fun toolbarColor(@ColorInt color: Int) = apply { this.toolbarColor = color }
   fun toolbarColorRes(@ColorRes colorRes: Int) = apply { this.toolbarColor = ContextCompat.getColor(context, colorRes) }
-  fun toolbarScrollFlags(@AppBarLayout.LayoutParams.ScrollFlags flags: Int) = apply { this.toolbarScrollFlags = flags }
+  fun toolbarScrollFlags(@ScrollFlags flags: Int) = apply { this.toolbarScrollFlags = flags }
 
   fun iconDefaultColor(@ColorInt color: Int) = apply { this.iconDefaultColor = color }
   fun iconDefaultColorRes(@ColorRes color: Int) = apply { this.iconDefaultColor = ContextCompat.getColor(context, color) }
@@ -209,7 +205,8 @@ data class FinestWebView(
     for (i in colors.indices) {
       swipeRefreshColors[i] = colors[i]
     }
-    this.swipeRefreshColors = swipeRefreshColors }
+    this.swipeRefreshColors = swipeRefreshColors
+  }
 
   fun swipeRefreshColorsRes(@ArrayRes colorsRes: Int) = apply {
     val colors = context.resources.getIntArray(colorsRes)
@@ -266,7 +263,7 @@ data class FinestWebView(
   fun menuTextGravity(gravity: Int) = apply { this.menuTextGravity = gravity }
 
   fun menuTextPaddingLeft(menuTextPaddingLeft: Float) = apply { this.menuTextPaddingLeft = menuTextPaddingLeft }
-  fun menuTextPaddingLeft(menuTextPaddingLeft: Int)= apply { this.menuTextPaddingLeft = menuTextPaddingLeft.toFloat() }
+  fun menuTextPaddingLeft(menuTextPaddingLeft: Int) = apply { this.menuTextPaddingLeft = menuTextPaddingLeft.toFloat() }
   fun menuTextPaddingLeftRes(@DimenRes menuTextPaddingLeft: Int) = apply { this.menuTextPaddingLeft = context.resources.getDimension(menuTextPaddingLeft) }
 
   fun menuTextPaddingRight(menuTextPaddingRight: Float) = apply { this.menuTextPaddingRight = menuTextPaddingRight }
@@ -284,7 +281,7 @@ data class FinestWebView(
 
   fun menuTextSize(menuTextSize: Float) = apply { this.menuTextSize = menuTextSize }
   fun menuTextSize(menuTextSize: Int) = apply { this.menuTextSize = menuTextSize.toFloat() }
-  fun menuTextSizeRes(@DimenRes menuTextSize: Int)= apply { this.menuTextSize = context.resources.getDimension(menuTextSize) }
+  fun menuTextSizeRes(@DimenRes menuTextSize: Int) = apply { this.menuTextSize = context.resources.getDimension(menuTextSize) }
 
   fun menuTextFont(menuTextFont: String?) = apply { this.menuTextFont = menuTextFont }
 
@@ -335,7 +332,7 @@ data class FinestWebView(
 
   fun webViewSupportZoom(webViewSupportZoom: Boolean) = apply { this.webViewSupportZoom = webViewSupportZoom }
 
-  fun webViewMediaPlaybackRequiresUserGesture( webViewMediaPlaybackRequiresUserGesture: Boolean) = apply { this.webViewMediaPlaybackRequiresUserGesture = webViewMediaPlaybackRequiresUserGesture }
+  fun webViewMediaPlaybackRequiresUserGesture(webViewMediaPlaybackRequiresUserGesture: Boolean) = apply { this.webViewMediaPlaybackRequiresUserGesture = webViewMediaPlaybackRequiresUserGesture }
 
   fun webViewBuiltInZoomControls(webViewBuiltInZoomControls: Boolean) = apply { this.webViewBuiltInZoomControls = webViewBuiltInZoomControls }
 
@@ -353,7 +350,7 @@ data class FinestWebView(
 
   fun webViewUseWideViewPort(webViewUseWideViewPort: Boolean) = apply { this.webViewUseWideViewPort = webViewUseWideViewPort }
 
-  fun webViewSupportMultipleWindows(webViewSupportMultipleWindows: Boolean)= apply { this.webViewSupportMultipleWindows = webViewSupportMultipleWindows }
+  fun webViewSupportMultipleWindows(webViewSupportMultipleWindows: Boolean) = apply { this.webViewSupportMultipleWindows = webViewSupportMultipleWindows }
 
   fun webViewLayoutAlgorithm(webViewLayoutAlgorithm: LayoutAlgorithm?) = apply { this.webViewLayoutAlgorithm = webViewLayoutAlgorithm }
 
@@ -430,7 +427,6 @@ data class FinestWebView(
     load(context.getString(dataRes))
   }
 
-  @JvmOverloads
   fun load(data: String?, mimeType: String? = "text/html", encoding: String? = "UTF-8") {
     this.mimeType = mimeType
     this.encoding = encoding
@@ -449,15 +445,15 @@ data class FinestWebView(
     this.url = url
     this.data = data
     key = System.identityHashCode(this)
-    if (!listeners.isEmpty()) {
+    if (listeners.isNotEmpty()) {
       BroadCastManager(context, key!!, listeners)
     }
     val intent = Intent(context, FinestWebViewActivity::class.java)
-    intent.putExtra("builder", this)
+    intent.putExtra("FinestWebView", this)
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     context.startActivity(intent)
     if (context is Activity) {
-      context.overridePendingTransition(animationOpenEnter, animationOpenExit)
+      (context as Activity).overridePendingTransition(animationOpenEnter, animationOpenExit)
     }
   }
 }
