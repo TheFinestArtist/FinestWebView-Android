@@ -147,7 +147,7 @@ data class FinestWebView(
     var encoding: String? = null,
     var data: String? = null,
     var url: String? = null,
-): Serializable {
+) : Serializable {
 
   constructor(ctx: Context) : this(context = ctx)
 

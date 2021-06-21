@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import androidx.appcompat.app.AppCompatActivity;
 
-/**
- * Created by TheFinestArtist on 3/11/16.
- */
+/** Created by TheFinestArtist on 3/11/16. */
 public class WebViewActivity extends AppCompatActivity {
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.webview);
     WebView webView = findViewById(R.id.webView);

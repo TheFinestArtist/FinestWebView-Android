@@ -17,5 +17,6 @@ abstract class WebViewListener {
       contentDisposition: String?,
       mimeType: String?,
       contentLength: Long
-  ) {}
+  ) {
+  }
 }
