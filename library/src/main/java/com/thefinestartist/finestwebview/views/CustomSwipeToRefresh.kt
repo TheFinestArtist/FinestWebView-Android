@@ -29,7 +29,9 @@ class CustomSwipeToRefresh : SwipeRefreshLayout {
   }
 
   override fun onInterceptTouchEvent(event: MotionEvent): Boolean {
-    return webView!!.scrollY <= scrollBuffer && super.onInterceptTouchEvent(event)
+    return webView != null
+      && webView!!.scrollY <= scrollBuffer
+      && super.onInterceptTouchEvent(event)
   }
 
   companion object {

@@ -6,8 +6,7 @@ import androidx.collection.SimpleArrayMap
 
 /**
  * Created by Leonardo on 11/14/15.
- */
-/*
+ *//*
     Each call to Typeface.createFromAsset will load a new instance of the typeface into memory,
     and this memory is not consistently get garbage collected
     http://code.google.com/p/android/issues/detail?id=9904

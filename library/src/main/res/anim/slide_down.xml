@@ -3,5 +3,5 @@
   <translate xmlns:android="http://schemas.android.com/apk/res/android"
     android:duration="350"
     android:fromYDelta="0.0%"
-    android:toYDelta="100.0%" />
+    android:toYDelta="100.0%"/>
 </set>

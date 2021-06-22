@@ -1,11 +1,11 @@
 <resources>
 
   <declare-styleable name="ShadowLayout">
-    <attr format="dimension" name="slCornerRadius" />
-    <attr format="dimension" name="slShadowSize" />
-    <attr format="color" name="slShadowColor" />
-    <attr format="dimension" name="slDx" />
-    <attr format="dimension" name="slDy" />
+    <attr format="dimension" name="slCornerRadius"/>
+    <attr format="dimension" name="slShadowSize"/>
+    <attr format="color" name="slShadowColor"/>
+    <attr format="dimension" name="slDx"/>
+    <attr format="dimension" name="slDy"/>
   </declare-styleable>
 
   <style name="FinestWebViewTheme.Fullscreen" parent="FinestWebViewTheme">

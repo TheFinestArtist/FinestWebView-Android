@@ -12,7 +12,7 @@
     android:background="@color/finestWhite"
     android:onClick="onClick"
     android:text="Default Theme"
-    android:textColor="@color/finestBlack" />
+    android:textColor="@color/finestBlack"/>
 
   <Button
     android:id="@+id/redTheme"
@@ -22,7 +22,7 @@
     android:background="@color/redPrimary"
     android:onClick="onClick"
     android:text="Red Theme"
-    android:textColor="@color/finestWhite" />
+    android:textColor="@color/finestWhite"/>
 
   <Button
     android:id="@+id/blueTheme"
@@ -32,7 +32,7 @@
     android:background="@color/bluePrimary"
     android:onClick="onClick"
     android:text="Blue Theme"
-    android:textColor="@color/finestWhite" />
+    android:textColor="@color/finestWhite"/>
 
   <Button
     android:id="@+id/blackTheme"
@@ -42,6 +42,6 @@
     android:background="@color/blackPrimary"
     android:onClick="onClick"
     android:text="Black Theme"
-    android:textColor="@color/finestWhite" />
+    android:textColor="@color/finestWhite"/>
 
 </LinearLayout>

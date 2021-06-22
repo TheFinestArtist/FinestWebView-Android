@@ -3,10 +3,17 @@ package com.thefinestartist.finestwebview
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.webkit.WebSettings.LayoutAlgorithm
-import androidx.annotation.*
+import android.webkit.WebSettings.*
+import androidx.annotation.AnimRes
+import androidx.annotation.ArrayRes
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
-import com.google.android.material.appbar.AppBarLayout.LayoutParams.ScrollFlags
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.*
 import com.thefinestartist.finestwebview.enums.ProgressBarPosition
 import com.thefinestartist.finestwebview.listeners.BroadCastManager
 import com.thefinestartist.finestwebview.listeners.WebViewListener
@@ -15,138 +22,138 @@ import java.util.*
 
 /** Created by Leonardo on 11/21/15.  */
 data class FinestWebView(
-    @Transient var context: Context,
-    @Transient var listeners: MutableList<WebViewListener> = ArrayList(),
+  @Transient var context: Context,
+  @Transient var listeners: MutableList<WebViewListener> = ArrayList(),
 
-    var key: Int? = null,
+  var key: Int? = null,
 
-    var rtl: Boolean? = null,
-    var theme: Int? = null,
+  var rtl: Boolean? = null,
+  var theme: Int? = null,
 
-    var statusBarColor: Int? = null,
+  var statusBarColor: Int? = null,
 
-    var toolbarColor: Int? = null,
-    var toolbarScrollFlags: Int? = null,
+  var toolbarColor: Int? = null,
+  var toolbarScrollFlags: Int? = null,
 
-    var iconDefaultColor: Int? = null,
-    var iconDisabledColor: Int? = null,
-    var iconPressedColor: Int? = null,
-    var iconSelector: Int? = null,
+  var iconDefaultColor: Int? = null,
+  var iconDisabledColor: Int? = null,
+  var iconPressedColor: Int? = null,
+  var iconSelector: Int? = null,
 
-    var showIconClose: Boolean? = null,
-    var disableIconClose: Boolean? = null,
-    var showIconBack: Boolean? = null,
-    var disableIconBack: Boolean? = null,
-    var showIconForward: Boolean? = null,
-    var disableIconForward: Boolean? = null,
-    var showIconMenu: Boolean? = null,
-    var disableIconMenu: Boolean? = null,
+  var showIconClose: Boolean? = null,
+  var disableIconClose: Boolean? = null,
+  var showIconBack: Boolean? = null,
+  var disableIconBack: Boolean? = null,
+  var showIconForward: Boolean? = null,
+  var disableIconForward: Boolean? = null,
+  var showIconMenu: Boolean? = null,
+  var disableIconMenu: Boolean? = null,
 
-    var showSwipeRefreshLayout: Boolean? = null,
-    var swipeRefreshColor: Int? = null,
-    var swipeRefreshColors: IntArray? = null,
+  var showSwipeRefreshLayout: Boolean? = null,
+  var swipeRefreshColor: Int? = null,
+  var swipeRefreshColors: IntArray? = null,
 
-    var showDivider: Boolean? = null,
-    var gradientDivider: Boolean? = null,
-    var dividerColor: Int? = null,
-    var dividerHeight: Float? = null,
+  var showDivider: Boolean? = null,
+  var gradientDivider: Boolean? = null,
+  var dividerColor: Int? = null,
+  var dividerHeight: Float? = null,
 
-    var showProgressBar: Boolean? = null,
-    var progressBarColor: Int? = null,
-    var progressBarHeight: Float? = null,
-    var progressBarPosition: ProgressBarPosition? = null,
+  var showProgressBar: Boolean? = null,
+  var progressBarColor: Int? = null,
+  var progressBarHeight: Float? = null,
+  var progressBarPosition: ProgressBarPosition? = null,
 
-    var titleDefault: String? = null,
-    var updateTitleFromHtml: Boolean? = null,
-    var titleSize: Float? = null,
-    var titleFont: String? = null,
-    var titleColor: Int? = null,
+  var titleDefault: String? = null,
+  var updateTitleFromHtml: Boolean? = null,
+  var titleSize: Float? = null,
+  var titleFont: String? = null,
+  var titleColor: Int? = null,
 
-    var showUrl: Boolean? = null,
-    var urlSize: Float? = null,
-    var urlFont: String? = null,
-    var urlColor: Int? = null,
+  var showUrl: Boolean? = null,
+  var urlSize: Float? = null,
+  var urlFont: String? = null,
+  var urlColor: Int? = null,
 
-    var menuColor: Int? = null,
-    var menuDropShadowColor: Int? = null,
-    var menuDropShadowSize: Float? = null,
-    var menuSelector: Int? = null,
+  var menuColor: Int? = null,
+  var menuDropShadowColor: Int? = null,
+  var menuDropShadowSize: Float? = null,
+  var menuSelector: Int? = null,
 
-    var menuTextSize: Float? = null,
-    var menuTextFont: String? = null,
-    var menuTextColor: Int? = null,
+  var menuTextSize: Float? = null,
+  var menuTextFont: String? = null,
+  var menuTextColor: Int? = null,
 
-    var menuTextGravity: Int? = null,
-    var menuTextPaddingLeft: Float? = null,
-    var menuTextPaddingRight: Float? = null,
+  var menuTextGravity: Int? = null,
+  var menuTextPaddingLeft: Float? = null,
+  var menuTextPaddingRight: Float? = null,
 
-    var showMenuRefresh: Boolean? = null,
-    var stringResRefresh: Int? = null,
-    var showMenuFind: Boolean? = null,
-    var stringResFind: Int? = null,
-    var showMenuShareVia: Boolean? = null,
-    var stringResShareVia: Int? = null,
-    var showMenuCopyLink: Boolean? = null,
-    var stringResCopyLink: Int? = null,
-    var showMenuOpenWith: Boolean? = null,
-    var stringResOpenWith: Int? = null,
+  var showMenuRefresh: Boolean? = null,
+  var stringResRefresh: Int? = null,
+  var showMenuFind: Boolean? = null,
+  var stringResFind: Int? = null,
+  var showMenuShareVia: Boolean? = null,
+  var stringResShareVia: Int? = null,
+  var showMenuCopyLink: Boolean? = null,
+  var stringResCopyLink: Int? = null,
+  var showMenuOpenWith: Boolean? = null,
+  var stringResOpenWith: Int? = null,
 
-    var animationOpenEnter: Int = R.anim.modal_activity_open_enter,
-    var animationOpenExit: Int = R.anim.modal_activity_open_exit,
-    var animationCloseEnter: Int? = null,
-    var animationCloseExit: Int? = null,
+  var animationOpenEnter: Int = R.anim.modal_activity_open_enter,
+  var animationOpenExit: Int = R.anim.modal_activity_open_exit,
+  var animationCloseEnter: Int? = null,
+  var animationCloseExit: Int? = null,
 
-    var backPressToClose: Boolean? = null,
-    var stringResCopiedToClipboard: Int? = null,
+  var backPressToClose: Boolean? = null,
+  var stringResCopiedToClipboard: Int? = null,
 
-    var webViewSupportZoom: Boolean? = null,
-    var webViewMediaPlaybackRequiresUserGesture: Boolean? = null,
-    var webViewBuiltInZoomControls: Boolean? = null,
-    var webViewDisplayZoomControls: Boolean? = null,
-    var webViewAllowFileAccess: Boolean? = null,
-    var webViewAllowContentAccess: Boolean? = null,
-    var webViewLoadWithOverviewMode: Boolean? = null,
-    var webViewSaveFormData: Boolean? = null,
-    var webViewTextZoom: Int? = null,
-    var webViewUseWideViewPort: Boolean? = null,
-    var webViewSupportMultipleWindows: Boolean? = null,
-    var webViewLayoutAlgorithm: LayoutAlgorithm? = null,
-    var webViewStandardFontFamily: String? = null,
-    var webViewFixedFontFamily: String? = null,
-    var webViewSansSerifFontFamily: String? = null,
-    var webViewSerifFontFamily: String? = null,
-    var webViewCursiveFontFamily: String? = null,
-    var webViewFantasyFontFamily: String? = null,
-    var webViewMinimumFontSize: Int? = null,
-    var webViewMinimumLogicalFontSize: Int? = null,
-    var webViewDefaultFontSize: Int? = null,
-    var webViewDefaultFixedFontSize: Int? = null,
-    var webViewLoadsImagesAutomatically: Boolean? = null,
-    var webViewBlockNetworkImage: Boolean? = null,
-    var webViewBlockNetworkLoads: Boolean? = null,
-    var webViewJavaScriptEnabled: Boolean? = null,
-    var webViewAllowUniversalAccessFromFileURLs: Boolean? = null,
-    var webViewAllowFileAccessFromFileURLs: Boolean? = null,
-    var webViewGeolocationDatabasePath: String? = null,
-    var webViewAppCacheEnabled: Boolean? = null,
-    var webViewAppCachePath: String? = null,
-    var webViewDatabaseEnabled: Boolean? = null,
-    var webViewDomStorageEnabled: Boolean? = null,
-    var webViewGeolocationEnabled: Boolean? = null,
-    var webViewJavaScriptCanOpenWindowsAutomatically: Boolean? = null,
-    var webViewDefaultTextEncodingName: String? = null,
-    var webViewUserAgentString: String? = null,
-    var webViewNeedInitialFocus: Boolean? = null,
-    var webViewCacheMode: Int? = null,
-    var webViewMixedContentMode: Int? = null,
-    var webViewOffscreenPreRaster: Boolean? = null,
+  var webViewSupportZoom: Boolean? = null,
+  var webViewMediaPlaybackRequiresUserGesture: Boolean? = null,
+  var webViewBuiltInZoomControls: Boolean? = null,
+  var webViewDisplayZoomControls: Boolean? = null,
+  var webViewAllowFileAccess: Boolean? = null,
+  var webViewAllowContentAccess: Boolean? = null,
+  var webViewLoadWithOverviewMode: Boolean? = null,
+  var webViewSaveFormData: Boolean? = null,
+  var webViewTextZoom: Int? = null,
+  var webViewUseWideViewPort: Boolean? = null,
+  var webViewSupportMultipleWindows: Boolean? = null,
+  var webViewLayoutAlgorithm: LayoutAlgorithm? = null,
+  var webViewStandardFontFamily: String? = null,
+  var webViewFixedFontFamily: String? = null,
+  var webViewSansSerifFontFamily: String? = null,
+  var webViewSerifFontFamily: String? = null,
+  var webViewCursiveFontFamily: String? = null,
+  var webViewFantasyFontFamily: String? = null,
+  var webViewMinimumFontSize: Int? = null,
+  var webViewMinimumLogicalFontSize: Int? = null,
+  var webViewDefaultFontSize: Int? = null,
+  var webViewDefaultFixedFontSize: Int? = null,
+  var webViewLoadsImagesAutomatically: Boolean? = null,
+  var webViewBlockNetworkImage: Boolean? = null,
+  var webViewBlockNetworkLoads: Boolean? = null,
+  var webViewJavaScriptEnabled: Boolean? = null,
+  var webViewAllowUniversalAccessFromFileURLs: Boolean? = null,
+  var webViewAllowFileAccessFromFileURLs: Boolean? = null,
+  var webViewGeolocationDatabasePath: String? = null,
+  var webViewAppCacheEnabled: Boolean? = null,
+  var webViewAppCachePath: String? = null,
+  var webViewDatabaseEnabled: Boolean? = null,
+  var webViewDomStorageEnabled: Boolean? = null,
+  var webViewGeolocationEnabled: Boolean? = null,
+  var webViewJavaScriptCanOpenWindowsAutomatically: Boolean? = null,
+  var webViewDefaultTextEncodingName: String? = null,
+  var webViewUserAgentString: String? = null,
+  var webViewNeedInitialFocus: Boolean? = null,
+  var webViewCacheMode: Int? = null,
+  var webViewMixedContentMode: Int? = null,
+  var webViewOffscreenPreRaster: Boolean? = null,
 
-    var injectJavaScript: String? = null,
+  var injectJavaScript: String? = null,
 
-    var mimeType: String? = null,
-    var encoding: String? = null,
-    var data: String? = null,
-    var url: String? = null,
+  var mimeType: String? = null,
+  var encoding: String? = null,
+  var data: String? = null,
+  var url: String? = null,
 ) : Serializable {
 
   constructor(ctx: Context) : this(context = ctx)
@@ -308,11 +315,7 @@ data class FinestWebView(
 
   fun stringResOpenWith(@StringRes stringResOpenWith: Int) = apply { this.stringResOpenWith = stringResOpenWith }
 
-  fun setCustomAnimations(
-      @AnimRes animationOpenEnter: Int,
-      @AnimRes animationOpenExit: Int,
-      @AnimRes animationCloseEnter: Int,
-      @AnimRes animationCloseExit: Int) = apply {
+  fun setCustomAnimations(@AnimRes animationOpenEnter: Int, @AnimRes animationOpenExit: Int, @AnimRes animationCloseEnter: Int, @AnimRes animationCloseExit: Int) = apply {
     this.animationOpenEnter = animationOpenEnter
     this.animationOpenExit = animationOpenExit
     this.animationCloseEnter = animationCloseEnter
@@ -320,8 +323,7 @@ data class FinestWebView(
   }
 
   @Deprecated("As of release 1.0.1, replaced by {@link #setCustomAnimations(int, int, int, int)}")
-  fun setCloseAnimations(
-      @AnimRes animationCloseEnter: Int, @AnimRes animationCloseExit: Int) = apply {
+  fun setCloseAnimations(@AnimRes animationCloseEnter: Int, @AnimRes animationCloseExit: Int) = apply {
     this.animationCloseEnter = animationCloseEnter
     this.animationCloseExit = animationCloseExit
   }
@@ -352,7 +354,7 @@ data class FinestWebView(
 
   fun webViewSupportMultipleWindows(webViewSupportMultipleWindows: Boolean) = apply { this.webViewSupportMultipleWindows = webViewSupportMultipleWindows }
 
-  fun webViewLayoutAlgorithm(webViewLayoutAlgorithm: LayoutAlgorithm?) = apply { this.webViewLayoutAlgorithm = webViewLayoutAlgorithm }
+  fun webViewLayoutAlgorithm(webViewLayoutAlgorithm: LayoutAlgorithm?): FinestWebView = apply { this.webViewLayoutAlgorithm = webViewLayoutAlgorithm }
 
   fun webViewStandardFontFamily(webViewStandardFontFamily: String?) = apply { this.webViewStandardFontFamily = webViewStandardFontFamily }
 
@@ -414,8 +416,7 @@ data class FinestWebView(
 
   fun webViewDesktopMode(webViewDesktopMode: Boolean) = apply {
     return if (webViewDesktopMode) {
-      webViewUserAgentString(
-          "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0")
+      webViewUserAgentString("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0")
     } else {
       this
     }

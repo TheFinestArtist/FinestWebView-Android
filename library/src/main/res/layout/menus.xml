@@ -49,7 +49,7 @@
           android:singleLine="true"
           android:text="@string/refresh"
           android:textColor="@color/finestBlack"
-          android:textSize="@dimen/defaultMenuTextSize" />
+          android:textSize="@dimen/defaultMenuTextSize"/>
       </LinearLayout>
 
       <LinearLayout
@@ -71,7 +71,7 @@
           android:singleLine="true"
           android:text="@string/find"
           android:textColor="@color/finestBlack"
-          android:textSize="@dimen/defaultMenuTextSize" />
+          android:textSize="@dimen/defaultMenuTextSize"/>
       </LinearLayout>
 
       <LinearLayout
@@ -93,7 +93,7 @@
           android:singleLine="true"
           android:text="@string/share_via"
           android:textColor="@color/finestBlack"
-          android:textSize="@dimen/defaultMenuTextSize" />
+          android:textSize="@dimen/defaultMenuTextSize"/>
       </LinearLayout>
 
       <LinearLayout
@@ -115,7 +115,7 @@
           android:singleLine="true"
           android:text="@string/copy_link"
           android:textColor="@color/finestBlack"
-          android:textSize="@dimen/defaultMenuTextSize" />
+          android:textSize="@dimen/defaultMenuTextSize"/>
       </LinearLayout>
 
       <LinearLayout
@@ -137,7 +137,7 @@
           android:singleLine="true"
           android:text="@string/open_with"
           android:textColor="@color/finestBlack"
-          android:textSize="@dimen/defaultMenuTextSize" />
+          android:textSize="@dimen/defaultMenuTextSize"/>
       </LinearLayout>
 
     </LinearLayout>

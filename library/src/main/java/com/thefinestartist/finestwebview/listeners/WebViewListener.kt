@@ -12,11 +12,11 @@ abstract class WebViewListener {
   fun onLoadResource(url: String?) {}
   fun onPageCommitVisible(url: String?) {}
   fun onDownloadStart(
-      url: String?,
-      userAgent: String?,
-      contentDisposition: String?,
-      mimeType: String?,
-      contentLength: Long
+    url: String?,
+    userAgent: String?,
+    contentDisposition: String?,
+    mimeType: String?,
+    contentLength: Long
   ) {
   }
 }

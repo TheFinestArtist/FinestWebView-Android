@@ -10,9 +10,9 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
  * Created by TheFinestArtist on 1/26/16.
  */
 class BroadCastManager(
-    context: Context,
-    private val key: Int,
-    private val listeners: List<WebViewListener>
+  context: Context,
+  private val key: Int,
+  private val listeners: List<WebViewListener>
 ) {
   private val manager: LocalBroadcastManager = LocalBroadcastManager.getInstance(context)
   private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -56,8 +56,10 @@ class BroadCastManager(
 
   private fun onReceivedTouchIconUrl(intent: Intent) {
     for (listener in listeners) {
-      listener.onReceivedTouchIconUrl(intent.getStringExtra(EXTRA_URL),
-          intent.getBooleanExtra(EXTRA_PRECOMPOSED, false))
+      listener.onReceivedTouchIconUrl(
+        intent.getStringExtra(EXTRA_URL),
+        intent.getBooleanExtra(EXTRA_PRECOMPOSED, false)
+      )
     }
   }
 
@@ -87,9 +89,13 @@ class BroadCastManager(
 
   private fun onDownloadStart(intent: Intent) {
     for (listener in listeners) {
-      listener.onDownloadStart(intent.getStringExtra(EXTRA_URL),
-          intent.getStringExtra(EXTRA_USER_AGENT), intent.getStringExtra(EXTRA_CONTENT_DISPOSITION),
-          intent.getStringExtra(EXTRA_MIME_TYPE), intent.getLongExtra(EXTRA_CONTENT_LENGTH, 0L))
+      listener.onDownloadStart(
+        intent.getStringExtra(EXTRA_URL),
+        intent.getStringExtra(EXTRA_USER_AGENT),
+        intent.getStringExtra(EXTRA_CONTENT_DISPOSITION),
+        intent.getStringExtra(EXTRA_MIME_TYPE),
+        intent.getLongExtra(EXTRA_CONTENT_LENGTH, 0L)
+      )
     }
   }
 
@@ -98,7 +104,15 @@ class BroadCastManager(
   }
 
   enum class Type {
-    PROGRESS_CHANGED, RECEIVED_TITLE, RECEIVED_TOUCH_ICON_URL, PAGE_STARTED, PAGE_FINISHED, LOAD_RESOURCE, PAGE_COMMIT_VISIBLE, DOWNLOADED_START, UNREGISTER
+    PROGRESS_CHANGED,
+    RECEIVED_TITLE,
+    RECEIVED_TOUCH_ICON_URL,
+    PAGE_STARTED,
+    PAGE_FINISHED,
+    LOAD_RESOURCE,
+    PAGE_COMMIT_VISIBLE,
+    DOWNLOADED_START,
+    UNREGISTER
   }
 
   companion object {
@@ -116,8 +130,7 @@ class BroadCastManager(
 
     // Base Static Methods
     private fun getBaseIntent(key: Int, type: Type): Intent {
-      return Intent(WEBVIEW_EVENT).putExtra(EXTRA_KEY, key)
-          .putExtra(EXTRA_TYPE, type)
+      return Intent(WEBVIEW_EVENT).putExtra(EXTRA_KEY, key).putExtra(EXTRA_TYPE, type)
     }
 
     private fun sendBroadCast(context: Context, intent: Intent) {
@@ -138,9 +151,10 @@ class BroadCastManager(
     }
 
     @JvmStatic
-    fun onReceivedTouchIconUrl(context: Context, key: Int, url: String?,
-                               precomposed: Boolean) {
-      val intent = getBaseIntent(key, Type.RECEIVED_TOUCH_ICON_URL).putExtra(EXTRA_URL, url)
+    fun onReceivedTouchIconUrl(context: Context, key: Int, url: String?, precomposed: Boolean) {
+      val intent =
+        getBaseIntent(key, Type.RECEIVED_TOUCH_ICON_URL)
+          .putExtra(EXTRA_URL, url)
           .putExtra(EXTRA_PRECOMPOSED, precomposed)
       sendBroadCast(context, intent)
     }
@@ -170,9 +184,18 @@ class BroadCastManager(
     }
 
     @JvmStatic
-    fun onDownloadStart(context: Context, key: Int, url: String?, userAgent: String?,
-                        contentDisposition: String?, mimeType: String?, contentLength: Long) {
-      val intent = getBaseIntent(key, Type.DOWNLOADED_START).putExtra(EXTRA_URL, url)
+    fun onDownloadStart(
+      context: Context,
+      key: Int,
+      url: String?,
+      userAgent: String?,
+      contentDisposition: String?,
+      mimeType: String?,
+      contentLength: Long
+    ) {
+      val intent =
+        getBaseIntent(key, Type.DOWNLOADED_START)
+          .putExtra(EXTRA_URL, url)
           .putExtra(EXTRA_USER_AGENT, userAgent)
           .putExtra(EXTRA_CONTENT_DISPOSITION, contentDisposition)
           .putExtra(EXTRA_MIME_TYPE, mimeType)

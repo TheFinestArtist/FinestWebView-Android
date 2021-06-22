@@ -12,18 +12,17 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
 import android.net.MailTo
 import android.net.Uri
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
+import android.os.Build.*
 import android.os.Bundle
 import android.os.Handler
 import android.util.TypedValue
 import android.view.*
 import android.view.animation.Animation
-import android.view.animation.Animation.AnimationListener
+import android.view.animation.Animation.*
 import android.view.animation.AnimationUtils
 import android.webkit.DownloadListener
 import android.webkit.WebChromeClient
-import android.webkit.WebSettings.LayoutAlgorithm
+import android.webkit.WebSettings.*
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
@@ -219,8 +218,7 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
   protected var webLayout: FrameLayout? = null
 
   var downloadListener = DownloadListener { url, userAgent, contentDisposition, mimetype, contentLength ->
-    onDownloadStart(this@FinestWebViewActivity, key, url, userAgent,
-        contentDisposition, mimetype, contentLength)
+    onDownloadStart(this@FinestWebViewActivity, key, url, userAgent, contentDisposition, mimetype, contentLength)
   }
 
   protected fun initializeOptions() {
@@ -232,11 +230,7 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
 
     // resolve themed attributes
     val typedValue = TypedValue()
-    val typedArray = obtainStyledAttributes(typedValue.data, intArrayOf(
-        R.attr.colorPrimaryDark, R.attr.colorPrimary, R.attr.colorAccent,
-        android.R.attr.textColorPrimary, android.R.attr.textColorSecondary,
-        android.R.attr.selectableItemBackground, android.R.attr.selectableItemBackgroundBorderless
-    ))
+    val typedArray = obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorPrimaryDark, R.attr.colorPrimary, R.attr.colorAccent, android.R.attr.textColorPrimary, android.R.attr.textColorSecondary, android.R.attr.selectableItemBackground, android.R.attr.selectableItemBackgroundBorderless))
     val colorPrimaryDark = typedArray.getColor(0, ContextCompat.getColor(this, R.color.finestGray))
     val colorPrimary = typedArray.getColor(1, ContextCompat.getColor(this, R.color.finestWhite))
     val colorAccent = typedArray.getColor(2, ContextCompat.getColor(this, R.color.finestBlack))
@@ -399,34 +393,29 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
 
   protected fun layoutViews() {
     setSupportActionBar(toolbar)
-    run {
-      // AppBar
+    run { // AppBar
       var toolbarHeight = resources.getDimension(R.dimen.toolbarHeight)
       if (!gradientDivider) {
         toolbarHeight += dividerHeight
       }
-      val params = CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-          toolbarHeight.toInt())
+      val params = CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, toolbarHeight.toInt())
       appBar!!.layoutParams = params
       coordinatorLayout!!.requestLayout()
     }
-    run {
-      // Toolbar
+    run { // Toolbar
       val toolbarHeight = resources.getDimension(R.dimen.toolbarHeight)
       val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, toolbarHeight.toInt())
       toolbarLayout!!.minimumHeight = toolbarHeight.toInt()
       toolbarLayout!!.layoutParams = params
       coordinatorLayout!!.requestLayout()
     }
-    run {
-      // TextViews
+    run { // TextViews
       val maxWidth = maxWidth
       title!!.maxWidth = maxWidth
       urlTv!!.maxWidth = maxWidth
       requestCenterLayout()
     }
-    run {
-      // Icons
+    run { // Icons
       updateIcon(close, if (rtl) R.drawable.more else R.drawable.close)
       updateIcon(back, R.drawable.back)
       updateIcon(forward, R.drawable.forward)
@@ -440,11 +429,9 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
         gradient!!.layoutParams = params
       }
     }
-    run {
-      // ProgressBar
+    run { // ProgressBar
       progressBar!!.minimumHeight = progressBarHeight.toInt()
-      val params = CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-          progressBarHeight.toInt())
+      val params = CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, progressBarHeight.toInt())
       val toolbarHeight = resources.getDimension(R.dimen.toolbarHeight)
       when (progressBarPosition) {
         ProgressBarPosition.TOP_OF_TOOLBAR -> params.setMargins(0, 0, 0, 0)
@@ -454,8 +441,7 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
       }
       progressBar!!.layoutParams = params
     }
-    run {
-      // WebLayout
+    run { // WebLayout
       val toolbarHeight = resources.getDimension(R.dimen.toolbarHeight)
       val statusBarHeight = getStatusBarHeight(this)
       val screenHeight = getHeight(this)
@@ -481,15 +467,13 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
     run { // AppBar
       appBar!!.addOnOffsetChangedListener(this)
     }
-    run {
-      // Toolbar
+    run { // Toolbar
       toolbar!!.setBackgroundColor(toolbarColor)
       val params = toolbar!!.layoutParams as AppBarLayout.LayoutParams
       params.scrollFlags = toolbarScrollFlags
       toolbar!!.layoutParams = params
     }
-    run {
-      // TextViews
+    run { // TextViews
       title!!.text = titleDefault
       title!!.setTextSize(TypedValue.COMPLEX_UNIT_PX, titleSize)
       title!!.setTypeface(TypefaceUtil[this, titleFont!!])
@@ -501,27 +485,21 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
       urlTv!!.setTextColor(urlColor)
       requestCenterLayout()
     }
-    run {
-      // Icons
+    run { // Icons
       close!!.setBackgroundResource(iconSelector)
       back!!.setBackgroundResource(iconSelector)
       forward!!.setBackgroundResource(iconSelector)
       more!!.setBackgroundResource(iconSelector)
       close!!.visibility = if (showIconClose) View.VISIBLE else View.GONE
       close!!.isEnabled = !disableIconClose
-      if ((showMenuRefresh
-              || showMenuFind
-              || showMenuShareVia
-              || showMenuCopyLink
-              || showMenuOpenWith) && showIconMenu) {
+      if ((showMenuRefresh || showMenuFind || showMenuShareVia || showMenuCopyLink || showMenuOpenWith) && showIconMenu) {
         more!!.visibility = View.VISIBLE
       } else {
         more!!.visibility = View.GONE
       }
       more!!.isEnabled = !disableIconMenu
     }
-    run {
-      // WebView
+    run { // WebView
       webView!!.webChromeClient = MyWebChromeClient()
       webView!!.webViewClient = MyWebViewClient()
       webView!!.setDownloadListener(downloadListener)
@@ -529,28 +507,24 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
       if (webViewSupportZoom != null) {
         settings.setSupportZoom(webViewSupportZoom!!)
       }
-      if (webViewMediaPlaybackRequiresUserGesture != null
-          && VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR1) {
+      if (webViewMediaPlaybackRequiresUserGesture != null && VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR1) {
         settings.mediaPlaybackRequiresUserGesture = webViewMediaPlaybackRequiresUserGesture!!
       }
       if (webViewBuiltInZoomControls != null) {
         settings.builtInZoomControls = webViewBuiltInZoomControls!!
-        if (webViewBuiltInZoomControls as Boolean) {
-          // Remove NestedScrollView to enable BuiltInZoomControls
+        if (webViewBuiltInZoomControls as Boolean) { // Remove NestedScrollView to enable BuiltInZoomControls
           (webView!!.parent as ViewGroup).removeAllViews()
           swipeRefreshLayout!!.addView(webView)
           swipeRefreshLayout!!.removeViewAt(1)
         }
       }
-      if (webViewDisplayZoomControls != null
-          && VERSION.SDK_INT >= VERSION_CODES.HONEYCOMB) {
+      if (webViewDisplayZoomControls != null && VERSION.SDK_INT >= VERSION_CODES.HONEYCOMB) {
         settings.displayZoomControls = webViewDisplayZoomControls!!
       }
       if (webViewAllowFileAccess != null) {
         settings.allowFileAccess = webViewAllowFileAccess!!
       }
-      if (webViewAllowContentAccess != null
-          && VERSION.SDK_INT >= VERSION_CODES.HONEYCOMB) {
+      if (webViewAllowContentAccess != null && VERSION.SDK_INT >= VERSION_CODES.HONEYCOMB) {
         settings.allowContentAccess = webViewAllowContentAccess!!
       }
       if (webViewLoadWithOverviewMode != null) {
@@ -559,8 +533,7 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
       if (webViewSaveFormData != null) {
         settings.saveFormData = webViewSaveFormData!!
       }
-      if (webViewTextZoom != null
-          && VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH) {
+      if (webViewTextZoom != null && VERSION.SDK_INT >= VERSION_CODES.ICE_CREAM_SANDWICH) {
         settings.textZoom = webViewTextZoom!!
       }
       if (webViewUseWideViewPort != null) {
@@ -614,12 +587,10 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
       if (webViewJavaScriptEnabled != null) {
         settings.javaScriptEnabled = webViewJavaScriptEnabled!!
       }
-      if (webViewAllowUniversalAccessFromFileURLs != null
-          && VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
+      if (webViewAllowUniversalAccessFromFileURLs != null && VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
         settings.allowUniversalAccessFromFileURLs = webViewAllowUniversalAccessFromFileURLs!!
       }
-      if (webViewAllowFileAccessFromFileURLs != null
-          && VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
+      if (webViewAllowFileAccessFromFileURLs != null && VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
         settings.allowFileAccessFromFileURLs = webViewAllowFileAccessFromFileURLs!!
       }
       if (webViewGeolocationDatabasePath != null) {
@@ -655,8 +626,7 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
       if (webViewCacheMode != null) {
         settings.cacheMode = webViewCacheMode!!
       }
-      if (webViewMixedContentMode != null
-          && VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
+      if (webViewMixedContentMode != null && VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
         settings.mixedContentMode = webViewMixedContentMode!!
       }
       if (webViewOffscreenPreRaster != null && VERSION.SDK_INT >= VERSION_CODES.M) {
@@ -678,8 +648,7 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
         webView!!.loadUrl(url!!)
       }
     }
-    run {
-      // SwipeRefreshLayout
+    run { // SwipeRefreshLayout
       swipeRefreshLayout!!.isEnabled = showSwipeRefreshLayout
       if (showSwipeRefreshLayout) {
         swipeRefreshLayout!!.post { swipeRefreshLayout!!.isRefreshing = true }
@@ -691,8 +660,7 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
       }
       swipeRefreshLayout!!.setOnRefreshListener { webView!!.reload() }
     }
-    run {
-      // Divider
+    run { // Divider
       gradient!!.visibility = if (showDivider && gradientDivider) View.VISIBLE else View.GONE
       divider!!.visibility = if (showDivider && !gradientDivider) View.VISIBLE else View.GONE
       if (gradientDivider) {
@@ -710,13 +678,11 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
         divider!!.layoutParams = params
       }
     }
-    run {
-      // ProgressBar
+    run { // ProgressBar
       progressBar!!.visibility = if (showProgressBar) View.VISIBLE else View.GONE
       progressBar!!.progressDrawable.setColorFilter(progressBarColor, PorterDuff.Mode.SRC_IN)
       progressBar!!.minimumHeight = progressBarHeight.toInt()
-      val params = CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-          progressBarHeight.toInt())
+      val params = CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, progressBarHeight.toInt())
       val toolbarHeight = resources.getDimension(R.dimen.toolbarHeight)
       when (progressBarPosition) {
         ProgressBarPosition.TOP_OF_TOOLBAR -> params.setMargins(0, 0, 0, 0)
@@ -726,8 +692,7 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
       }
       progressBar!!.layoutParams = params
     }
-    run {
-      // Menu
+    run { // Menu
       val drawable = GradientDrawable()
       drawable.cornerRadius = resources.getDimension(R.dimen.defaultMenuCornerRadius)
       drawable.setColor(menuColor)
@@ -738,8 +703,7 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
       }
       shadowLayout!!.setShadowColor(menuDropShadowColor)
       shadowLayout!!.setShadowSize(menuDropShadowSize)
-      val params = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-          ViewGroup.LayoutParams.WRAP_CONTENT)
+      val params = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
       val margin = (resources.getDimension(R.dimen.defaultMenuLayoutMargin) - menuDropShadowSize).toInt()
       params.setMargins(0, margin, margin, 0)
       params.addRule(RelativeLayout.ALIGN_PARENT_TOP)
@@ -904,8 +868,7 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
       val clipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
       val clip = ClipData.newPlainText("ClipboardManagerUtil", webView!!.url)
       clipboardManager.setPrimaryClip(clip)
-      val snackbar = Snackbar.make(coordinatorLayout!!, getString(stringResCopiedToClipboard),
-          Snackbar.LENGTH_LONG)
+      val snackbar = Snackbar.make(coordinatorLayout!!, getString(stringResCopiedToClipboard), Snackbar.LENGTH_LONG)
       val snackbarView = snackbar.view
       snackbarView.setBackgroundColor(toolbarColor)
       if (snackbarView is ViewGroup) {
@@ -1017,10 +980,10 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
   // http://stackoverflow.com/a/5966151/1797648
   private fun destroyWebView() {
     Handler().postDelayed({
-      if (webView != null) {
-        webView!!.destroy()
-      }
-    }, ViewConfiguration.getZoomControlsTimeout() + 1000L)
+                            if (webView != null) {
+                              webView!!.destroy()
+                            }
+                          }, ViewConfiguration.getZoomControlsTimeout() + 1000L)
   }
 
   inner class MyWebChromeClient : WebChromeClient() {
@@ -1086,11 +1049,9 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
         val intent = Intent(Intent.ACTION_VIEW)
         intent.setDataAndType(Uri.parse(url), "video/*")
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        view.context.startActivity(intent)
-        // If we return true, onPageStarted, onPageFinished won't be called.
+        view.context.startActivity(intent) // If we return true, onPageStarted, onPageFinished won't be called.
         true
-      } else if (url.startsWith("tel:") || url.startsWith("sms:") || url.startsWith("smsto:") || url
-              .startsWith("mms:") || url.startsWith("mmsto:")) {
+      } else if (url.startsWith("tel:") || url.startsWith("sms:") || url.startsWith("smsto:") || url.startsWith("mms:") || url.startsWith("mmsto:")) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         view.context.startActivity(intent)

@@ -12,8 +12,9 @@ import androidx.annotation.DrawableRes
  */
 object BitmapUtil {
   fun getColoredBitmap(
-      context: Context, @DrawableRes drawableRes: Int,
-      @ColorInt color: Int
+    context: Context,
+    @DrawableRes drawableRes: Int,
+    @ColorInt color: Int
   ): Bitmap {
     val bitmap = BitmapFactory.decodeResource(context.resources, drawableRes)
     return getColoredBitmap(bitmap, color)
@@ -29,8 +30,9 @@ object BitmapUtil {
     bitmap.getPixels(pixels, 0, width, 0, 0, width, height)
     for (y in 0 until height) {
       val gradientAlpha =
-          (alpha.toFloat() * (height - y).toFloat() * (height - y).toFloat() / height.toFloat()
-              / height.toFloat()).toInt()
+        (alpha.toFloat() * (height - y).toFloat() * (height - y).toFloat()
+          / height.toFloat()
+          / height.toFloat()).toInt()
       for (x in 0 until width) {
         pixels[x + y * width] = Color.argb(gradientAlpha, red, green, blue)
       }
@@ -54,10 +56,7 @@ object BitmapUtil {
       }
     }
     val coloredBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
-    coloredBitmap.setPixels(
-        pixels, 0, bitmap.width, 0, 0, bitmap.width,
-        bitmap.height
-    )
+    coloredBitmap.setPixels(pixels, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
     return coloredBitmap
   }
 }

@@ -1,9 +1,12 @@
 package com.thefinestartist.finestwebview.views
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.RectF
 import android.graphics.drawable.BitmapDrawable
-import android.os.Build
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
@@ -32,9 +35,9 @@ class ShadowLayout : FrameLayout {
   }
 
   constructor(
-      context: Context,
-      attrs: AttributeSet?,
-      defStyleAttr: Int
+    context: Context,
+    attrs: AttributeSet?,
+    defStyleAttr: Int
   ) : super(context, attrs, defStyleAttr) {
     setWillNotDraw(false)
     initAttributes(attrs)
@@ -44,14 +47,14 @@ class ShadowLayout : FrameLayout {
   private fun initAttributes(attrs: AttributeSet?) {
     val attr = context.obtainStyledAttributes(attrs, R.styleable.ShadowLayout, 0, 0)
     try {
-      cornerRadius = attr.getDimension(R.styleable.ShadowLayout_slCornerRadius,
-          resources.getDimension(R.dimen.defaultMenuDropShadowCornerRadius))
-      shadowSize = attr.getDimension(R.styleable.ShadowLayout_slShadowSize,
-          resources.getDimension(R.dimen.defaultMenuDropShadowSize))
+      cornerRadius = attr.getDimension(R.styleable.ShadowLayout_slCornerRadius, resources.getDimension(R.dimen.defaultMenuDropShadowCornerRadius))
+      shadowSize = attr.getDimension(R.styleable.ShadowLayout_slShadowSize, resources.getDimension(R.dimen.defaultMenuDropShadowSize))
       dx = attr.getDimension(R.styleable.ShadowLayout_slDx, 0f)
       dy = attr.getDimension(R.styleable.ShadowLayout_slDy, 0f)
-      shadowColor = attr.getColor(R.styleable.ShadowLayout_slShadowColor,
-          ContextCompat.getColor(context, R.color.finestBlack10))
+      shadowColor = attr.getColor(
+        R.styleable.ShadowLayout_slShadowColor,
+        ContextCompat.getColor(context, R.color.finestBlack10)
+      )
     } finally {
       attr.recycle()
     }
@@ -115,26 +118,21 @@ class ShadowLayout : FrameLayout {
   }
 
   private fun setBackgroundCompat(w: Int, h: Int) {
-    val bitmap = createShadowBitmap(w, h, cornerRadius, shadowSize, dx, dy, shadowColor, Color.TRANSPARENT)
-    //        Bitmap coloredBitmap = BitmapHelper.getColoredBitmap(getContext(), bitmap, shadowColor);
+    val bitmap = createShadowBitmap(
+      w,
+      h,
+      cornerRadius,
+      shadowSize,
+      dx,
+      dy,
+      shadowColor,
+      Color.TRANSPARENT
+    )
     val drawable = BitmapDrawable(resources, bitmap)
-    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN) {
-      setBackgroundDrawable(drawable)
-    } else {
-      background = drawable
-    }
+    background = drawable
   }
 
-  private fun createShadowBitmap(
-      shadowWidth: Int,
-      shadowHeight: Int,
-      cornerRadius: Float,
-      shadowSize: Float,
-      dx: Float,
-      dy: Float,
-      shadowColor: Int,
-      fillColor: Int
-  ): Bitmap {
+  private fun createShadowBitmap(shadowWidth: Int, shadowHeight: Int, cornerRadius: Float, shadowSize: Float, dx: Float, dy: Float, shadowColor: Int, fillColor: Int): Bitmap {
     val output = Bitmap.createBitmap(shadowWidth, shadowHeight, Bitmap.Config.ALPHA_8)
     val canvas = Canvas(output)
     val shadowRect = RectF(shadowSize, shadowSize, shadowWidth - shadowSize, shadowHeight - shadowSize)

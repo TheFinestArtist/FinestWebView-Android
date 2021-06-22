@@ -10,7 +10,7 @@
     android:fromAlpha="1.0"
     android:interpolator="@anim/accelerate_quart"
     android:startOffset="100"
-    android:toAlpha="0.0" />
+    android:toAlpha="0.0"/>
   <translate
     android:duration="250"
     android:fillAfter="true"
@@ -18,5 +18,5 @@
     android:fillEnabled="true"
     android:fromYDelta="0.0%"
     android:interpolator="@anim/accelerate_quint"
-    android:toYDelta="-4.999995%" />
+    android:toYDelta="-4.999995%"/>
 </set>

@@ -14,9 +14,9 @@
       android:label="@string/app_name"
       android:name=".MainActivity">
       <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
+        <action android:name="android.intent.action.MAIN"/>
 
-        <category android:name="android.intent.category.LAUNCHER" />
+        <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
 
@@ -24,13 +24,13 @@
       android:configChanges="keyboardHidden|orientation|screenSize"
       android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
       android:screenOrientation="sensor"
-      android:theme="@style/FinestWebViewTheme.Light" />
+      android:theme="@style/FinestWebViewTheme.Light"/>
 
-    <activity android:name=".WebViewActivity" />
+    <activity android:name=".WebViewActivity"/>
   </application>
 
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
