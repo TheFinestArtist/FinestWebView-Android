@@ -243,7 +243,7 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
     rtl = if (finestWebView.rtl != null) finestWebView.rtl!! else resources.getBoolean(R.bool.is_right_to_left)
     statusBarColor = if (finestWebView.statusBarColor != null) finestWebView.statusBarColor!! else colorPrimaryDark
     toolbarColor = if (finestWebView.toolbarColor != null) finestWebView.toolbarColor!! else colorPrimary
-    toolbarScrollFlags = if (finestWebView.toolbarScrollFlags != null) finestWebView.toolbarScrollFlags!! else AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+    toolbarScrollFlags = if (finestWebView.toolbarScrollFlags != null) finestWebView.toolbarScrollFlags!! else AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
     iconDefaultColor = if (finestWebView.iconDefaultColor != null) finestWebView.iconDefaultColor!! else colorAccent
     iconDisabledColor = if (finestWebView.iconDisabledColor != null) finestWebView.iconDisabledColor!! else disableColor(iconDefaultColor)
     iconPressedColor = if (finestWebView.iconPressedColor != null) finestWebView.iconPressedColor!! else iconDefaultColor
@@ -256,7 +256,7 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
     disableIconForward = if (finestWebView.disableIconForward != null) finestWebView.disableIconForward!! else false
     showIconMenu = if (finestWebView.showIconMenu != null) finestWebView.showIconMenu!! else true
     disableIconMenu = if (finestWebView.disableIconMenu != null) finestWebView.disableIconMenu!! else false
-    showSwipeRefreshLayout = if (finestWebView.showSwipeRefreshLayout != null) finestWebView.showSwipeRefreshLayout!! else true
+    showSwipeRefreshLayout = if (finestWebView.showSwipeRefreshLayout != null) finestWebView.showSwipeRefreshLayout!! else false
     swipeRefreshColor = if (finestWebView.swipeRefreshColor != null) finestWebView.swipeRefreshColor!! else colorAccent
     if (finestWebView.swipeRefreshColors != null) {
       val colors = IntArray(finestWebView.swipeRefreshColors!!.size)
