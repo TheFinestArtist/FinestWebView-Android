@@ -187,6 +187,7 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
   protected var encoding: String? = null
   protected var data: String? = null
   protected var url: String? = null
+  protected var headers: HashMap<String,String>? = null
   protected var coordinatorLayout: CoordinatorLayout? = null
   protected var appBar: AppBarLayout? = null
   protected var toolbar: Toolbar? = null
@@ -352,6 +353,10 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
     encoding = finestWebView.encoding
     data = finestWebView.data
     url = finestWebView.url
+    finestWebView.headers?.let { headerMap ->
+      headers = headerMap
+    }
+
   }
 
   protected fun bindViews() {
@@ -645,7 +650,12 @@ class FinestWebViewActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedL
       if (data != null) {
         webView!!.loadData(data!!, mimeType, encoding)
       } else if (url != null) {
-        webView!!.loadUrl(url!!)
+        headers?.let { headers ->
+          webView!!.loadUrl(url!!,headers)
+        }?.run {
+          webView!!.loadUrl(url!!)
+        }
+
       }
     }
     run { // SwipeRefreshLayout

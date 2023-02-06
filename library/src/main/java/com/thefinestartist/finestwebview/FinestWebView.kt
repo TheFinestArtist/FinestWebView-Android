@@ -19,6 +19,7 @@ import com.thefinestartist.finestwebview.listeners.BroadCastManager
 import com.thefinestartist.finestwebview.listeners.WebViewListener
 import java.io.Serializable
 import java.util.*
+import kotlin.collections.HashMap
 
 /** Created by Leonardo on 11/21/15.  */
 data class FinestWebView(
@@ -154,6 +155,7 @@ data class FinestWebView(
   var encoding: String? = null,
   var data: String? = null,
   var url: String? = null,
+  var headers: HashMap<String,String>? = null
 ) : Serializable {
 
   constructor(ctx: Context) : this(context = ctx)
@@ -428,9 +430,12 @@ data class FinestWebView(
     load(context.getString(dataRes))
   }
 
-  fun load(data: String?, mimeType: String? = "text/html", encoding: String? = "UTF-8") {
+  fun load(data: String?, mimeType: String? = "text/html", encoding: String? = "UTF-8", headers: HashMap<String, String>? = null) {
     this.mimeType = mimeType
     this.encoding = encoding
+    headers?.let {
+      this.headers = headers
+    }
     show(null, data)
   }
 
